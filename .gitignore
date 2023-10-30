@@ -5,3 +5,6 @@ src/gatsby-types.d.ts
 .vscode/
 
 /public/dsfr/
+
+.env.development
+.env.production

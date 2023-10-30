@@ -1,9 +1,13 @@
 import type { GatsbyConfig } from "gatsby";
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Euphrosyne Digilab`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: process.env.SITE_URL,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -34,7 +38,7 @@ const config: GatsbyConfig = {
       options: {
         typeName: "EuphrosyneAPI",
         fieldName: "euphrosyneAPI",
-        url: "http:localhost:8000/graphql",
+        url: process.env.EUPHROSYNE_GRAPHQL_ENDPOINT,
       },
     },
     {
