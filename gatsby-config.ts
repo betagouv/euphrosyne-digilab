@@ -37,6 +37,14 @@ const config: GatsbyConfig = {
         url: "http:localhost:8000/graphql",
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `content`,
+        path: `${__dirname}/src/content`,
+      },
+    },
+    `gatsby-transformer-remark`,
   ],
 };
 
