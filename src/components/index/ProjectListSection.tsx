@@ -1,5 +1,4 @@
-import { Project } from "../../types/project";
-import { BaseSection } from "./BaseSection";
+import { BaseSection } from "../BaseSection";
 import { ProjectCard } from "../ProjectCard";
 
 export const ProjectListSection = ({ projects }: { projects: Project[] }) => {

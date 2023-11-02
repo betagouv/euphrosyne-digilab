@@ -1,6 +1,6 @@
 import { StaticImage } from "gatsby-plugin-image";
 import { css } from "@emotion/react";
-import { BaseSection } from "./BaseSection";
+import { BaseSection } from "../BaseSection";
 
 export const HowItWorksSection = () => (
   <BaseSection

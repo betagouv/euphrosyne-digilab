@@ -2,7 +2,8 @@ import { StaticImage } from "gatsby-plugin-image";
 import { css } from "@emotion/react";
 import { fr } from "@codegouvfr/react-dsfr";
 
-import { BaseSection } from "./BaseSection";
+import { BaseSection } from "../BaseSection";
+import { paddedUpToLg } from "../../styles";
 
 export const Hero = () => (
   <div
@@ -27,10 +28,7 @@ export const Hero = () => (
         <div
           className="fr-col-12 fr-col-lg-6"
           css={css`
-            ${fr.breakpoints.down("lg")} {
-              padding-left: ${fr.spacing("3w")} !important;
-              padding-right: ${fr.spacing("3w")} !important;
-            }
+            ${paddedUpToLg}
           `}
         >
           <h1>

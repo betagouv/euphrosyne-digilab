@@ -16,7 +16,9 @@
     "typecheck": "tsc --noEmit",
     "postinstall": "copy-dsfr-to-public",
     "prestart": "only-include-used-icons",
-    "prebuild": "only-include-used-icons"
+    "prebuild": "only-include-used-icons",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "npm run lint -- --fix"
   },
   "jest": {
     "transformIgnorePatterns": [

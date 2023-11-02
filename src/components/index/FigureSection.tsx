@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { css } from "@emotion/react";
 import { fr } from "@codegouvfr/react-dsfr";
 
-import { BaseSection } from "./BaseSection";
+import { BaseSection } from "../BaseSection";
 import AnimatedNumber from "../AnimatedNumber";
 import useHasBeenInViewport from "../../hooks/useHasBeenInViewport";
 

@@ -2,10 +2,11 @@ import { StaticImage } from "gatsby-plugin-image";
 import { css } from "@emotion/react";
 import { fr } from "@codegouvfr/react-dsfr";
 
-import { BaseSection } from "./BaseSection";
+import { BaseSection } from "../BaseSection";
 import FadeInDiv from "../FadeInDiv";
 import { useRef } from "react";
 import useHasBeenInViewport from "../../hooks/useHasBeenInViewport";
+import { paddedUpToLg } from "../../styles";
 
 export const AboutSection = () => {
   const elementRef = useRef<HTMLDivElement>(null);
@@ -37,10 +38,7 @@ export const AboutSection = () => {
             </div>
             <p
               css={css`
-                ${fr.breakpoints.down("lg")} {
-                  padding-left: ${fr.spacing("3w")} !important;
-                  padding-right: ${fr.spacing("3w")} !important;
-                }
+                ${paddedUpToLg}
               `}
             >
               L'Accélérateur, inauguré en 1989, est la seule installation de ce
