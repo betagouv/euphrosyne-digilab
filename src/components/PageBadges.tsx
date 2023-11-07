@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 
 import { ProjectStatusBadge } from "./ProjectStatusBadge";
 import Badge from "@codegouvfr/react-dsfr/Badge";
+import { ProjectStatus } from "../types/project";
 
 export const PageBadges = ({
   pageType,

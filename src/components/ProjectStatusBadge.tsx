@@ -1,5 +1,6 @@
 import { Badge, BadgeProps } from "@codegouvfr/react-dsfr/Badge";
 import { AlertProps } from "@codegouvfr/react-dsfr/Alert";
+import { ProjectStatus } from "../types/project";
 
 function projectStatusToLabelAndSeverity(
   status: ProjectStatus

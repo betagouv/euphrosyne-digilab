@@ -1,5 +1,5 @@
 import { PageBadges } from "../PageBadges";
-import { FrCxArg, fr } from "@codegouvfr/react-dsfr";
+import { fr } from "@codegouvfr/react-dsfr";
 import ObjectGroupMaterialTags from "./ObjectGroupMaterialTags";
 import { css } from "@emotion/react";
 import Button from "@codegouvfr/react-dsfr/Button";

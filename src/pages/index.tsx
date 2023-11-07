@@ -9,6 +9,7 @@ import { AboutSection } from "../components/index/AboutSection";
 import { FigureSection } from "../components/index/FigureSection";
 import { ProjectListSection } from "../components/index/ProjectListSection";
 import { BaseHead } from "../components/BaseHead";
+import { Project } from "../types/project";
 
 const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({
   data,

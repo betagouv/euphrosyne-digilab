@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { Card } from "@codegouvfr/react-dsfr/Card";
 import { ellipse } from "../../utils";
+import { Participation } from "../../types/project";
 
 type RunCardProps = { run: Run; projectLeader: Participation };
 
@@ -41,7 +42,7 @@ const RunCardContent = ({ run, projectLeader }: RunCardProps) => {
       <div>
         <span className="fr-hint-text">Méthodes</span>
         <div className="fr-grid-row">
-          {run.methods.map((method) => (
+          {run.methods?.map((method) => (
             <div
               className="fr-col-6"
               css={css`

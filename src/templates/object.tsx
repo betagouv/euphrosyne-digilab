@@ -12,6 +12,7 @@ import { ObjectGroupDescription } from "../components/object-group/ObjectGroupDe
 import { StaticImage } from "gatsby-plugin-image";
 import { fr } from "@codegouvfr/react-dsfr";
 import { ProjectData } from "../components/project/ProjectData";
+import { Participation } from "../types/project";
 
 interface Project {
   name: string;
@@ -126,7 +127,7 @@ export default function ObjectTemplate({
               selectedProjectRuns &&
               selectedProjectRuns.length > 0 && (
                 <ProjectData
-                  runs={selectedProjectRuns}
+                  runs={selectedProjectRuns as Run[]}
                   projectLeader={selectedProject.leader}
                 />
               )}

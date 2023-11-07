@@ -4,7 +4,7 @@ interface Detector {
 }
 interface Method {
   name: string;
-  detectors: readonly (Detector | null)[];
+  detectors: readonly Detector[];
 }
 
 interface Run {
@@ -13,5 +13,5 @@ interface Run {
   label: string;
   particleType: "PROTON" | "ALPHA_PARTICLE" | "DEUTON" | null;
   startDate: string;
-  methods: readonly (Method | null)[] | null;
+  methods: readonly Method[] | null;
 }

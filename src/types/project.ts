@@ -1,6 +1,6 @@
-type ProjectStatus = "Status.FINISHED" | "Status.DATA_AVAILABLE";
+export type ProjectStatus = "Status.FINISHED" | "Status.DATA_AVAILABLE";
 
-interface Project {
+export interface Project {
   name: string;
   status: ProjectStatus;
   comments: string | null;
@@ -9,27 +9,27 @@ interface Project {
   objectGroups: ObjectGroup[];
 }
 
-interface Participation {
+export interface Participation {
   user: User;
   institution?: Institution;
 }
 
-interface User {
+export interface User {
   firstName: string;
   lastName: string;
 }
 
-interface Institution {
+export interface Institution {
   name: string;
   country: string;
 }
 
-interface DetailedObject {
+export interface DetailedObject {
   label: string;
   collection: string | null;
 }
 
-interface ObjectGroup {
+export interface ObjectGroup {
   id: string;
   c2rmfId: string | null;
   label: string;
@@ -40,5 +40,3 @@ interface ObjectGroup {
   objectSet: DetailedObject[];
   dataAvailable?: boolean;
 }
-
-export { Project, Participation, User, Institution, ObjectGroup };

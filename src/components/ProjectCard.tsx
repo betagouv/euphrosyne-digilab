@@ -5,6 +5,7 @@ import placeHolderImage from "../images/card-placeholder-16x9.png";
 import { ProjectStatusBadge } from "./ProjectStatusBadge";
 import { ellipse } from "../utils";
 import ObjectGroupMaterialTags from "./object-group/ObjectGroupMaterialTags";
+import { Project } from "../types/project";
 
 export const ProjectCard = ({ project }: { project: Project }) => {
   return (

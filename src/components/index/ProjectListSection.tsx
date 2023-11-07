@@ -1,3 +1,4 @@
+import { Project } from "../../types/project";
 import { BaseSection } from "../BaseSection";
 import { ProjectCard } from "../ProjectCard";
 

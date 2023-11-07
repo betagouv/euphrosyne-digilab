@@ -3,6 +3,7 @@ import { PageBadges } from "../PageBadges";
 import { BaseSection } from "../BaseSection";
 import { css } from "@emotion/react";
 import { paddedUpToLg } from "../../styles";
+import { ProjectStatus } from "../../types/project";
 
 type ProjectDescriptionProps = {
   projectName: string;
