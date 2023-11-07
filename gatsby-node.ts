@@ -1,12 +1,7 @@
 import type { GatsbyNode } from "gatsby";
 import { EuphrosyneAPIQuery } from "./src/types/queries";
 import path from "path";
-
-type Person = {
-  id: number;
-  name: string;
-  age: number;
-};
+import slugify from "slugify";
 
 export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
@@ -16,20 +11,35 @@ export const createPages: GatsbyNode["createPages"] = async ({
     query createPagesFromProjects {
       euphrosyneAPI {
         lastProjects(limit: 6) {
-          name
-          status
-          objectGroupLabels
-          comments
           slug
+          objectGroups {
+            id
+            label
+          }
         }
       }
     }
   `);
-  data?.euphrosyneAPI.lastProjects.forEach(({ slug }) => {
-    actions.createPage({
-      path: `/project/${slug}`,
-      component: path.resolve(`./src/templates/project.tsx`),
-      context: { slug: slug },
-    });
-  });
+
+  let objectGroupIdsOfPages: string[] = [];
+
+  data?.euphrosyneAPI.lastProjects.forEach(
+    ({ slug, objectGroups }: Project) => {
+      actions.createPage({
+        path: `/project/${slug}`,
+        component: path.resolve(`./src/templates/project.tsx`),
+        context: { slug: slug },
+      });
+      objectGroups.forEach(({ id, label }) => {
+        if (objectGroupIdsOfPages.includes(`${label}|${id}`)) return; // page already created
+        objectGroupIdsOfPages.push(`${label}|${id}`);
+        const objectSlug = slugify(label);
+        actions.createPage({
+          path: `/object/${objectSlug}/${id}`,
+          component: path.resolve(`./src/templates/object.tsx`),
+          context: { id },
+        });
+      });
+    }
+  );
 };

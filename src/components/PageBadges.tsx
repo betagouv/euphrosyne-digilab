@@ -9,7 +9,7 @@ export const PageBadges = ({
   projectStatus,
   className,
 }: {
-  pageType: "project" | "object";
+  pageType: "project" | "objectGroup";
   projectStatus?: ProjectStatus;
   className?: string;
 }) => {
@@ -20,13 +20,12 @@ export const PageBadges = ({
       `}
       className={className}
     >
-      {pageType === "project" && (
-        <>
-          {<Badge severity="info">Projet</Badge>}
-          {projectStatus && (
-            <ProjectStatusBadge status={projectStatus} className="fr-ml-1w" />
-          )}
-        </>
+      {pageType === "project" && <Badge severity="info">Projet</Badge>}
+      {pageType === "objectGroup" && (
+        <Badge severity="new">Groupe d'objets</Badge>
+      )}
+      {projectStatus && (
+        <ProjectStatusBadge status={projectStatus} className="fr-ml-1w" />
       )}
     </div>
   );

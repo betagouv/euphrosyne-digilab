@@ -1,27 +1,32 @@
+import { useContext, useEffect } from "react";
 import { HeadFC, PageProps, graphql } from "gatsby";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 
-import BasePage from "../components/BasePage";
+import { PageContext } from "../contexts/PageContext";
 import { BaseHead } from "../components/BaseHead";
 import { ProjectDescription } from "../components/project/ProjectDescription";
 import { ProjectData } from "../components/project/ProjectData";
-import { css } from "@emotion/react";
-import { paddedUpToLg } from "../styles";
 import { ProjectObjects } from "../components/project/ProjectObjects";
-
-const baseSectionStyle = css`
-  box-shadow: inset 0 2px 0 0 var(--border-plain-blue-france),
-    inset 0 -1px 0 0 var(--border-default-grey);
-  ${paddedUpToLg};
-`;
+import { detailPageSection } from "../styles";
+import { BaseSection } from "../components/BaseSection";
 
 export default function ProjectTemplate({
   data,
-  path,
 }: PageProps<Queries.ProjectTemplateQuery>) {
+  const { setCurrentProject } = useContext(PageContext);
   const project = data.euphrosyneAPI.projectDetail;
+
+  useEffect(() => {
+    if (project && setCurrentProject) {
+      setCurrentProject({
+        name: project.name,
+        slug: project.slug,
+      });
+    }
+  }, [project, setCurrentProject]);
+
   return (
-    <BasePage currentPath={path}>
+    <div>
       {project && (
         <div>
           <div className="fr-container fr-container--fluid">
@@ -44,20 +49,25 @@ export default function ProjectTemplate({
             projectStatus={project.status as ProjectStatus}
             projectDescription={project.comments}
           />
-          <ProjectData
-            runs={project.runs as Run[]}
-            projectLeader={project.leader as Participation}
-            className="fr-pt-5w fr-pb-4w"
-            css={baseSectionStyle}
-          />
+          <BaseSection className="fr-pt-5w fr-pb-4w" css={detailPageSection}>
+            <div className="fr-grid-row fr-grid-row--gutters">
+              <div className="fr-col-12 fr-col-md-6">
+                <h2 className="fr-mb-2w">Données du projet</h2>
+              </div>
+            </div>
+            <ProjectData
+              runs={project.runs}
+              projectLeader={project.leader as Participation}
+            />
+          </BaseSection>
           <ProjectObjects
             objectGroups={project.objectGroups as ObjectGroup[]}
             className="fr-pt-5w"
-            css={baseSectionStyle}
+            css={detailPageSection}
           />
         </div>
       )}
-    </BasePage>
+    </div>
   );
 }
 
@@ -70,7 +80,7 @@ export const query = graphql`
         name
         slug
         comments
-        objectGroupLabels
+        objectGroupMaterials
         comments
         status
         leader {
@@ -98,6 +108,7 @@ export const query = graphql`
           }
         }
         objectGroups {
+          id
           c2rmfId
           label
           materials

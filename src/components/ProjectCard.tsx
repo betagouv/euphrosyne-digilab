@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
 import { Card } from "@codegouvfr/react-dsfr/Card";
-import { Tag } from "@codegouvfr/react-dsfr/Tag";
 
 import placeHolderImage from "../images/card-placeholder-16x9.png";
 import { ProjectStatusBadge } from "./ProjectStatusBadge";
 import { ellipse } from "../utils";
+import ObjectGroupMaterialTags from "./object-group/ObjectGroupMaterialTags";
 
 export const ProjectCard = ({ project }: { project: Project }) => {
   return (
@@ -21,13 +21,9 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       }}
       size="medium"
       start={
-        <ul className="fr-tags-group">
-          {project.objectGroupLabels.slice(0, 3).map((label) => (
-            <li key={label}>
-              <Tag>{ellipse(label, 15)}</Tag>
-            </li>
-          ))}
-        </ul>
+        <ObjectGroupMaterialTags
+          materials={project.objectGroupMaterials.slice(0, 3)}
+        ></ObjectGroupMaterialTags>
       }
       title={project.name}
       titleAs="h3"

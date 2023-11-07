@@ -3,9 +3,10 @@ type ProjectStatus = "Status.FINISHED" | "Status.DATA_AVAILABLE";
 type Project = {
   name: string;
   status: ProjectStatus;
-  objectGroupLabels: string[];
   comments: string | null;
   slug: string;
+  objectGroupMaterials: string[];
+  objectGroups: ObjectGroup[];
 };
 
 type Participation = {
@@ -29,6 +30,7 @@ type DetailedObject = {
 };
 
 type ObjectGroup = {
+  id: string;
   c2rmfId: string | null;
   label: string;
   materials: string[];
@@ -36,4 +38,5 @@ type ObjectGroup = {
   collection: string | null;
   dating: string | null;
   objectSet: DetailedObject[];
+  dataAvailable?: boolean;
 };

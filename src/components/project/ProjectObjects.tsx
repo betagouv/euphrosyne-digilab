@@ -3,6 +3,9 @@ import * as React from "react";
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { css } from "@emotion/react";
+import { Link } from "gatsby";
+import slugify from "slugify";
+import { ErosLink } from "../object-group/ErosLink";
 
 interface ProjectObjectsProps
   extends React.InputHTMLAttributes<HTMLDivElement> {
@@ -35,16 +38,14 @@ export const ProjectObjects = ({
         <>
           <div className="fr-grid-row fr-grid-row--gutters">
             {visibleObjectGroups.map((objectGroup) => (
-              <div className="fr-col-6 fr-col-lg-4">
+              <div
+                className="fr-col-6 fr-col-lg-4"
+                key={`object-group-item-${objectGroup.id}`}
+              >
                 <h3>{objectGroup.label}</h3>
                 <p>
                   {objectGroup.c2rmfId ? (
-                    <a
-                      href={`https://data.culture.gouv.fr/explore/dataset/notices-d-oeuvres-du-c2rmf/table/?disjunctive.collection_patrimoniale&disjunctive.domaine&sort=numero_de_reference_c2rmf&q=${objectGroup.c2rmfId}`}
-                      target="_blank"
-                    >
-                      Fiche objet Eros
-                    </a>
+                    <ErosLink c2rmfId={objectGroup.c2rmfId} />
                   ) : (
                     "\x00"
                   )}
@@ -60,8 +61,21 @@ export const ProjectObjects = ({
                 <p>
                   <strong>Matériaux: </strong>
                   {objectGroup.materials.map((material) => (
-                    <Tag>{material}</Tag>
+                    <Tag
+                      key={`object-group-item-${objectGroup.id}-material-${material}`}
+                    >
+                      {material}
+                    </Tag>
                   ))}
+                </p>
+                <p>
+                  <Link
+                    to={`/object/${slugify(objectGroup.label)}/${
+                      objectGroup.id
+                    }`}
+                  >
+                    Voir le détail de l'objet
+                  </Link>
                 </p>
               </div>
             ))}

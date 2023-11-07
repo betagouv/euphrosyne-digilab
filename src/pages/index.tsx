@@ -9,7 +9,6 @@ import { AboutSection } from "../components/index/AboutSection";
 import { FigureSection } from "../components/index/FigureSection";
 import { ProjectListSection } from "../components/index/ProjectListSection";
 import { BaseHead } from "../components/BaseHead";
-import BasePage from "../components/BasePage";
 
 const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({
   data,
@@ -17,7 +16,7 @@ const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({
 }) => {
   const { lastProjects } = data.euphrosyneAPI;
   return (
-    <BasePage currentPath={path}>
+    <>
       <Hero />
       <SearchSection />
       <HowItWorksSection />
@@ -26,7 +25,7 @@ const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({
       {lastProjects && (
         <ProjectListSection projects={lastProjects as Project[]} />
       )}
-    </BasePage>
+    </>
   );
 };
 
@@ -40,7 +39,7 @@ export const query = graphql`
       lastProjects(limit: 6) {
         name
         status
-        objectGroupLabels
+        objectGroupMaterials
         comments
         slug
       }
