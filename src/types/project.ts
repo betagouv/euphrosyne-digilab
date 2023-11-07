@@ -1,35 +1,35 @@
 type ProjectStatus = "Status.FINISHED" | "Status.DATA_AVAILABLE";
 
-type Project = {
+interface Project {
   name: string;
   status: ProjectStatus;
   comments: string | null;
   slug: string;
   objectGroupMaterials: string[];
   objectGroups: ObjectGroup[];
-};
+}
 
-type Participation = {
+interface Participation {
   user: User;
   institution?: Institution;
-};
+}
 
-type User = {
+interface User {
   firstName: string;
   lastName: string;
-};
+}
 
-type Institution = {
+interface Institution {
   name: string;
   country: string;
-};
+}
 
-type DetailedObject = {
+interface DetailedObject {
   label: string;
   collection: string | null;
-};
+}
 
-type ObjectGroup = {
+interface ObjectGroup {
   id: string;
   c2rmfId: string | null;
   label: string;
@@ -39,4 +39,6 @@ type ObjectGroup = {
   dating: string | null;
   objectSet: DetailedObject[];
   dataAvailable?: boolean;
-};
+}
+
+export { Project, Participation, User, Institution, ObjectGroup };

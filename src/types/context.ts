@@ -1,4 +1,4 @@
-type PageContext = {
+interface PageContext {
   currentProject: {
     name: string;
     slug: string;
@@ -6,4 +6,4 @@ type PageContext = {
   setCurrentProject: React.Dispatch<
     SetStateAction<PageContext["currentProject"]>
   > | null;
-};
+}
