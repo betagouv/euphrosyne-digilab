@@ -32,6 +32,13 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
         text: "Accueil",
         isActive: currentPath === "/",
       },
+      {
+        linkProps: {
+          href: "/catalog",
+        },
+        text: "Catalogue",
+        isActive: currentPath === "/catalog",
+      },
     ]}
     serviceTitle="Euphrosyne Digilab"
     serviceTagline="Catalogue des données de NewAglae"

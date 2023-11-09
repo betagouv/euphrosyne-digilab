@@ -38,7 +38,7 @@ export default function ObjectTemplate({
   let breadcrumbSegments = [
     {
       label: "Catalogue",
-      linkProps: {},
+      linkProps: { href: "/catalog" },
     },
   ];
   if (currentProject) {

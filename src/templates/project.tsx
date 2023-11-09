@@ -38,7 +38,7 @@ export default function ProjectTemplate({
               segments={[
                 {
                   label: "Catalogue",
-                  linkProps: {},
+                  linkProps: { href: "/catalog" },
                 },
               ]}
               className="fr-container"
@@ -79,7 +79,6 @@ export const query = graphql`
       projectDetail(slug: $slug) {
         name
         slug
-        comments
         objectGroupMaterials
         comments
         status
