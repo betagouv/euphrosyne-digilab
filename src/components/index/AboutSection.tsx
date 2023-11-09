@@ -1,12 +1,12 @@
-import { StaticImage } from "gatsby-plugin-image";
-import { css } from "@emotion/react";
 import { fr } from "@codegouvfr/react-dsfr";
-
-import { BaseSection } from "../BaseSection";
-import FadeInDiv from "../FadeInDiv";
+import { css } from "@emotion/react";
+import { StaticImage } from "gatsby-plugin-image";
 import { useRef } from "react";
+
 import useHasBeenInViewport from "../../hooks/useHasBeenInViewport";
 import { paddedUpToLg } from "../../styles";
+import { BaseSection } from "../BaseSection";
+import FadeInDiv from "../FadeInDiv";
 
 export const AboutSection = () => {
   const elementRef = useRef<HTMLDivElement>(null);

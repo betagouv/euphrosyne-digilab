@@ -1,9 +1,8 @@
 // Credit : https://tinloof.com/blog/how-to-create-scroll-animations-with-1-react-hook
-
 import React, { useEffect, useState } from "react";
 
 export default function useHasBeenInViewport(
-  ref: React.RefObject<HTMLElement>
+  ref: React.RefObject<HTMLElement>,
 ) {
   const elementInViewPort = (element: React.RefObject<HTMLElement>) => {
     if (!element.current) return false;

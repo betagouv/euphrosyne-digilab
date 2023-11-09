@@ -1,9 +1,10 @@
-import { Badge, BadgeProps } from "@codegouvfr/react-dsfr/Badge";
 import { AlertProps } from "@codegouvfr/react-dsfr/Alert";
+import { Badge, BadgeProps } from "@codegouvfr/react-dsfr/Badge";
+
 import { ProjectStatus } from "../types/project";
 
 function projectStatusToLabelAndSeverity(
-  status: ProjectStatus
+  status: ProjectStatus,
 ): [string, AlertProps.Severity | "new"] {
   switch (status) {
     case "Status.FINISHED":

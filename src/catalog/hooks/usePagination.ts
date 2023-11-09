@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function usePagination(page?: number) {
   const [currentPage, setCurrentPage] = useState<number>(
-    page || getCurrentPageFromURL() || 1
+    page || getCurrentPageFromURL() || 1,
   );
 
   useEffect(() => {

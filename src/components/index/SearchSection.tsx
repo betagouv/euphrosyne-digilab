@@ -1,6 +1,6 @@
-import { css } from "@emotion/react";
 import { fr } from "@codegouvfr/react-dsfr";
 import SearchBar from "@codegouvfr/react-dsfr/SearchBar";
+import { css } from "@emotion/react";
 import { navigate } from "gatsby";
 
 const highlightStyle = css`

@@ -1,9 +1,10 @@
 "use client";
 
-import { startReactDsfr } from "@codegouvfr/react-dsfr/next-appdir";
-import { defaultColorScheme } from "./defaultColorScheme";
-import { Link as GatsbyLink } from "gatsby";
 import { RegisteredLinkProps } from "@codegouvfr/react-dsfr/link";
+import { startReactDsfr } from "@codegouvfr/react-dsfr/next-appdir";
+import { Link as GatsbyLink } from "gatsby";
+
+import { defaultColorScheme } from "./defaultColorScheme";
 
 const Link = ({ ...props }: RegisteredLinkProps) => {
   const { ref, href, ...newProps } = props;

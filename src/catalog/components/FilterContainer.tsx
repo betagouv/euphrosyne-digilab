@@ -78,7 +78,7 @@ export default function FilterContainer({
     return index > -1 ? index : 0;
   }
   const [selectedComponentIndex, setSelectedComponentIndex] = useState<number>(
-    getComponentIndex()
+    getComponentIndex(),
   );
 
   useEffect(() => {

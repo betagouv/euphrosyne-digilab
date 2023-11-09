@@ -1,11 +1,11 @@
-import { css } from "@emotion/react";
 import { Card } from "@codegouvfr/react-dsfr/Card";
+import { css } from "@emotion/react";
 
 import placeHolderImage from "../images/card-placeholder-16x9.png";
-import { ProjectStatusBadge } from "./ProjectStatusBadge";
-import { ellipse } from "../utils";
-import ObjectGroupMaterialTags from "./object-group/ObjectGroupMaterialTags";
 import { Project } from "../types/project";
+import { ellipse } from "../utils";
+import { ProjectStatusBadge } from "./ProjectStatusBadge";
+import ObjectGroupMaterialTags from "./object-group/ObjectGroupMaterialTags";
 
 export const ProjectCard = ({ project }: { project: Project }) => {
   return (

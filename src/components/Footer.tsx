@@ -1,8 +1,8 @@
+import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 import {
   Footer as DsfrFooter,
   FooterProps,
 } from "@codegouvfr/react-dsfr/Footer";
-import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 
 const contentDescription = () => (
   <p>

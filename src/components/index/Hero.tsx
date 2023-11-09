@@ -1,9 +1,9 @@
-import { StaticImage } from "gatsby-plugin-image";
-import { css } from "@emotion/react";
 import { fr } from "@codegouvfr/react-dsfr";
+import { css } from "@emotion/react";
+import { StaticImage } from "gatsby-plugin-image";
 
-import { BaseSection } from "../BaseSection";
 import { paddedUpToLg } from "../../styles";
+import { BaseSection } from "../BaseSection";
 
 export const Hero = () => (
   <div

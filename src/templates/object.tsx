@@ -1,17 +1,17 @@
-import { useContext, useEffect, useState } from "react";
-import { HeadFC, PageProps, graphql } from "gatsby";
+import { fr } from "@codegouvfr/react-dsfr";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
-import { css } from "@emotion/react";
 import { Select } from "@codegouvfr/react-dsfr/SelectNext";
+import { css } from "@emotion/react";
+import { HeadFC, PageProps, graphql } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
+import { useContext, useEffect, useState } from "react";
 
-import { PageContext } from "../contexts/PageContext";
 import { BaseHead } from "../components/BaseHead";
-import { detailPageSection, paddedUpToLg } from "../styles";
 import { BaseSection } from "../components/BaseSection";
 import { ObjectGroupDescription } from "../components/object-group/ObjectGroupDescription";
-import { StaticImage } from "gatsby-plugin-image";
-import { fr } from "@codegouvfr/react-dsfr";
 import { ProjectData } from "../components/project/ProjectData";
+import { PageContext } from "../contexts/PageContext";
+import { detailPageSection, paddedUpToLg } from "../styles";
 import { Participation } from "../types/project";
 
 interface Project {
@@ -32,7 +32,7 @@ export default function ObjectTemplate({
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const selectedProjectRuns = objectGroup?.runs.filter(
-    (run) => run.project.slug === selectedProject?.slug
+    (run) => run.project.slug === selectedProject?.slug,
   );
 
   let breadcrumbSegments = [

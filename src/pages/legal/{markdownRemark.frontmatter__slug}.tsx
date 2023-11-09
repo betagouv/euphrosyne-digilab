@@ -1,6 +1,6 @@
-import { graphql, HeadFC } from "gatsby";
-import type { PageProps } from "gatsby";
 import { css } from "@emotion/react";
+import { HeadFC, graphql } from "gatsby";
+import type { PageProps } from "gatsby";
 
 import { BaseHead } from "../../components/BaseHead";
 

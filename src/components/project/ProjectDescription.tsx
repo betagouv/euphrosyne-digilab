@@ -1,9 +1,10 @@
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { PageBadges } from "../PageBadges";
-import { BaseSection } from "../BaseSection";
 import { css } from "@emotion/react";
+
 import { paddedUpToLg } from "../../styles";
 import { ProjectStatus } from "../../types/project";
+import { BaseSection } from "../BaseSection";
+import { PageBadges } from "../PageBadges";
 
 type ProjectDescriptionProps = {
   projectName: string;

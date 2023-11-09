@@ -1,9 +1,9 @@
 /** Section with padding */
-import React from "react";
 import { fr } from "@codegouvfr/react-dsfr";
-import { Interpolation } from "@emotion/serialize";
 import { Theme } from "@emotion/react";
 import { css as emotionCss } from "@emotion/react";
+import { Interpolation } from "@emotion/serialize";
+import React from "react";
 
 export function BaseSection({
   className,

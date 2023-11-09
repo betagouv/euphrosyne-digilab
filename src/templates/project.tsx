@@ -1,14 +1,14 @@
-import { useContext, useEffect } from "react";
-import { HeadFC, PageProps, graphql } from "gatsby";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
+import { HeadFC, PageProps, graphql } from "gatsby";
+import { useContext, useEffect } from "react";
 
-import { PageContext } from "../contexts/PageContext";
 import { BaseHead } from "../components/BaseHead";
-import { ProjectDescription } from "../components/project/ProjectDescription";
-import { ProjectData } from "../components/project/ProjectData";
-import { ProjectObjects } from "../components/project/ProjectObjects";
-import { detailPageSection } from "../styles";
 import { BaseSection } from "../components/BaseSection";
+import { ProjectData } from "../components/project/ProjectData";
+import { ProjectDescription } from "../components/project/ProjectDescription";
+import { ProjectObjects } from "../components/project/ProjectObjects";
+import { PageContext } from "../contexts/PageContext";
+import { detailPageSection } from "../styles";
 
 export default function ProjectTemplate({
   data,

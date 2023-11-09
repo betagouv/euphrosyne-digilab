@@ -1,7 +1,8 @@
 import Button from "@codegouvfr/react-dsfr/Button";
-import { RunCard } from "../run/RunCard";
 import * as React from "react";
+
 import { Participation } from "../../types/project";
+import { RunCard } from "../run/RunCard";
 
 interface ProjectDataProps extends React.InputHTMLAttributes<HTMLDivElement> {
   runs: readonly Run[];

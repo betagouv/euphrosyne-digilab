@@ -1,9 +1,9 @@
-import React from "react";
-import { css } from "@emotion/react";
-
-import { ProjectStatusBadge } from "./ProjectStatusBadge";
 import Badge from "@codegouvfr/react-dsfr/Badge";
+import { css } from "@emotion/react";
+import React from "react";
+
 import { ProjectStatus } from "../types/project";
+import { ProjectStatusBadge } from "./ProjectStatusBadge";
 
 export const PageBadges = ({
   pageType,

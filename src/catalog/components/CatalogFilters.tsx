@@ -15,7 +15,7 @@ interface FiltersProps {
 export default function CatalogFilters({ filters, setFilters }: FiltersProps) {
   const itemTypeOptions: [
     string,
-    "objectGroupsSelected" | "projectsSelected"
+    "objectGroupsSelected" | "projectsSelected",
   ][] = [
     ["Projet", "projectsSelected"],
     ["Groupe d'objets", "objectGroupsSelected"],

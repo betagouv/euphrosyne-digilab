@@ -1,14 +1,14 @@
-import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
+import * as React from "react";
 
-import { Hero } from "../components/index/Hero";
-import { SearchSection } from "../components/index/SearchSection";
-import { HowItWorksSection } from "../components/index/HowItWorksSection";
+import { BaseHead } from "../components/BaseHead";
 import { AboutSection } from "../components/index/AboutSection";
 import { FigureSection } from "../components/index/FigureSection";
+import { Hero } from "../components/index/Hero";
+import { HowItWorksSection } from "../components/index/HowItWorksSection";
 import { ProjectListSection } from "../components/index/ProjectListSection";
-import { BaseHead } from "../components/BaseHead";
+import { SearchSection } from "../components/index/SearchSection";
 import { Project } from "../types/project";
 
 const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({ data }) => {

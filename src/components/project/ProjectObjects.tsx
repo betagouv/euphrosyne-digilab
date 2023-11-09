@@ -1,12 +1,13 @@
-import * as React from "react";
-import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import { css } from "@emotion/react";
 import { Link } from "gatsby";
+import * as React from "react";
 import slugify from "slugify";
+
+import { ObjectGroup } from "../../types/project";
 import { BaseSection } from "../BaseSection";
 import { ErosLink } from "../object-group/ErosLink";
-import { ObjectGroup } from "../../types/project";
 
 interface ProjectObjectsProps
   extends React.InputHTMLAttributes<HTMLDivElement> {

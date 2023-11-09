@@ -9,7 +9,8 @@ export const paddedUpToLg = css`
 `;
 
 export const detailPageSection = css`
-  box-shadow: inset 0 2px 0 0 var(--border-plain-blue-france),
+  box-shadow:
+    inset 0 2px 0 0 var(--border-plain-blue-france),
     inset 0 -1px 0 0 var(--border-default-grey);
   ${paddedUpToLg};
 `;

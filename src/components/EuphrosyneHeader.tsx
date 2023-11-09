@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Header } from "@codegouvfr/react-dsfr/Header";
+import * as React from "react";
 
 type EuphrosyneHeaderProps = {
   currentPath: string;

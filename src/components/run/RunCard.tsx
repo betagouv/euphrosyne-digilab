@@ -1,7 +1,8 @@
-import { css } from "@emotion/react";
 import { Card } from "@codegouvfr/react-dsfr/Card";
-import { ellipse } from "../../utils";
+import { css } from "@emotion/react";
+
 import { Participation } from "../../types/project";
+import { ellipse } from "../../utils";
 
 type RunCardProps = { run: Run; projectLeader: Participation };
 

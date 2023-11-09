@@ -1,10 +1,10 @@
-import { useRef } from "react";
-import { css } from "@emotion/react";
 import { fr } from "@codegouvfr/react-dsfr";
+import { css } from "@emotion/react";
+import { useRef } from "react";
 
-import { BaseSection } from "../BaseSection";
-import AnimatedNumber from "../AnimatedNumber";
 import useHasBeenInViewport from "../../hooks/useHasBeenInViewport";
+import AnimatedNumber from "../AnimatedNumber";
+import { BaseSection } from "../BaseSection";
 
 export const FigureSection = () => {
   const elementRef = useRef<HTMLDivElement>(null);

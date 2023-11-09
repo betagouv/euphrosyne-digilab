@@ -1,9 +1,9 @@
+import { DsfrProvider } from "@codegouvfr/react-dsfr/next-appdir/DsfrProvider";
 import { useState } from "react";
 
-import { DsfrProvider } from "@codegouvfr/react-dsfr/next-appdir/DsfrProvider";
-import { PageContext } from "../contexts/PageContext";
 import { EuphrosyneHeader } from "../components/EuphrosyneHeader";
 import { Footer } from "../components/Footer";
+import { PageContext } from "../contexts/PageContext";
 
 export default function Layout({
   children,

@@ -1,6 +1,7 @@
 import Tag from "@codegouvfr/react-dsfr/Tag";
-import { ellipse } from "../../utils";
+
 import { ObjectGroup } from "../../types/project";
+import { ellipse } from "../../utils";
 
 export default function ObjectGroupMaterialTags({
   materials,

@@ -1,7 +1,8 @@
+import { fr } from "@codegouvfr/react-dsfr";
 import { Link } from "gatsby";
 import React from "react";
+
 import { getUrlForPage } from "../hooks/usePagination";
-import { fr } from "@codegouvfr/react-dsfr";
 
 interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   currentPage: number;
@@ -28,8 +29,8 @@ export function Pagination({
         currentPage + 2,
         pageCount - 1,
         pageCount,
-      ].filter((page) => page > 0 && page <= pageCount)
-    )
+      ].filter((page) => page > 0 && page <= pageCount),
+    ),
   );
   return (
     <nav

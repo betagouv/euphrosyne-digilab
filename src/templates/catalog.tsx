@@ -1,20 +1,20 @@
-import { HeadFC, PageProps } from "gatsby";
-
-import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
 import { fr } from "@codegouvfr/react-dsfr";
-import { BaseHead } from "../components/BaseHead";
-import SortSelect, { SortValue } from "../catalog/components/SortSelect";
-import { CatalogItem } from "../catalog/components/CatalogItem";
+import { css } from "@emotion/react";
+import { useLocation } from "@reach/router";
+import { HeadFC, PageProps } from "gatsby";
+import { useEffect, useState } from "react";
+
 import CatalogFilters, { Filters } from "../catalog/components/CatalogFilters";
+import { CatalogItem } from "../catalog/components/CatalogItem";
 import FilterContainer from "../catalog/components/FilterContainer";
+import { Pagination } from "../catalog/components/Pagination";
 import SearchBarSection from "../catalog/components/SearchBarSection";
+import SortSelect, { SortValue } from "../catalog/components/SortSelect";
 import useFilter, {
   buildFiltersFromLocation,
 } from "../catalog/hooks/useFilter";
 import usePagination, { getUrlForPage } from "../catalog/hooks/usePagination";
-import { Pagination } from "../catalog/components/Pagination";
-import { useLocation } from "@reach/router";
+import { BaseHead } from "../components/BaseHead";
 
 interface CatalogTemplateProps {
   searchItems: SearchItem[];
@@ -25,7 +25,7 @@ export default function CatalogTemplate({
 }: PageProps<null, CatalogTemplateProps>) {
   const [selectedSort, setSelectedSort] = useState<SortValue>("dsc");
   const [filters, setFilters] = useState<Filters>(
-    buildFiltersFromLocation(useLocation())
+    buildFiltersFromLocation(useLocation()),
   );
 
   const currentPage = usePagination();
@@ -34,7 +34,7 @@ export default function CatalogTemplate({
   const filteredSearchItems = useFilter(searchItems, filters, selectedSort);
   const paginatedSearchItems = filteredSearchItems.slice(
     (currentPage - 1) * pageLength,
-    currentPage * pageLength
+    currentPage * pageLength,
   );
 
   return (
@@ -156,7 +156,7 @@ export default function CatalogTemplate({
                 {filteredSearchItems.length > pageLength && (
                   <Pagination
                     pageCount={Math.ceil(
-                      filteredSearchItems.length / pageLength
+                      filteredSearchItems.length / pageLength,
                     )}
                     currentPage={currentPage}
                     className="fr-mb-5w"

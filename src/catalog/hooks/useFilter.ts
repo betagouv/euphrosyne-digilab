@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import { Filters } from "../components/CatalogFilters";
 import { SortValue } from "../components/SortSelect";
 
@@ -21,10 +22,10 @@ export function buildFiltersFromLocation(location: Location): Filters {
 export default function useFilter(
   searchItems: SearchItem[],
   filters: Filters,
-  sort: SortValue = "dsc"
+  sort: SortValue = "dsc",
 ) {
   const [filteredSearchItems, setFilteredSearchItems] = useState<SearchItem[]>(
-    []
+    [],
   );
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function useFilter(
       searchItemArray
         .sortByCreated(sort)
         .filterObjectTypeSelected(filters)
-        .filterOnSearch(filters.q)
+        .filterOnSearch(filters.q),
     );
     updateQueryParamsWithFilters(window.location, filters);
   }, [searchItems, filters, sort]);
@@ -54,7 +55,7 @@ class SearchItemArray extends Array<SearchItem> {
           return projectsSelected;
         }
         return false;
-      })
+      }),
     );
   }
 
@@ -70,17 +71,17 @@ class SearchItemArray extends Array<SearchItem> {
         return filterValues
           .map((value) => value.toLowerCase().includes(q.toLowerCase()))
           .includes(true);
-      })
+      }),
     );
   }
 
   sortByCreated(sort: "asc" | "dsc" = "dsc") {
     return this.sort((a, b) => {
       const aCreated = new Date(
-        a.objectGroup?.created || a.project?.created || new Date()
+        a.objectGroup?.created || a.project?.created || new Date(),
       );
       const bCreated = new Date(
-        b.objectGroup?.created || b.project?.created || new Date()
+        b.objectGroup?.created || b.project?.created || new Date(),
       );
       return sort === "asc"
         ? aCreated.getTime() - bCreated.getTime()

@@ -1,9 +1,10 @@
-import { PageBadges } from "../PageBadges";
 import { fr } from "@codegouvfr/react-dsfr";
-import ObjectGroupMaterialTags from "./ObjectGroupMaterialTags";
-import { css } from "@emotion/react";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { css } from "@emotion/react";
+
+import { PageBadges } from "../PageBadges";
 import { ErosLink } from "./ErosLink";
+import ObjectGroupMaterialTags from "./ObjectGroupMaterialTags";
 
 type ObjectGroupDescriptionProps = React.InputHTMLAttributes<HTMLDivElement> & {
   collection?: string;

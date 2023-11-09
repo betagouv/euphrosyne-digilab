@@ -1,5 +1,8 @@
 module.exports = {
   root: true,
+  rules: {
+    "sort-imports": "error",
+  },
   overrides: [
     {
       files: ["*.ts", "*.tsx"],

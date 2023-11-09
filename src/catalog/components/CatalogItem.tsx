@@ -1,9 +1,10 @@
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import Card from "@codegouvfr/react-dsfr/Card";
+import { css } from "@emotion/react";
 import slugify from "slugify";
+
 import ObjectGroupMaterialTags from "../../components/object-group/ObjectGroupMaterialTags";
 import { ellipse } from "../../utils";
-import { css } from "@emotion/react";
 
 type CatalogItemProps = Partial<React.ComponentProps<typeof Card>> & {
   searchItem: SearchItem;
