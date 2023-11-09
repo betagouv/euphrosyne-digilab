@@ -19,6 +19,7 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
         iconId: "fr-icon-external-link-fill",
         linkProps: {
           href: "https://euphrosyne.beta.gouv.fr",
+          target: "_self",
         },
         text: "Accéder à Fixlab",
       },
