@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const isBrowser = typeof window !== "undefined";
+
 export default function usePagination(page?: number) {
   const [currentPage, setCurrentPage] = useState<number>(
     page || getCurrentPageFromURL() || 1,
@@ -13,12 +15,13 @@ export default function usePagination(page?: number) {
       }
       setCurrentPage(page || 1);
     }
-  }, [window.location.search]);
+  }, [isBrowser ? window.location.search : null]);
 
   return currentPage;
 }
 
 export function getCurrentPageFromURL(): number | null {
+  if (!isBrowser) return 1;
   const page = new URLSearchParams(window.location.search).get("page");
   return page ? parseInt(page) : null;
 }

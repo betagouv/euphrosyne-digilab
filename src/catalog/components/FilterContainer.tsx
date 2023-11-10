@@ -71,7 +71,8 @@ export default function FilterContainer({
   function getComponentIndex() {
     let index = 0;
     sortedContainers.forEach(([breakpoint, _], i) => {
-      if (breakpoint <= window.innerWidth) {
+      const windowWidth = typeof window === "undefined" ? 0 : window.innerWidth;
+      if (breakpoint <= windowWidth) {
         index = i;
       }
     });
