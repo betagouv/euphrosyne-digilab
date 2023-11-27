@@ -1,49 +1,46 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby Minimal TypeScript Starter
-</h1>
+# Euphrosyne Digilab
 
-## 🚀 Quick start
+## Description
 
-1.  **Create a Gatsby site.**
+Euphrosyne Digilab est une plateforme référençant les données de recherche des projets menés à New AGLAE, l’accélérateur de particules dans les sous-sols du Palais du Louvre. Elle permet de rechercher les données de ces projets par mots clefs, matériaux, date ou aire géographique.
 
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
+Le projet est en cours de développement. Une version beta sera disponible prochainement contenant uniquement les données de certains projets.
 
-    ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby -- -ts
-    ```
+## Specs
 
-2.  **Start developing.**
+Le projet est basée sur [Gatsby](https://www.gatsbyjs.com/), un framework React, qui permet de générer un site statique. Le code est écrit en Typescript.
 
-    Navigate into your new site’s directory and start it up.
+Les données nécessaires à la génération des pages sont récupérées sur Euphrosyne ([site](https://euphrosyne.beta.gouv.fr/login/?next=/) | [repo](https://github.com/betagouv/euphrosyne)) via un _endpoint_ GraphQL.
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+## Installation
 
-3.  **Open the code and start customizing!**
+1. Cloner le projet :
 
-    Your site is now running at http://localhost:8000!
+   ```bash
+   git clone https://github.com/betagouv/euphrosyne-digilab
+   ```
 
-    Edit `src/pages/index.tsx` to see your site update in real-time!
+2. Installer les dépendances :
 
-4.  **Learn more**
+   ```bash
+     npm install
+   ```
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+## Développement
 
-## 🚀 Quick start (Netlify)
+```bash
+npm run develop
+```
 
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
+## Build
 
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)
+```bash
+npm run build
+```
+
+## Ecosystème Euphrosyne
+
+- [Euphrosyne](https://github.com/betagouv/euphrosyne)
+- [Euphrosyne Tools API](https://github.com/betagouv/euphrosyne-tools-api)
+- [Euphrosyne Infra](https://github.com/betagouv/euphrosyne-tools-infra)
+- [New AGLAE Data Converter](https://github.com/betagouv/new-aglae-data-converter)
