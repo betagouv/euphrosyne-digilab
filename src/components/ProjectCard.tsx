@@ -18,7 +18,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       imageAlt={`Image du projet ${project.name}`}
       imageUrl={placeHolderImage}
       linkProps={{
-        href: `/project/${project.slug}`,
+        to: `/project/${project.slug}`,
       }}
       size="medium"
       start={

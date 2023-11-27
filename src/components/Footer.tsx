@@ -18,13 +18,13 @@ export const Footer = () => {
   const bottomItems: FooterProps.BottomItem[] = [
     {
       linkProps: {
-        href: "/legal/donnees-personnelles",
+        to: "/legal/donnees-personnelles",
       },
       text: "Données personnelles et Cookies",
     },
     {
       linkProps: {
-        href: "/legal/cgu",
+        to: "/legal/cgu",
       },
       text: "Conditions générales d'utilisation",
     },
@@ -34,7 +34,7 @@ export const Footer = () => {
       accessibility="non compliant"
       contentDescription={contentDescription()}
       termsLinkProps={{
-        href: "/legal/mentions-legales",
+        to: "/legal/mentions-legales",
       }}
       bottomItems={[...bottomItems, headerFooterDisplayItem]}
     />

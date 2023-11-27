@@ -39,13 +39,13 @@ export default function ObjectTemplate({
   const breadcrumbSegments = [
     {
       label: "Catalogue",
-      linkProps: { href: "/catalog" },
+      linkProps: { to: "/catalog" },
     },
   ];
   if (currentProject) {
     breadcrumbSegments.push({
       label: `Projet ${currentProject.name}`,
-      linkProps: { href: `/project/${currentProject.slug}` },
+      linkProps: { to: `/project/${currentProject.slug}` },
     });
   }
 
@@ -63,7 +63,7 @@ export default function ObjectTemplate({
             <Breadcrumb
               currentPageLabel={objectGroup.label}
               homeLinkProps={{
-                href: "/",
+                to: "/",
               }}
               segments={breadcrumbSegments}
               className="fr-container"

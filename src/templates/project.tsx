@@ -33,12 +33,12 @@ export default function ProjectTemplate({
             <Breadcrumb
               currentPageLabel={project.name}
               homeLinkProps={{
-                href: "/",
+                to: "/",
               }}
               segments={[
                 {
                   label: "Catalogue",
-                  linkProps: { href: "/catalog" },
+                  linkProps: { to: "/catalog" },
                 },
               ]}
               className="fr-container"

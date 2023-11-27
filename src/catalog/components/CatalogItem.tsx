@@ -61,7 +61,7 @@ export function CatalogItem({ searchItem, ...props }: CatalogItemProps) {
       desc={ellipse(searchItem.project?.comments || "", 200)}
       enlargeLink
       linkProps={{
-        href: linkTo,
+        to: linkTo,
       }}
       size="medium"
       start={<CardStart searchItem={searchItem} />}

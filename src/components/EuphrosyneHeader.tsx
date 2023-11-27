@@ -11,14 +11,14 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
   <Header
     brandTop="Ministère de la Culture"
     homeLinkProps={{
-      href: "/",
+      to: "/",
       title: "Accueil - Euphrosyne Digilab",
     }}
     quickAccessItems={[
       {
         iconId: "fr-icon-external-link-fill",
         linkProps: {
-          href: "https://euphrosyne.beta.gouv.fr",
+          to: "https://euphrosyne.beta.gouv.fr",
           target: "_self",
         },
         text: "Accéder à Fixlab",
@@ -27,7 +27,7 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
     navigation={[
       {
         linkProps: {
-          href: "/",
+          to: "/",
           target: "_self",
         },
         text: "Accueil",
@@ -35,7 +35,7 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
       },
       {
         linkProps: {
-          href: "/catalog",
+          to: "/catalog",
         },
         text: "Catalogue",
         isActive: currentPath === "/catalog",
