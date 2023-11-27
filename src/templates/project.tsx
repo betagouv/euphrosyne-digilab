@@ -9,6 +9,7 @@ import { ProjectDescription } from "../components/project/ProjectDescription";
 import { ProjectObjects } from "../components/project/ProjectObjects";
 import { PageContext } from "../contexts/PageContext";
 import { detailPageSection } from "../styles";
+import { ObjectGroup, Participation, ProjectStatus } from "../types/project";
 
 export default function ProjectTemplate({
   data,

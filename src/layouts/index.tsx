@@ -4,6 +4,7 @@ import { useState } from "react";
 import { EuphrosyneHeader } from "../components/EuphrosyneHeader";
 import { Footer } from "../components/Footer";
 import { PageContext } from "../contexts/PageContext";
+import { PageContext as IPageContext } from "../types/context";
 
 export default function Layout({
   children,
@@ -13,7 +14,7 @@ export default function Layout({
   children: React.ReactNode;
 }) {
   const [currentProject, setCurrentProject] =
-    useState<PageContext["currentProject"]>(null);
+    useState<IPageContext["currentProject"]>(null);
 
   return (
     <DsfrProvider>

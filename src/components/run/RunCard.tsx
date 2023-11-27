@@ -44,29 +44,35 @@ const RunCardContent = ({ run, projectLeader }: RunCardProps) => {
       <div>
         <span className="fr-hint-text">Méthodes</span>
         <div className="fr-grid-row">
-          {run.methods?.map((method) => (
-            <div
-              className="fr-col-6"
-              css={css`
-                display: flex;
-              `}
-            >
-              <div>
-                <strong>{method.name}</strong>
-              </div>
-              <div className="fr-ml-2v">
-                {method.detectors.map((detector) => (
+          {run.methods?.map(
+            (method) =>
+              method && (
+                <div
+                  className="fr-col-6"
+                  css={css`
+                    display: flex;
+                  `}
+                >
                   <div>
-                    <span>
-                      {detector.name}
-                      {detector.filters.length > 0 && ": "}
-                      {detector.filters.join(", ")}
-                    </span>
+                    <strong>{method.name}</strong>
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
+                  <div className="fr-ml-2v">
+                    {method.detectors?.map(
+                      (detector) =>
+                        detector && (
+                          <div>
+                            <span>
+                              {detector.name}
+                              {detector.filters.length > 0 && ": "}
+                              {detector.filters.join(", ")}
+                            </span>
+                          </div>
+                        ),
+                    )}
+                  </div>
+                </div>
+              ),
+          )}
         </div>
       </div>
     </div>

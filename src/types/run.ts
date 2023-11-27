@@ -4,14 +4,14 @@ interface Detector {
 }
 interface Method {
   name: string;
-  detectors: readonly Detector[];
+  detectors: readonly (Detector | null)[] | null;
 }
 
 export interface Run {
   beamline: string;
-  energyInKev: number;
+  energyInKev: number | null;
   label: string;
   particleType: "PROTON" | "ALPHA_PARTICLE" | "DEUTON" | null;
   startDate: string;
-  methods: readonly Method[] | null;
+  methods: readonly (Method | null)[] | null;
 }
