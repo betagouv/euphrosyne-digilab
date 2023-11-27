@@ -39,7 +39,7 @@ export const SearchSection = () => (
           onButtonClick={(value) => {
             navigate(`/catalog?q=${value}`);
           }}
-          className="fr-mx-3w"
+          className="fr-mx-3w fr-mx-md-10w"
         />
       </div>
     </div>

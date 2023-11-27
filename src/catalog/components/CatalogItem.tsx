@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import slugify from "slugify";
 
 import ObjectGroupMaterialTags from "../../components/object-group/ObjectGroupMaterialTags";
+import { SearchItem } from "../../types/catalog";
 import { ellipse } from "../../utils";
 
 type CatalogItemProps = Partial<React.ComponentProps<typeof Card>> & {

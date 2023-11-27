@@ -7,7 +7,7 @@ interface Method {
   detectors: readonly Detector[];
 }
 
-interface Run {
+export interface Run {
   beamline: string;
   energyInKev: number;
   label: string;

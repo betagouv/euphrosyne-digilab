@@ -13,6 +13,7 @@ import { ProjectData } from "../components/project/ProjectData";
 import { PageContext } from "../contexts/PageContext";
 import { detailPageSection, paddedUpToLg } from "../styles";
 import { Participation } from "../types/project";
+import { Run } from "../types/run";
 
 interface Project {
   name: string;
@@ -35,7 +36,7 @@ export default function ObjectTemplate({
     (run) => run.project.slug === selectedProject?.slug,
   );
 
-  let breadcrumbSegments = [
+  const breadcrumbSegments = [
     {
       label: "Catalogue",
       linkProps: { href: "/catalog" },

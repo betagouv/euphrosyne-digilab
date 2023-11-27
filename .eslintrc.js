@@ -1,8 +1,5 @@
 module.exports = {
   root: true,
-  rules: {
-    "sort-imports": "error",
-  },
   overrides: [
     {
       files: ["*.ts", "*.tsx"],
@@ -18,6 +15,8 @@ module.exports = {
       parser: "@graphql-eslint/eslint-plugin",
       plugins: ["@graphql-eslint"],
       rules: {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error"],
         "@graphql-eslint/no-anonymous-operations": "error",
         "@graphql-eslint/naming-convention": [
           "error",

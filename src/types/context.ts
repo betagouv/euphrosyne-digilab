@@ -1,4 +1,6 @@
-interface PageContext {
+import { SetStateAction } from "react";
+
+export interface PageContext {
   currentProject: {
     name: string;
     slug: string;

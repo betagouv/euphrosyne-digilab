@@ -2,13 +2,15 @@ import type { GatsbyNode } from "gatsby";
 import path from "path";
 import slugify from "slugify";
 
+import { SearchItem } from "./src/types/catalog";
+
 export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
   actions,
 }) => {
-  const { data }: { data?: Queries.createPagesFromProjectsQuery } =
+  const { data }: { data?: Queries.CreatePagesFromProjectsQuery } =
     await graphql(`
-      query createPagesFromProjects {
+      query CreatePagesFromProjects {
         euphrosyneAPI {
           lastProjects(limit: 6) {
             name
@@ -27,7 +29,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     `);
 
   const searchItems: SearchItem[] = [];
-  let objectGroupIdsOfPages: string[] = [];
+  const objectGroupIdsOfPages: string[] = [];
 
   data?.euphrosyneAPI.lastProjects?.forEach((project) => {
     if (!project || !project.objectGroups) return;

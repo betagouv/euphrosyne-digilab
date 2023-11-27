@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { SearchItem } from "../../types/catalog";
 import { Filters } from "../components/CatalogFilters";
 import { SortValue } from "../components/SortSelect";
 
@@ -62,7 +63,7 @@ class SearchItemArray extends Array<SearchItem> {
   filterOnSearch(q: string) {
     return new SearchItemArray(
       ...this.filter((item) => {
-        let filterValues = [];
+        const filterValues = [];
         if (item.project) {
           filterValues.push(item.project.name, item.project.comments);
         } else if (item.objectGroup) {

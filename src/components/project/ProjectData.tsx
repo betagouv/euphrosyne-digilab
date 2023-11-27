@@ -2,6 +2,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import * as React from "react";
 
 import { Participation } from "../../types/project";
+import { Run } from "../../types/run";
 import { RunCard } from "../run/RunCard";
 
 interface ProjectDataProps extends React.InputHTMLAttributes<HTMLDivElement> {

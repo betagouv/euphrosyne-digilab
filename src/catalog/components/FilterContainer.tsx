@@ -1,6 +1,8 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
+import { animated, useSpring } from "react-spring";
+import useMeasure from "react-use-measure";
 
 function DekstopFilterContainer({ children }: { children?: React.ReactNode }) {
   return (
@@ -20,7 +22,17 @@ function DekstopFilterContainer({ children }: { children?: React.ReactNode }) {
 }
 
 function MobileFilterContainer({ children }: { children?: React.ReactNode }) {
+  const [ref, { height: viewHeight }] = useMeasure();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const style = useSpring({
+    from: { height: 0, opacity: 0, y: 0 },
+    to: {
+      height: isFilterOpen ? viewHeight : 0,
+      opacity: isFilterOpen ? 1 : 0,
+      y: isFilterOpen ? 0 : -10,
+    },
+  });
+
   return (
     <div
       css={css`
@@ -47,11 +59,16 @@ function MobileFilterContainer({ children }: { children?: React.ReactNode }) {
           />
           Filtrer les résultats
           <i
-            className={fr.cx("fr-icon-arrow-down-s-line", "fr-ml-3w")}
+            className={fr.cx(
+              `fr-icon-arrow-${isFilterOpen ? "up" : "down"}-s-line`,
+              "fr-ml-3w",
+            )}
             aria-hidden={true}
           />
         </button>
-        {isFilterOpen && <div>{children}</div>}
+        <animated.div style={style}>
+          <div ref={ref}>{children}</div>
+        </animated.div>
       </div>
     </div>
   );
@@ -70,7 +87,7 @@ export default function FilterContainer({
     sortedContainers = containers.sort((a, b) => a[0] - b[0]);
   function getComponentIndex() {
     let index = 0;
-    sortedContainers.forEach(([breakpoint, _], i) => {
+    sortedContainers.forEach(([breakpoint], i) => {
       const windowWidth = typeof window === "undefined" ? 0 : window.innerWidth;
       if (breakpoint <= windowWidth) {
         index = i;

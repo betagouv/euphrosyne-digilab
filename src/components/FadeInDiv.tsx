@@ -1,4 +1,3 @@
-import { fr } from "@codegouvfr/react-dsfr";
 import { Interpolation, Theme } from "@emotion/react";
 import { animated, useSpring } from "react-spring";
 

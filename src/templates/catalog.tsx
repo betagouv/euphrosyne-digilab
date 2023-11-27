@@ -2,7 +2,7 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { css } from "@emotion/react";
 import { useLocation } from "@reach/router";
 import { HeadFC, PageProps } from "gatsby";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import CatalogFilters, { Filters } from "../catalog/components/CatalogFilters";
 import { CatalogItem } from "../catalog/components/CatalogItem";
@@ -13,8 +13,9 @@ import SortSelect, { SortValue } from "../catalog/components/SortSelect";
 import useFilter, {
   buildFiltersFromLocation,
 } from "../catalog/hooks/useFilter";
-import usePagination, { getUrlForPage } from "../catalog/hooks/usePagination";
+import usePagination from "../catalog/hooks/usePagination";
 import { BaseHead } from "../components/BaseHead";
+import { SearchItem } from "../types/catalog";
 
 interface CatalogTemplateProps {
   searchItems: SearchItem[];
@@ -49,7 +50,7 @@ export default function CatalogTemplate({
       <div className="fr-grid-row fr-grid-row--gutters">
         <SearchBarSection
           searchValue={filters.q}
-          className="fr-mt-5w fr-px-2w"
+          className="fr-mt-5w fr-px-3w"
           css={css`
             ${fr.breakpoints.up("md")} {
               display: none;
@@ -99,7 +100,7 @@ export default function CatalogTemplate({
               />
               <div
                 css={css`
-                  width: 800px;
+                  max-width: 800px;
                 `}
               >
                 <div

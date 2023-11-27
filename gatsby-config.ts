@@ -1,6 +1,7 @@
+import dotenv from "dotenv";
 import type { GatsbyConfig } from "gatsby";
 
-require("dotenv").config({
+dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 

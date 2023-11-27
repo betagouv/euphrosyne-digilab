@@ -2,6 +2,7 @@ import { Card } from "@codegouvfr/react-dsfr/Card";
 import { css } from "@emotion/react";
 
 import { Participation } from "../../types/project";
+import { Run } from "../../types/run";
 import { ellipse } from "../../utils";
 
 type RunCardProps = { run: Run; projectLeader: Participation };

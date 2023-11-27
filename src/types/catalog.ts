@@ -1,4 +1,4 @@
-interface SearchItem {
+export interface SearchItem {
   type: "ObjectGroup" | "Project";
   project?: { name: string; slug: string; comments: string; created: string };
   objectGroup?: {
@@ -8,5 +8,3 @@ interface SearchItem {
     created: string;
   };
 }
-
-type SearchItems = SearchItem[];

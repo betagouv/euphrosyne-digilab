@@ -7,6 +7,7 @@ import { Link as GatsbyLink } from "gatsby";
 import { defaultColorScheme } from "./defaultColorScheme";
 
 const Link = ({ ...props }: RegisteredLinkProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ref, href, ...newProps } = props;
   return <GatsbyLink to={href || "#"} {...newProps} />;
 };
