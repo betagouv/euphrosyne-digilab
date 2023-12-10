@@ -21,6 +21,9 @@ jobs:
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
 
+      - name: Create public dir # required for copy-dsfr-to-public
+        run: mkdir public
+
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         run: npm ci
