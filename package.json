@@ -7,6 +7,9 @@
   "keywords": [
     "gatsby"
   ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "develop": "gatsby develop --port 8002",
     "start": "gatsby develop --port 8002",
