@@ -58,6 +58,7 @@ export const AboutSection = () => {
             <FadeInDiv
               className="fr-col-12 fr-col-lg-6"
               css={css`
+                display: flex;
                 text-align: center;
                 background-color: ${fr.colors.decisions.background.actionLow
                   .blueFrance.default};
@@ -66,27 +67,35 @@ export const AboutSection = () => {
                 }
               `}
             >
-              <StaticImage
-                src="../../images/analyzed-object-zoomed-1.png"
-                alt="Icône de calendrier"
-                placeholder="blurred"
-                className="fr-mr-1v"
-                css={css`
-                  mix-blend-mode: luminosity;
-                `}
-              />
-              <StaticImage
-                src="../../images/analyzed-object-zoomed-2.png"
-                alt="Icône de calendrier"
-                placeholder="blurred"
-                className="fr-ml-1v"
-                css={css`
-                  mix-blend-mode: luminosity;
-                  ${fr.breakpoints.down("xl")} {
-                    display: none;
-                  }
-                `}
-              />
+              <div className="fr-col-lg-6">
+                <StaticImage
+                  src="../../images/analyzed-object-zoomed-1.png"
+                  alt="Statuette du trésor des bronzes de Bavay analysée par New AGLAÉ."
+                  placeholder="blurred"
+                  className="fr-mr-1v"
+                  css={css`
+                    mix-blend-mode: luminosity;
+                  `}
+                />
+                <p className="fr-text--xs">
+                  © Christophe Hargoues. C2RMF. AGLAÉ. CNRS Photothèque. 2017
+                </p>
+              </div>
+              <div className="fr-col-lg-6">
+                <StaticImage
+                  src="../../images/analyzed-object-zoomed-2.png"
+                  alt="Objet analysé par New AGLAÉ."
+                  placeholder="blurred"
+                  className="fr-ml-1v"
+                  css={css`
+                    mix-blend-mode: luminosity;
+                    ${fr.breakpoints.down("xl")} {
+                      display: none;
+                    }
+                  `}
+                />
+                <p>&nbsp;</p>
+              </div>
             </FadeInDiv>
           )}
         </div>
