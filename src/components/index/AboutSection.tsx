@@ -41,16 +41,18 @@ export const AboutSection = () => {
                 ${paddedUpToLg}
               `}
             >
-              L'Accélérateur, inauguré en 1989, est la seule installation de ce
-              type dans le monde à être implantée dans un laboratoire de musée
-              et dédié exclusivement à l'étude d'objets du patrimoine. AGLAE met
-              en œuvre des méthodes d'analyse dérivées par faisceaux d'ions qui
-              sont désormais d'un emploi courant en science des matériaux.Ces
-              méthodes possèdent de très bonnes performances analytiques, mais
-              sont surtout non destructives, ce qui est capital, compte tenu du
-              caractère précieux et souvent unique des œuvres.
+              AGLAE, acronyme pour "Accélérateur Grand Louvre d'Analyse
+              Élémentaire," est un grand instrument unique, situé au sein même
+              du Palais du Louvre. Depuis son installation en 1988, AGLAE est le
+              seul accélérateur de particules au monde dédié aux sciences du
+              patrimoine, utilisant des techniques avancées pour décrypter les
+              secrets enfouis dans les œuvres d'art. Lauréat de l'Investissement
+              d'Avenir de l'Agence Nationale de la Recherche (ANR-10-EQPX-22),
+              AGLAE est devenu New AGLAE en 2017. Complètement automatisée, la
+              ligne de faisceau est dorénavant susceptible de fonctionner
+              24h/24.
             </p>
-            <a href="#">En savoir plus</a>
+            <a href="https://c2rmf.fr/aglae">En savoir plus</a>
           </div>
           {hasBeenInViewport && (
             <FadeInDiv
