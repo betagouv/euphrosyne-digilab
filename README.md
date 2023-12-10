@@ -28,11 +28,18 @@ Les données nécessaires à la génération des pages sont récupérées sur Eu
 
 ## Développement
 
+1. Copier le fichier `.env.example` en `.env.development` et remplir les valeurs.
+2. Lancer le webserver [euphrosyne](https://github.com/betagouv/euphrosyne). La variable d'environnement EUPHROSYNE_GRAPHQL_ENDPOINT doit pointer vers l'endpoint graphql de ce webserver. Par exemple [http://localhost:8000/graphql](http://localhost:8000/graphql).
+3. Lancer le serveur de développement :
+
 ```bash
 npm run develop
 ```
 
 ## Build
+
+1. Copier le fichier `.env.example` en `.env.development` et remplir les valeurs.
+2. Lancer le build des pages (ensuite accessible dans le dossier `public`):
 
 ```bash
 npm run build
