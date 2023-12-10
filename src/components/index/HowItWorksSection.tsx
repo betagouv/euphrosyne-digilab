@@ -3,56 +3,54 @@ import { StaticImage } from "gatsby-plugin-image";
 
 import { BaseSection } from "../BaseSection";
 
-export const HowItWorksSection = () => (
-  <BaseSection
-    css={css`
-      text-align: center;
-    `}
-  >
-    <div>
-      <h4>Comment ça marche ?</h4>
-    </div>
-    <div>
-      <h3>Les services d'Euphrosyne</h3>
-    </div>
+interface ContentElement {
+  imageSrc: string;
+  imageAlt: string;
+  text: string;
+}
 
-    <div className="fr-grid-row fr-grid-row--gutters">
-      <div className="fr-col-12 fr-col-lg-4 fr-p-7w">
-        <StaticImage
-          src="../../images/illustrations/calendar.svg"
-          alt="Icône de calendrier"
-          placeholder="blurred"
-          width={80}
-          height={80}
-        />
-        <p>Une plateforme Fixlab pour prévoir vos projets à l'accélérateur.</p>
+export const HowItWorksSection = () => {
+  const content: ContentElement[] = [
+    {
+      imageSrc: "../../images/illustrations/search.svg",
+      imageAlt: "Icône de recherche",
+      text: "Un catalogue référençant les jeux de données produits par New AGLAE depuis le 01/04/2022.",
+    },
+    {
+      imageSrc: "../../images/illustrations/calendar.svg",
+      imageAlt: "Icône de calendrier",
+      text: "Une plateforme numérique permettant aux utilisateurs de New AGLAE de préparer leurs expériences.",
+    },
+    {
+      imageSrc: "../../images/illustrations/human-cooperation.svg",
+      imageAlt: "Icône représentant la coopération humaine",
+      text: "Un bureau virtuel pour que les utilisateurs de New AGLAE puissent traiter et récupérer leurs données à distance.",
+    },
+  ];
+  return (
+    <BaseSection
+      css={css`
+        text-align: center;
+      `}
+    >
+      <div>
+        <h3>Les services d'Euphrosyne</h3>
       </div>
-      <div className="fr-col-12 fr-col-lg-4 fr-p-7w">
-        <StaticImage
-          src="../../images/illustrations/human-cooperation.svg"
-          alt="Icône représentant la coopération humaine"
-          placeholder="blurred"
-          width={80}
-          height={80}
-        />
-        <p>
-          Une mise à disposition d'un bureau virtuel pour traiter vos données à
-          distance.
-        </p>
+
+      <div className="fr-grid-row fr-grid-row--gutters">
+        {content.map((element) => (
+          <div className="fr-col-12 fr-col-lg-4 fr-p-7w">
+            <StaticImage
+              src={element.imageSrc}
+              alt={element.imageAlt}
+              placeholder="blurred"
+              width={80}
+              height={80}
+            />
+            <p>{element.text}</p>
+          </div>
+        ))}
       </div>
-      <div className="fr-col-12 fr-col-lg-4 fr-p-7w">
-        <StaticImage
-          src="../../images/illustrations/search.svg"
-          alt="Icône de recherche"
-          placeholder="blurred"
-          width={80}
-          height={80}
-        />
-        <p>
-          Une plateforme Digilab référençant les données des projets menés à
-          Aglaé.
-        </p>
-      </div>
-    </div>
-  </BaseSection>
-);
+    </BaseSection>
+  );
+};
