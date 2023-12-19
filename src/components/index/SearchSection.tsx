@@ -1,7 +1,5 @@
 import { fr } from "@codegouvfr/react-dsfr";
-import SearchBar from "@codegouvfr/react-dsfr/SearchBar";
 import { css } from "@emotion/react";
-import { navigate } from "gatsby";
 
 const highlightStyle = css`
   font-family: Spectral;
@@ -33,14 +31,7 @@ export const SearchSection = () => (
         </h2>
       </div>
       <div className="fr-mt-5w">
-        <SearchBar
-          big={true}
-          label="Rechercher un mot, une expression, une référence..."
-          onButtonClick={(value) => {
-            navigate(`/catalog?q=${value}`);
-          }}
-          className="fr-mx-3w fr-mx-md-10w"
-        />
+        <h5 css={highlightStyle}>Fonctionnalité à venir...</h5>
       </div>
     </div>
   </div>

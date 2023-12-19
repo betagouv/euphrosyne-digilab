@@ -12,7 +12,7 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
     brandTop="Ministère de la Culture"
     homeLinkProps={{
       to: "/",
-      title: "Accueil - Euphrosyne Digilab",
+      title: "Accueil - Catalogue des données de NewAglae",
     }}
     quickAccessItems={[
       {
@@ -21,7 +21,7 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
           to: "https://euphrosyne.beta.gouv.fr",
           target: "_self",
         },
-        text: "Accéder à Fixlab",
+        text: "Accéder à Euphrosyne",
       },
     ]}
     navigation={[
@@ -41,7 +41,6 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
         isActive: currentPath === "/catalog",
       },
     ]}
-    serviceTitle="Euphrosyne Digilab"
-    serviceTagline="Catalogue des données de NewAglae"
+    serviceTitle="Catalogue des données de NewAglae"
   />
 );

@@ -41,21 +41,24 @@ export const AboutSection = () => {
                 ${paddedUpToLg}
               `}
             >
-              L'Accélérateur, inauguré en 1989, est la seule installation de ce
-              type dans le monde à être implantée dans un laboratoire de musée
-              et dédié exclusivement à l'étude d'objets du patrimoine. AGLAE met
-              en œuvre des méthodes d'analyse dérivées par faisceaux d'ions qui
-              sont désormais d'un emploi courant en science des matériaux.Ces
-              méthodes possèdent de très bonnes performances analytiques, mais
-              sont surtout non destructives, ce qui est capital, compte tenu du
-              caractère précieux et souvent unique des œuvres.
+              AGLAE, acronyme pour "Accélérateur Grand Louvre d'Analyse
+              Élémentaire," est un grand instrument unique, situé au sein même
+              du Palais du Louvre. Depuis son installation en 1988, AGLAE est le
+              seul accélérateur de particules au monde dédié aux sciences du
+              patrimoine, utilisant des techniques avancées pour décrypter les
+              secrets enfouis dans les œuvres d'art. Lauréat de l'Investissement
+              d'Avenir de l'Agence Nationale de la Recherche (ANR-10-EQPX-22),
+              AGLAE est devenu NewAglae en 2017. Complètement automatisée, la
+              ligne de faisceau est dorénavant susceptible de fonctionner
+              24h/24.
             </p>
-            <a href="#">En savoir plus</a>
+            <a href="https://c2rmf.fr/aglae">En savoir plus</a>
           </div>
           {hasBeenInViewport && (
             <FadeInDiv
               className="fr-col-12 fr-col-lg-6"
               css={css`
+                display: flex;
                 text-align: center;
                 background-color: ${fr.colors.decisions.background.actionLow
                   .blueFrance.default};
@@ -64,27 +67,35 @@ export const AboutSection = () => {
                 }
               `}
             >
-              <StaticImage
-                src="../../images/analyzed-object-zoomed-1.png"
-                alt="Icône de calendrier"
-                placeholder="blurred"
-                className="fr-mr-1v"
-                css={css`
-                  mix-blend-mode: luminosity;
-                `}
-              />
-              <StaticImage
-                src="../../images/analyzed-object-zoomed-2.png"
-                alt="Icône de calendrier"
-                placeholder="blurred"
-                className="fr-ml-1v"
-                css={css`
-                  mix-blend-mode: luminosity;
-                  ${fr.breakpoints.down("xl")} {
-                    display: none;
-                  }
-                `}
-              />
+              <div className="fr-col-lg-6">
+                <StaticImage
+                  src="../../images/analyzed-object-zoomed-1.png"
+                  alt="Statuette du trésor des bronzes de Bavay analysée par New AGLAÉ."
+                  placeholder="blurred"
+                  className="fr-mr-1v"
+                  css={css`
+                    mix-blend-mode: luminosity;
+                  `}
+                />
+                <p className="fr-text--xs">
+                  © Christophe Hargoues. C2RMF. AGLAÉ. CNRS Photothèque. 2017
+                </p>
+              </div>
+              <div className="fr-col-lg-6">
+                <StaticImage
+                  src="../../images/analyzed-object-zoomed-2.png"
+                  alt="Objet analysé par New AGLAÉ."
+                  placeholder="blurred"
+                  className="fr-ml-1v"
+                  css={css`
+                    mix-blend-mode: luminosity;
+                    ${fr.breakpoints.down("xl")} {
+                      display: none;
+                    }
+                  `}
+                />
+                <p>&nbsp;</p>
+              </div>
             </FadeInDiv>
           )}
         </div>
