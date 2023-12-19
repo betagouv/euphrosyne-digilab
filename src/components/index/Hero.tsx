@@ -38,10 +38,10 @@ export const Hero = () => (
             du patrimoine. Elle permet la collecte et la diffusion des données
             ainsi que, pour les utilisateurs de New AGLAE, l'accès à distance
             aux logiciels de traitement des analyses par faisceau d'ions
-            acquises sur New AGLAE. Euphrosyne DIGILAB vous aide a chercher des
-            données scientifiques par mots-clefs (matériaux, date, aire
-            géographique, etc.) afin de répondre au mieux à vos besoins de
-            recherche.
+            acquises sur New AGLAE. Le catalogue des données de NewAglae vous
+            aide a chercher des données scientifiques par mots-clefs (matériaux,
+            date, aire géographique, etc.) afin de répondre au mieux à vos
+            besoins de recherche.
           </p>
         </div>
       </div>
