@@ -31,7 +31,7 @@ export const SearchSection = () => (
         </h2>
       </div>
       <div className="fr-mt-5w">
-        <p css={highlightStyle}>Fonctionnalité à venir...</p>
+        <h5 css={highlightStyle}>Fonctionnalité à venir...</h5>
       </div>
     </div>
   </div>
