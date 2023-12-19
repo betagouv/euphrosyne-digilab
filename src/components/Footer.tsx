@@ -3,15 +3,16 @@ import {
   Footer as DsfrFooter,
   FooterProps,
 } from "@codegouvfr/react-dsfr/Footer";
+import React from "react";
 
 const contentDescription = () => (
-  <p>
+  <>
     Euphrosyne, ouvrir les données de{" "}
     <a href="https://c2rmf.fr/aglae-0" target="_blank">
       NewAglae
     </a>
     .
-  </p>
+  </>
 );
 
 export const Footer = () => {

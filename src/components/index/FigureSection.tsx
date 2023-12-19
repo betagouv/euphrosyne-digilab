@@ -50,7 +50,7 @@ export const FigureSection: React.FC<FigureSectionProps> = ({ stats }) => {
           ];
 
           return (
-            <>
+            <React.Fragment key={`figure-${key}`}>
               <h4
                 css={css`
                   margin-right: auto;
@@ -63,13 +63,16 @@ export const FigureSection: React.FC<FigureSectionProps> = ({ stats }) => {
               </h4>
               <div className="fr-grid-row fr-grid-row--gutters">
                 {animatedNumberProps.map(([label, number]) => (
-                  <div className="fr-col-12 fr-col-lg-4 fr-px-7w fr-py-4w">
+                  <div
+                    className="fr-col-12 fr-col-lg-4 fr-px-7w fr-py-4w"
+                    key={`figure-${key}-${label}`}
+                  >
                     <h4>{isInViewport && <AnimatedNumber n={number} />}</h4>
                     <p>{label}</p>
                   </div>
                 ))}
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </BaseSection>

@@ -59,7 +59,7 @@ export const HowItWorksSection = () => {
 
       <div className="fr-grid-row fr-grid-row--gutters">
         {content.map((element) => (
-          <div className="fr-col-12 fr-col-lg-4 fr-p-7w">
+          <div className="fr-col-12 fr-col-lg-4 fr-p-7w" key={element.text}>
             {element.image}
             <p>{element.text}</p>
           </div>
