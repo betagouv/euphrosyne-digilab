@@ -14,17 +14,17 @@ export const HowItWorksSection = () => {
     {
       imageSrc: "../../images/illustrations/search.svg",
       imageAlt: "Icône de recherche",
-      text: "Un catalogue référençant les jeux de données produits par New AGLAE depuis le 01/04/2022.",
+      text: "Un catalogue référençant les jeux de données produits par NewAglae depuis le 01/04/2022.",
     },
     {
       imageSrc: "../../images/illustrations/calendar.svg",
       imageAlt: "Icône de calendrier",
-      text: "Une plateforme numérique permettant aux utilisateurs de New AGLAE de préparer leurs expériences.",
+      text: "Une plateforme numérique permettant aux utilisateurs de NewAglae de préparer leurs expériences.",
     },
     {
       imageSrc: "../../images/illustrations/human-cooperation.svg",
       imageAlt: "Icône représentant la coopération humaine",
-      text: "Un bureau virtuel pour que les utilisateurs de New AGLAE puissent traiter et récupérer leurs données à distance.",
+      text: "Un bureau virtuel pour que les utilisateurs de NewAglae puissent traiter et récupérer leurs données à distance.",
     },
   ];
   return (

@@ -31,17 +31,17 @@ export const Hero = () => (
             ${paddedUpToLg}
           `}
         >
-          <h1>Les données produites par New AGLAE accessibles en ligne</h1>
+          <h1>Les données produites par NewAglae accessibles en ligne</h1>
           <p>
-            Euphrosyne est la plateforme numérique liée à New AGLAE,
+            Euphrosyne est la plateforme numérique liée à NewAglae,
             l'Accélérateur Grand Louvre d'Analyse Elémentaire dédié aux sciences
             du patrimoine. Elle permet la collecte et la diffusion des données
-            ainsi que, pour les utilisateurs de New AGLAE, l'accès à distance
-            aux logiciels de traitement des analyses par faisceau d'ions
-            acquises sur New AGLAE. Le catalogue des données de NewAglae vous
-            aide a chercher des données scientifiques par mots-clefs (matériaux,
-            date, aire géographique, etc.) afin de répondre au mieux à vos
-            besoins de recherche.
+            ainsi que, pour les utilisateurs de NewAglae, l'accès à distance aux
+            logiciels de traitement des analyses par faisceau d'ions acquises
+            sur NewAglae. Le catalogue des données de NewAglae vous aide a
+            chercher des données scientifiques par mots-clefs (matériaux, date,
+            aire géographique, etc.) afin de répondre au mieux à vos besoins de
+            recherche.
           </p>
         </div>
       </div>

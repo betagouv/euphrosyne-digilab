@@ -48,7 +48,7 @@ export const AboutSection = () => {
               patrimoine, utilisant des techniques avancées pour décrypter les
               secrets enfouis dans les œuvres d'art. Lauréat de l'Investissement
               d'Avenir de l'Agence Nationale de la Recherche (ANR-10-EQPX-22),
-              AGLAE est devenu New AGLAE en 2017. Complètement automatisée, la
+              AGLAE est devenu NewAglae en 2017. Complètement automatisée, la
               ligne de faisceau est dorénavant susceptible de fonctionner
               24h/24.
             </p>

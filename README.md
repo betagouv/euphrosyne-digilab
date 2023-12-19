@@ -2,7 +2,7 @@
 
 ## Description
 
-Euphrosyne Digilab est une plateforme référençant les données de recherche des projets menés à New AGLAE, l’accélérateur de particules dans les sous-sols du Palais du Louvre. Elle permet de rechercher les données de ces projets par mots clefs, matériaux, date ou aire géographique.
+Euphrosyne Digilab est une plateforme référençant les données de recherche des projets menés à NewAglae, l’accélérateur de particules dans les sous-sols du Palais du Louvre. Elle permet de rechercher les données de ces projets par mots clefs, matériaux, date ou aire géographique.
 
 Le projet est en cours de développement. Une version beta sera disponible prochainement contenant uniquement les données de certains projets.
 
@@ -50,4 +50,4 @@ npm run build
 - [Euphrosyne](https://github.com/betagouv/euphrosyne)
 - [Euphrosyne Tools API](https://github.com/betagouv/euphrosyne-tools-api)
 - [Euphrosyne Infra](https://github.com/betagouv/euphrosyne-tools-infra)
-- [New AGLAE Data Converter](https://github.com/betagouv/new-aglae-data-converter)
+- [NewAglae Data Converter](https://github.com/betagouv/new-aglae-data-converter)
