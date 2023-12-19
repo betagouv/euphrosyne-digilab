@@ -1,5 +1,6 @@
 module.exports = {
   root: true,
+  ignorePatterns: ["graphql.config.js"], // Prevent "Cannot find module './.cache/typegen/graphql.config.json'" error
   overrides: [
     {
       files: ["*.ts", "*.tsx"],

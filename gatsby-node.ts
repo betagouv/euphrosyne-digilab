@@ -1,4 +1,9 @@
 import type { GatsbyNode } from "gatsby";
+import {
+  writeGraphQLConfig,
+  writeGraphQLFragments,
+  writeGraphQLSchema,
+} from "gatsby/dist/utils/graphql-typegen/file-writes";
 import path from "path";
 import slugify from "slugify";
 
@@ -66,4 +71,19 @@ export const createPages: GatsbyNode["createPages"] = async ({
     component: path.resolve(`./src/templates/catalog.tsx`),
     context: { searchItems },
   });
+};
+
+// Generate GraphQL type definitions in .cache/typegen folders
+// so we can use eslint with graphql in CI
+export const onPostBuild: GatsbyNode["onPostBuild"] = async ({ store }) => {
+  const { program, config, schema, definitions } = store.getState();
+
+  if (
+    process.env.gatsby_executing_command === `build` &&
+    config.graphqlTypegen
+  ) {
+    await writeGraphQLConfig(program);
+    await writeGraphQLSchema(program.directory, schema);
+    await writeGraphQLFragments(program.directory, definitions);
+  }
 };
