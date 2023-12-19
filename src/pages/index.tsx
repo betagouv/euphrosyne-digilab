@@ -12,14 +12,14 @@ import { SearchSection } from "../components/index/SearchSection";
 import { Project } from "../types/project";
 
 const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({ data }) => {
-  const { lastProjects } = data.euphrosyneAPI;
+  const { lastProjects, stats } = data.euphrosyneAPI;
   return (
     <>
       <Hero />
       <SearchSection />
       <HowItWorksSection />
       <AboutSection />
-      <FigureSection />
+      {stats && <FigureSection stats={stats} />}
       {lastProjects && (
         <ProjectListSection projects={lastProjects as Project[]} />
       )}
@@ -40,6 +40,18 @@ export const query = graphql`
         objectGroupMaterials
         comments
         slug
+      }
+      stats {
+        all {
+          totalProjects
+          totalObjectGroups
+          totalHours
+        }
+        year {
+          totalProjects
+          totalObjectGroups
+          totalHours
+        }
       }
     }
   }
