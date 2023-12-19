@@ -28,6 +28,14 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
 
+      # Test build and generate GraphQL Typegen files. It fetches data from Euphrosyne staging.
+      - name: Run npm build
+        run: npm run build
+        env:
+          SITE_URL: http://localhost:8000
+          EUPHROSYNE_GRAPHQL_ENDPOINT: https://euphrosyne.incubateur.net/graphql
+          TYPEGEN_ON_BUILD: true
+
       - name: Run eslint
         run: npm run lint
 
