@@ -1,33 +1,19 @@
-import { DsfrProvider } from "@codegouvfr/react-dsfr/next-appdir/DsfrProvider";
-import { useState } from "react";
+import { PageProps } from "gatsby";
 
-import { EuphrosyneHeader } from "../components/EuphrosyneHeader";
-import { Footer } from "../components/Footer";
-import { PageContext } from "../contexts/PageContext";
-import { PageContext as IPageContext } from "../types/context";
+import LayoutEn from "./en";
+import LayoutFr from "./fr";
 
-export default function Layout({
-  children,
-  currentPath,
-}: {
-  currentPath: string;
-  children: React.ReactNode;
-}) {
-  const [currentProject, setCurrentProject] =
-    useState<IPageContext["currentProject"]>(null);
-
-  return (
-    <DsfrProvider>
-      <PageContext.Provider
-        value={{
-          currentProject,
-          setCurrentProject,
-        }}
-      >
-        <EuphrosyneHeader currentPath={currentPath} />
-        <main>{children}</main>
-        <Footer />
-      </PageContext.Provider>
-    </DsfrProvider>
-  );
+interface PageContext {
+  langKey: string;
 }
+export default ({
+  pageContext,
+  ...props
+}: PageProps & { currentPath: string }) => {
+  const lang = (pageContext as PageContext).langKey;
+  if (lang === "en") {
+    return <LayoutEn pageContext={pageContext} {...props}></LayoutEn>;
+  } else {
+    return <LayoutFr pageContext={pageContext} {...props}></LayoutFr>;
+  }
+};
