@@ -1,46 +1,114 @@
 import { Header } from "@codegouvfr/react-dsfr/Header";
+import { Link } from "gatsby";
 import * as React from "react";
 
-type EuphrosyneHeaderProps = {
+import { ContentProps, Lang, getCurrentLangKey, langs } from "../i18n";
+
+interface LanguageSwitcherContent {
+  selectLangBtnTitle: string;
+}
+
+export interface EuphrosyneHeaderContent {
+  languageSwitcher: LanguageSwitcherContent;
+  homeLinkTitle: string;
+  euphrosyneLinkTitle: string;
+  homeLinkLabel: string;
+  catalogLinkLabel: string;
+  serviceTitle: string;
+}
+
+interface EuphrosyneHeaderProps extends ContentProps<EuphrosyneHeaderContent> {
   currentPath: string;
+}
+
+type LangNames = {
+  [key in Lang]: string;
+};
+
+const langNames: LangNames = {
+  fr: "Français",
+  en: "English",
+};
+
+const LanguageSwitcher: React.FC<ContentProps<LanguageSwitcherContent>> = ({
+  content,
+}) => {
+  const currentLang = getCurrentLangKey();
+  return (
+    <nav role="navigation" className="fr-translate fr-nav">
+      <div className="fr-nav__item">
+        <button
+          className="fr-translate__btn fr-btn fr-btn--tertiary"
+          aria-controls="translate"
+          aria-expanded="false"
+          title={content.selectLangBtnTitle}
+        >
+          {currentLang.toUpperCase()}
+          <span className="fr-hidden-lg"> - {langNames[currentLang]}</span>
+        </button>
+        <div className="fr-collapse fr-translate__menu fr-menu" id="translate">
+          <ul className="fr-menu__list">
+            {langs.map((lang) => (
+              <li key={lang}>
+                <Link
+                  className="fr-translate__language fr-nav__link"
+                  hrefLang={lang}
+                  lang={lang}
+                  to={`/${lang}`}
+                  aria-current={lang === currentLang ? "true" : undefined}
+                >
+                  {lang.toUpperCase()} - {langNames[lang]}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
 };
 
 export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
   currentPath,
-}) => (
-  <Header
-    brandTop="Ministère de la Culture"
-    homeLinkProps={{
-      to: "/",
-      title: "Accueil - Catalogue des données de NewAglae",
-    }}
-    quickAccessItems={[
-      {
-        iconId: "fr-icon-external-link-fill",
-        linkProps: {
-          to: "https://euphrosyne.beta.gouv.fr",
-          target: "_self",
+  content,
+}) => {
+  const currentLang = getCurrentLangKey();
+  return (
+    <Header
+      brandTop="Ministère de la Culture"
+      homeLinkProps={{
+        to: `/${currentLang}`,
+        title: content.homeLinkTitle,
+      }}
+      quickAccessItems={[
+        {
+          iconId: "fr-icon-external-link-fill",
+          linkProps: {
+            to: "https://euphrosyne.beta.gouv.fr",
+            target: "_self",
+          },
+          text: content.euphrosyneLinkTitle,
         },
-        text: "Accéder à Euphrosyne",
-      },
-    ]}
-    navigation={[
-      {
-        linkProps: {
-          to: "/",
-          target: "_self",
+        <LanguageSwitcher content={content.languageSwitcher} />,
+      ]}
+      navigation={[
+        {
+          linkProps: {
+            to: "/",
+            target: "_self",
+          },
+          text: content.homeLinkLabel,
+          isActive: currentPath === "/",
         },
-        text: "Accueil",
-        isActive: currentPath === "/",
-      },
-      {
-        linkProps: {
-          to: "/catalog",
+        {
+          linkProps: {
+            to: "/catalog",
+          },
+          text: content.catalogLinkLabel,
+          isActive: currentPath === "/catalog",
         },
-        text: "Catalogue",
-        isActive: currentPath === "/catalog",
-      },
-    ]}
-    serviceTitle="Catalogue des données de NewAglae"
-  />
-);
+      ]}
+      serviceTitle={content.serviceTitle}
+    />
+  );
+};
