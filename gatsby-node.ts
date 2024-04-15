@@ -55,10 +55,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
       if (objectGroupIdsOfPages.includes(`${label}|${id}`)) return; // page already created
       objectGroupIdsOfPages.push(`${label}|${id}`);
       const objectSlug = slugify(label);
-      actions.createPage({
-        path: `/object/${objectSlug}/${id}`,
-        component: path.resolve(`./src/templates/object.tsx`),
-        context: { id },
+      langs.forEach((lang) => {
+        actions.createPage({
+          path: `/${lang}/object/${objectSlug}/${id}`,
+          component: path.resolve(`./src/templates/object.${lang}.tsx`),
+          context: { id },
+        });
       });
       searchItems.push({
         objectGroup: { id, label, materials, created },

@@ -1,11 +1,17 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import * as React from "react";
 
+import { ContentProps } from "../../i18n";
 import { Participation } from "../../types/project";
 import { Run } from "../../types/run";
 import { RunCard } from "../run/RunCard";
 
-interface ProjectDataProps extends React.InputHTMLAttributes<HTMLDivElement> {
+export interface ProjectDataContent {
+  addToCart: string;
+}
+
+interface ProjectDataProps
+  extends Omit<React.InputHTMLAttributes<HTMLDivElement>, "content"> {
   runs: readonly Run[];
   projectLeader: Participation;
 }
@@ -14,13 +20,14 @@ export const ProjectData = ({
   runs,
   projectLeader,
   className,
+  content,
   ...props
-}: ProjectDataProps) => {
+}: ProjectDataProps & ContentProps<ProjectDataContent>) => {
   return (
     <div className={`${className}`}>
       <div className="fr-grid-row fr-grid-row--gutters">
         <div className="fr-col-12">
-          <Button disabled>Ajouter les données au panier</Button>
+          <Button disabled>{content.addToCart}</Button>
         </div>
       </div>
 
