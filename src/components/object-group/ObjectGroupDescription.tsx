@@ -23,8 +23,8 @@ type ObjectGroupDescriptionProps = Omit<
   "content"
 > & {
   collection?: string;
-  dating?: string;
-  discoveryPlace?: string;
+  dating: string | null;
+  discoveryPlace: string | null;
   materials?: string[];
   dataAvailable?: boolean;
   label: string;
