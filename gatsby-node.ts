@@ -7,6 +7,7 @@ import {
 import path from "path";
 import slugify from "slugify";
 
+import { langs } from "./src/i18n";
 import { SearchItem } from "./src/types/catalog";
 
 export const createPages: GatsbyNode["createPages"] = async ({
@@ -66,10 +67,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
     });
   });
 
-  actions.createPage({
-    path: `/catalog`,
-    component: path.resolve(`./src/templates/catalog.tsx`),
-    context: { searchItems },
+  langs.forEach((lang) => {
+    actions.createPage({
+      path: `${lang}/catalog`,
+      component: path.resolve(`./src/templates/catalog.${lang}.tsx`),
+      context: { searchItems },
+    });
   });
 };
 

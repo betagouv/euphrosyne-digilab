@@ -1,14 +1,25 @@
 import Select from "@codegouvfr/react-dsfr/SelectNext";
 import { ChangeEvent } from "react";
 
+import { ContentProps } from "../../i18n";
+
 export type SortValue = "asc" | "dsc";
+
+export interface SortSelectContent {
+  mostRecent: string;
+  mostDated: string;
+  sorting: string;
+}
 
 interface SortSelectOption {
   label: string;
   value: SortValue;
 }
 interface SortSelectProps
-  extends Omit<React.InputHTMLAttributes<HTMLDivElement>, "onChange"> {
+  extends Omit<
+    Omit<React.InputHTMLAttributes<HTMLDivElement>, "onChange">,
+    "content"
+  > {
   onChange: (value: SortValue) => void;
   value: SortValue;
 }
@@ -16,11 +27,12 @@ interface SortSelectProps
 export default function SortSelect({
   onChange,
   value,
+  content,
   ...props
-}: SortSelectProps) {
+}: SortSelectProps & ContentProps<SortSelectContent>) {
   const options: SortSelectOption[] = [
-    { label: "Plus anciens", value: "asc" },
-    { label: "Plus récents", value: "dsc" },
+    { label: content.mostDated, value: "asc" },
+    { label: content.mostRecent, value: "dsc" },
   ];
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -32,7 +44,7 @@ export default function SortSelect({
 
   return (
     <Select
-      label="Tri: "
+      label={content.sorting}
       nativeSelectProps={{
         value,
         onChange: handleChange,
