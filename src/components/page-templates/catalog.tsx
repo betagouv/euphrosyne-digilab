@@ -154,7 +154,7 @@ export default function CatalogTemplate({
                     css={css`
                       display: flex;
                       align-items: center;
-                      max-width: 11em;
+                      max-width: 13em;
                     `}
                   />
                 </div>
