@@ -112,7 +112,7 @@ export default function ObjectTemplate({
               />
               <div className="fr-col-12 fr-col-lg-6">
                 <StaticImage
-                  src="../images/objectgroup-placeholder.svg"
+                  src="../../images/objectgroup-placeholder.svg"
                   alt={content.altImageWithObjectName.replace(
                     "{}",
                     objectGroup.label,
