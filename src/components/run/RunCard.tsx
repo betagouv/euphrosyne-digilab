@@ -75,7 +75,9 @@ const RunCardContent = ({
                     {method.detectors?.map(
                       (detector) =>
                         detector && (
-                          <div>
+                          <div
+                            key={`${run.label}-${method.name}-${detector.name}`}
+                          >
                             <span>
                               {detector.name}
                               {detector.filters.length > 0 ? ": " : ""}
