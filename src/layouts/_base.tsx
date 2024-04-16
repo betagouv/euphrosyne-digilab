@@ -7,7 +7,7 @@ import {
 } from "../components/EuphrosyneHeader";
 import { Footer } from "../components/Footer";
 import { PageContext } from "../contexts/PageContext";
-import { ContentProps } from "../i18n";
+import { ContentProps, getCurrentLangKey } from "../i18n";
 import { PageContext as IPageContext } from "../types/context";
 
 export interface LayoutContentProps {
@@ -25,8 +25,10 @@ export default function Layout({
   const [currentProject, setCurrentProject] =
     useState<IPageContext["currentProject"]>(null);
 
+  const langKey = getCurrentLangKey();
+
   return (
-    <DsfrProvider>
+    <DsfrProvider lang={langKey}>
       <PageContext.Provider
         value={{
           currentProject,
