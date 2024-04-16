@@ -166,13 +166,15 @@ export default function CatalogTemplate({
               >
                 <div className="fr-grid-row fr-grid-row--gutters fr-my-3w">
                   {paginatedSearchItems.map((searchItem) => (
-                    <div className="fr-col-6 fr-col-xl-4">
+                    <div
+                      className="fr-col-6 fr-col-xl-4"
+                      key={`catalog-item-${searchItem.type}-${
+                        searchItem.objectGroup
+                          ? searchItem.objectGroup.id
+                          : searchItem.project?.slug
+                      }`}
+                    >
                       <CatalogItem
-                        key={`catalog-item-${searchItem.type}-${
-                          searchItem.objectGroup
-                            ? searchItem.objectGroup.id
-                            : searchItem.project?.slug
-                        }`}
                         searchItem={searchItem}
                         css={css`
                           min-height: 350px;
