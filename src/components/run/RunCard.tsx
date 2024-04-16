@@ -1,24 +1,39 @@
 import { Card } from "@codegouvfr/react-dsfr/Card";
 import { css } from "@emotion/react";
 
+import { ContentProps } from "../../i18n";
 import { Participation } from "../../types/project";
 import { Run } from "../../types/run";
 import { ellipse } from "../../utils";
 
-type RunCardProps = { run: Run; projectLeader: Participation };
+export interface RunCardContent {
+  date: string;
+  projectLeader: string;
+  experimentalCondition: string;
+  methods: string;
+}
 
-const RunCardContent = ({ run, projectLeader }: RunCardProps) => {
+interface RunCardProps {
+  run: Run;
+  projectLeader: Participation;
+}
+
+const RunCardContent = ({
+  run,
+  projectLeader,
+  content,
+}: RunCardProps & ContentProps<RunCardContent>) => {
   const { firstName, lastName } = projectLeader.user;
   const institutionName = projectLeader.institution?.name;
   const startDate = new Date(run.startDate);
   return (
     <div>
       <div>
-        <span className="fr-hint-text">Date</span>
+        <span className="fr-hint-text">{content.date}</span>
         <p>{startDate.toLocaleDateString()}</p>
       </div>
       <div>
-        <span className="fr-hint-text">Chef de projet</span>
+        <span className="fr-hint-text">{content.projectLeader}</span>
         <p>
           {firstName} {lastName}{" "}
           {institutionName &&
@@ -28,7 +43,7 @@ const RunCardContent = ({ run, projectLeader }: RunCardProps) => {
         </p>
       </div>
       <div>
-        <span className="fr-hint-text">Condition expérimentale</span>
+        <span className="fr-hint-text">{content.experimentalCondition}</span>
         <div
           css={css`
             display: flex;
@@ -42,7 +57,7 @@ const RunCardContent = ({ run, projectLeader }: RunCardProps) => {
         </div>
       </div>
       <div>
-        <span className="fr-hint-text">Méthodes</span>
+        <span className="fr-hint-text">{content.methods}</span>
         <div className="fr-grid-row">
           {run.methods?.map(
             (method) =>
@@ -63,7 +78,7 @@ const RunCardContent = ({ run, projectLeader }: RunCardProps) => {
                           <div>
                             <span>
                               {detector.name}
-                              {detector.filters.length > 0 && ": "}
+                              {detector.filters.length > 0 ? ": " : ""}
                               {detector.filters.join(", ")}
                             </span>
                           </div>
@@ -78,12 +93,22 @@ const RunCardContent = ({ run, projectLeader }: RunCardProps) => {
     </div>
   );
 };
-export const RunCard = ({ run, projectLeader }: RunCardProps) => {
+export const RunCard = ({
+  run,
+  projectLeader,
+  content,
+}: RunCardProps & ContentProps<RunCardContent>) => {
   return (
     <Card
       background
       border
-      desc={<RunCardContent run={run} projectLeader={projectLeader} />}
+      desc={
+        <RunCardContent
+          run={run}
+          projectLeader={projectLeader}
+          content={content}
+        />
+      }
       size="medium"
       title={ellipse(run.label, 35)}
       titleAs="h3"

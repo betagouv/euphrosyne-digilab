@@ -4,11 +4,16 @@ import React from "react";
 
 import { ContentProps } from "../i18n";
 import { ProjectStatus } from "../types/project";
-import { ProjectStatusBadge } from "./ProjectStatusBadge";
+import {
+  ProjectStatusBadge,
+  ProjectStatusBadgeContent,
+} from "./ProjectStatusBadge";
 
 export interface PageBadgesContent {
   project: string;
   objectGroup: string;
+
+  projectStatusBadge: ProjectStatusBadgeContent;
 }
 
 export const PageBadges = ({
@@ -35,7 +40,11 @@ export const PageBadges = ({
         <Badge severity="new">{content.objectGroup}</Badge>
       )}
       {projectStatus && (
-        <ProjectStatusBadge status={projectStatus} className="fr-ml-1w" />
+        <ProjectStatusBadge
+          status={projectStatus}
+          content={content.projectStatusBadge}
+          className="fr-ml-1w"
+        />
       )}
     </div>
   );

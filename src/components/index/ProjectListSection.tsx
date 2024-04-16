@@ -1,10 +1,11 @@
 import { ContentProps } from "../../i18n";
 import { Project } from "../../types/project";
 import { BaseSection } from "../BaseSection";
-import { ProjectCard } from "../ProjectCard";
+import { ProjectCard, ProjectCardContent } from "../ProjectCard";
 
 export interface ProjectListSectionContent {
   title: string;
+  projectCard: ProjectCardContent;
 }
 
 export const ProjectListSection = ({
@@ -22,7 +23,7 @@ export const ProjectListSection = ({
             className="fr-col-12 fr-col-md-6 fr-col-lg-4 fr-p-7w"
             key={project.name}
           >
-            <ProjectCard project={project} />
+            <ProjectCard project={project} content={content.projectCard} />
           </div>
         ))}
       </div>

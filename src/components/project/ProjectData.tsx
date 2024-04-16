@@ -4,10 +4,11 @@ import * as React from "react";
 import { ContentProps } from "../../i18n";
 import { Participation } from "../../types/project";
 import { Run } from "../../types/run";
-import { RunCard } from "../run/RunCard";
+import { RunCard, RunCardContent } from "../run/RunCard";
 
 export interface ProjectDataContent {
   addToCart: string;
+  runCard: RunCardContent;
 }
 
 interface ProjectDataProps
@@ -34,7 +35,11 @@ export const ProjectData = ({
       <div className={`fr-grid-row fr-grid-row--gutters`} {...props}>
         {runs.map((run) => (
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4" key={run.label}>
-            <RunCard run={run} projectLeader={projectLeader} />
+            <RunCard
+              run={run}
+              projectLeader={projectLeader}
+              content={content.runCard}
+            />
           </div>
         ))}
       </div>

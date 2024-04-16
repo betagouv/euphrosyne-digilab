@@ -40,10 +40,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
   data?.euphrosyneAPI.lastProjects?.forEach((project) => {
     if (!project || !project.objectGroups) return;
     const { name, slug, objectGroups, comments, created } = project;
-    actions.createPage({
-      path: `/project/${slug}`,
-      component: path.resolve(`./src/templates/project.tsx`),
-      context: { slug: slug },
+    langs.forEach((lang) => {
+      actions.createPage({
+        path: `/${lang}/project/${slug}`,
+        component: path.resolve(`./src/templates/project.${lang}.tsx`),
+        context: { slug: slug },
+      });
     });
     searchItems.push({
       project: { name, slug, comments, created },

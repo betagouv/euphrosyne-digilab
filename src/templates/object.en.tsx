@@ -4,6 +4,12 @@ import { BaseHead } from "../components/BaseHead";
 import ObjectTemplate, {
   ObjectTemplateContent,
 } from "../components/page-templates/object";
+import {
+  erosLinkText,
+  pageBadges,
+  projectDataContent,
+  translations,
+} from "../locales/en";
 
 const content: ObjectTemplateContent = {
   catalog: "Catalog",
@@ -14,21 +20,16 @@ const content: ObjectTemplateContent = {
   project: "Project",
 
   objectGroupDescription: {
-    inventory: "Inventory",
-    period: "Period",
-    geographicArea: "Geographic area",
-    materials: "Materials",
+    inventory: translations.inventory,
+    period: translations.period,
+    geographicArea: translations.geographicArea,
+    materials: translations.materials,
     addObjectDataToCart: "Add all object data to cart",
-    erosLinkText: "Eros object page",
+    erosLinkText,
 
-    pageBadges: {
-      project: "Project",
-      objectGroup: "Object group",
-    },
+    pageBadges,
   },
-  projectDataContent: {
-    addToCart: "Add data to cart",
-  },
+  projectDataContent,
 };
 
 export default function ObjectTemplateEn(

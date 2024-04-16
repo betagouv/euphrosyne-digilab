@@ -1,19 +1,36 @@
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
-import { HeadFC, PageProps, graphql } from "gatsby";
+import { PageProps } from "gatsby";
 import { useContext, useEffect } from "react";
 
-import { BaseHead } from "../components/BaseHead";
-import { BaseSection } from "../components/BaseSection";
-import { ProjectData } from "../components/project/ProjectData";
-import { ProjectDescription } from "../components/project/ProjectDescription";
-import { ProjectObjects } from "../components/project/ProjectObjects";
-import { PageContext } from "../contexts/PageContext";
-import { detailPageSection } from "../styles";
-import { ObjectGroup, Participation, ProjectStatus } from "../types/project";
+import { PageContext } from "../../contexts/PageContext";
+import { ContentProps } from "../../i18n";
+import { detailPageSection } from "../../styles";
+import { ObjectGroup, Participation, ProjectStatus } from "../../types/project";
+import { BaseSection } from "../BaseSection";
+import { ProjectData, ProjectDataContent } from "../project/ProjectData";
+import {
+  ProjectDescription,
+  ProjectDescriptionContent,
+} from "../project/ProjectDescription";
+import {
+  ProjectObjects,
+  ProjectObjectsContent,
+} from "../project/ProjectObjects";
+
+export interface ProjectTemplateContent {
+  catalog: string;
+  projectData: string;
+
+  projectDataContent: ProjectDataContent;
+  projectDescription: ProjectDescriptionContent;
+  projectObjects: ProjectObjectsContent;
+}
 
 export default function ProjectTemplate({
   data,
-}: PageProps<Queries.ProjectTemplateQuery>) {
+  content,
+}: PageProps<Queries.ProjectTemplateQuery> &
+  ContentProps<ProjectTemplateContent>) {
   const { setCurrentProject } = useContext(PageContext);
   const project = data.euphrosyneAPI.projectDetail;
 
@@ -38,7 +55,7 @@ export default function ProjectTemplate({
               }}
               segments={[
                 {
-                  label: "Catalogue",
+                  label: content.catalog,
                   linkProps: { to: "/catalog" },
                 },
               ]}
@@ -49,78 +66,28 @@ export default function ProjectTemplate({
             projectName={project.name}
             projectStatus={project.status as ProjectStatus}
             projectDescription={project.comments}
+            content={content.projectDescription}
           />
           <BaseSection className="fr-pt-5w fr-pb-4w" css={detailPageSection}>
             <div className="fr-grid-row fr-grid-row--gutters">
               <div className="fr-col-12 fr-col-md-6">
-                <h2 className="fr-mb-2w">Données du projet</h2>
+                <h2 className="fr-mb-2w">{content.projectData}</h2>
               </div>
             </div>
             <ProjectData
               runs={project.runs}
               projectLeader={project.leader as Participation}
+              content={content.projectDataContent}
             />
           </BaseSection>
           <ProjectObjects
             objectGroups={project.objectGroups as ObjectGroup[]}
             className="fr-pt-5w"
             css={detailPageSection}
+            content={content.projectObjects}
           />
         </div>
       )}
     </div>
   );
 }
-
-export const Head: HeadFC = BaseHead;
-
-export const query = graphql`
-  query ProjectTemplate($slug: String!) {
-    euphrosyneAPI {
-      projectDetail(slug: $slug) {
-        name
-        slug
-        objectGroupMaterials
-        comments
-        status
-        leader {
-          user {
-            firstName
-            lastName
-          }
-          institution {
-            name
-            country
-          }
-        }
-        runs {
-          label
-          startDate
-          particleType
-          energyInKev
-          beamline
-          methods {
-            name
-            detectors {
-              name
-              filters
-            }
-          }
-        }
-        objectGroups {
-          id
-          c2rmfId
-          label
-          materials
-          discoveryPlace
-          collection
-          dating
-          objectSet {
-            label
-            collection
-          }
-        }
-      }
-    }
-  }
-`;

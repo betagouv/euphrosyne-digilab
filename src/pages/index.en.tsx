@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import * as React from "react";
 
 import { BaseHead } from "../components/BaseHead";
+import { projectCard } from "../locales/en";
 import IndexPage from "../templates/index";
 
 const content = {
@@ -57,6 +58,7 @@ const content = {
   },
   projectList: {
     title: "Latest Euphrosyne research projects",
+    projectCard,
   },
 };
 const FrIndexPage: React.FC<PageProps<Queries.HomePageQuery>> = (props) => {

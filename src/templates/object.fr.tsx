@@ -4,6 +4,12 @@ import { BaseHead } from "../components/BaseHead";
 import ObjectTemplate, {
   ObjectTemplateContent,
 } from "../components/page-templates/object";
+import {
+  erosLinkText,
+  pageBadges,
+  projectDataContent,
+  translations,
+} from "../locales/fr";
 
 const content: ObjectTemplateContent = {
   catalog: "Catalogue",
@@ -14,21 +20,16 @@ const content: ObjectTemplateContent = {
   project: "Projet",
 
   objectGroupDescription: {
-    inventory: "Inventaire",
-    period: "Époque",
-    geographicArea: "Aire géographique",
-    materials: "Matériaux",
+    inventory: translations.inventory,
+    period: translations.period,
+    geographicArea: translations.geographicArea,
+    materials: translations.materials,
     addObjectDataToCart: "Ajouter toutes les données de l'objet au panier",
-    erosLinkText: "Fiche objet Eros",
+    erosLinkText,
 
-    pageBadges: {
-      project: "Projet",
-      objectGroup: "Groupe d'objets",
-    },
+    pageBadges,
   },
-  projectDataContent: {
-    addToCart: "Ajouter les données au panier",
-  },
+  projectDataContent,
 };
 
 export default function ObjectTemplateFr(

@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import * as React from "react";
 
 import { BaseHead } from "../components/BaseHead";
+import { projectCard } from "../locales/fr";
 import IndexPage from "../templates/index";
 
 const content = {
@@ -61,6 +62,7 @@ const content = {
   },
   projectList: {
     title: "Les dernières recherches Euphrosyne",
+    projectCard,
   },
 };
 

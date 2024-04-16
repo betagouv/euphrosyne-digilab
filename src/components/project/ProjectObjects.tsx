@@ -5,19 +5,34 @@ import { Link } from "gatsby";
 import * as React from "react";
 import slugify from "slugify";
 
+import { ContentProps } from "../../i18n";
 import { ObjectGroup } from "../../types/project";
 import { BaseSection } from "../BaseSection";
 import { ErosLink } from "../object-group/ErosLink";
 
+export interface ProjectObjectsContent {
+  projectObjects: string;
+  noObjects: string;
+  seeObjectDetails: string;
+  seeMore: string;
+  seeLess: string;
+  erosLinkText: string;
+  inventory: string;
+  period: string;
+  materials: string;
+  geographicArea: string;
+}
+
 interface ProjectObjectsProps
-  extends React.InputHTMLAttributes<HTMLDivElement> {
+  extends Omit<React.InputHTMLAttributes<HTMLDivElement>, "content"> {
   objectGroups: ObjectGroup[];
 }
 
 export const ProjectObjects = ({
   objectGroups,
+  content,
   ...props
-}: ProjectObjectsProps) => {
+}: ProjectObjectsProps & ContentProps<ProjectObjectsContent>) => {
   const excerptLength = 3;
   const [showAll, setShowAll] = React.useState(false);
 
@@ -29,12 +44,12 @@ export const ProjectObjects = ({
     <BaseSection {...props}>
       <div className="fr-grid-row fr-grid-row--gutters">
         <div className="fr-col-12 fr-col-md-6">
-          <h2 className="fr-mb-2w">Objets du projet</h2>
+          <h2 className="fr-mb-2w">{content.projectObjects}</h2>
         </div>
       </div>
       {objectGroups.length === 0 ? (
         <p>
-          <i>Ce projet n'a pas d'objet enregistré.</i>
+          <i>{content.noObjects}</i>
         </p>
       ) : (
         <>
@@ -47,21 +62,24 @@ export const ProjectObjects = ({
                 <h3>{objectGroup.label}</h3>
                 <p>
                   {objectGroup.c2rmfId ? (
-                    <ErosLink c2rmfId={objectGroup.c2rmfId} />
+                    <ErosLink
+                      c2rmfId={objectGroup.c2rmfId}
+                      text={content.erosLinkText}
+                    />
                   ) : (
                     "\x00"
                   )}
                 </p>
                 <p>
-                  <strong>Époque: </strong>
+                  <strong>{content.period}: </strong>
                   {objectGroup.dating}
                 </p>
                 <p>
-                  <strong>Aire géographique: </strong>
+                  <strong>{content.geographicArea}: </strong>
                   {objectGroup.discoveryPlace}
                 </p>
                 <p>
-                  <strong>Matériaux: </strong>
+                  <strong>{content.materials}: </strong>
                   {objectGroup.materials.map((material) => (
                     <Tag
                       key={`object-group-item-${objectGroup.id}-material-${material}`}
@@ -76,7 +94,7 @@ export const ProjectObjects = ({
                       objectGroup.id
                     }`}
                   >
-                    Voir le détail de l'objet
+                    {content.seeObjectDetails}
                   </Link>
                 </p>
               </div>
@@ -93,10 +111,11 @@ export const ProjectObjects = ({
                 priority="tertiary no outline"
               >
                 {!showAll
-                  ? `Voir plus d'objets liés (${
-                      objectGroups.length - excerptLength
-                    } restants) +`
-                  : "Voir moins -"}
+                  ? content.seeMore.replace(
+                      "{}",
+                      (objectGroups.length - excerptLength).toString(),
+                    )
+                  : content.seeLess}
               </Button>
             )}
           </div>
