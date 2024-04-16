@@ -44,7 +44,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       actions.createPage({
         path: `/${lang}/project/${slug}`,
         component: path.resolve(`./src/templates/project.${lang}.tsx`),
-        context: { slug: slug },
+        context: { slug: slug, langKey: lang },
       });
     });
     searchItems.push({
@@ -61,7 +61,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
         actions.createPage({
           path: `/${lang}/object/${objectSlug}/${id}`,
           component: path.resolve(`./src/templates/object.${lang}.tsx`),
-          context: { id },
+          context: { id, langKey: lang },
         });
       });
       searchItems.push({
@@ -75,7 +75,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     actions.createPage({
       path: `${lang}/catalog`,
       component: path.resolve(`./src/templates/catalog.${lang}.tsx`),
-      context: { searchItems },
+      context: { searchItems, langKey: lang },
     });
   });
 };

@@ -4,7 +4,7 @@ import Layout, { LayoutContentProps } from "./_base";
 
 const layoutContent: LayoutContentProps = {
   header: {
-    homeLinkTitle: "Home - Catalogue des données de NewAglae",
+    homeLinkTitle: "Home - NewAglae Data Catalog",
     euphrosyneLinkTitle: "Access Euphrosyne",
     homeLinkLabel: "Home",
     catalogLinkLabel: "Catalog",
@@ -27,6 +27,7 @@ export default function LayoutEn({
       currentPath={currentPath}
       children={children}
       content={layoutContent}
+      langKey="en"
     />
   );
 }

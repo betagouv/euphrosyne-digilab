@@ -27,6 +27,7 @@ export default function LayoutFr({
       currentPath={currentPath}
       children={children}
       content={layoutContent}
+      langKey="fr"
     />
   );
 }
