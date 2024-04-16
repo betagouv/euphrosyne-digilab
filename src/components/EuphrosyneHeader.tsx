@@ -30,10 +30,21 @@ const langNames: LangNames = {
   en: "English",
 };
 
+const buildLanguageSwitchLink = (lang: string) => {
+  const pathElements = location.pathname.split("/");
+  if ((langs as string[]).includes(pathElements[1])) {
+    pathElements[1] = lang;
+  } else {
+    pathElements.splice(1, 0, lang);
+  }
+  return pathElements.join("/") + location.search;
+};
+
 const LanguageSwitcher: React.FC<ContentProps<LanguageSwitcherContent>> = ({
   content,
 }) => {
   const currentLang = getCurrentLangKey();
+
   return (
     <nav role="navigation" className="fr-translate fr-nav">
       <div className="fr-nav__item">
@@ -54,7 +65,7 @@ const LanguageSwitcher: React.FC<ContentProps<LanguageSwitcherContent>> = ({
                   className="fr-translate__language fr-nav__link"
                   hrefLang={lang}
                   lang={lang}
-                  to={`/${lang}`}
+                  to={buildLanguageSwitchLink(lang)}
                   aria-current={lang === currentLang ? "true" : undefined}
                 >
                   {lang.toUpperCase()} - {langNames[lang]}
@@ -72,12 +83,11 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
   currentPath,
   content,
 }) => {
-  const currentLang = getCurrentLangKey();
   return (
     <Header
       brandTop="Ministère de la Culture"
       homeLinkProps={{
-        to: `/${currentLang}`,
+        to: `/`,
         title: content.homeLinkTitle,
       }}
       quickAccessItems={[
