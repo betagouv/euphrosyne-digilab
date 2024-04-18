@@ -15,7 +15,7 @@ export interface RunCardContent {
 
 interface RunCardProps {
   run: Run;
-  projectLeader: Participation;
+  projectLeader: Participation | null;
 }
 
 const RunCardContent = ({
@@ -23,8 +23,7 @@ const RunCardContent = ({
   projectLeader,
   content,
 }: RunCardProps & ContentProps<RunCardContent>) => {
-  const { firstName, lastName } = projectLeader.user;
-  const institutionName = projectLeader.institution?.name;
+  const institutionName = projectLeader?.institution?.name;
   const startDate = new Date(run.startDate);
   return (
     <div>
@@ -35,7 +34,9 @@ const RunCardContent = ({
       <div>
         <span className="fr-hint-text">{content.projectLeader}</span>
         <p>
-          {firstName} {lastName}{" "}
+          {projectLeader && projectLeader.user
+            ? `${projectLeader.user.firstName} ${projectLeader.user.lastName} `
+            : ""}
           {institutionName &&
             `[${
               institutionName.charAt(0).toUpperCase() + institutionName.slice(1)
