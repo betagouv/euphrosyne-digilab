@@ -31,6 +31,7 @@ const langNames: LangNames = {
 };
 
 const buildLanguageSwitchLink = (lang: string) => {
+  if (typeof window === "undefined") return `/${lang}`;
   const pathElements = location.pathname.split("/");
   if ((langs as string[]).includes(pathElements[1])) {
     pathElements[1] = lang;
