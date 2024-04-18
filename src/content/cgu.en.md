@@ -1,6 +1,6 @@
 ---
-slug: "/cgu"
-title: "CGU"
+slug: "/en/gcu"
+title: "GCU"
 ---
 
 Toute personne qui accède au site internet, à l’une des offres éditoriales ou services associés accepte et s’engage à respecter, sans restriction ni réserve, les présentes conditions générales d’utilisation en vigueur.
