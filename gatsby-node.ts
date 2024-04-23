@@ -35,7 +35,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     await graphql(`
       query CreatePagesFromProjects {
         euphrosyneAPI {
-          lastProjects(limit: 6) {
+          lastProjects {
             name
             slug
             comments
