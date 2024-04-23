@@ -2,14 +2,29 @@ import { fr } from "@codegouvfr/react-dsfr";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { css } from "@emotion/react";
 
-import { PageBadges } from "../PageBadges";
+import { ContentProps } from "../../i18n";
+import { PageBadges, PageBadgesContent } from "../PageBadges";
 import { ErosLink } from "./ErosLink";
 import ObjectGroupMaterialTags from "./ObjectGroupMaterialTags";
 
-type ObjectGroupDescriptionProps = React.InputHTMLAttributes<HTMLDivElement> & {
+export interface ObjectGroupDescriptionContent {
+  inventory: string;
+  period: string;
+  geographicArea: string;
+  materials: string;
+  addObjectDataToCart: string;
+  erosLinkText: string;
+
+  pageBadges: PageBadgesContent;
+}
+
+type ObjectGroupDescriptionProps = Omit<
+  React.InputHTMLAttributes<HTMLDivElement>,
+  "content"
+> & {
   collection?: string;
-  dating?: string;
-  discoveryPlace?: string;
+  dating: string | null;
+  discoveryPlace: string | null;
   materials?: string[];
   dataAvailable?: boolean;
   label: string;
@@ -24,30 +39,32 @@ export const ObjectGroupDescription = ({
   dataAvailable,
   label,
   c2rmfId,
+  content,
   ...props
-}: ObjectGroupDescriptionProps) => {
+}: ObjectGroupDescriptionProps &
+  ContentProps<ObjectGroupDescriptionContent>) => {
   const descriptionItems: {
     label: string;
     value: string | React.ReactElement;
     icon: string;
   }[] = [
     {
-      label: "Inventaire",
+      label: content.inventory,
       value: collection || "",
       icon: fr.cx("fr-icon-clipboard-line"),
     },
     {
-      label: "Époque",
+      label: content.period,
       value: dating || "",
       icon: fr.cx("fr-icon-calendar-line"),
     },
     {
-      label: "Aire géographique",
+      label: content.geographicArea,
       value: discoveryPlace || "",
       icon: fr.cx("fr-icon-road-map-line"),
     },
     {
-      label: "Matériaux",
+      label: content.materials,
       value: materials ? ObjectGroupMaterialTags({ materials }) : "",
       icon: fr.cx("fr-icon-seedling-line"),
     },
@@ -60,6 +77,7 @@ export const ObjectGroupDescription = ({
         projectStatus={
           dataAvailable ? "Status.DATA_AVAILABLE" : "Status.FINISHED"
         }
+        content={content.pageBadges}
         className="fr-mb-2w"
       />
       <h1 className="fr-mb-6w">{label}</h1>
@@ -88,11 +106,11 @@ export const ObjectGroupDescription = ({
       </div>
 
       <Button className="fr-mb-2w" disabled>
-        Ajouter toutes les données de l'objet au panier
+        {content.addObjectDataToCart}
       </Button>
       {c2rmfId && (
         <p>
-          <ErosLink c2rmfId={c2rmfId} />
+          <ErosLink c2rmfId={c2rmfId} text={content.erosLinkText} />
         </p>
       )}
     </div>

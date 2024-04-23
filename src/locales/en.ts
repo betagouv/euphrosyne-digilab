@@ -1,0 +1,205 @@
+import { PageBadgesContent } from "../components/PageBadges";
+import { ProjectCardContent } from "../components/ProjectCard";
+import { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
+import { ProjectDataContent } from "../components/project/ProjectData";
+import { LayoutContentProps } from "../layouts";
+import { IndexPageContent } from "../pages";
+import { CatalogContent } from "../templates/catalog";
+import { ObjectTemplateContent } from "../templates/object";
+import { ProjectTemplateContent } from "../templates/project";
+import { Translations } from "./fr";
+
+export const translations = {
+  project: "Project",
+  objectGroup: "Object group",
+
+  inventory: "Inventory",
+  period: "Period",
+  geographicArea: "Geographic area",
+  materials: "Materials",
+};
+export const erosLinkText = "Eros object page";
+
+const layoutContent: LayoutContentProps = {
+  header: {
+    homeLinkTitle: "Home - NewAglae Data Catalog",
+    euphrosyneLinkTitle: "Access Euphrosyne",
+    homeLinkLabel: "Home",
+    catalogLinkLabel: "Catalog",
+    serviceTitle: "NewAglae Data Catalog",
+    languageSwitcher: {
+      selectLangBtnTitle: "Change language",
+    },
+  },
+};
+
+export const projectDataContent: ProjectDataContent = {
+  addToCart: "Add data to cart",
+  runCard: {
+    date: "Date",
+    projectLeader: "Project leader",
+    experimentalCondition: "Experimental conditions",
+    methods: "Methods",
+  },
+};
+
+const projectStatusBadge: ProjectStatusBadgeContent = {
+  upcoming: "Upcoming",
+  dataAvailable: "Data available",
+};
+
+export const pageBadges: PageBadgesContent = {
+  project: translations.project,
+  objectGroup: translations.objectGroup,
+  projectStatusBadge,
+};
+
+export const projectCard: ProjectCardContent = {
+  project: translations.project,
+  objectGroup: translations.objectGroup,
+  projectImage: "Image of project {}",
+  projectStatusBadge,
+};
+
+const indexPageContent: IndexPageContent = {
+  hero: {
+    title: "Data produced by NewAglae available online",
+    description: `Euphrosyne is the digital platform linked to NewAglae, 
+    the Grand Louvre Accelerator for Elemental Analysis dedicated to heritage sciences.
+    It allows the collection and dissemination of data
+    as well as, for NewAglae users, remote access to
+    software for processing ion beam analysis acquired
+    on NewAglae. The NewAglae data catalog helps you
+    search for scientific data by keywords (materials, date,
+    geographical area, etc.) to best meet your research needs.`,
+  },
+  search: {
+    title: {
+      highlight: "Browse",
+      rest: "our Euphrosyne data catalog",
+    },
+    featureSoon: "Feature coming soon...",
+  },
+  howItWorks: {
+    title: "Euphrosyne's services",
+    catalogText:
+      "A catalog referencing the datasets produced by NewAglae since 04/01/2022.",
+    euphrosyneText:
+      "A digital platform allowing NewAglae users to prepare their experiments.",
+    workplaceText:
+      "A virtual office for NewAglae users to process and retrieve their data remotely.",
+  },
+  about: {
+    title: "About",
+    newAglae: "NewAglae, Grand Louvre Accelerator for Elemental Analysis",
+    description: `AGLAE, acronym for "Grand Louvre Accelerator for Elemental Analysis," is a unique large instrument, located within
+    the Louvre Palace itself. Since its installation in 1988, AGLAE is the
+    only particle accelerator in the world dedicated to heritage sciences, using advanced techniques to decipher the
+    secrets buried in works of art. Winner of the Future Investment from the National Research Agency (ANR-10-EQPX-22),
+    AGLAE became NewAglae in 2017. Completely automated, the
+    beam line is now likely to operate
+    24/7.`,
+    moreInfo: "Learn more",
+    img1Alt: "Statuette from the Bavay bronze treasure analyzed by New AGLAÉ.",
+    img2Alt: "Object analyzed by New AGLAÉ.",
+  },
+  figure: {
+    title: "Key figures of NewAglae",
+    analyzedProjectsLabel: "analysis projects carried out",
+    analyzedObjectsLabel: "objects analyzed",
+    hoursLabel: "hours",
+    sinceYear: "Since {}",
+    inYear: "In {}",
+  },
+  projectList: {
+    title: "Latest Euphrosyne research projects",
+    projectCard,
+  },
+};
+
+const catalogContent: CatalogContent = {
+  noData: "No results for these search criteria.",
+  numResult: "{} result",
+  numResultPlural: "{} results",
+
+  searchBar: {
+    title: "Browse the Euphrosyne data catalog",
+  },
+
+  filterContainer: {
+    filterResults: "Filter results",
+    filter: "Filter",
+  },
+
+  catalogFilters: {
+    project: "Project",
+    objectGroup: "Object group",
+    itemType: "Item type",
+  },
+
+  sortSelect: {
+    mostDated: "Oldest",
+    mostRecent: "Most recent",
+    sorting: "Sorting",
+  },
+};
+
+const objectPageContent: ObjectTemplateContent = {
+  catalog: "Catalog",
+  projectWithName: "Project {}",
+  altImageWithObjectName: "Image of the object {}",
+  noProject: "No project",
+  objectData: "Object data",
+  project: "Project",
+
+  objectGroupDescription: {
+    inventory: translations.inventory,
+    period: translations.period,
+    geographicArea: translations.geographicArea,
+    materials: translations.materials,
+    addObjectDataToCart: "Add all object data to cart",
+    erosLinkText,
+
+    pageBadges,
+  },
+  projectDataContent,
+};
+
+const projectPageContent: ProjectTemplateContent = {
+  catalog: "Catalog",
+  projectData: "Project data",
+
+  projectDataContent,
+  projectDescription: {
+    pageBadges: pageBadges,
+    noDescription: "No description for this project.",
+    addDataToCart: "Add all data to the cart",
+  },
+  projectObjects: {
+    projectObjects: "Project objects",
+    noObjects: "This project has no registered object.",
+    seeObjectDetails: "See object details",
+    seeMore: "See more related objects ({} remaining) +",
+    seeLess: "See less -",
+    erosLinkText,
+    inventory: translations.inventory,
+    period: translations.period,
+    geographicArea: translations.geographicArea,
+    materials: translations.materials,
+  },
+};
+
+const t: Translations = {
+  base: translations,
+  erosLinkText,
+  projectStatusBadge,
+  pageBadges,
+  projectCard,
+  layoutContent,
+  indexPageContent,
+  catalogContent,
+  objectPageContent,
+  projectPageContent,
+};
+
+export default t;

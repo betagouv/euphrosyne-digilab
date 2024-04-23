@@ -2,7 +2,13 @@ import SearchBar from "@codegouvfr/react-dsfr/SearchBar";
 import { css } from "@emotion/react";
 import { useEffect, useRef } from "react";
 
+import { ContentProps } from "../../i18n";
+
 type SearchEvent = (q: string) => void;
+
+export interface SearchBarContent {
+  title: string;
+}
 
 interface SearchBarSectionProps
   extends React.InputHTMLAttributes<HTMLDivElement> {
@@ -13,8 +19,9 @@ interface SearchBarSectionProps
 export default function SearchBarSection({
   searchValue,
   onSearchChange,
+  content,
   ...props
-}: SearchBarSectionProps) {
+}: Omit<SearchBarSectionProps, "content"> & ContentProps<SearchBarContent>) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -24,7 +31,7 @@ export default function SearchBarSection({
   }, []);
   return (
     <div {...props}>
-      <h1>Parcourez le catalogue de données Euphrosyne</h1>
+      <h1>{content.title}</h1>
       <SearchBar
         big={true}
         css={css`

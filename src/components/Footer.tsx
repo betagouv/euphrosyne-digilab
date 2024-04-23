@@ -6,13 +6,13 @@ import {
 import React from "react";
 
 const contentDescription = () => (
-  <>
+  <React.Fragment>
     Euphrosyne, ouvrir les données de{" "}
     <a href="https://c2rmf.fr/aglae-0" target="_blank">
       NewAglae
     </a>
     .
-  </>
+  </React.Fragment>
 );
 
 export const Footer = () => {

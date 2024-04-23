@@ -4,11 +4,23 @@ import { StaticImage } from "gatsby-plugin-image";
 import { useRef } from "react";
 
 import useHasBeenInViewport from "../../hooks/useHasBeenInViewport";
+import { ContentProps } from "../../i18n";
 import { paddedUpToLg } from "../../styles";
 import { BaseSection } from "../BaseSection";
 import FadeInDiv from "../FadeInDiv";
 
-export const AboutSection = () => {
+export interface AboutSectionContent {
+  title: string;
+  newAglae: string;
+  description: string;
+  moreInfo: string;
+  img1Alt: string;
+  img2Alt: string;
+}
+
+export const AboutSection: React.FC<ContentProps<AboutSectionContent>> = ({
+  content,
+}) => {
   const elementRef = useRef<HTMLDivElement>(null);
   const hasBeenInViewport = useHasBeenInViewport(elementRef);
 
@@ -31,28 +43,19 @@ export const AboutSection = () => {
         <div className="fr-grid-row fr-grid-row--gutters">
           <div className="fr-col-12 fr-col-lg-6">
             <div>
-              <h4>A propos</h4>
+              <h4>{content.title}</h4>
             </div>
             <div>
-              <h3>NewAglae, Accélérateur Grand Louvre d'analyse élémentaire</h3>
+              <h3>{content.newAglae}</h3>
             </div>
             <p
               css={css`
                 ${paddedUpToLg}
               `}
             >
-              AGLAE, acronyme pour "Accélérateur Grand Louvre d'Analyse
-              Élémentaire," est un grand instrument unique, situé au sein même
-              du Palais du Louvre. Depuis son installation en 1988, AGLAE est le
-              seul accélérateur de particules au monde dédié aux sciences du
-              patrimoine, utilisant des techniques avancées pour décrypter les
-              secrets enfouis dans les œuvres d'art. Lauréat de l'Investissement
-              d'Avenir de l'Agence Nationale de la Recherche (ANR-10-EQPX-22),
-              AGLAE est devenu NewAglae en 2017. Complètement automatisée, la
-              ligne de faisceau est dorénavant susceptible de fonctionner
-              24h/24.
+              {content.description}
             </p>
-            <a href="https://c2rmf.fr/aglae">En savoir plus</a>
+            <a href="https://c2rmf.fr/aglae">{content.moreInfo}</a>
           </div>
           {hasBeenInViewport && (
             <FadeInDiv
@@ -70,7 +73,7 @@ export const AboutSection = () => {
               <div className="fr-col-lg-6">
                 <StaticImage
                   src="../../images/analyzed-object-zoomed-1.png"
-                  alt="Statuette du trésor des bronzes de Bavay analysée par New AGLAÉ."
+                  alt={content.img1Alt}
                   placeholder="blurred"
                   className="fr-mr-1v"
                   css={css`
@@ -84,7 +87,7 @@ export const AboutSection = () => {
               <div className="fr-col-lg-6">
                 <StaticImage
                   src="../../images/analyzed-object-zoomed-2.png"
-                  alt="Objet analysé par New AGLAÉ."
+                  alt={content.img2Alt}
                   placeholder="blurred"
                   className="fr-ml-1v"
                   css={css`

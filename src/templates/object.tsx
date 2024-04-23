@@ -8,12 +8,33 @@ import { useContext, useEffect, useState } from "react";
 
 import { BaseHead } from "../components/BaseHead";
 import { BaseSection } from "../components/BaseSection";
-import { ObjectGroupDescription } from "../components/object-group/ObjectGroupDescription";
-import { ProjectData } from "../components/project/ProjectData";
+import {
+  ObjectGroupDescription,
+  ObjectGroupDescriptionContent,
+} from "../components/object-group/ObjectGroupDescription";
+import {
+  ProjectData,
+  ProjectDataContent,
+} from "../components/project/ProjectData";
+import { LangContext } from "../contexts/LangContext";
 import { PageContext } from "../contexts/PageContext";
+import { ContentProps } from "../i18n";
 import { detailPageSection, paddedUpToLg } from "../styles";
 import { Participation } from "../types/project";
 import { Run } from "../types/run";
+
+export interface ObjectTemplateContent {
+  catalog: string;
+  projectWithName: string;
+  altImageWithObjectName: string;
+
+  noProject: string;
+  objectData: string;
+  project: string;
+
+  objectGroupDescription: ObjectGroupDescriptionContent;
+  projectDataContent: ProjectDataContent;
+}
 
 interface Project {
   name: string;
@@ -23,7 +44,11 @@ interface Project {
 
 export default function ObjectTemplate({
   data,
-}: PageProps<Queries.ObjectTemplateQuery>) {
+}: PageProps<Queries.ObjectTemplateQuery> &
+  ContentProps<ObjectTemplateContent>) {
+  const { translations } = useContext(LangContext);
+  const content = translations.objectPageContent;
+
   const { currentProject } = useContext(PageContext);
   const objectGroup = data.euphrosyneAPI.objectGroupDetail;
   const projects = objectGroup?.runs
@@ -38,13 +63,13 @@ export default function ObjectTemplate({
 
   const breadcrumbSegments = [
     {
-      label: "Catalogue",
+      label: content.catalog,
       linkProps: { to: "/catalog" },
     },
   ];
   if (currentProject) {
     breadcrumbSegments.push({
-      label: `Projet ${currentProject.name}`,
+      label: content.projectWithName.replace("{}", currentProject.name),
       linkProps: { to: `/project/${currentProject.slug}` },
     });
   }
@@ -90,11 +115,15 @@ export default function ObjectTemplate({
                 dataAvailable={objectGroup.dataAvailable}
                 label={objectGroup.label}
                 c2rmfId={objectGroup.c2rmfId}
+                content={content.objectGroupDescription}
               />
               <div className="fr-col-12 fr-col-lg-6">
                 <StaticImage
                   src="../images/objectgroup-placeholder.svg"
-                  alt={`Image de l'objet ${objectGroup.label}`}
+                  alt={content.altImageWithObjectName.replace(
+                    "{}",
+                    objectGroup.label,
+                  )}
                   placeholder="blurred"
                   css={css`
                     ${fr.breakpoints.down("lg")} {
@@ -112,15 +141,15 @@ export default function ObjectTemplate({
               ${detailPageSection}
             `}
           >
-            <h2>Object data</h2>
+            <h2>{content.objectData}</h2>
             <Select
-              label="Projet"
+              label={content.project}
               disabled={!(projects && projects.length > 0)}
               options={
                 projects?.map((project) => ({
                   label: project.name,
                   value: project.slug,
-                })) || [{ label: "Aucun projet", value: "" }]
+                })) || [{ label: content.noProject, value: "" }]
               }
               nativeSelectProps={{ value: selectedProject?.slug }}
             />
@@ -130,6 +159,7 @@ export default function ObjectTemplate({
                 <ProjectData
                   runs={selectedProjectRuns as Run[]}
                   projectLeader={selectedProject.leader}
+                  content={content.projectDataContent}
                 />
               )}
           </BaseSection>

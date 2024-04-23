@@ -2,28 +2,54 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { css } from "@emotion/react";
 import { useLocation } from "@reach/router";
 import { HeadFC, PageProps } from "gatsby";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-import CatalogFilters, { Filters } from "../catalog/components/CatalogFilters";
+import CatalogFilters, {
+  CatalogFiltersContent,
+  Filters,
+} from "../catalog/components/CatalogFilters";
 import { CatalogItem } from "../catalog/components/CatalogItem";
-import FilterContainer from "../catalog/components/FilterContainer";
+import FilterContainer, {
+  FilterContainerContent,
+} from "../catalog/components/FilterContainer";
 import { Pagination } from "../catalog/components/Pagination";
-import SearchBarSection from "../catalog/components/SearchBarSection";
-import SortSelect, { SortValue } from "../catalog/components/SortSelect";
+import SearchBarSection, {
+  SearchBarContent,
+} from "../catalog/components/SearchBarSection";
+import SortSelect, {
+  SortSelectContent,
+  SortValue,
+} from "../catalog/components/SortSelect";
 import useFilter, {
   buildFiltersFromLocation,
 } from "../catalog/hooks/useFilter";
 import usePagination from "../catalog/hooks/usePagination";
 import { BaseHead } from "../components/BaseHead";
+import { LangContext } from "../contexts/LangContext";
+import { ContentProps } from "../i18n";
 import { SearchItem } from "../types/catalog";
 
-interface CatalogTemplateProps {
+export interface CatalogContent {
+  noData: string;
+  numResult: string;
+  numResultPlural: string;
+
+  searchBar: SearchBarContent;
+  filterContainer: FilterContainerContent;
+  catalogFilters: CatalogFiltersContent;
+  sortSelect: SortSelectContent;
+}
+
+export interface CatalogTemplateProps {
   searchItems: SearchItem[];
 }
 
 export default function CatalogTemplate({
   pageContext: { searchItems },
-}: PageProps<null, CatalogTemplateProps>) {
+}: PageProps<null, CatalogTemplateProps> & ContentProps<CatalogContent>) {
+  const { translations } = useContext(LangContext);
+  const content = translations.catalogContent;
+
   const [selectedSort, setSelectedSort] = useState<SortValue>("dsc");
   const [filters, setFilters] = useState<Filters>(
     buildFiltersFromLocation(useLocation()),
@@ -59,6 +85,7 @@ export default function CatalogTemplate({
           onSearchChange={(q: string) => {
             setFilters({ ...filters, q });
           }}
+          content={content.searchBar}
         />
         <div
           css={css`
@@ -73,8 +100,12 @@ export default function CatalogTemplate({
             }
           `}
         >
-          <FilterContainer>
-            <CatalogFilters filters={filters} setFilters={setFilters} />
+          <FilterContainer content={content.filterContainer}>
+            <CatalogFilters
+              filters={filters}
+              setFilters={setFilters}
+              content={content.catalogFilters}
+            />
           </FilterContainer>
           <div
             className="fr-mt-5w fr-px-2w"
@@ -97,6 +128,7 @@ export default function CatalogTemplate({
                 onSearchChange={(q: string) => {
                   setFilters({ ...filters, q });
                 }}
+                content={content.searchBar}
               />
               <div
                 css={css`
@@ -112,17 +144,20 @@ export default function CatalogTemplate({
                 >
                   <span>
                     <i>
-                      {filteredSearchItems.length} résultat
-                      {filteredSearchItems.length > 0 && "s"}
+                      {(filteredSearchItems.length > 1
+                        ? content.numResultPlural
+                        : content.numResult
+                      ).replace("{}", filteredSearchItems.length.toString())}
                     </i>
                   </span>
                   <SortSelect
+                    content={content.sortSelect}
                     value={selectedSort}
                     onChange={setSelectedSort}
                     css={css`
                       display: flex;
                       align-items: center;
-                      max-width: 11em;
+                      max-width: 13em;
                     `}
                   />
                 </div>
@@ -134,13 +169,15 @@ export default function CatalogTemplate({
               >
                 <div className="fr-grid-row fr-grid-row--gutters fr-my-3w">
                   {paginatedSearchItems.map((searchItem) => (
-                    <div className="fr-col-6 fr-col-xl-4">
+                    <div
+                      className="fr-col-6 fr-col-xl-4"
+                      key={`catalog-item-${searchItem.type}-${
+                        searchItem.objectGroup
+                          ? searchItem.objectGroup.id
+                          : searchItem.project?.slug
+                      }`}
+                    >
                       <CatalogItem
-                        key={`catalog-item-${searchItem.type}-${
-                          searchItem.objectGroup
-                            ? searchItem.objectGroup.id
-                            : searchItem.project?.slug
-                        }`}
                         searchItem={searchItem}
                         css={css`
                           min-height: 350px;
@@ -150,7 +187,7 @@ export default function CatalogTemplate({
                   ))}
                   {!paginatedSearchItems.length && (
                     <div>
-                      <i>Aucun résultat pour ces critères de recherche.</i>
+                      <i>{content.noData}</i>
                     </div>
                   )}
                 </div>

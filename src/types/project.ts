@@ -10,7 +10,7 @@ export interface Project {
 }
 
 export interface Participation {
-  user: User;
+  user?: User;
   institution?: Institution;
 }
 

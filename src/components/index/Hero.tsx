@@ -2,10 +2,16 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { css } from "@emotion/react";
 import { StaticImage } from "gatsby-plugin-image";
 
+import { ContentProps } from "../../i18n";
 import { paddedUpToLg } from "../../styles";
 import { BaseSection } from "../BaseSection";
 
-export const Hero = () => (
+export interface HeroContent {
+  title: string;
+  description: string;
+}
+
+export const Hero: React.FC<ContentProps<HeroContent>> = ({ content }) => (
   <div
     css={css`
       background-color: ${fr.colors.decisions.background.alt.grey.default};
@@ -31,18 +37,8 @@ export const Hero = () => (
             ${paddedUpToLg}
           `}
         >
-          <h1>Les données produites par NewAglae accessibles en ligne</h1>
-          <p>
-            Euphrosyne est la plateforme numérique liée à NewAglae,
-            l'Accélérateur Grand Louvre d'Analyse Elémentaire dédié aux sciences
-            du patrimoine. Elle permet la collecte et la diffusion des données
-            ainsi que, pour les utilisateurs de NewAglae, l'accès à distance aux
-            logiciels de traitement des analyses par faisceau d'ions acquises
-            sur NewAglae. Le catalogue des données de NewAglae vous aide a
-            chercher des données scientifiques par mots-clefs (matériaux, date,
-            aire géographique, etc.) afin de répondre au mieux à vos besoins de
-            recherche.
-          </p>
+          <h1>{content.title}</h1>
+          <p>{content.description}</p>
         </div>
       </div>
     </BaseSection>

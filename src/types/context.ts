@@ -1,5 +1,7 @@
 import { SetStateAction } from "react";
 
+import defaultTranslations from "../locales/fr";
+
 export interface PageContext {
   currentProject: {
     name: string;
@@ -8,4 +10,8 @@ export interface PageContext {
   setCurrentProject: React.Dispatch<
     SetStateAction<PageContext["currentProject"]>
   > | null;
+}
+
+export interface LangContext {
+  translations: typeof defaultTranslations;
 }

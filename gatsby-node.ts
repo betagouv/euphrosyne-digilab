@@ -7,7 +7,25 @@ import {
 import path from "path";
 import slugify from "slugify";
 
+import { langs } from "./src/i18n";
 import { SearchItem } from "./src/types/catalog";
+
+export const onCreatePage: GatsbyNode["onCreatePage"] = async ({
+  page,
+  actions,
+}) => {
+  actions.deletePage(page);
+  langs.forEach((lang) => {
+    actions.createPage({
+      ...page,
+      path: `/${lang}${page.path}`,
+      context: {
+        ...page.context,
+        langKey: lang,
+      },
+    });
+  });
+};
 
 export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
@@ -39,10 +57,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
   data?.euphrosyneAPI.lastProjects?.forEach((project) => {
     if (!project || !project.objectGroups) return;
     const { name, slug, objectGroups, comments, created } = project;
-    actions.createPage({
-      path: `/project/${slug}`,
-      component: path.resolve(`./src/templates/project.tsx`),
-      context: { slug: slug },
+    langs.forEach((lang) => {
+      actions.createPage({
+        path: `/${lang}/project/${slug}`,
+        component: path.resolve(`./src/templates/project.tsx`),
+        context: { slug: slug, langKey: lang },
+      });
     });
     searchItems.push({
       project: { name, slug, comments, created },
@@ -54,10 +74,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
       if (objectGroupIdsOfPages.includes(`${label}|${id}`)) return; // page already created
       objectGroupIdsOfPages.push(`${label}|${id}`);
       const objectSlug = slugify(label);
-      actions.createPage({
-        path: `/object/${objectSlug}/${id}`,
-        component: path.resolve(`./src/templates/object.tsx`),
-        context: { id },
+      langs.forEach((lang) => {
+        actions.createPage({
+          path: `/${lang}/object/${objectSlug}/${id}`,
+          component: path.resolve(`./src/templates/object.tsx`),
+          context: { id, langKey: lang },
+        });
       });
       searchItems.push({
         objectGroup: { id, label, materials, created },
@@ -66,10 +88,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
     });
   });
 
-  actions.createPage({
-    path: `/catalog`,
-    component: path.resolve(`./src/templates/catalog.tsx`),
-    context: { searchItems },
+  langs.forEach((lang) => {
+    actions.createPage({
+      path: `/${lang}/catalog`,
+      component: path.resolve(`./src/templates/catalog.tsx`),
+      context: { searchItems },
+    });
   });
 };
 

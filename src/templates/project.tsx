@@ -4,16 +4,38 @@ import { useContext, useEffect } from "react";
 
 import { BaseHead } from "../components/BaseHead";
 import { BaseSection } from "../components/BaseSection";
-import { ProjectData } from "../components/project/ProjectData";
-import { ProjectDescription } from "../components/project/ProjectDescription";
-import { ProjectObjects } from "../components/project/ProjectObjects";
+import {
+  ProjectData,
+  ProjectDataContent,
+} from "../components/project/ProjectData";
+import {
+  ProjectDescription,
+  ProjectDescriptionContent,
+} from "../components/project/ProjectDescription";
+import {
+  ProjectObjects,
+  ProjectObjectsContent,
+} from "../components/project/ProjectObjects";
+import { LangContext } from "../contexts/LangContext";
 import { PageContext } from "../contexts/PageContext";
 import { detailPageSection } from "../styles";
 import { ObjectGroup, Participation, ProjectStatus } from "../types/project";
 
+export interface ProjectTemplateContent {
+  catalog: string;
+  projectData: string;
+
+  projectDataContent: ProjectDataContent;
+  projectDescription: ProjectDescriptionContent;
+  projectObjects: ProjectObjectsContent;
+}
+
 export default function ProjectTemplate({
   data,
 }: PageProps<Queries.ProjectTemplateQuery>) {
+  const { translations } = useContext(LangContext);
+  const content = translations.projectPageContent;
+
   const { setCurrentProject } = useContext(PageContext);
   const project = data.euphrosyneAPI.projectDetail;
 
@@ -38,7 +60,7 @@ export default function ProjectTemplate({
               }}
               segments={[
                 {
-                  label: "Catalogue",
+                  label: content.catalog,
                   linkProps: { to: "/catalog" },
                 },
               ]}
@@ -49,22 +71,25 @@ export default function ProjectTemplate({
             projectName={project.name}
             projectStatus={project.status as ProjectStatus}
             projectDescription={project.comments}
+            content={content.projectDescription}
           />
           <BaseSection className="fr-pt-5w fr-pb-4w" css={detailPageSection}>
             <div className="fr-grid-row fr-grid-row--gutters">
               <div className="fr-col-12 fr-col-md-6">
-                <h2 className="fr-mb-2w">Données du projet</h2>
+                <h2 className="fr-mb-2w">{content.projectData}</h2>
               </div>
             </div>
             <ProjectData
               runs={project.runs}
               projectLeader={project.leader as Participation}
+              content={content.projectDataContent}
             />
           </BaseSection>
           <ProjectObjects
             objectGroups={project.objectGroups as ObjectGroup[]}
             className="fr-pt-5w"
             css={detailPageSection}
+            content={content.projectObjects}
           />
         </div>
       )}

@@ -3,8 +3,18 @@ import { css } from "@emotion/react";
 import React, { useRef } from "react";
 
 import useHasBeenInViewport from "../../hooks/useHasBeenInViewport";
+import { ContentProps } from "../../i18n";
 import AnimatedNumber from "../AnimatedNumber";
 import { BaseSection } from "../BaseSection";
+
+export interface FigureSectionContent {
+  title: string;
+  analyzedProjectsLabel: string;
+  analyzedObjectsLabel: string;
+  hoursLabel: string;
+  sinceYear: string;
+  inYear: string;
+}
 
 interface Stats {
   totalProjects: number | null;
@@ -22,7 +32,9 @@ interface FigureSectionProps {
   stats: StatsContainer | null;
 }
 
-export const FigureSection: React.FC<FigureSectionProps> = ({ stats }) => {
+export const FigureSection: React.FC<
+  FigureSectionProps & ContentProps<FigureSectionContent>
+> = ({ stats, content }) => {
   const elementRef = useRef<HTMLDivElement>(null);
   const isInViewport = useHasBeenInViewport(elementRef);
 
@@ -38,15 +50,18 @@ export const FigureSection: React.FC<FigureSectionProps> = ({ stats }) => {
         `}
         className="fr-pb-0 fr-pt-5w"
       >
-        <h3>Les chiffres clefs de NewAglae</h3>
+        <h3>{content.title}</h3>
         {["all", "year"].map((key) => {
           const animatedNumberProps: [string, number][] = [
             [
-              "projets d'analyse menés",
+              content.analyzedProjectsLabel,
               stats ? stats[key]?.totalProjects || 0 : 0,
             ],
-            ["objets analysés", stats ? stats[key]?.totalObjectGroups || 0 : 0],
-            ["heures", stats ? stats[key]?.totalHours || 0 : 0],
+            [
+              content.analyzedObjectsLabel,
+              stats ? stats[key]?.totalObjectGroups || 0 : 0,
+            ],
+            [content.hoursLabel, stats ? stats[key]?.totalHours || 0 : 0],
           ];
 
           return (
@@ -58,8 +73,11 @@ export const FigureSection: React.FC<FigureSectionProps> = ({ stats }) => {
                 `}
               >
                 {key === "all"
-                  ? "Depuis 2022"
-                  : `En ${new Date().getFullYear()}`}
+                  ? content.sinceYear.replace("{}", "2022")
+                  : content.inYear.replace(
+                      "{}",
+                      new Date().getFullYear().toString(),
+                    )}
               </h4>
               <div className="fr-grid-row fr-grid-row--gutters">
                 {animatedNumberProps.map(([label, number]) => (

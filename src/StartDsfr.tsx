@@ -1,8 +1,8 @@
 "use client";
 
 import { startReactDsfr } from "@codegouvfr/react-dsfr/next-appdir";
-import { Link } from "gatsby";
 
+import { I18nLink as Link } from "./components/I18nLink";
 import { defaultColorScheme } from "./defaultColorScheme";
 
 declare module "@codegouvfr/react-dsfr/next-appdir" {
