@@ -1,5 +1,5 @@
 ---
-slug: "/en/gcu"
+slug: "/cgu"
 title: "GCU"
 ---
 

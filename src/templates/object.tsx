@@ -2,21 +2,26 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { Select } from "@codegouvfr/react-dsfr/SelectNext";
 import { css } from "@emotion/react";
-import { PageProps } from "gatsby";
+import { HeadFC, PageProps, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { useContext, useEffect, useState } from "react";
 
-import { PageContext } from "../../contexts/PageContext";
-import { ContentProps } from "../../i18n";
-import { detailPageSection, paddedUpToLg } from "../../styles";
-import { Participation } from "../../types/project";
-import { Run } from "../../types/run";
-import { BaseSection } from "../BaseSection";
+import { BaseHead } from "../components/BaseHead";
+import { BaseSection } from "../components/BaseSection";
 import {
   ObjectGroupDescription,
   ObjectGroupDescriptionContent,
-} from "../object-group/ObjectGroupDescription";
-import { ProjectData, ProjectDataContent } from "../project/ProjectData";
+} from "../components/object-group/ObjectGroupDescription";
+import {
+  ProjectData,
+  ProjectDataContent,
+} from "../components/project/ProjectData";
+import { LangContext } from "../contexts/LangContext";
+import { PageContext } from "../contexts/PageContext";
+import { ContentProps } from "../i18n";
+import { detailPageSection, paddedUpToLg } from "../styles";
+import { Participation } from "../types/project";
+import { Run } from "../types/run";
 
 export interface ObjectTemplateContent {
   catalog: string;
@@ -39,9 +44,11 @@ interface Project {
 
 export default function ObjectTemplate({
   data,
-  content,
 }: PageProps<Queries.ObjectTemplateQuery> &
   ContentProps<ObjectTemplateContent>) {
+  const { translations } = useContext(LangContext);
+  const content = translations.objectPageContent;
+
   const { currentProject } = useContext(PageContext);
   const objectGroup = data.euphrosyneAPI.objectGroupDetail;
   const projects = objectGroup?.runs
@@ -112,7 +119,7 @@ export default function ObjectTemplate({
               />
               <div className="fr-col-12 fr-col-lg-6">
                 <StaticImage
-                  src="../../images/objectgroup-placeholder.svg"
+                  src="../images/objectgroup-placeholder.svg"
                   alt={content.altImageWithObjectName.replace(
                     "{}",
                     objectGroup.label,
@@ -161,3 +168,54 @@ export default function ObjectTemplate({
     </div>
   );
 }
+
+export const Head: HeadFC = BaseHead;
+
+export const query = graphql`
+  query ObjectTemplate($id: String!) {
+    euphrosyneAPI {
+      objectGroupDetail(pk: $id) {
+        id
+        c2rmfId
+        label
+        materials
+        discoveryPlace
+        collection
+        dating
+        dataAvailable
+        objectSet {
+          label
+          collection
+        }
+        runs {
+          label
+          startDate
+          particleType
+          energyInKev
+          beamline
+          project {
+            name
+            slug
+            leader {
+              user {
+                firstName
+                lastName
+              }
+              institution {
+                name
+                country
+              }
+            }
+          }
+          methods {
+            name
+            detectors {
+              name
+              filters
+            }
+          }
+        }
+      }
+    }
+  }
+`;

@@ -1,6 +1,9 @@
-import type { PageProps } from "gatsby";
+import type { HeadFC, PageProps } from "gatsby";
+import { graphql } from "gatsby";
 import * as React from "react";
+import { useContext } from "react";
 
+import { BaseHead } from "../components/BaseHead";
 import {
   AboutSection,
   AboutSectionContent,
@@ -22,9 +25,10 @@ import {
   SearchSection,
   SearchSectionContent,
 } from "../components/index/SearchSection";
+import { LangContext } from "../contexts/LangContext";
 import { Project } from "../types/project";
 
-interface IndexPageContent {
+export interface IndexPageContent {
   hero: HeroContent;
   search: SearchSectionContent;
   howItWorks: HowItWorksSectionContent;
@@ -33,13 +37,10 @@ interface IndexPageContent {
   projectList: ProjectListSectionContent;
 }
 
-interface IndexPageProps {
-  content: IndexPageContent;
-}
+const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({ data }) => {
+  const { translations } = useContext(LangContext);
+  const content = translations.indexPageContent;
 
-const IndexPage: React.FC<
-  PageProps<Queries.HomePageQuery> & IndexPageProps
-> = ({ data, content }) => {
   const { lastProjects, stats } = data.euphrosyneAPI;
   const { hero, search } = content;
   return (
@@ -60,3 +61,31 @@ const IndexPage: React.FC<
 };
 
 export default IndexPage;
+
+export const Head: HeadFC = BaseHead;
+
+export const query = graphql`
+  query HomePage {
+    euphrosyneAPI {
+      lastProjects(limit: 6) {
+        name
+        status
+        objectGroupMaterials
+        comments
+        slug
+      }
+      stats {
+        all {
+          totalProjects
+          totalObjectGroups
+          totalHours
+        }
+        year {
+          totalProjects
+          totalObjectGroups
+          totalHours
+        }
+      }
+    }
+  }
+`;

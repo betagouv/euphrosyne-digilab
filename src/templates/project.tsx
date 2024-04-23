@@ -1,21 +1,25 @@
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
-import { PageProps } from "gatsby";
+import { HeadFC, PageProps, graphql } from "gatsby";
 import { useContext, useEffect } from "react";
 
-import { PageContext } from "../../contexts/PageContext";
-import { ContentProps } from "../../i18n";
-import { detailPageSection } from "../../styles";
-import { ObjectGroup, Participation, ProjectStatus } from "../../types/project";
-import { BaseSection } from "../BaseSection";
-import { ProjectData, ProjectDataContent } from "../project/ProjectData";
+import { BaseHead } from "../components/BaseHead";
+import { BaseSection } from "../components/BaseSection";
+import {
+  ProjectData,
+  ProjectDataContent,
+} from "../components/project/ProjectData";
 import {
   ProjectDescription,
   ProjectDescriptionContent,
-} from "../project/ProjectDescription";
+} from "../components/project/ProjectDescription";
 import {
   ProjectObjects,
   ProjectObjectsContent,
-} from "../project/ProjectObjects";
+} from "../components/project/ProjectObjects";
+import { LangContext } from "../contexts/LangContext";
+import { PageContext } from "../contexts/PageContext";
+import { detailPageSection } from "../styles";
+import { ObjectGroup, Participation, ProjectStatus } from "../types/project";
 
 export interface ProjectTemplateContent {
   catalog: string;
@@ -28,9 +32,10 @@ export interface ProjectTemplateContent {
 
 export default function ProjectTemplate({
   data,
-  content,
-}: PageProps<Queries.ProjectTemplateQuery> &
-  ContentProps<ProjectTemplateContent>) {
+}: PageProps<Queries.ProjectTemplateQuery>) {
+  const { translations } = useContext(LangContext);
+  const content = translations.projectPageContent;
+
   const { setCurrentProject } = useContext(PageContext);
   const project = data.euphrosyneAPI.projectDetail;
 
@@ -91,3 +96,56 @@ export default function ProjectTemplate({
     </div>
   );
 }
+
+export const Head: HeadFC = BaseHead;
+
+export const query = graphql`
+  query ProjectTemplate($slug: String!) {
+    euphrosyneAPI {
+      projectDetail(slug: $slug) {
+        name
+        slug
+        objectGroupMaterials
+        comments
+        status
+        leader {
+          user {
+            firstName
+            lastName
+          }
+          institution {
+            name
+            country
+          }
+        }
+        runs {
+          label
+          startDate
+          particleType
+          energyInKev
+          beamline
+          methods {
+            name
+            detectors {
+              name
+              filters
+            }
+          }
+        }
+        objectGroups {
+          id
+          c2rmfId
+          label
+          materials
+          discoveryPlace
+          collection
+          dating
+          objectSet {
+            label
+            collection
+          }
+        }
+      }
+    }
+  }
+`;

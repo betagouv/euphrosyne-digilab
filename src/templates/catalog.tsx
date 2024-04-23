@@ -2,31 +2,32 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { css } from "@emotion/react";
 import { useLocation } from "@reach/router";
 import { HeadFC, PageProps } from "gatsby";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import CatalogFilters, {
   CatalogFiltersContent,
   Filters,
-} from "../../catalog/components/CatalogFilters";
-import { CatalogItem } from "../../catalog/components/CatalogItem";
+} from "../catalog/components/CatalogFilters";
+import { CatalogItem } from "../catalog/components/CatalogItem";
 import FilterContainer, {
   FilterContainerContent,
-} from "../../catalog/components/FilterContainer";
-import { Pagination } from "../../catalog/components/Pagination";
+} from "../catalog/components/FilterContainer";
+import { Pagination } from "../catalog/components/Pagination";
 import SearchBarSection, {
   SearchBarContent,
-} from "../../catalog/components/SearchBarSection";
+} from "../catalog/components/SearchBarSection";
 import SortSelect, {
   SortSelectContent,
   SortValue,
-} from "../../catalog/components/SortSelect";
+} from "../catalog/components/SortSelect";
 import useFilter, {
   buildFiltersFromLocation,
-} from "../../catalog/hooks/useFilter";
-import usePagination from "../../catalog/hooks/usePagination";
-import { ContentProps } from "../../i18n";
-import { SearchItem } from "../../types/catalog";
-import { BaseHead } from "../BaseHead";
+} from "../catalog/hooks/useFilter";
+import usePagination from "../catalog/hooks/usePagination";
+import { BaseHead } from "../components/BaseHead";
+import { LangContext } from "../contexts/LangContext";
+import { ContentProps } from "../i18n";
+import { SearchItem } from "../types/catalog";
 
 export interface CatalogContent {
   noData: string;
@@ -44,9 +45,11 @@ export interface CatalogTemplateProps {
 }
 
 export default function CatalogTemplate({
-  content,
   pageContext: { searchItems },
 }: PageProps<null, CatalogTemplateProps> & ContentProps<CatalogContent>) {
+  const { translations } = useContext(LangContext);
+  const content = translations.catalogContent;
+
   const [selectedSort, setSelectedSort] = useState<SortValue>("dsc");
   const [filters, setFilters] = useState<Filters>(
     buildFiltersFromLocation(useLocation()),

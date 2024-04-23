@@ -1,8 +1,6 @@
 import dotenv from "dotenv";
 import type { GatsbyConfig } from "gatsby";
 
-import { defaultLangKey } from "./src/i18n";
-
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 });
@@ -19,13 +17,6 @@ const config: GatsbyConfig = {
     generateOnBuild: process.env.TYPEGEN_ON_BUILD === "true",
   },
   plugins: [
-    {
-      resolve: "gatsby-plugin-i18n",
-      options: {
-        langKeyDefault: defaultLangKey,
-        useLangKeyLayout: true,
-      },
-    },
     "gatsby-plugin-emotion",
     "gatsby-plugin-image",
     "gatsby-plugin-sitemap",

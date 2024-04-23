@@ -1,5 +1,5 @@
 ---
-slug: "/fr/cgu"
+slug: "/cgu"
 title: "CGU"
 ---
 

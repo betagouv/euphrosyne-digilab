@@ -10,6 +10,23 @@ import slugify from "slugify";
 import { langs } from "./src/i18n";
 import { SearchItem } from "./src/types/catalog";
 
+export const onCreatePage: GatsbyNode["onCreatePage"] = async ({
+  page,
+  actions,
+}) => {
+  actions.deletePage(page);
+  langs.forEach((lang) => {
+    actions.createPage({
+      ...page,
+      path: `/${lang}${page.path}`,
+      context: {
+        ...page.context,
+        langKey: lang,
+      },
+    });
+  });
+};
+
 export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
   actions,
@@ -43,7 +60,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     langs.forEach((lang) => {
       actions.createPage({
         path: `/${lang}/project/${slug}`,
-        component: path.resolve(`./src/templates/project.${lang}.tsx`),
+        component: path.resolve(`./src/templates/project.tsx`),
         context: { slug: slug, langKey: lang },
       });
     });
@@ -60,7 +77,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       langs.forEach((lang) => {
         actions.createPage({
           path: `/${lang}/object/${objectSlug}/${id}`,
-          component: path.resolve(`./src/templates/object.${lang}.tsx`),
+          component: path.resolve(`./src/templates/object.tsx`),
           context: { id, langKey: lang },
         });
       });
@@ -73,9 +90,9 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   langs.forEach((lang) => {
     actions.createPage({
-      path: `${lang}/catalog`,
-      component: path.resolve(`./src/templates/catalog.${lang}.tsx`),
-      context: { searchItems, langKey: lang },
+      path: `/${lang}/catalog`,
+      component: path.resolve(`./src/templates/catalog.tsx`),
+      context: { searchItems },
     });
   });
 };

@@ -1,20 +1,20 @@
 ---
 slug: "/personal-data"
-title: "Données personnelles et cookies"
+title: "Personal data and cookies"
 ---
 
-### Cookies déposés et opt-out
+### Cookies placed and opt-out
 
-Ce site dépose un petit fichier texte (un « cookie ») sur votre ordinateur lorsque vous le consultez. Cela nous permet de mesurer le nombre de visites et de comprendre quelles sont les pages les plus consultées.
+This site places a small text file (a "cookie") on your computer when you visit it. This allows us to measure the number of visits and understand which pages are most viewed.
 
-### Ce site n’affiche pas de bannière de consentement aux cookies, pourquoi ?
+### This site does not display a cookie consent banner, why?
 
-C’est vrai, vous n’avez pas eu à cliquer sur un bloc qui recouvre la moitié de la page pour dire que vous êtes d’accord avec le dépôt de cookies — même si vous ne savez pas ce que ça veut dire !
+That's right, you didn't have to click on a block that covers half the page to say that you agree with the placement of cookies — even if you don't know what that means!
 
-Rien d’exceptionnel, pas de passe-droit lié à un .gouv.fr. Nous respectons simplement la loi, qui dit que certains outils de suivi d’audience, correctement configurés pour respecter la vie privée, sont exemptés d’autorisation préalable.
+Nothing exceptional, no special privilege related to a .gouv.fr. We simply respect the law, which says that some audience tracking tools, correctly configured to respect privacy, are exempt from prior authorization.
 
-Nous utilisons pour cela Matomo, un outil libre, paramétré pour être en conformité avec la recommandation « Cookies » de la CNIL. Cela signifie que votre adresse IP, par exemple, est anonymisée avant d’être enregistrée. Il est donc impossible d’associer vos visites sur ce site à votre personne.
+For this, we use Matomo, a free tool, set up to comply with the "Cookies" recommendation of the CNIL. This means that your IP address, for example, is anonymized before being recorded. It is therefore impossible to associate your visits to this site with your person.
 
-### Je contribue à enrichir vos données, puis-je y accéder ?
+### I contribute to enriching your data, can I access it?
 
-Bien sûr ! Les statistiques d’usage de la majorité de nos produits, dont beta.gouv.fr, sont disponibles en accès libre sur [stats.data.gouv.fr](https://stats.data.gouv.fr).
+Of course! Usage statistics for the majority of our products, including beta.gouv.fr, are freely accessible on [stats.data.gouv.fr](https://stats.data.gouv.fr).
