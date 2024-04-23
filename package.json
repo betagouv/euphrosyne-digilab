@@ -8,7 +8,7 @@
     "gatsby"
   ],
   "engines": {
-    "node": ">=20.0.0"
+    "node": "20.*"
   },
   "scripts": {
     "develop": "gatsby develop --port 8002",
