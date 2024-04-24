@@ -7,7 +7,7 @@ import {
 import path from "path";
 import slugify from "slugify";
 
-import { langs } from "./src/i18n";
+import { defaultLangKey, langs } from "./src/i18n";
 import { SearchItem } from "./src/types/catalog";
 
 export const onCreatePage: GatsbyNode["onCreatePage"] = async ({
@@ -15,6 +15,7 @@ export const onCreatePage: GatsbyNode["onCreatePage"] = async ({
   actions,
 }) => {
   actions.deletePage(page);
+
   langs.forEach((lang) => {
     actions.createPage({
       ...page,
@@ -24,6 +25,11 @@ export const onCreatePage: GatsbyNode["onCreatePage"] = async ({
         langKey: lang,
       },
     });
+  });
+
+  actions.createRedirect({
+    fromPath: `${page.path}`,
+    toPath: `/${defaultLangKey}/${page.path}`,
   });
 };
 

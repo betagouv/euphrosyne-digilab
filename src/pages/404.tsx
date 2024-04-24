@@ -1,6 +1,8 @@
 import { HeadFC, Link, PageProps } from "gatsby";
 import * as React from "react";
 
+import { StartDsfr } from "../StartDsfr";
+
 const pageStyles = {
   color: "#232129",
   padding: "96px",
@@ -46,4 +48,9 @@ const NotFoundPage: React.FC<PageProps> = () => {
 
 export default NotFoundPage;
 
-export const Head: HeadFC = () => <title>Not found</title>;
+export const Head: HeadFC = () => (
+  <>
+    <StartDsfr />
+    <title>Not found</title>
+  </>
+);
