@@ -8,12 +8,12 @@
     "gatsby"
   ],
   "engines": {
-    "node": ">=20.0.0"
+    "node": "20.*"
   },
   "scripts": {
     "develop": "gatsby develop --port 8002",
     "start": "gatsby develop --port 8002",
-    "build": "gatsby build",
+    "build": "gatsby build && copy-dsfr-to-public",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",

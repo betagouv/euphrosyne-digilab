@@ -8,7 +8,7 @@ interface Method {
 }
 
 export interface Run {
-  beamline: string;
+  beamline: string | null;
   energyInKev: number | null;
   label: string;
   particleType: "PROTON" | "ALPHA_PARTICLE" | "DEUTON" | null;
