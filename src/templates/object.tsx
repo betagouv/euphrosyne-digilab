@@ -53,13 +53,24 @@ export default function ObjectTemplate({
   const objectGroup = data.euphrosyneAPI.objectGroupDetail;
   const projects = objectGroup?.runs
     .map((run) => run.project)
-    .filter((value, index, array) => array.indexOf(value) === index);
+    .filter((value, index, array) => {
+      return array.map((p) => p.slug).indexOf(value.slug) === index;
+    });
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const selectedProjectRuns = objectGroup?.runs.filter(
     (run) => run.project.slug === selectedProject?.slug,
   );
+
+  const onProjectSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const project = projects?.find(
+      (project) => project.slug === event.target.value,
+    );
+    if (project) {
+      setSelectedProject(project as Project);
+    }
+  };
 
   const breadcrumbSegments = [
     {
@@ -78,7 +89,7 @@ export default function ObjectTemplate({
     if (projects && projects.length) {
       setSelectedProject(projects[0] as Project);
     }
-  }, [projects]);
+  }, []);
 
   return (
     <div>
@@ -151,7 +162,13 @@ export default function ObjectTemplate({
                   value: project.slug,
                 })) || [{ label: content.noProject, value: "" }]
               }
-              nativeSelectProps={{ value: selectedProject?.slug }}
+              nativeSelectProps={{
+                value: selectedProject?.slug,
+                onChange: onProjectSelect,
+              }}
+              css={css`
+                max-width: 400px;
+              `}
             />
             {selectedProject &&
               selectedProjectRuns &&

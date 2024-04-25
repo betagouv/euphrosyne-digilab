@@ -1,13 +1,13 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import { css } from "@emotion/react";
-import { Link } from "gatsby";
 import * as React from "react";
 import slugify from "slugify";
 
 import { ContentProps } from "../../i18n";
 import { ObjectGroup } from "../../types/project";
 import { BaseSection } from "../BaseSection";
+import { I18nLink as Link } from "../I18nLink";
 import { ErosLink } from "../object-group/ErosLink";
 
 export interface ProjectObjectsContent {

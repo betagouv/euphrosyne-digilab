@@ -2,9 +2,18 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { Link } from "gatsby";
 import React from "react";
 
+import { ContentProps } from "../../i18n";
 import { getUrlForPage } from "../hooks/usePagination";
 
-interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
+export interface PaginationContent {
+  firstPage: string;
+  previousPage: string;
+  nextPage: string;
+  lastPage: string;
+}
+
+interface PaginationProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, "content"> {
   currentPage: number;
   pageCount: number;
 }
@@ -13,8 +22,9 @@ export function Pagination({
   currentPage,
   pageCount,
   className,
+  content,
   ...props
-}: PaginationProps) {
+}: PaginationProps & ContentProps<PaginationContent>) {
   const getLinkForPage = (page: number) => {
     const { pathname, search } = getUrlForPage(page);
     return pathname + search;
@@ -47,7 +57,7 @@ export function Pagination({
             role="link"
             to={getLinkForPage(1)}
           >
-            Première page
+            {content.firstPage}
           </Link>
         </li>
         <li>
@@ -57,7 +67,7 @@ export function Pagination({
             role="link"
             to={getLinkForPage(currentPage - 1)}
           >
-            Page précédente
+            {content.previousPage}
           </Link>
         </li>
         {visiblePages.map((page, index, array) => {
@@ -67,11 +77,11 @@ export function Pagination({
           return (
             <>
               {index > 0 && page - array[index - 1] > 1 && (
-                <li>
+                <li key="pagination-current">
                   <a className="fr-pagination__link fr-displayed-lg">…</a>
                 </li>
               )}
-              <li>
+              <li key={`pagination-${index}`}>
                 <Link
                   className="fr-pagination__link"
                   title={"Page " + page}
@@ -91,17 +101,17 @@ export function Pagination({
             role="link"
             to={getLinkForPage(currentPage + 1)}
           >
-            Page suivante
+            {content.nextPage}
           </Link>
         </li>
         <li>
           <Link
             className="fr-pagination__link fr-pagination__link--last"
-            to={getLinkForPage(currentPage + 1)}
+            to={getLinkForPage(pageCount)}
             aria-disabled={currentPage === pageCount}
             role="link"
           >
-            Dernière page
+            {content.lastPage}
           </Link>
         </li>
       </ul>
