@@ -12,7 +12,10 @@ import { CatalogItem } from "../catalog/components/CatalogItem";
 import FilterContainer, {
   FilterContainerContent,
 } from "../catalog/components/FilterContainer";
-import { Pagination } from "../catalog/components/Pagination";
+import {
+  Pagination,
+  PaginationContent,
+} from "../catalog/components/Pagination";
 import SearchBarSection, {
   SearchBarContent,
 } from "../catalog/components/SearchBarSection";
@@ -38,6 +41,7 @@ export interface CatalogContent {
   filterContainer: FilterContainerContent;
   catalogFilters: CatalogFiltersContent;
   sortSelect: SortSelectContent;
+  pagination: PaginationContent;
 }
 
 export interface CatalogTemplateProps {
@@ -201,6 +205,7 @@ export default function CatalogTemplate({
                     css={css`
                       margin: 0 auto;
                     `}
+                    content={content.pagination}
                   />
                 )}
               </div>

@@ -145,6 +145,13 @@ const catalogContent: CatalogContent = {
     mostRecent: "Plus récents",
     sorting: "Tri",
   },
+
+  pagination: {
+    firstPage: "Première page",
+    previousPage: "Page précédente",
+    nextPage: "Page suivante",
+    lastPage: "Dernière page",
+  },
 };
 
 const objectPageContent: ObjectTemplateContent = {
