@@ -68,6 +68,7 @@ const RunCardContent = ({
                   css={css`
                     display: flex;
                   `}
+                  key={`${run.label}-${method.name}`}
                 >
                   <div>
                     <strong>{method.name}</strong>
