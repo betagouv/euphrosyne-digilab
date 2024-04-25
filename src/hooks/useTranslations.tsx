@@ -9,9 +9,11 @@ export default function useTranslations(lang: Lang) {
     useState<ILangContext["translations"]>(defaultTranslations);
 
   useEffect(() => {
-    import(`../locales/${lang}.ts`).then((t) => {
-      setCurrentTranslations(t.default as typeof defaultTranslations);
-    });
+    if (lang) {
+      import(`../locales/${lang}.ts`).then((t) => {
+        setCurrentTranslations(t.default as typeof defaultTranslations);
+      });
+    }
   }, [lang]);
 
   return translations;
