@@ -1,6 +1,5 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { css } from "@emotion/react";
-import { useLocation } from "@reach/router";
 import { HeadFC, PageProps } from "gatsby";
 import { useContext, useState } from "react";
 
@@ -44,25 +43,31 @@ export interface CatalogContent {
   pagination: PaginationContent;
 }
 
-export interface CatalogTemplateProps {
+export interface CatalogTemplateProps extends PageProps {
   searchItems: SearchItem[];
 }
 
 export default function CatalogTemplate({
   pageContext: { searchItems },
+  location,
 }: PageProps<null, CatalogTemplateProps> & ContentProps<CatalogContent>) {
   const { translations } = useContext(LangContext);
   const content = translations.catalogContent;
 
   const [selectedSort, setSelectedSort] = useState<SortValue>("dsc");
   const [filters, setFilters] = useState<Filters>(
-    buildFiltersFromLocation(useLocation()),
+    buildFiltersFromLocation(location),
   );
 
   const currentPage = usePagination();
   const pageLength = 20;
 
-  const filteredSearchItems = useFilter(searchItems, filters, selectedSort);
+  const filteredSearchItems = useFilter(
+    searchItems,
+    filters,
+    selectedSort,
+    location,
+  );
   const paginatedSearchItems = filteredSearchItems.slice(
     (currentPage - 1) * pageLength,
     currentPage * pageLength,
