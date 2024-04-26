@@ -32,6 +32,12 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
       url: String!
       copyright: String!
     }
+
+    type ErosThumbnail {
+      url: String!
+      copyright: String!
+      image: File @link(from: "fields.localImage")
+    }
     `;
 
     const projectTypes = `
@@ -103,6 +109,7 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         discoveryPlaceLabel: String
         collection: String
         inventoryNumber: String
+        erosImage: ErosThumbnail
         datingEra: ${NODE_TYPES.ObjectGroup}Dating
         datingPeriod: ${NODE_TYPES.ObjectGroup}Dating
         thumbnail: Thumbnail

@@ -106,10 +106,13 @@ export default function ObjectTemplate({
     }
   }, []);
 
-  const thumbnailImg =
-    data.objectGroup && data.objectGroup.thumbnailImage
-      ? getImage(data.objectGroup.thumbnailImage as ImageDataLike)
-      : null;
+  const thumbnailSrc =
+    objectGroup?.thumbnailImage || objectGroup?.erosImage?.image;
+  const thumbnailImg = thumbnailSrc
+    ? getImage(thumbnailSrc as ImageDataLike)
+    : null;
+  const thumbnailCopyright =
+    objectGroup?.thumbnail?.copyright || objectGroup?.erosImage?.copyright;
 
   return (
     <div>
@@ -154,12 +157,14 @@ export default function ObjectTemplate({
                 {thumbnailImg ? (
                   <div>
                     <GatsbyImage image={thumbnailImg} alt="" />
-                    <p
-                      className="fr-text--sm fr-mt-1w"
-                      css={{ textAlign: "right" }}
-                    >
-                      © {data.objectGroup?.thumbnail?.copyright}
-                    </p>
+                    {thumbnailCopyright && (
+                      <p
+                        className="fr-text--sm fr-mt-1w"
+                        css={{ textAlign: "right" }}
+                      >
+                        © {thumbnailCopyright}
+                      </p>
+                    )}
                   </div>
                 ) : (
                   <StaticImage
@@ -284,6 +289,14 @@ export const query = graphql`
               name
               filters
             }
+          }
+        }
+      }
+      erosImage {
+        copyright
+        image {
+          childImageSharp {
+            gatsbyImageData(width: 600)
           }
         }
       }
