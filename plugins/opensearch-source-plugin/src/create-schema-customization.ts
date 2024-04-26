@@ -96,6 +96,7 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         discoveryPlaceLabel: String
         collection: String
         inventoryNumber: String
+        erosImage: File @link(from: "fields.localErosImage")
         datingEra: ${NODE_TYPES.ObjectGroup}Dating
         datingPeriod: ${NODE_TYPES.ObjectGroup}Dating
       }
