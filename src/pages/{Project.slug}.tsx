@@ -2,6 +2,7 @@ import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { HeadFC, PageProps, graphql } from "gatsby";
 import { useContext, useEffect } from "react";
 
+import { IObjectGroup } from "../../types/ICatalog";
 import { BaseHead } from "../components/BaseHead";
 import { BaseSection } from "../components/BaseSection";
 import {
@@ -19,7 +20,8 @@ import {
 import { LangContext } from "../contexts/LangContext";
 import { PageContext } from "../contexts/PageContext";
 import { detailPageSection } from "../styles";
-import { ObjectGroup, Participation, ProjectStatus } from "../types/project";
+import type { Leader, ProjectStatus } from "../types/project";
+import type { Run } from "../types/run";
 
 export interface ProjectTemplateContent {
   catalog: string;
@@ -32,12 +34,12 @@ export interface ProjectTemplateContent {
 
 export default function ProjectTemplate({
   data,
-}: PageProps<Queries.ProjectTemplateQuery>) {
+}: PageProps<Queries.ProjectPageQuery>) {
   const { translations } = useContext(LangContext);
   const content = translations.projectPageContent;
 
   const { setCurrentProject } = useContext(PageContext);
-  const project = data.euphrosyneAPI.projectDetail;
+  const { project } = data;
 
   useEffect(() => {
     if (project && setCurrentProject) {
@@ -80,13 +82,16 @@ export default function ProjectTemplate({
               </div>
             </div>
             <ProjectData
-              runs={project.runs}
-              projectLeader={project.leader as Participation}
+              runs={project.projectPageData.runs as Run[]}
+              projectLeader={project.projectPageData.leader as Leader}
               content={content.projectDataContent}
             />
           </BaseSection>
           <ProjectObjects
-            objectGroups={project.objectGroups as ObjectGroup[]}
+            objectGroups={
+              (project.projectPageData.objectGroups as IObjectGroup[] | null) ||
+              []
+            }
             className="fr-pt-5w"
             css={detailPageSection}
             content={content.projectObjects}
@@ -100,23 +105,19 @@ export default function ProjectTemplate({
 export const Head: HeadFC = BaseHead;
 
 export const query = graphql`
-  query ProjectTemplate($slug: String!) {
-    euphrosyneAPI {
-      projectDetail(slug: $slug) {
-        name
-        slug
-        objectGroupMaterials
-        comments
-        status
+  query ProjectPage($slug: String!) {
+    project(slug: { eq: $slug }) {
+      name
+      slug
+      materials
+      comments
+      status
+      projectPageData {
         leader {
-          user {
-            firstName
-            lastName
-          }
-          institution {
-            name
-            country
-          }
+          firstName
+          lastName
+          institutionName
+          institutionCountry
         }
         runs {
           label
@@ -137,12 +138,13 @@ export const query = graphql`
           c2rmfId
           label
           materials
-          discoveryPlace
+          discoveryPlaceLabel
           collection
-          dating
-          objectSet {
+          datingLabel
+          objects {
             label
             collection
+            inventory
           }
         }
       }

@@ -1,13 +1,13 @@
-import { PageBadgesContent } from "../components/PageBadges";
-import { ProjectCardContent } from "../components/ProjectCard";
-import { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
-import { ProjectDataContent } from "../components/project/ProjectData";
-import { LayoutContentProps } from "../layouts";
-import { IndexPageContent } from "../pages";
-import { CatalogContent } from "../templates/catalog";
-import { ObjectTemplateContent } from "../templates/object";
-import { ProjectTemplateContent } from "../templates/project";
-import { Translations } from "./fr";
+import type { PageBadgesContent } from "../components/PageBadges";
+import type { ProjectCardContent } from "../components/ProjectCard";
+import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
+import type { ProjectDataContent } from "../components/project/ProjectData";
+import type { LayoutContentProps } from "../layouts";
+import type { IndexPageContent } from "../pages";
+import type { CatalogContent } from "../pages/catalog";
+import type { ObjectTemplateContent } from "../pages/{ObjectGroup.slug}";
+import type { ProjectTemplateContent } from "../pages/{Project.slug}";
+import type { Translations } from "./fr";
 
 export const translations = {
   project: "Project",

@@ -1,5 +1,5 @@
 import { ContentProps } from "../../i18n";
-import { Project } from "../../types/project";
+import type { Project } from "../../types/project";
 import { BaseSection } from "../BaseSection";
 import { ProjectCard, ProjectCardContent } from "../ProjectCard";
 
@@ -11,7 +11,9 @@ export interface ProjectListSectionContent {
 export const ProjectListSection = ({
   projects,
   content,
-}: { projects: Project[] } & ContentProps<ProjectListSectionContent>) => {
+}: {
+  projects: Queries.HomePageQuery["allProject"]["nodes"];
+} & ContentProps<ProjectListSectionContent>) => {
   return (
     <BaseSection>
       <div>
@@ -23,7 +25,10 @@ export const ProjectListSection = ({
             className="fr-col-12 fr-col-md-6 fr-col-lg-4 fr-p-7w"
             key={project.name}
           >
-            <ProjectCard project={project} content={content.projectCard} />
+            <ProjectCard
+              project={project as Project}
+              content={content.projectCard}
+            />
           </div>
         ))}
       </div>

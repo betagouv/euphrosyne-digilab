@@ -21,17 +21,24 @@ jobs:
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
 
-      # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         run: npm ci
 
-      # Test build and generate GraphQL Typegen files. It fetches data from Euphrosyne staging.
+      - name: Install Node.js dependencies for opensearch plugin
+        working-directory: plugins/opensearch-source-plugin
+        run: npm ci
+
+      - name: Build Node.js dependencies for opensearch plugin
+        working-directory: plugins/opensearch-source-plugin
+        run: npm run build
+
       - name: Run npm build
         run: npm run build
         env:
           SITE_URL: http://localhost:8000
           EUPHROSYNE_GRAPHQL_ENDPOINT: https://euphrosyne.incubateur.net/graphql
           TYPEGEN_ON_BUILD: true
+          OPENSEARCH_HOST: http://localhost:9200 # TODO change to the real opensearch host
 
       - name: Run eslint
         run: npm run lint

@@ -53,6 +53,14 @@ const config: GatsbyConfig = {
     },
     `gatsby-transformer-remark`,
     `gatsby-plugin-layout`,
+    {
+      resolve: `opensearch-source-plugin`,
+      options: {
+        openSearch: {
+          host: process.env.OPENSEARCH_HOST,
+        },
+      },
+    },
   ],
 };
 

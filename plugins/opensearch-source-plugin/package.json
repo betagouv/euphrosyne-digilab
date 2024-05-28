@@ -1,0 +1,36 @@
+{
+  "name": "plugin",
+  "description": "Opensearch source plugin",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "./dist/gatsby-node.js",
+  "files": [
+    "./dist/*",
+    "gatsby-node.js"
+  ],
+  "scripts": {
+    "clean": "del-cli dist",
+    "build": "tsc",
+    "develop": "tsc --watch",
+    "test": "jest",
+    "prepare": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin"
+  ],
+  "engines": {
+    "node": "20.*"
+  },
+  "devDependencies": {
+    "del-cli": "^5.0.0",
+    "gatsby": "next",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "gatsby": "^5.12.4"
+  },
+  "dependencies": {
+    "@opensearch-project/opensearch": "^2.8.0"
+  }
+}

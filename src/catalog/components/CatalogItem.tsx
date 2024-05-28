@@ -1,7 +1,6 @@
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import Card from "@codegouvfr/react-dsfr/Card";
 import { css } from "@emotion/react";
-import slugify from "slugify";
 
 import ObjectGroupMaterialTags from "../../components/object-group/ObjectGroupMaterialTags";
 import { SearchItem } from "../../types/catalog";
@@ -13,20 +12,21 @@ type CatalogItemProps = Partial<React.ComponentProps<typeof Card>> & {
 
 function SearchItemBadge({ searchItem }: { searchItem: SearchItem }) {
   return (
-    <Badge severity={searchItem.type === "ObjectGroup" ? "new" : "info"}>
-      {searchItem.type === "ObjectGroup" ? "Objet" : "Projet"}
+    <Badge severity={searchItem.category === "object" ? "new" : "info"}>
+      {searchItem.category === "object" ? "Objet" : "Projet"}
     </Badge>
   );
 }
 
 function CardStart({ searchItem }: { searchItem: SearchItem }) {
+  const { materials } = searchItem;
   return (
     <div>
-      {searchItem.objectGroup && searchItem.objectGroup.materials.length > 0 ? (
+      {materials && materials.length > 0 ? (
         <ObjectGroupMaterialTags
-          materials={searchItem.objectGroup.materials
-            .slice(0, 3)
-            .map((material) => material)}
+          materials={
+            materials.slice(0, 3).map((material) => material) as string[]
+          }
         />
       ) : (
         <div
@@ -40,19 +40,8 @@ function CardStart({ searchItem }: { searchItem: SearchItem }) {
 }
 
 export function CatalogItem({ searchItem, ...props }: CatalogItemProps) {
-  let linkTo: string,
-    title: string = "";
-  if (searchItem.type === "ObjectGroup" && searchItem.objectGroup) {
-    const { label, id } = searchItem.objectGroup;
-    title = label;
-    linkTo = `/object/${slugify(label)}/${id}`;
-  } else if (searchItem.type === "Project" && searchItem.project) {
-    const { slug, name } = searchItem.project;
-    linkTo = `/project/${slug}`;
-    title = name;
-  } else {
-    linkTo = "#";
-  }
+  const linkTo = searchItem.pagePath || "#",
+    title = searchItem.name || "";
 
   return (
     <Card

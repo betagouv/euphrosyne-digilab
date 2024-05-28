@@ -2,7 +2,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import * as React from "react";
 
 import { ContentProps } from "../../i18n";
-import { Participation } from "../../types/project";
+import { Leader } from "../../types/project";
 import { Run } from "../../types/run";
 import { RunCard, RunCardContent } from "../run/RunCard";
 
@@ -13,8 +13,8 @@ export interface ProjectDataContent {
 
 interface ProjectDataProps
   extends Omit<React.InputHTMLAttributes<HTMLDivElement>, "content"> {
-  runs: readonly Run[];
-  projectLeader: Participation;
+  runs: readonly Run[] | null;
+  projectLeader: Leader;
 }
 
 export const ProjectData = ({
@@ -31,18 +31,19 @@ export const ProjectData = ({
           <Button disabled>{content.addToCart}</Button>
         </div>
       </div>
-
-      <div className={`fr-grid-row fr-grid-row--gutters`} {...props}>
-        {runs.map((run) => (
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4" key={run.label}>
-            <RunCard
-              run={run}
-              projectLeader={projectLeader}
-              content={content.runCard}
-            />
-          </div>
-        ))}
-      </div>
+      {runs && runs.length > 0 && (
+        <div className={`fr-grid-row fr-grid-row--gutters`} {...props}>
+          {runs.map((run) => (
+            <div className="fr-col-12 fr-col-md-6 fr-col-lg-4" key={run.label}>
+              <RunCard
+                run={run}
+                projectLeader={projectLeader}
+                content={content.runCard}
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { css } from "@emotion/react";
-import { HeadFC, PageProps } from "gatsby";
+import { HeadFC, PageProps, graphql } from "gatsby";
 import { useContext, useState } from "react";
 
 import CatalogFilters, {
@@ -48,9 +48,10 @@ export interface CatalogTemplateProps extends PageProps {
 }
 
 export default function CatalogTemplate({
-  pageContext: { searchItems },
+  data: { allCatalogItem },
   location,
-}: PageProps<null, CatalogTemplateProps> & ContentProps<CatalogContent>) {
+}: PageProps<Queries.CatalogPageQuery> & ContentProps<CatalogContent>) {
+  const searchItems = allCatalogItem.nodes as SearchItem[];
   const { translations } = useContext(LangContext);
   const content = translations.catalogContent;
 
@@ -180,11 +181,7 @@ export default function CatalogTemplate({
                   {paginatedSearchItems.map((searchItem) => (
                     <div
                       className="fr-col-6 fr-col-xl-4"
-                      key={`catalog-item-${searchItem.type}-${
-                        searchItem.objectGroup
-                          ? searchItem.objectGroup.id
-                          : searchItem.project?.slug
-                      }`}
+                      key={`catalog-item-${searchItem.category}-${searchItem.slug}`}
                     >
                       <CatalogItem
                         searchItem={searchItem}
@@ -223,3 +220,24 @@ export default function CatalogTemplate({
 }
 
 export const Head: HeadFC = BaseHead;
+
+export const query = graphql`
+  query CatalogPage {
+    allCatalogItem {
+      nodes {
+        name
+        pagePath
+        materials
+        category
+        slug
+        created
+        object {
+          id
+        }
+        project {
+          comments
+        }
+      }
+    }
+  }
+`;

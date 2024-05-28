@@ -63,9 +63,9 @@ class SearchItemArray extends Array<SearchItem> {
   }: Filters) {
     return new SearchItemArray(
       ...this.filter((item) => {
-        if (item.type === "ObjectGroup") {
+        if (item.category === "object") {
           return objectGroupsSelected;
-        } else if (item.type === "Project") {
+        } else if (item.category === "project") {
           return projectsSelected;
         }
         return false;
@@ -77,10 +77,9 @@ class SearchItemArray extends Array<SearchItem> {
     return new SearchItemArray(
       ...this.filter((item) => {
         const filterValues = [];
-        if (item.project) {
-          filterValues.push(item.project.name, item.project.comments);
-        } else if (item.objectGroup) {
-          filterValues.push(item.objectGroup.label);
+        filterValues.push(item.name);
+        if (item.category === "project") {
+          filterValues.push(item.project?.comments || "");
         }
         return filterValues
           .map((value) => value.toLowerCase().includes(q.toLowerCase()))
@@ -91,12 +90,8 @@ class SearchItemArray extends Array<SearchItem> {
 
   sortByCreated(sort: "asc" | "dsc" = "dsc") {
     return this.sort((a, b) => {
-      const aCreated = new Date(
-        a.objectGroup?.created || a.project?.created || new Date(),
-      );
-      const bCreated = new Date(
-        b.objectGroup?.created || b.project?.created || new Date(),
-      );
+      const aCreated = new Date(a.created || new Date());
+      const bCreated = new Date(b.created || new Date());
       return sort === "asc"
         ? aCreated.getTime() - bCreated.getTime()
         : bCreated.getTime() - aCreated.getTime();

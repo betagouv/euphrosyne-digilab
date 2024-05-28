@@ -72,11 +72,11 @@ export const ProjectObjects = ({
                 </p>
                 <p>
                   <strong>{content.period}: </strong>
-                  {objectGroup.dating}
+                  {objectGroup.datingLabel}
                 </p>
                 <p>
                   <strong>{content.geographicArea}: </strong>
-                  {objectGroup.discoveryPlace}
+                  {objectGroup.discoveryPlaceLabel}
                 </p>
                 <p>
                   <strong>{content.materials}: </strong>
@@ -90,7 +90,7 @@ export const ProjectObjects = ({
                 </p>
                 <p>
                   <Link
-                    to={`/object/${slugify(objectGroup.label)}/${
+                    to={`/${slugify(objectGroup.label, { lower: true })}-${
                       objectGroup.id
                     }`}
                   >

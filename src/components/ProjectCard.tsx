@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 
 import { ContentProps } from "../i18n";
 import placeHolderImage from "../images/card-placeholder-16x9.png";
-import { Project } from "../types/project";
+import { ProjectStatus } from "../types/project";
 import { ellipse } from "../utils";
 import {
   ProjectStatusBadge,
@@ -20,6 +20,15 @@ export interface ProjectCardContent {
   projectStatusBadge: ProjectStatusBadgeContent;
 }
 
+interface Project {
+  status: string;
+  comments: string | null;
+  name: string;
+  slug: string;
+  materials: readonly string[] | null;
+  pagePath: string;
+}
+
 export const ProjectCard = ({
   project,
   content,
@@ -29,7 +38,7 @@ export const ProjectCard = ({
       background
       badge={
         <ProjectStatusBadge
-          status={project.status}
+          status={project.status as ProjectStatus}
           content={content.projectStatusBadge}
         />
       }
@@ -39,12 +48,12 @@ export const ProjectCard = ({
       imageAlt={content.projectImage.replace("{}", project.name)}
       imageUrl={placeHolderImage}
       linkProps={{
-        to: `/project/${project.slug}`,
+        to: project.pagePath,
       }}
       size="medium"
       start={
         <ObjectGroupMaterialTags
-          materials={project.objectGroupMaterials.slice(0, 3)}
+          materials={(project.materials || []).slice(0, 3)}
         ></ObjectGroupMaterialTags>
       }
       title={project.name}

@@ -11,7 +11,7 @@
     "node": "20.*"
   },
   "scripts": {
-    "develop": "gatsby develop --port 8002",
+    "develop": "gatsby develop --port 8002 --verbose",
     "start": "gatsby develop --port 8002",
     "build": "gatsby build && copy-dsfr-to-public",
     "serve": "gatsby serve",
