@@ -1,1 +1,1 @@
-module.exports = require("./dist/gatsby-node");
+module.exports = require("./dist/plugins/opensearch-source-plugin/src/gatsby-node");

@@ -10,7 +10,7 @@ export default function ObjectGroupMaterialTags({
 }) {
   return (
     <ul className="fr-tags-group">
-      {materials.map((material) => (
+      {(materials || []).map((material) => (
         <li key={`objectgroup-material-${material}-tag`}>
           <Tag>{ellipse(material, 15)}</Tag>
         </li>

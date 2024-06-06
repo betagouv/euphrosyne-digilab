@@ -38,7 +38,7 @@ jobs:
           SITE_URL: http://localhost:8000
           EUPHROSYNE_GRAPHQL_ENDPOINT: https://euphrosyne.incubateur.net/graphql
           TYPEGEN_ON_BUILD: true
-          OPENSEARCH_HOST: http://localhost:9200 # TODO change to the real opensearch host
+          OPENSEARCH_CONNECTION_URL: http://localhost:9200 # TODO change to the real opensearch host
 
       - name: Run eslint
         run: npm run lint

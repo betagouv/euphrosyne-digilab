@@ -13,7 +13,7 @@ export const translations = {
   project: "Project",
   objectGroup: "Object group",
 
-  inventory: "Inventory",
+  inventory: "Inventory number",
   period: "Period",
   geographicArea: "Geographic area",
   materials: "Materials",
@@ -135,12 +135,29 @@ const catalogContent: CatalogContent = {
     project: "Project",
     objectGroup: "Object group",
     itemType: "Item type",
+    materials: translations.materials,
+    inventory: translations.inventory,
+    collection: "Collection",
+    discoveryPlaceFilter: {
+      discoveryPlace: "Discovery place",
+    },
+    periodFilter: {
+      period: translations.period,
+    },
+    createdRange: {
+      label: "Project year",
+    },
+    dataAvailableSwitch: {
+      label: "Data available",
+      status: "Data status",
+    },
   },
 
   sortSelect: {
     mostDated: "Oldest",
     mostRecent: "Most recent",
     sorting: "Sorting",
+    relevance: "Relevance",
   },
 
   pagination: {

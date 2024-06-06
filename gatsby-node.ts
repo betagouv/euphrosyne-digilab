@@ -43,3 +43,17 @@ export const onPostBuild: GatsbyNode["onPostBuild"] = async ({ store }) => {
     await writeGraphQLFragments(program.directory, definitions);
   }
 };
+
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({
+  actions,
+  getConfig,
+}) => {
+  const config = getConfig();
+  if (config.mode !== "production") {
+    actions.setWebpackConfig({
+      watchOptions: {
+        ignored: /node_modules/,
+      },
+    });
+  }
+};

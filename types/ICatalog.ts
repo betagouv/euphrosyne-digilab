@@ -13,7 +13,7 @@ export interface IObjectGroup {
   id: string;
   c2rmfId: string | null;
   label: string;
-  materials: string[];
+  materials: string[] | null;
   discoveryPlaceLabel: string | null;
   collection: string;
   datingLabel: string | null;
@@ -39,7 +39,7 @@ interface IMethod {
 
 interface IRun {
   label: string;
-  startDate: Date;
+  startDate: Date | null;
   particleType: string;
   energyInKev: string;
   beamline: string;
@@ -84,7 +84,7 @@ export interface IProjectItem extends IBaseItem {
   category: "project";
   comments: string;
   status: string;
-  locations: ILocation[];
+  discoveryPlacePoints: ILocation[];
 
   pagePath: string;
 

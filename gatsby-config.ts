@@ -57,7 +57,7 @@ const config: GatsbyConfig = {
       resolve: `opensearch-source-plugin`,
       options: {
         openSearch: {
-          host: process.env.OPENSEARCH_HOST,
+          host: process.env.OPENSEARCH_CONNECTION_URL,
         },
       },
     },

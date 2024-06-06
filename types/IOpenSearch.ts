@@ -27,7 +27,7 @@ interface IBaseDocument {
 interface IBaseProjectDocument {
   comments: string;
   status: string;
-  locations: {
+  discovery_place_points: {
     lat: number;
     lon: number;
   }[];
@@ -86,7 +86,7 @@ interface IObjectPageData {
 
 interface IRun {
   label: string;
-  start_date: string;
+  start_date?: string;
   particle_type: string;
   energy_in_kev: string;
   beamline: string;

@@ -12,7 +12,7 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         slug: String!
         name: String!
         created: Date!
-        locations: [${NODE_TYPES.Project}Locations]
+        discoveryPlacePoints: [${NODE_TYPES.Project}DiscoveryPlacePoints]
         materials: [String]
         dataAvailable: Boolean!
         comments: String
@@ -52,7 +52,7 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         inventory: String
       }
 
-      type ${NODE_TYPES.Project}Locations {
+      type ${NODE_TYPES.Project}DiscoveryPlacePoints {
         lat: Float!
         lon: Float!
       }
@@ -60,6 +60,23 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
       type ${NODE_TYPES.Project}ProjectPageDataRuns {
         label: String!
         projectSlug: String!
+      }
+
+      type ${NODE_TYPES.Project}ObjectPageDataRuns {
+        startDate: Date
+        particleType: String
+        energyInKev: String
+        beamline: String
+        methods: [${NODE_TYPES.Project}ObjectPageDataRunsMethods!]
+      }
+
+      type ${NODE_TYPES.Project}ObjectPageDataRunsMethods {
+        detectors: [${NODE_TYPES.Project}ObjectPageDataRunsMethodsFilters!]
+        name: String!
+      }
+
+      type ${NODE_TYPES.Project}ObjectPageDataRunsMethodsFilters {
+        filters: [String!]
       }
     `;
 
@@ -75,6 +92,9 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         c2rmfId: String
         objectPageData: ${NODE_TYPES.ObjectGroup}ObjectPageData!
         pagePath: String!
+        discoveryPlaceLabel: String
+        collection: String
+        inventoryNumber: String
       }
 
       type ${NODE_TYPES.ObjectGroup}ObjectPageData {
@@ -98,6 +118,23 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
       type ${NODE_TYPES.ObjectGroup}ObjectPageDataRuns {
         label: String!
         projectSlug: String!
+      }
+
+      type ${NODE_TYPES.ObjectGroup}ObjectPageDataRuns {
+        startDate: Date
+        particleType: String
+        energyInKev: String
+        beamline: String
+        methods: [${NODE_TYPES.ObjectGroup}ObjectPageDataRunsMethods!]
+      }
+
+      type ${NODE_TYPES.ObjectGroup}ObjectPageDataRunsMethods {
+        detectors: [${NODE_TYPES.ObjectGroup}ObjectPageDataRunsMethodsFilters!]
+        name: String!
+      }
+
+      type ${NODE_TYPES.ObjectGroup}ObjectPageDataRunsMethodsFilters {
+        filters: [String!]
       }
 
     `;

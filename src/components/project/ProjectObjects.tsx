@@ -80,7 +80,7 @@ export const ProjectObjects = ({
                 </p>
                 <p>
                   <strong>{content.materials}: </strong>
-                  {objectGroup.materials.map((material) => (
+                  {(objectGroup.materials || []).map((material) => (
                     <Tag
                       key={`object-group-item-${objectGroup.id}-material-${material}`}
                     >

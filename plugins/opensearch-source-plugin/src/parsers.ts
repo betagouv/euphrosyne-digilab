@@ -17,7 +17,7 @@ export function parseProjectDocument(data: IOpenSearchDocument): IProjectItem {
     materials: data.materials,
     comments: data.comments,
     status: data.status,
-    locations: data.locations,
+    discoveryPlacePoints: data.discovery_place_points,
     dataAvailable: data.is_data_available,
     projectPageData: parseProjectPageData(data.project_page_data),
 
@@ -69,18 +69,18 @@ function parseObjectPageData(
   data: IOpenSearchDocument["object_page_data"],
 ): IObjectPageData {
   return {
-    runs: data.runs.map((run) => {
+    runs: data.runs?.map((run) => {
       return {
         label: run.label,
-        startDate: new Date(run.start_date),
+        startDate: run.start_date ? new Date(run.start_date) : null,
         particleType: run.particle_type,
         energyInKev: run.energy_in_kev,
         beamline: run.beamline,
         projectSlug: run.project_slug,
-        methods: run.methods.map((method) => {
+        methods: run.methods?.map((method) => {
           return {
             name: method.name,
-            detectors: method.detectors.map((detector) => {
+            detectors: method.detectors?.map((detector) => {
               return {
                 name: detector.name,
                 filters: detector.filters,
@@ -115,18 +115,18 @@ function parseProjectPageData(
       institutionName: data.leader.institution_name,
       institutionCountry: data.leader.institution_country,
     },
-    runs: data.runs.map((run) => {
+    runs: data.runs?.map((run) => {
       return {
         label: run.label,
-        startDate: new Date(run.start_date),
+        startDate: run.start_date ? new Date(run.start_date) : null,
         particleType: run.particle_type,
         energyInKev: run.energy_in_kev,
         beamline: run.beamline,
         projectSlug: run.project_slug,
-        methods: run.methods.map((method) => {
+        methods: run.methods?.map((method) => {
           return {
             name: method.name,
-            detectors: method.detectors.map((detector) => {
+            detectors: method.detectors?.map((detector) => {
               return {
                 name: detector.name,
                 filters: detector.filters,
@@ -136,7 +136,7 @@ function parseProjectPageData(
         }),
       };
     }),
-    objectGroups: data.object_groups.map((objectGroup) => {
+    objectGroups: data.object_groups?.map((objectGroup) => {
       return {
         id: objectGroup.id,
         c2rmfId: objectGroup.c2rmf_id || null,

@@ -82,8 +82,8 @@ const RunCardContent = ({
                           >
                             <span>
                               {detector.name}
-                              {detector.filters.length > 0 ? ": " : ""}
-                              {detector.filters.join(", ")}
+                              {(detector?.filters || []).length > 0 ? ": " : ""}
+                              {detector?.filters?.join(", ")}
                             </span>
                           </div>
                         ),

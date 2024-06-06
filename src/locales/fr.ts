@@ -12,7 +12,7 @@ export const translations = {
   project: "Projet",
   objectGroup: "Groupe d'objets",
 
-  inventory: "Inventaire",
+  inventory: "Numéro d'inventaire",
   period: "Époque",
   geographicArea: "Aire géographique",
   materials: "Matériaux",
@@ -137,13 +137,30 @@ const catalogContent: CatalogContent = {
   catalogFilters: {
     project: "Projet",
     objectGroup: "Groupe d'objets",
-    itemType: "Type d'item",
+    itemType: "Type d 'item",
+    materials: translations.materials,
+    inventory: translations.inventory,
+    collection: "Collection",
+    discoveryPlaceFilter: {
+      discoveryPlace: "Lieu de découverte",
+    },
+    periodFilter: {
+      period: translations.period,
+    },
+    createdRange: {
+      label: "Année du projet",
+    },
+    dataAvailableSwitch: {
+      label: "Données disponibles",
+      status: "Statut des données",
+    },
   },
 
   sortSelect: {
     mostDated: "Plus anciens",
     mostRecent: "Plus récents",
     sorting: "Tri",
+    relevance: "Pertinence",
   },
 
   pagination: {

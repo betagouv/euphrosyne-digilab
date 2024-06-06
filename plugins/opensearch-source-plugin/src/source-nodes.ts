@@ -16,9 +16,7 @@ export const sourceNodes: GatsbyNode[`sourceNodes`] = async (
 ) => {
   const { reporter } = gatsbyApi;
 
-  reporter.info(
-    formatLogMessage(`Connecting to host at ${options.openSearch.host}`),
-  );
+  reporter.info(formatLogMessage(`Connecting to host...`));
   const client = new Client({
     node: options.openSearch.host,
   });

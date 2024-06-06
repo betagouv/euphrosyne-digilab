@@ -1,13 +1,14 @@
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import Card from "@codegouvfr/react-dsfr/Card";
-import { css } from "@emotion/react";
+import { SerializedStyles, css } from "@emotion/react";
 
 import ObjectGroupMaterialTags from "../../components/object-group/ObjectGroupMaterialTags";
 import { SearchItem } from "../../types/catalog";
 import { ellipse } from "../../utils";
 
-type CatalogItemProps = Partial<React.ComponentProps<typeof Card>> & {
+type CatalogItemProps = {
   searchItem: SearchItem;
+  css: SerializedStyles;
 };
 
 function SearchItemBadge({ searchItem }: { searchItem: SearchItem }) {
@@ -39,7 +40,7 @@ function CardStart({ searchItem }: { searchItem: SearchItem }) {
   );
 }
 
-export function CatalogItem({ searchItem, ...props }: CatalogItemProps) {
+export function CatalogItem({ searchItem, css }: CatalogItemProps) {
   const linkTo = searchItem.pagePath || "#",
     title = searchItem.name || "";
 
@@ -57,7 +58,7 @@ export function CatalogItem({ searchItem, ...props }: CatalogItemProps) {
       end={<SearchItemBadge searchItem={searchItem} />}
       titleAs="h3"
       title={title}
-      {...props}
+      css={css}
     />
   );
 }
