@@ -181,12 +181,7 @@ export default function CatalogPage({
                       className="fr-col-6 fr-col-xl-4"
                       key={`catalog-item-${searchItem.category}-${searchItem.slug}`}
                     >
-                      <CatalogItem
-                        searchItem={searchItem}
-                        css={css`
-                          min-height: 350px;
-                        `}
-                      />
+                      <CatalogItem searchItem={searchItem} />
                     </div>
                   ))}
                   {!searchResult.results.length && (

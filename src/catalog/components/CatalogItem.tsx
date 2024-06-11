@@ -8,7 +8,7 @@ import { ellipse } from "../../utils";
 
 type CatalogItemProps = {
   searchItem: SearchItem;
-  css: SerializedStyles;
+  css?: SerializedStyles;
 };
 
 function SearchItemBadge({ searchItem }: { searchItem: SearchItem }) {
@@ -58,7 +58,7 @@ export function CatalogItem({ searchItem, css }: CatalogItemProps) {
       end={<SearchItemBadge searchItem={searchItem} />}
       titleAs="h3"
       title={title}
-      css={css}
+      css={{ ...css, minHeight: "22rem" }}
     />
   );
 }

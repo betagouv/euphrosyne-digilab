@@ -22,7 +22,7 @@ const suggestionsContainerStyle = css({
   backgroundColor: "var(--background-default-grey)",
   width: "100%",
   boxShadow: "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px",
-  zIndex: 1,
+  zIndex: 2,
 });
 
 export default function AutocompleteInput<T>({
