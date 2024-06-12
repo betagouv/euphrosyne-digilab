@@ -2,26 +2,26 @@ import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { HeadFC, PageProps, graphql } from "gatsby";
 import { useContext, useEffect } from "react";
 
-import { IObjectGroup } from "../../types/ICatalog";
-import { BaseHead } from "../components/BaseHead";
-import { BaseSection } from "../components/BaseSection";
+import { IObjectGroup } from "../../../types/ICatalog";
+import { BaseHead } from "../../components/BaseHead";
+import { BaseSection } from "../../components/BaseSection";
 import {
   ProjectData,
   ProjectDataContent,
-} from "../components/project/ProjectData";
+} from "../../components/project/ProjectData";
 import {
   ProjectDescription,
   ProjectDescriptionContent,
-} from "../components/project/ProjectDescription";
+} from "../../components/project/ProjectDescription";
 import {
   ProjectObjects,
   ProjectObjectsContent,
-} from "../components/project/ProjectObjects";
-import { LangContext } from "../contexts/LangContext";
-import { PageContext } from "../contexts/PageContext";
-import { detailPageSection } from "../styles";
-import type { Leader, ProjectStatus } from "../types/project";
-import type { Run } from "../types/run";
+} from "../../components/project/ProjectObjects";
+import { LangContext } from "../../contexts/LangContext";
+import { PageContext } from "../../contexts/PageContext";
+import { detailPageSection } from "../../styles";
+import type { Leader, ProjectStatus } from "../../types/project";
+import type { Run } from "../../types/run";
 
 export interface ProjectTemplateContent {
   catalog: string;

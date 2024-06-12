@@ -21,7 +21,7 @@ export function parseProjectDocument(data: IOpenSearchDocument): IProjectItem {
     dataAvailable: data.is_data_available,
     projectPageData: parseProjectPageData(data.project_page_data),
 
-    pagePath: `/${data.slug}/`,
+    pagePath: `/project/${data.slug}/`,
   };
 }
 
@@ -50,7 +50,7 @@ export function parseObjectDocument(
     collections: data.collections,
     inventoryNumbers: data.inventory_numbers,
 
-    pagePath: `/${data.slug}/`,
+    pagePath: `/object/${data.slug}/`,
   };
 }
 

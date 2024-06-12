@@ -4,24 +4,26 @@ import { Select } from "@codegouvfr/react-dsfr/SelectNext";
 import { css } from "@emotion/react";
 import { HeadFC, PageProps, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-import { BaseHead } from "../components/BaseHead";
-import { BaseSection } from "../components/BaseSection";
+import { buildProjectPath } from "../../catalog/utils";
+import { BaseHead } from "../../components/BaseHead";
+import { BaseSection } from "../../components/BaseSection";
+import { I18nLink as Link } from "../../components/I18nLink";
 import {
   ObjectGroupDescription,
   ObjectGroupDescriptionContent,
-} from "../components/object-group/ObjectGroupDescription";
+} from "../../components/object-group/ObjectGroupDescription";
 import {
   ProjectData,
   ProjectDataContent,
-} from "../components/project/ProjectData";
-import { LangContext } from "../contexts/LangContext";
-import { PageContext } from "../contexts/PageContext";
-import { ContentProps } from "../i18n";
-import { detailPageSection, paddedUpToLg } from "../styles";
-import { Leader } from "../types/project";
-import { Run } from "../types/run";
+} from "../../components/project/ProjectData";
+import { LangContext } from "../../contexts/LangContext";
+import { PageContext } from "../../contexts/PageContext";
+import { ContentProps } from "../../i18n";
+import { detailPageSection, paddedUpToLg } from "../../styles";
+import { Leader } from "../../types/project";
+import { Run } from "../../types/run";
 
 export interface ObjectTemplateContent {
   catalog: string;
@@ -31,6 +33,7 @@ export interface ObjectTemplateContent {
   noProject: string;
   objectData: string;
   project: string;
+  viewProject: string;
 
   objectGroupDescription: ObjectGroupDescriptionContent;
   projectDataContent: ProjectDataContent;
@@ -83,7 +86,7 @@ export default function ObjectTemplate({
   if (currentProject) {
     breadcrumbSegments.push({
       label: content.projectWithName.replace("{}", currentProject.name),
-      linkProps: { to: `/project/${currentProject.slug}` },
+      linkProps: { to: buildProjectPath(currentProject) },
     });
   }
 
@@ -132,7 +135,7 @@ export default function ObjectTemplate({
               />
               <div className="fr-col-12 fr-col-lg-6">
                 <StaticImage
-                  src="../images/objectgroup-placeholder.svg"
+                  src="../../images/objectgroup-placeholder.svg"
                   alt={content.altImageWithObjectName.replace(
                     "{}",
                     objectGroup.name,
@@ -167,15 +170,23 @@ export default function ObjectTemplate({
                 max-width: 400px;
               `}
             />
-            {selectedProject &&
-              selectedProjectRuns &&
-              selectedProjectRuns.length > 0 && (
-                <ProjectData
-                  runs={selectedProjectRuns as Run[]}
-                  projectLeader={selectedProject.leader}
-                  content={content.projectDataContent}
-                />
-              )}
+            {selectedProject && (
+              <React.Fragment>
+                <div className="fr-mb-1w">
+                  <Link to={buildProjectPath(selectedProject)}>
+                    {content.viewProject}
+                  </Link>
+                </div>
+                {selectedProjectRuns && selectedProjectRuns.length > 0 && (
+                  <ProjectData
+                    runs={selectedProjectRuns as Run[]}
+                    projectLeader={selectedProject.leader}
+                    content={content.projectDataContent}
+                    className="fr-mb-2w"
+                  />
+                )}
+              </React.Fragment>
+            )}
           </BaseSection>
         </div>
       )}

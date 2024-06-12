@@ -5,11 +5,12 @@ import type { ProjectDataContent } from "../components/project/ProjectData";
 import type { LayoutContentProps } from "../layouts";
 import type { IndexPageContent } from "../pages";
 import type { CatalogContent } from "../pages/catalog";
-import type { ObjectTemplateContent } from "../pages/{ObjectGroup.slug}";
-import type { ProjectTemplateContent } from "../pages/{Project.slug}";
+import type { ObjectTemplateContent } from "../pages/object/{ObjectGroup.slug}";
+import type { ProjectTemplateContent } from "../pages/project/{Project.slug}";
 
 export const translations = {
   project: "Projet",
+  object: "Objet",
   objectGroup: "Groupe d'objets",
 
   inventory: "Numéro d'inventaire",
@@ -178,6 +179,7 @@ const objectPageContent: ObjectTemplateContent = {
   noProject: "Aucun projet",
   objectData: "Données de l'objet",
   project: "Projet",
+  viewProject: "Voir le projet",
 
   objectGroupDescription: {
     inventory: translations.inventory,
@@ -230,5 +232,6 @@ const t = {
 };
 
 export type Translations = typeof t;
+export type BaseTranslations = typeof translations;
 
 export default t;

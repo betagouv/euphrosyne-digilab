@@ -2,8 +2,8 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import { css } from "@emotion/react";
 import * as React from "react";
-import slugify from "slugify";
 
+import { buildObjectPath } from "../../catalog/utils";
 import { ContentProps } from "../../i18n";
 import { ObjectGroup } from "../../types/project";
 import { BaseSection } from "../BaseSection";
@@ -40,6 +40,7 @@ export const ProjectObjects = ({
     ? objectGroups
     : objectGroups.slice(0, excerptLength);
 
+  console.log(objectGroups);
   return (
     <BaseSection {...props}>
       <div className="fr-grid-row fr-grid-row--gutters">
@@ -89,11 +90,7 @@ export const ProjectObjects = ({
                   ))}
                 </p>
                 <p>
-                  <Link
-                    to={`/${slugify(objectGroup.label, { lower: true })}-${
-                      objectGroup.id
-                    }`}
-                  >
+                  <Link to={buildObjectPath(objectGroup)}>
                     {content.seeObjectDetails}
                   </Link>
                 </p>

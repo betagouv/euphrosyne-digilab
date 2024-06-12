@@ -5,14 +5,14 @@ import type { ProjectDataContent } from "../components/project/ProjectData";
 import type { LayoutContentProps } from "../layouts";
 import type { IndexPageContent } from "../pages";
 import type { CatalogContent } from "../pages/catalog";
-import type { ObjectTemplateContent } from "../pages/{ObjectGroup.slug}";
-import type { ProjectTemplateContent } from "../pages/{Project.slug}";
+import type { ObjectTemplateContent } from "../pages/object/{ObjectGroup.slug}";
+import type { ProjectTemplateContent } from "../pages/project/{Project.slug}";
 import type { Translations } from "./fr";
 
 export const translations = {
   project: "Project",
   objectGroup: "Object group",
-
+  object: "Object",
   inventory: "Inventory number",
   period: "Period",
   geographicArea: "Geographic area",
@@ -175,6 +175,7 @@ const objectPageContent: ObjectTemplateContent = {
   noProject: "No project",
   objectData: "Object data",
   project: "Project",
+  viewProject: "View project",
 
   objectGroupDescription: {
     inventory: translations.inventory,

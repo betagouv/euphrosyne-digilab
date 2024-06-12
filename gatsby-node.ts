@@ -5,29 +5,34 @@ import {
   writeGraphQLSchema,
 } from "gatsby/dist/utils/graphql-typegen/file-writes";
 
-import { defaultLangKey, langs } from "./src/i18n";
+import { defaultLangKey, langs, localizePath } from "./src/i18n";
 
-export const onCreatePage: GatsbyNode["onCreatePage"] = async ({
-  page,
-  actions,
-}) => {
+export const onCreatePage: GatsbyNode["onCreatePage"] = ({ page, actions }) => {
   actions.deletePage(page);
 
-  langs.forEach((lang) => {
+  actions.createRedirect({
+    fromPath: page.path,
+    toPath: `/${defaultLangKey}${page.path}`,
+    redirectInBrowser: true,
+    isPermanent: true,
+  });
+
+  for (const lang of langs) {
+    let path: string;
+    if (page.path === "/") {
+      path = `/${lang}/`;
+    } else {
+      path = localizePath(page.path, lang);
+    }
     actions.createPage({
       ...page,
-      path: `/${lang}${page.path}`,
+      path,
       context: {
         ...page.context,
         langKey: lang,
       },
     });
-  });
-
-  actions.createRedirect({
-    fromPath: `${page.path}`,
-    toPath: `/${defaultLangKey}/${page.path}`,
-  });
+  }
 };
 // Generate GraphQL type definitions in .cache/typegen folders
 // so we can use eslint with graphql in CI
