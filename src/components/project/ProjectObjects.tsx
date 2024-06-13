@@ -40,7 +40,6 @@ export const ProjectObjects = ({
     ? objectGroups
     : objectGroups.slice(0, excerptLength);
 
-  console.log(objectGroups);
   return (
     <BaseSection {...props}>
       <div className="fr-grid-row fr-grid-row--gutters">
