@@ -47,7 +47,7 @@ export async function searchCatalog(
   let response: Response;
   try {
     response = await fetch(
-      `${process.env.EUPHROSYNE_ENDPOINT}/api/lab/catalog/search`,
+      `${process.env.EUPHROSYNE_HOST}/api/lab/catalog/search`,
       {
         method: "POST",
         headers: {
@@ -67,7 +67,7 @@ export async function fetchAggregatedTags(
   query?: string,
   exclude?: string[],
 ) {
-  let url = `${process.env.EUPHROSYNE_ENDPOINT}/api/lab/catalog/aggregate`;
+  let url = `${process.env.EUPHROSYNE_HOST}/api/lab/catalog/aggregate`;
   url += `?field=${field}`;
   if (query) {
     url += `&query=${query}`;
@@ -98,7 +98,7 @@ export async function fetchAggregatedTags(
 }
 
 export async function fetchCreatedAggs() {
-  const url = `${process.env.EUPHROSYNE_ENDPOINT}/api/lab/catalog/aggregate-created`;
+  const url = `${process.env.EUPHROSYNE_HOST}/api/lab/catalog/aggregate-created`;
   let response;
   try {
     response = await fetch(url, {
