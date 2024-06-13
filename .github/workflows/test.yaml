@@ -38,14 +38,6 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
 
-      - name: Install Node.js dependencies for opensearch plugin
-        working-directory: plugins/opensearch-source-plugin
-        run: npm ci
-
-      - name: Build Node.js dependencies for opensearch plugin
-        working-directory: plugins/opensearch-source-plugin
-        run: npm run build
-
       - name: Run npm build
         run: npm run build
         env:
