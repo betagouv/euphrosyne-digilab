@@ -21,6 +21,20 @@ jobs:
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
 
+      - name: Download Scalingo CLI
+        run: curl -O https://cli-dl.scalingo.com/install && bash install
+
+      - name: Scalingo login
+        run: scalingo login --api-token ${{ secrets.SCALINGO_API_TOKEN }}
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SCALINGO_SSH_PRIVATE_KEY }}
+
+      - name: Create tunnel to Elasticsearch connection
+        run: scalingo -a euphrosyne-staging db-tunnel ${{ secrets.ELASTICSEARCH_CONNECTION_URL }} &
+
       - name: Install Node.js dependencies
         run: npm ci
 
@@ -38,7 +52,7 @@ jobs:
           SITE_URL: http://localhost:8000
           EUPHROSYNE_HOST: https://euphrosyne.incubateur.net
           TYPEGEN_ON_BUILD: true
-          ELASTICSEARCH_CONNECTION_URL: ${{ secrets.ELASTICSEARCH_CONNECTION_URL }}
+          ELASTICSEARCH_CONNECTION_URL: ${{ secrets.ELASTICSEARCH_TUNNELED_CONNECTION_URL }}
 
       - name: Run eslint
         run: npm run lint
