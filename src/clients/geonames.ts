@@ -1,4 +1,4 @@
-const USERNAME = process.env.GEONAMES_USERNAME;
+const USERNAME = process.env.GATSBY_GEONAMES_USERNAME;
 
 interface GeonamesResponse {
   totalResultsCount: number;

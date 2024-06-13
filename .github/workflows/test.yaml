@@ -42,7 +42,7 @@ jobs:
         run: npm run build
         env:
           SITE_URL: http://localhost:8000
-          EUPHROSYNE_HOST: https://euphrosyne.incubateur.net
+          GATSBY_EUPHROSYNE_HOST: https://euphrosyne.incubateur.net
           TYPEGEN_ON_BUILD: true
           ELASTICSEARCH_CONNECTION_URL: ${{ secrets.ELASTICSEARCH_TUNNELED_CONNECTION_URL }}
 

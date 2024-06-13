@@ -41,7 +41,7 @@ const config: GatsbyConfig = {
       options: {
         typeName: "EuphrosyneAPI",
         fieldName: "euphrosyneAPI",
-        url: process.env.EUPHROSYNE_HOST + "/graphql",
+        url: process.env.GATSBY_EUPHROSYNE_HOST + "/graphql",
       },
     },
     {
