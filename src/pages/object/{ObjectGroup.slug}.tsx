@@ -4,24 +4,26 @@ import { Select } from "@codegouvfr/react-dsfr/SelectNext";
 import { css } from "@emotion/react";
 import { HeadFC, PageProps, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-import { BaseHead } from "../components/BaseHead";
-import { BaseSection } from "../components/BaseSection";
+import { buildProjectPath } from "../../catalog/utils";
+import { BaseHead } from "../../components/BaseHead";
+import { BaseSection } from "../../components/BaseSection";
+import { I18nLink as Link } from "../../components/I18nLink";
 import {
   ObjectGroupDescription,
   ObjectGroupDescriptionContent,
-} from "../components/object-group/ObjectGroupDescription";
+} from "../../components/object-group/ObjectGroupDescription";
 import {
   ProjectData,
   ProjectDataContent,
-} from "../components/project/ProjectData";
-import { LangContext } from "../contexts/LangContext";
-import { PageContext } from "../contexts/PageContext";
-import { ContentProps } from "../i18n";
-import { detailPageSection, paddedUpToLg } from "../styles";
-import { Participation } from "../types/project";
-import { Run } from "../types/run";
+} from "../../components/project/ProjectData";
+import { LangContext } from "../../contexts/LangContext";
+import { PageContext } from "../../contexts/PageContext";
+import { ContentProps } from "../../i18n";
+import { detailPageSection, paddedUpToLg } from "../../styles";
+import { Leader } from "../../types/project";
+import { Run } from "../../types/run";
 
 export interface ObjectTemplateContent {
   catalog: string;
@@ -31,6 +33,7 @@ export interface ObjectTemplateContent {
   noProject: string;
   objectData: string;
   project: string;
+  viewProject: string;
 
   objectGroupDescription: ObjectGroupDescriptionContent;
   projectDataContent: ProjectDataContent;
@@ -39,33 +42,27 @@ export interface ObjectTemplateContent {
 interface Project {
   name: string;
   slug: string;
-  leader: Participation;
+  leader: Leader;
 }
 
 export default function ObjectTemplate({
   data,
-}: PageProps<Queries.ObjectTemplateQuery> &
+}: PageProps<Queries.ObjectGroupPageQuery> &
   ContentProps<ObjectTemplateContent>) {
   const { translations } = useContext(LangContext);
   const content = translations.objectPageContent;
 
   const { currentProject } = useContext(PageContext);
-  const objectGroup = data.euphrosyneAPI.objectGroupDetail;
-  const projects = objectGroup?.runs
-    .map((run) => run.project)
-    .filter((value, index, array) => {
-      return array.map((p) => p.slug).indexOf(value.slug) === index;
-    });
-
+  const { objectGroup } = data;
+  const projects = objectGroup?.objectPageData?.projects || [];
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const selectedProjectRuns = objectGroup?.runs.filter(
-    (run) => run.project.slug === selectedProject?.slug,
+  const selectedProjectRuns = objectGroup?.objectPageData?.runs.filter(
+    (run) => run?.projectSlug === selectedProject?.slug,
   );
-
   const onProjectSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const project = projects?.find(
-      (project) => project.slug === event.target.value,
+      (project) => project?.slug === event.target.value,
     );
     if (project) {
       setSelectedProject(project as Project);
@@ -78,10 +75,18 @@ export default function ObjectTemplate({
       linkProps: { to: "/catalog" },
     },
   ];
+  let selectOptions = [{ label: content.noProject, value: "" }];
+  if (projects && projects.length > 0) {
+    selectOptions = (projects as readonly Project[]).map((project) => ({
+      label: project.name,
+      value: project.slug,
+    }));
+  }
+
   if (currentProject) {
     breadcrumbSegments.push({
       label: content.projectWithName.replace("{}", currentProject.name),
-      linkProps: { to: `/project/${currentProject.slug}` },
+      linkProps: { to: buildProjectPath(currentProject) },
     });
   }
 
@@ -97,7 +102,7 @@ export default function ObjectTemplate({
         <div>
           <div className="fr-container fr-container--fluid">
             <Breadcrumb
-              currentPageLabel={objectGroup.label}
+              currentPageLabel={objectGroup.name}
               homeLinkProps={{
                 to: "/",
               }}
@@ -119,21 +124,21 @@ export default function ObjectTemplate({
                 css={css`
                   ${paddedUpToLg}
                 `}
-                collection={objectGroup.collection}
-                dating={objectGroup.dating}
-                discoveryPlace={objectGroup.discoveryPlace}
+                collection={objectGroup.collection || ""}
+                dating={objectGroup.datingLabel}
+                discoveryPlace={objectGroup.discoveryPlaceLabel}
                 materials={objectGroup.materials as string[]}
                 dataAvailable={objectGroup.dataAvailable}
-                label={objectGroup.label}
+                label={objectGroup.name}
                 c2rmfId={objectGroup.c2rmfId}
                 content={content.objectGroupDescription}
               />
               <div className="fr-col-12 fr-col-lg-6">
                 <StaticImage
-                  src="../images/objectgroup-placeholder.svg"
+                  src="../../images/objectgroup-placeholder.svg"
                   alt={content.altImageWithObjectName.replace(
                     "{}",
-                    objectGroup.label,
+                    objectGroup.name,
                   )}
                   placeholder="blurred"
                   css={css`
@@ -156,12 +161,7 @@ export default function ObjectTemplate({
             <Select
               label={content.project}
               disabled={!(projects && projects.length > 0)}
-              options={
-                projects?.map((project) => ({
-                  label: project.name,
-                  value: project.slug,
-                })) || [{ label: content.noProject, value: "" }]
-              }
+              options={selectOptions}
               nativeSelectProps={{
                 value: selectedProject?.slug,
                 onChange: onProjectSelect,
@@ -170,15 +170,23 @@ export default function ObjectTemplate({
                 max-width: 400px;
               `}
             />
-            {selectedProject &&
-              selectedProjectRuns &&
-              selectedProjectRuns.length > 0 && (
-                <ProjectData
-                  runs={selectedProjectRuns as Run[]}
-                  projectLeader={selectedProject.leader}
-                  content={content.projectDataContent}
-                />
-              )}
+            {selectedProject && (
+              <React.Fragment>
+                <div className="fr-mb-1w">
+                  <Link to={buildProjectPath(selectedProject)}>
+                    {content.viewProject}
+                  </Link>
+                </div>
+                {selectedProjectRuns && selectedProjectRuns.length > 0 && (
+                  <ProjectData
+                    runs={selectedProjectRuns as Run[]}
+                    projectLeader={selectedProject.leader}
+                    content={content.projectDataContent}
+                    className="fr-mb-2w"
+                  />
+                )}
+              </React.Fragment>
+            )}
           </BaseSection>
         </div>
       )}
@@ -189,20 +197,32 @@ export default function ObjectTemplate({
 export const Head: HeadFC = BaseHead;
 
 export const query = graphql`
-  query ObjectTemplate($id: String!) {
-    euphrosyneAPI {
-      objectGroupDetail(pk: $id) {
-        id
-        c2rmfId
+  query ObjectGroupPage($slug: String!) {
+    objectGroup(slug: { eq: $slug }) {
+      id
+      name
+      materials
+      dataAvailable
+      c2rmfId
+      discoveryPlaceLabel
+      collection
+      inventoryNumber
+      datingLabel
+      objects {
         label
-        materials
-        discoveryPlace
         collection
-        dating
-        dataAvailable
-        objectSet {
-          label
-          collection
+        inventory
+      }
+      objectPageData {
+        projects {
+          name
+          slug
+          leader {
+            firstName
+            lastName
+            institutionName
+            institutionCountry
+          }
         }
         runs {
           label
@@ -210,20 +230,7 @@ export const query = graphql`
           particleType
           energyInKev
           beamline
-          project {
-            name
-            slug
-            leader {
-              user {
-                firstName
-                lastName
-              }
-              institution {
-                name
-                country
-              }
-            }
-          }
+          projectSlug
           methods {
             name
             detectors {

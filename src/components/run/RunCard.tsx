@@ -2,7 +2,7 @@ import { Card } from "@codegouvfr/react-dsfr/Card";
 import { css } from "@emotion/react";
 
 import { ContentProps } from "../../i18n";
-import { Participation } from "../../types/project";
+import { Leader } from "../../types/project";
 import { Run } from "../../types/run";
 import { ellipse } from "../../utils";
 
@@ -15,7 +15,7 @@ export interface RunCardContent {
 
 interface RunCardProps {
   run: Run;
-  projectLeader: Participation | null;
+  projectLeader: Leader | null;
 }
 
 const RunCardContent = ({
@@ -23,7 +23,7 @@ const RunCardContent = ({
   projectLeader,
   content,
 }: RunCardProps & ContentProps<RunCardContent>) => {
-  const institutionName = projectLeader?.institution?.name;
+  const institutionName = projectLeader?.institutionName;
   const startDate = new Date(run.startDate);
   return (
     <div>
@@ -34,8 +34,8 @@ const RunCardContent = ({
       <div>
         <span className="fr-hint-text">{content.projectLeader}</span>
         <p>
-          {projectLeader && projectLeader.user
-            ? `${projectLeader.user.firstName} ${projectLeader.user.lastName} `
+          {projectLeader
+            ? `${projectLeader.firstName} ${projectLeader.lastName} `
             : ""}
           {institutionName &&
             `[${
@@ -82,8 +82,8 @@ const RunCardContent = ({
                           >
                             <span>
                               {detector.name}
-                              {detector.filters.length > 0 ? ": " : ""}
-                              {detector.filters.join(", ")}
+                              {(detector?.filters || []).length > 0 ? ": " : ""}
+                              {detector?.filters?.join(", ")}
                             </span>
                           </div>
                         ),

@@ -3,6 +3,7 @@ module.exports = {
   ignorePatterns: [
     "graphql.config.js", // Prevent "Cannot find module './.cache/typegen/graphql.config.json'" error
     "public/*",
+    "plugins/**/dist/*",
   ],
   overrides: [
     {

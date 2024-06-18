@@ -41,7 +41,7 @@ const config: GatsbyConfig = {
       options: {
         typeName: "EuphrosyneAPI",
         fieldName: "euphrosyneAPI",
-        url: process.env.EUPHROSYNE_GRAPHQL_ENDPOINT,
+        url: process.env.GATSBY_EUPHROSYNE_HOST + "/graphql",
       },
     },
     {
@@ -53,6 +53,14 @@ const config: GatsbyConfig = {
     },
     `gatsby-transformer-remark`,
     `gatsby-plugin-layout`,
+    {
+      resolve: `opensearch-source-plugin`,
+      options: {
+        openSearch: {
+          host: process.env.ELASTICSEARCH_CONNECTION_URL,
+        },
+      },
+    },
   ],
 };
 

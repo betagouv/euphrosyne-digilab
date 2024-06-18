@@ -3,12 +3,13 @@ import { ChangeEvent } from "react";
 
 import { ContentProps } from "../../i18n";
 
-export type SortValue = "asc" | "dsc";
+export type SortValue = "asc" | "desc" | "default";
 
 export interface SortSelectContent {
   mostRecent: string;
   mostDated: string;
   sorting: string;
+  relevance: string;
 }
 
 interface SortSelectOption {
@@ -31,8 +32,9 @@ export default function SortSelect({
   ...props
 }: SortSelectProps & ContentProps<SortSelectContent>) {
   const options: SortSelectOption[] = [
+    { label: content.relevance, value: "default" },
     { label: content.mostDated, value: "asc" },
-    { label: content.mostRecent, value: "dsc" },
+    { label: content.mostRecent, value: "desc" },
   ];
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {

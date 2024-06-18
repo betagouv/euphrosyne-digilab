@@ -4,105 +4,36 @@ import {
   writeGraphQLFragments,
   writeGraphQLSchema,
 } from "gatsby/dist/utils/graphql-typegen/file-writes";
-import path from "path";
-import slugify from "slugify";
 
-import { defaultLangKey, langs } from "./src/i18n";
-import { SearchItem } from "./src/types/catalog";
+import { defaultLangKey, langs, localizePath } from "./src/i18n";
 
-export const onCreatePage: GatsbyNode["onCreatePage"] = async ({
-  page,
-  actions,
-}) => {
+export const onCreatePage: GatsbyNode["onCreatePage"] = ({ page, actions }) => {
   actions.deletePage(page);
 
-  langs.forEach((lang) => {
+  actions.createRedirect({
+    fromPath: page.path,
+    toPath: `/${defaultLangKey}${page.path}`,
+    redirectInBrowser: true,
+    isPermanent: true,
+  });
+
+  for (const lang of langs) {
+    let path: string;
+    if (page.path === "/") {
+      path = `/${lang}/`;
+    } else {
+      path = localizePath(page.path, lang);
+    }
     actions.createPage({
       ...page,
-      path: `/${lang}${page.path}`,
+      path,
       context: {
         ...page.context,
         langKey: lang,
       },
     });
-  });
-
-  actions.createRedirect({
-    fromPath: `${page.path}`,
-    toPath: `/${defaultLangKey}/${page.path}`,
-  });
+  }
 };
-
-export const createPages: GatsbyNode["createPages"] = async ({
-  graphql,
-  actions,
-}) => {
-  const { data }: { data?: Queries.CreatePagesFromProjectsQuery } =
-    await graphql(`
-      query CreatePagesFromProjects {
-        euphrosyneAPI {
-          lastProjects {
-            name
-            slug
-            comments
-            created
-            objectGroups {
-              id
-              label
-              materials
-              created
-            }
-          }
-        }
-      }
-    `);
-
-  const searchItems: SearchItem[] = [];
-  const objectGroupIdsOfPages: string[] = [];
-
-  data?.euphrosyneAPI.lastProjects?.forEach((project) => {
-    if (!project || !project.objectGroups) return;
-    const { name, slug, objectGroups, comments, created } = project;
-    langs.forEach((lang) => {
-      actions.createPage({
-        path: `/${lang}/project/${slug}`,
-        component: path.resolve(`./src/templates/project.tsx`),
-        context: { slug: slug, langKey: lang },
-      });
-    });
-    searchItems.push({
-      project: { name, slug, comments, created },
-      type: "Project",
-    });
-    objectGroups.forEach((objectGroup) => {
-      if (!objectGroup) return;
-      const { id, label, materials, created } = objectGroup;
-      if (objectGroupIdsOfPages.includes(`${label}|${id}`)) return; // page already created
-      objectGroupIdsOfPages.push(`${label}|${id}`);
-      const objectSlug = slugify(label);
-      langs.forEach((lang) => {
-        actions.createPage({
-          path: `/${lang}/object/${objectSlug}/${id}`,
-          component: path.resolve(`./src/templates/object.tsx`),
-          context: { id, langKey: lang },
-        });
-      });
-      searchItems.push({
-        objectGroup: { id, label, materials, created },
-        type: "ObjectGroup",
-      });
-    });
-  });
-
-  langs.forEach((lang) => {
-    actions.createPage({
-      path: `/${lang}/catalog`,
-      component: path.resolve(`./src/templates/catalog.tsx`),
-      context: { searchItems },
-    });
-  });
-};
-
 // Generate GraphQL type definitions in .cache/typegen folders
 // so we can use eslint with graphql in CI
 export const onPostBuild: GatsbyNode["onPostBuild"] = async ({ store }) => {
@@ -115,5 +46,19 @@ export const onPostBuild: GatsbyNode["onPostBuild"] = async ({ store }) => {
     await writeGraphQLConfig(program);
     await writeGraphQLSchema(program.directory, schema);
     await writeGraphQLFragments(program.directory, definitions);
+  }
+};
+
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({
+  actions,
+  getConfig,
+}) => {
+  const config = getConfig();
+  if (config.mode !== "production") {
+    actions.setWebpackConfig({
+      watchOptions: {
+        ignored: /node_modules/,
+      },
+    });
   }
 };

@@ -26,7 +26,6 @@ import {
   SearchSectionContent,
 } from "../components/index/SearchSection";
 import { LangContext } from "../contexts/LangContext";
-import { Project } from "../types/project";
 
 export interface IndexPageContent {
   hero: HeroContent;
@@ -41,7 +40,8 @@ const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({ data }) => {
   const { translations } = useContext(LangContext);
   const content = translations.indexPageContent;
 
-  const { lastProjects, stats } = data.euphrosyneAPI;
+  const { stats } = data.euphrosyneAPI;
+  const lastProjects = data.allProject.nodes;
   const { hero, search } = content;
   return (
     <>
@@ -52,7 +52,7 @@ const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({ data }) => {
       {stats && <FigureSection stats={stats} content={content.figure} />}
       {lastProjects && (
         <ProjectListSection
-          projects={lastProjects as Project[]}
+          projects={lastProjects}
           content={content.projectList}
         />
       )}
@@ -66,14 +66,17 @@ export const Head: HeadFC = BaseHead;
 
 export const query = graphql`
   query HomePage {
-    euphrosyneAPI {
-      lastProjects(limit: 6) {
+    allProject(limit: 6, sort: { created: DESC }) {
+      nodes {
         name
         status
-        objectGroupMaterials
+        materials
         comments
         slug
+        pagePath
       }
+    }
+    euphrosyneAPI {
       stats {
         all {
           totalProjects

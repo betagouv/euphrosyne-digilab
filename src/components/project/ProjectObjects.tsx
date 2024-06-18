@@ -2,8 +2,8 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import { css } from "@emotion/react";
 import * as React from "react";
-import slugify from "slugify";
 
+import { buildObjectPath } from "../../catalog/utils";
 import { ContentProps } from "../../i18n";
 import { ObjectGroup } from "../../types/project";
 import { BaseSection } from "../BaseSection";
@@ -72,15 +72,15 @@ export const ProjectObjects = ({
                 </p>
                 <p>
                   <strong>{content.period}: </strong>
-                  {objectGroup.dating}
+                  {objectGroup.datingLabel}
                 </p>
                 <p>
                   <strong>{content.geographicArea}: </strong>
-                  {objectGroup.discoveryPlace}
+                  {objectGroup.discoveryPlaceLabel}
                 </p>
                 <p>
                   <strong>{content.materials}: </strong>
-                  {objectGroup.materials.map((material) => (
+                  {(objectGroup.materials || []).map((material) => (
                     <Tag
                       key={`object-group-item-${objectGroup.id}-material-${material}`}
                     >
@@ -89,11 +89,7 @@ export const ProjectObjects = ({
                   ))}
                 </p>
                 <p>
-                  <Link
-                    to={`/object/${slugify(objectGroup.label)}/${
-                      objectGroup.id
-                    }`}
-                  >
+                  <Link to={buildObjectPath(objectGroup)}>
                     {content.seeObjectDetails}
                   </Link>
                 </p>

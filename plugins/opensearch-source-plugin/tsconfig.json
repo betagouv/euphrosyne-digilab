@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["./src/**/*", "gatsby-node.ts"],
+  "compilerOptions": {
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "declaration": true
+  }
+}

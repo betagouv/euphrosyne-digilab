@@ -1,11 +1,10 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { css } from "@emotion/react";
-import { HeadFC, PageProps } from "gatsby";
-import { useContext, useState } from "react";
+import { HeadFC, PageProps, graphql } from "gatsby";
+import { useContext, useEffect, useState } from "react";
 
 import CatalogFilters, {
   CatalogFiltersContent,
-  Filters,
 } from "../catalog/components/CatalogFilters";
 import { CatalogItem } from "../catalog/components/CatalogItem";
 import FilterContainer, {
@@ -22,13 +21,14 @@ import SortSelect, {
   SortSelectContent,
   SortValue,
 } from "../catalog/components/SortSelect";
-import useFilter, {
-  buildFiltersFromLocation,
-} from "../catalog/hooks/useFilter";
 import usePagination from "../catalog/hooks/usePagination";
 import { BaseHead } from "../components/BaseHead";
 import { LangContext } from "../contexts/LangContext";
 import { ContentProps } from "../i18n";
+import useSearch, {
+  Filters,
+  buildFiltersFromLocation,
+} from "../opensearch/useSearch";
 import { SearchItem } from "../types/catalog";
 
 export interface CatalogContent {
@@ -47,31 +47,29 @@ export interface CatalogTemplateProps extends PageProps {
   searchItems: SearchItem[];
 }
 
-export default function CatalogTemplate({
-  pageContext: { searchItems },
+export default function CatalogPage({
   location,
-}: PageProps<null, CatalogTemplateProps> & ContentProps<CatalogContent>) {
+}: PageProps<Queries.CatalogPageQuery> & ContentProps<CatalogContent>) {
+  //const searchItems = allCatalogItem.nodes as SearchItem[];
   const { translations } = useContext(LangContext);
   const content = translations.catalogContent;
 
-  const [selectedSort, setSelectedSort] = useState<SortValue>("dsc");
+  const [selectedSort, setSelectedSort] = useState<SortValue>("default");
   const [filters, setFilters] = useState<Filters>(
     buildFiltersFromLocation(location),
   );
 
   const currentPage = usePagination();
-  const pageLength = 20;
+  const pageLength = 10;
 
-  const filteredSearchItems = useFilter(
-    searchItems,
-    filters,
-    selectedSort,
-    location,
-  );
-  const paginatedSearchItems = filteredSearchItems.slice(
-    (currentPage - 1) * pageLength,
-    currentPage * pageLength,
-  );
+  const searchResult = useSearch(filters, selectedSort, location);
+
+  useEffect(() => {
+    const from = filters.size * (currentPage - 1);
+    if (from !== filters.from) {
+      setFilters({ ...filters, from });
+    }
+  }, [currentPage]);
 
   return (
     <div
@@ -153,10 +151,10 @@ export default function CatalogTemplate({
                 >
                   <span>
                     <i>
-                      {(filteredSearchItems.length > 1
+                      {(searchResult.total > 1
                         ? content.numResultPlural
                         : content.numResult
-                      ).replace("{}", filteredSearchItems.length.toString())}
+                      ).replace("{}", searchResult.total.toString())}
                     </i>
                   </span>
                   <SortSelect
@@ -174,37 +172,27 @@ export default function CatalogTemplate({
               <div
                 css={css`
                   max-width: 78rem;
+                  min-height: 1500px;
                 `}
               >
                 <div className="fr-grid-row fr-grid-row--gutters fr-my-3w">
-                  {paginatedSearchItems.map((searchItem) => (
+                  {searchResult.results.map((searchItem) => (
                     <div
                       className="fr-col-6 fr-col-xl-4"
-                      key={`catalog-item-${searchItem.type}-${
-                        searchItem.objectGroup
-                          ? searchItem.objectGroup.id
-                          : searchItem.project?.slug
-                      }`}
+                      key={`catalog-item-${searchItem.category}-${searchItem.slug}`}
                     >
-                      <CatalogItem
-                        searchItem={searchItem}
-                        css={css`
-                          min-height: 350px;
-                        `}
-                      />
+                      <CatalogItem searchItem={searchItem} />
                     </div>
                   ))}
-                  {!paginatedSearchItems.length && (
+                  {!searchResult.results.length && (
                     <div>
                       <i>{content.noData}</i>
                     </div>
                   )}
                 </div>
-                {filteredSearchItems.length > pageLength && (
+                {searchResult.total > pageLength && (
                   <Pagination
-                    pageCount={Math.ceil(
-                      filteredSearchItems.length / pageLength,
-                    )}
+                    pageCount={Math.ceil(searchResult.total / pageLength)}
                     currentPage={currentPage}
                     className="fr-mb-5w"
                     css={css`
@@ -223,3 +211,24 @@ export default function CatalogTemplate({
 }
 
 export const Head: HeadFC = BaseHead;
+
+export const query = graphql`
+  query CatalogPage {
+    allCatalogItem {
+      nodes {
+        name
+        pagePath
+        materials
+        category
+        slug
+        created
+        object {
+          id
+        }
+        project {
+          comments
+        }
+      }
+    }
+  }
+`;

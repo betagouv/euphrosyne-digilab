@@ -15,7 +15,7 @@ export interface ProjectDescriptionContent {
 
 type ProjectDescriptionProps = {
   projectName: string;
-  projectDescription: string;
+  projectDescription: string | null;
   projectStatus: ProjectStatus;
 };
 

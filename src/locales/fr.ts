@@ -1,18 +1,19 @@
-import { PageBadgesContent } from "../components/PageBadges";
-import { ProjectCardContent } from "../components/ProjectCard";
-import { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
-import { ProjectDataContent } from "../components/project/ProjectData";
-import { LayoutContentProps } from "../layouts";
-import { IndexPageContent } from "../pages";
-import { CatalogContent } from "../templates/catalog";
-import { ObjectTemplateContent } from "../templates/object";
-import { ProjectTemplateContent } from "../templates/project";
+import type { PageBadgesContent } from "../components/PageBadges";
+import type { ProjectCardContent } from "../components/ProjectCard";
+import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
+import type { ProjectDataContent } from "../components/project/ProjectData";
+import type { LayoutContentProps } from "../layouts";
+import type { IndexPageContent } from "../pages";
+import type { CatalogContent } from "../pages/catalog";
+import type { ObjectTemplateContent } from "../pages/object/{ObjectGroup.slug}";
+import type { ProjectTemplateContent } from "../pages/project/{Project.slug}";
 
 export const translations = {
   project: "Projet",
+  object: "Objet",
   objectGroup: "Groupe d'objets",
 
-  inventory: "Inventaire",
+  inventory: "Numéro d'inventaire",
   period: "Époque",
   geographicArea: "Aire géographique",
   materials: "Matériaux",
@@ -137,13 +138,30 @@ const catalogContent: CatalogContent = {
   catalogFilters: {
     project: "Projet",
     objectGroup: "Groupe d'objets",
-    itemType: "Type d'item",
+    itemType: "Type d 'item",
+    materials: translations.materials,
+    inventory: translations.inventory,
+    collection: "Collection",
+    discoveryPlaceFilter: {
+      discoveryPlace: "Lieu de découverte",
+    },
+    periodFilter: {
+      period: translations.period,
+    },
+    createdRange: {
+      label: "Année du projet",
+    },
+    dataAvailableSwitch: {
+      label: "Données disponibles",
+      status: "Statut des données",
+    },
   },
 
   sortSelect: {
     mostDated: "Plus anciens",
     mostRecent: "Plus récents",
     sorting: "Tri",
+    relevance: "Pertinence",
   },
 
   pagination: {
@@ -161,6 +179,7 @@ const objectPageContent: ObjectTemplateContent = {
   noProject: "Aucun projet",
   objectData: "Données de l'objet",
   project: "Projet",
+  viewProject: "Voir le projet",
 
   objectGroupDescription: {
     inventory: translations.inventory,
@@ -213,5 +232,6 @@ const t = {
 };
 
 export type Translations = typeof t;
+export type BaseTranslations = typeof translations;
 
 export default t;

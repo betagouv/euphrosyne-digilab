@@ -21,6 +21,7 @@ function DekstopFilterContainer({
         width: 30%;
         max-width: 400px;
         background-color: ${fr.colors.decisions.background.alt.grey.default};
+        min-height: 800px;
       `}
     >
       <div className="fr-container fr-pt-5w">

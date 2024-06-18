@@ -2,7 +2,8 @@ import { Header } from "@codegouvfr/react-dsfr/Header";
 import { Link } from "gatsby";
 import * as React from "react";
 
-import { ContentProps, Lang, getCurrentLangKey, langs } from "../i18n";
+import type { ContentProps, Lang } from "../i18n";
+import { changePathLocale, getCurrentLangKey, langs } from "../i18n";
 
 interface LanguageSwitcherContent {
   selectLangBtnTitle: string;
@@ -30,8 +31,11 @@ const langNames: LangNames = {
   en: "English",
 };
 
-const buildLanguageSwitchLink = (lang: string) => {
+const buildLanguageSwitchLink = (lang: Lang, currentLang: Lang) => {
   if (typeof window === "undefined") return `/${lang}`;
+  return (
+    changePathLocale(location.pathname, lang, currentLang) + location.search
+  );
   const pathElements = location.pathname.split("/");
   if ((langs as string[]).includes(pathElements[1])) {
     pathElements[1] = lang;
@@ -66,7 +70,7 @@ const LanguageSwitcher: React.FC<ContentProps<LanguageSwitcherContent>> = ({
                   className="fr-translate__language fr-nav__link"
                   hrefLang={lang}
                   lang={lang}
-                  to={buildLanguageSwitchLink(lang)}
+                  to={buildLanguageSwitchLink(lang, currentLang)}
                   aria-current={lang === currentLang ? "true" : undefined}
                 >
                   {lang.toUpperCase()} - {langNames[lang]}

@@ -1,19 +1,19 @@
-import { PageBadgesContent } from "../components/PageBadges";
-import { ProjectCardContent } from "../components/ProjectCard";
-import { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
-import { ProjectDataContent } from "../components/project/ProjectData";
-import { LayoutContentProps } from "../layouts";
-import { IndexPageContent } from "../pages";
-import { CatalogContent } from "../templates/catalog";
-import { ObjectTemplateContent } from "../templates/object";
-import { ProjectTemplateContent } from "../templates/project";
-import { Translations } from "./fr";
+import type { PageBadgesContent } from "../components/PageBadges";
+import type { ProjectCardContent } from "../components/ProjectCard";
+import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
+import type { ProjectDataContent } from "../components/project/ProjectData";
+import type { LayoutContentProps } from "../layouts";
+import type { IndexPageContent } from "../pages";
+import type { CatalogContent } from "../pages/catalog";
+import type { ObjectTemplateContent } from "../pages/object/{ObjectGroup.slug}";
+import type { ProjectTemplateContent } from "../pages/project/{Project.slug}";
+import type { Translations } from "./fr";
 
 export const translations = {
   project: "Project",
   objectGroup: "Object group",
-
-  inventory: "Inventory",
+  object: "Object",
+  inventory: "Inventory number",
   period: "Period",
   geographicArea: "Geographic area",
   materials: "Materials",
@@ -135,12 +135,29 @@ const catalogContent: CatalogContent = {
     project: "Project",
     objectGroup: "Object group",
     itemType: "Item type",
+    materials: translations.materials,
+    inventory: translations.inventory,
+    collection: "Collection",
+    discoveryPlaceFilter: {
+      discoveryPlace: "Discovery place",
+    },
+    periodFilter: {
+      period: translations.period,
+    },
+    createdRange: {
+      label: "Project year",
+    },
+    dataAvailableSwitch: {
+      label: "Data available",
+      status: "Data status",
+    },
   },
 
   sortSelect: {
     mostDated: "Oldest",
     mostRecent: "Most recent",
     sorting: "Sorting",
+    relevance: "Relevance",
   },
 
   pagination: {
@@ -158,6 +175,7 @@ const objectPageContent: ObjectTemplateContent = {
   noProject: "No project",
   objectData: "Object data",
   project: "Project",
+  viewProject: "View project",
 
   objectGroupDescription: {
     inventory: translations.inventory,
