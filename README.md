@@ -10,7 +10,7 @@ Le projet est en cours de développement. Une version beta sera disponible proch
 
 Le projet est basée sur [Gatsby](https://www.gatsbyjs.com/), un framework React, qui permet de générer un site statique. Le code est écrit en Typescript.
 
-Les données nécessaires à la génération des pages sont récupérées sur Euphrosyne ([site](https://euphrosyne.beta.gouv.fr/login/?next=/) | [repo](https://github.com/betagouv/euphrosyne)) via un _endpoint_ GraphQL.
+Les données nécessaires à la génération des pages sont récupérées sur une instance Opensearch/Elasticseatch, qui est synchronisée avec Euphrosyne ([site](https://euphrosyne.beta.gouv.fr/login/?next=/) | [repo](https://github.com/betagouv/euphrosyne)). Les requêtes sur la page du catalogue de données sont faites via une API disponible sur Euphrosyne.
 
 ## Installation
 
@@ -29,8 +29,9 @@ Les données nécessaires à la génération des pages sont récupérées sur Eu
 ## Développement
 
 1. Copier le fichier `.env.example` en `.env.development` et remplir les valeurs.
-2. Lancer le webserver [euphrosyne](https://github.com/betagouv/euphrosyne). La variable d'environnement EUPHROSYNE_GRAPHQL_ENDPOINT doit pointer vers l'endpoint graphql de ce webserver. Par exemple [http://localhost:8000/graphql](http://localhost:8000/graphql).
-3. Lancer le serveur de développement :
+2. Lancer le webserver [euphrosyne](https://github.com/betagouv/euphrosyne). La variable d'environnement `GATSBY_EUPHROSYNE_HOST` doit pointer vers l'url de l'application Euphrosyne. Par exemple [http://localhost:8000](http://localhost:8000).
+3. Lancer l'instance Elasticsearch / Opensearch. Elle contient les données du catalogue et est utilisée pour générer les pages au moment du build. La variable doit `ELASTICSEARCH_CONNECTION_URL` pointer vers cette instance. Il est possible de synchroniser les données d'Euphrosyne avec l'instance via un script (cf. la documentation d'Euphrosyne).
+4. Lancer le serveur de développement :
 
 ```bash
 npm run develop
@@ -38,7 +39,7 @@ npm run develop
 
 ## Build
 
-1. Copier le fichier `.env.example` en `.env.development` et remplir les valeurs.
+1. Copier le fichier `.env.example` en `.env.production` et remplir les valeurs.
 2. Lancer le build des pages (ensuite accessible dans le dossier `public`):
 
 ```bash
