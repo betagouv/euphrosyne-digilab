@@ -4,6 +4,7 @@ import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge
 import type { ProjectDataContent } from "../components/project/ProjectData";
 import type { LayoutContentProps } from "../layouts";
 import type { IndexPageContent } from "../pages";
+import { NotFoundPageContent } from "../pages/404";
 import type { CatalogContent } from "../pages/catalog";
 import type { ObjectTemplateContent } from "../pages/object/{ObjectGroup.slug}";
 import type { ProjectTemplateContent } from "../pages/project/{Project.slug}";
@@ -214,6 +215,12 @@ const projectPageContent: ProjectTemplateContent = {
   },
 };
 
+export const notFoundPageContent: NotFoundPageContent = {
+  pageNotFound: "Page not found",
+  pageNotFoundMessage: "The requested page does not exist.",
+  goHome: "Back to home",
+};
+
 const t: Translations = {
   base: translations,
   erosLinkText,
@@ -225,6 +232,7 @@ const t: Translations = {
   catalogContent,
   objectPageContent,
   projectPageContent,
+  notFoundPageContent,
 };
 
 export default t;

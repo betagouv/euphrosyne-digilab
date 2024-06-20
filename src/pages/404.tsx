@@ -1,46 +1,42 @@
-import { HeadFC, Link, PageProps } from "gatsby";
+import { css } from "@emotion/react";
+import { HeadFC, PageProps } from "gatsby";
 import * as React from "react";
 
-import { StartDsfr } from "../StartDsfr";
+import { BaseHead } from "../components/BaseHead";
+import { I18nLink as Link } from "../components/I18nLink";
+import { getCurrentLangKey } from "../i18n";
+import { notFoundPageContent as enTranslations } from "../locales/en";
+import { notFoundPageContent as frTranslations } from "../locales/fr";
 
-const pageStyles = {
-  color: "#232129",
+const pageStyles = css({
   padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-};
-const headingStyles = {
+});
+const headingStyles = css({
   marginTop: 0,
   marginBottom: 64,
-  maxWidth: 320,
-};
+});
 
-const paragraphStyles = {
+const paragraphStyles = css({
   marginBottom: 48,
-};
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-};
+});
+
+export interface NotFoundPageContent {
+  pageNotFound: string;
+  pageNotFoundMessage: string;
+  goHome: string;
+}
 
 const NotFoundPage: React.FC<PageProps> = () => {
+  const currentLang = getCurrentLangKey();
+  const translations = currentLang === "fr" ? frTranslations : enTranslations;
+
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry 😔, we couldn’t find what you were looking for.
+    <main css={pageStyles}>
+      <h1 css={headingStyles}>{translations.pageNotFound}</h1>
+      <p css={paragraphStyles}>
+        {translations.pageNotFoundMessage}
         <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
+        <Link to="/">{translations.goHome}</Link>.
       </p>
     </main>
   );
@@ -48,9 +44,4 @@ const NotFoundPage: React.FC<PageProps> = () => {
 
 export default NotFoundPage;
 
-export const Head: HeadFC = () => (
-  <>
-    <StartDsfr />
-    <title>Not found</title>
-  </>
-);
+export const Head: HeadFC = BaseHead;
