@@ -36,13 +36,6 @@ const buildLanguageSwitchLink = (lang: Lang, currentLang: Lang) => {
   return (
     changePathLocale(location.pathname, lang, currentLang) + location.search
   );
-  const pathElements = location.pathname.split("/");
-  if ((langs as string[]).includes(pathElements[1])) {
-    pathElements[1] = lang;
-  } else {
-    pathElements.splice(1, 0, lang);
-  }
-  return pathElements.join("/") + location.search;
 };
 
 const LanguageSwitcher: React.FC<ContentProps<LanguageSwitcherContent>> = ({

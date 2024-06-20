@@ -8,6 +8,11 @@ import {
 import { defaultLangKey, langs, localizePath } from "./src/i18n";
 
 export const onCreatePage: GatsbyNode["onCreatePage"] = ({ page, actions }) => {
+  if (
+    ["dev-404-page", "/404/", "/404.html"].some((p) => page.path.includes(p))
+  ) {
+    return;
+  }
   actions.deletePage(page);
 
   actions.createRedirect({
