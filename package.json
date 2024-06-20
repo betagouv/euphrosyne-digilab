@@ -44,7 +44,7 @@
     "gatsby-plugin-sitemap": "^6.12.2",
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-source-graphql": "^5.12.0",
-    "gatsby-transformer-remark": "^6.12.3",
+    "gatsby-transformer-remark": "^6.13.1",
     "gatsby-transformer-sharp": "^5.12.2",
     "opensearch-source-plugin": "file:./plugins/opensearch-source-plugin",
     "react": "^18.2.0",
