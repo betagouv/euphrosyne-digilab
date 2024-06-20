@@ -32,8 +32,8 @@ export default function CreatedRange({
     });
   }, []);
 
-  const min = Math.min(...ranges),
-    max = Math.max(...ranges);
+  const min = ranges.length ? Math.min(...ranges) : minYear,
+    max = ranges.length ? Math.max(...ranges) : maxYear;
 
   const values = [
     filters.createdFromYear || minYear,
