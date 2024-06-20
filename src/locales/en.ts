@@ -80,7 +80,6 @@ const indexPageContent: IndexPageContent = {
       highlight: "Browse",
       rest: "our Euphrosyne data catalog",
     },
-    featureSoon: "Feature coming soon...",
   },
   howItWorks: {
     title: "Euphrosyne's services",
