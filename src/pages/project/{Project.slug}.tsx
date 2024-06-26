@@ -140,7 +140,8 @@ export const query = graphql`
           materials
           discoveryPlaceLabel
           collection
-          datingLabel
+          datingPeriodLabel
+          datingEraLabel
           objects {
             label
             collection

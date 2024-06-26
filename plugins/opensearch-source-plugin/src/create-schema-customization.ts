@@ -42,7 +42,8 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         materials: [String!]
         c2rmfId: String
         discoveryPlaceLabel: String
-        datingLabel: String
+        datingEraLabel: String
+        datingPeriodLabel: String
         objects: [${NODE_TYPES.Project}ProjectPageDataObjectGroupsObjects]
       }
 
@@ -88,7 +89,6 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         name: String!
         slug: String!
         dataAvailable: Boolean!
-        datingLabel: String
         c2rmfId: String
         objectPageData: ${NODE_TYPES.ObjectGroup}ObjectPageData!
         pagePath: String!

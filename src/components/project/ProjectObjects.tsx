@@ -6,6 +6,7 @@ import * as React from "react";
 import { buildObjectPath } from "../../catalog/utils";
 import { ContentProps } from "../../i18n";
 import { ObjectGroup } from "../../types/project";
+import { formatDatingLabel } from "../../utils";
 import { BaseSection } from "../BaseSection";
 import { I18nLink as Link } from "../I18nLink";
 import { ErosLink } from "../object-group/ErosLink";
@@ -19,6 +20,7 @@ export interface ProjectObjectsContent {
   erosLinkText: string;
   inventory: string;
   period: string;
+  era: string;
   materials: string;
   geographicArea: string;
 }
@@ -71,8 +73,12 @@ export const ProjectObjects = ({
                   )}
                 </p>
                 <p>
+                  <strong>{content.era}: </strong>
+                  {formatDatingLabel(objectGroup.datingEraLabel || "")}
+                </p>
+                <p>
                   <strong>{content.period}: </strong>
-                  {objectGroup.datingLabel}
+                  {formatDatingLabel(objectGroup.datingPeriodLabel || "")}
                 </p>
                 <p>
                   <strong>{content.geographicArea}: </strong>

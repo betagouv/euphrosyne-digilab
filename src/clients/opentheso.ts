@@ -29,7 +29,12 @@ export async function searchTheso(
         }. Reason: ${await response.text()}`,
       );
     }
-    const data = ((await response.json()) as OpenThesoSearchResult[][]).filter(
+    const responseJson = (await response.json()) as OpenThesoSearchResult[][];
+    if (Object.keys(responseJson).length === 0) {
+      // Check if response is empty
+      return [];
+    }
+    const data = responseJson.filter(
       (results) => results.length > 1, // Exclude top level concepts
     );
     return data.map((items) => ({

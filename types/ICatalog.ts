@@ -9,6 +9,12 @@ interface IObject {
   inventory: string | null;
 }
 
+export interface IDating {
+  label: string;
+  thesoHumaNumId?: string;
+  thesoHumaNumParentIds?: string[];
+}
+
 export interface IObjectGroup {
   id: string;
   c2rmfId: string | null;
@@ -16,7 +22,8 @@ export interface IObjectGroup {
   materials: string[] | null;
   discoveryPlaceLabel: string | null;
   collection: string;
-  datingLabel: string | null;
+  datingEraLabel: string | null;
+  datingPeriodLabel: string | null;
   objects: IObject[];
 }
 
@@ -98,9 +105,8 @@ export interface IObjectGroupItem extends IBaseItem {
   discoveryPlacePoint: ILocation;
   collection: string;
   inventoryNumber: string;
-  datingLabel: string;
-  datingThesoHumaNumId: string;
-  datingThesoHumaNumParentIds: string[];
+  datingEra?: IDating;
+  datingPeriod?: IDating;
   objects: IObject[];
   collections: string[];
   inventoryNumbers: string[];

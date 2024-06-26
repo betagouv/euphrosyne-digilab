@@ -1,35 +1,33 @@
 import { ContentProps } from "../../i18n";
 import { Filters } from "../../opensearch/useSearch";
-import { formatDatingLabel } from "../../utils";
 import BaseDatingFilter from "./BaseDatingFilter";
 
-const THESO_ID = "th287";
+const THESO_ID = "th289";
 
-export interface PeriodFilterContent {
-  period: string;
+export interface EraFilterContent {
+  era: string;
 }
 
-interface PeriodFilterProps {
+interface EraFilterProps {
   filters: Filters;
   setFilters: React.Dispatch<React.SetStateAction<Filters>>;
 }
 
-export default function PeriodFilter({
+export default function EraFilter({
   content,
   filters,
   setFilters,
   ...props
-}: PeriodFilterProps &
+}: EraFilterProps &
   Omit<React.HTMLAttributes<HTMLDivElement>, "content"> &
-  ContentProps<PeriodFilterContent>) {
+  ContentProps<EraFilterContent>) {
   return (
     <BaseDatingFilter
       filters={filters}
-      inputLabel={content.period}
+      inputLabel={content.era}
       thesoId={THESO_ID}
       setFilters={setFilters}
-      datingField="period"
-      formatLabelFn={formatDatingLabel}
+      datingField="era"
       {...props}
     />
   );

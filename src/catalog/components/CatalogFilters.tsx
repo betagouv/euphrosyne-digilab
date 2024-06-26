@@ -11,6 +11,7 @@ import {
   DiscoveryPlaceFilter,
   DiscoveryPlaceFilterContent,
 } from "./DiscoveryPlaceFilter";
+import EraFilter, { EraFilterContent } from "./EraFilter";
 import InputWithAggregatedTags from "./InputWithAggregatedTags";
 import PeriodFilter, { PeriodFilterContent } from "./PeriodFilter";
 
@@ -25,6 +26,7 @@ export interface CatalogFiltersContent {
   periodFilter: PeriodFilterContent;
   createdRange: CreatedRangeContent;
   dataAvailableSwitch: DataAvailableSwitchContent;
+  datingFilters: PeriodFilterContent & EraFilterContent;
 }
 
 interface FiltersProps {
@@ -92,7 +94,13 @@ export default function CatalogFilters({
         className="fr-mt-2w"
         filters={filters}
         setFilters={setFilters}
-        content={{ period: "Période" }}
+        content={content.datingFilters}
+      />
+      <EraFilter
+        className="fr-mt-2w"
+        filters={filters}
+        setFilters={setFilters}
+        content={content.datingFilters}
       />
       <Input
         className="fr-mt-2w"

@@ -5,7 +5,8 @@ import type { IOpenSearchDocument } from "../../types/IOpenSearch";
 export interface SearchProps {
   q?: string;
   materials?: string[];
-  period_ids?: string[];
+  dating_period_ids?: string[];
+  dating_era_ids?: string[];
   category?: "project" | "object";
   c2rmfId?: string;
   created_from?: string;

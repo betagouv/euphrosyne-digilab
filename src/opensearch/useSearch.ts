@@ -19,7 +19,8 @@ export interface Filters {
   collection?: string;
   inventory?: string;
   materials?: string[];
-  periodIds?: string[];
+  datingPeriodIds?: string[];
+  datingEraIds?: string[];
   createdFromYear?: number;
   createdToYear?: number;
   isDataAvailable?: boolean;
@@ -54,7 +55,8 @@ export default function useSearch(
       from,
       size,
       materials,
-      periodIds,
+      datingEraIds,
+      datingPeriodIds,
       collection,
       inventory,
       isDataAvailable,
@@ -95,7 +97,8 @@ export default function useSearch(
       collection,
       inventory,
       materials,
-      period_ids: periodIds,
+      dating_era_ids: datingEraIds,
+      dating_period_ids: datingPeriodIds,
       location: {
         top_left: filters.bBox?.topLeft,
         bottom_right: filters.bBox?.bottomRight,

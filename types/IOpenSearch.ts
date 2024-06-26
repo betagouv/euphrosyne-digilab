@@ -44,9 +44,12 @@ interface IBaseObjectDocument {
   };
   collection: string;
   inventory_number: string;
-  dating_label: string;
-  dating_theso_huma_num_id: string;
-  dating_theso_huma_num_parent_ids: string[];
+  dating_era_label: string;
+  dating_era_theoso_huma_num_id: string;
+  dating_era_theoso_huma_num_parent_ids: string[];
+  dating_period_label: string;
+  dating_period_theoso_huma_num_id: string;
+  dating_period_theoso_huma_num_parent_ids: string[];
   objects?: {
     label: string;
     collection: string;
@@ -66,7 +69,8 @@ interface IProjectPageData {
     materials: string[];
     discovery_place_label?: string;
     collection: string;
-    dating_label?: string;
+    dating_era_label?: string;
+    dating_period_label?: string;
     objects?: {
       label: string;
       collection: string;

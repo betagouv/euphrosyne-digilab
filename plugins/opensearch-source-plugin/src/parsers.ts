@@ -1,5 +1,6 @@
-import {
+import type {
   IBaseItem,
+  IDating,
   IObjectGroupItem,
   IObjectPageData,
   IProjectItem,
@@ -28,6 +29,21 @@ export function parseProjectDocument(data: IOpenSearchDocument): IProjectItem {
 export function parseObjectDocument(
   data: IOpenSearchDocument,
 ): IObjectGroupItem {
+  let datingEra: IDating | undefined, datingPeriod: IDating | undefined;
+  if (data.dating_era_label) {
+    datingEra = {
+      label: data.dating_era_label,
+      thesoHumaNumId: data.dating_era_theoso_huma_num_id,
+      thesoHumaNumParentIds: data.dating_era_theoso_huma_num_parent_ids,
+    };
+  }
+  if (data.dating_period_label) {
+    datingPeriod = {
+      label: data.dating_period_label,
+      thesoHumaNumId: data.dating_period_theoso_huma_num_id,
+      thesoHumaNumParentIds: data.dating_period_theoso_huma_num_parent_ids,
+    };
+  }
   return {
     category: "object",
     ...parseCommonData(data),
@@ -37,9 +53,8 @@ export function parseObjectDocument(
     discoveryPlacePoint: data.discovery_place_point,
     collection: data.collection,
     inventoryNumber: data.inventory_number,
-    datingLabel: data.dating_label,
-    datingThesoHumaNumId: data.dating_theso_huma_num_id,
-    datingThesoHumaNumParentIds: data.dating_theso_huma_num_parent_ids,
+    datingEra,
+    datingPeriod,
     objects: (data.objects || []).map((object) => {
       return {
         label: object.label,
@@ -144,7 +159,8 @@ function parseProjectPageData(
         materials: objectGroup.materials,
         discoveryPlaceLabel: objectGroup.discovery_place_label || null,
         collection: objectGroup.collection,
-        datingLabel: objectGroup.dating_label || null,
+        datingEraLabel: objectGroup.dating_era_label || null,
+        datingPeriodLabel: objectGroup.dating_period_label || null,
         objects: (objectGroup.objects || []).map((object) => {
           return {
             label: object.label,
