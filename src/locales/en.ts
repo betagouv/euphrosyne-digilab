@@ -16,6 +16,7 @@ export const translations = {
   object: "Object",
   inventory: "Inventory number",
   period: "Period",
+  era: "Era",
   geographicArea: "Geographic area",
   materials: "Materials",
 };
@@ -139,6 +140,10 @@ const catalogContent: CatalogContent = {
     materials: translations.materials,
     inventory: translations.inventory,
     collection: "Collection",
+    datingFilters: {
+      period: translations.period,
+      era: translations.era,
+    },
     discoveryPlaceFilter: {
       discoveryPlace: "Discovery place",
     },
@@ -181,6 +186,7 @@ const objectPageContent: ObjectTemplateContent = {
   objectGroupDescription: {
     inventory: translations.inventory,
     period: translations.period,
+    era: translations.era,
     geographicArea: translations.geographicArea,
     materials: translations.materials,
     addObjectDataToCart: "Add all object data to cart",
@@ -210,6 +216,7 @@ const projectPageContent: ProjectTemplateContent = {
     erosLinkText,
     inventory: translations.inventory,
     period: translations.period,
+    era: translations.era,
     geographicArea: translations.geographicArea,
     materials: translations.materials,
   },

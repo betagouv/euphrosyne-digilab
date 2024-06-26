@@ -125,7 +125,8 @@ export default function ObjectTemplate({
                   ${paddedUpToLg}
                 `}
                 collection={objectGroup.collection || ""}
-                dating={objectGroup.datingLabel}
+                datingEraLabel={objectGroup.datingEra?.label}
+                datingPeriodLabel={objectGroup.datingPeriod?.label}
                 discoveryPlace={objectGroup.discoveryPlaceLabel}
                 materials={objectGroup.materials as string[]}
                 dataAvailable={objectGroup.dataAvailable}
@@ -207,7 +208,12 @@ export const query = graphql`
       discoveryPlaceLabel
       collection
       inventoryNumber
-      datingLabel
+      datingPeriod {
+        label
+      }
+      datingEra {
+        label
+      }
       objects {
         label
         collection

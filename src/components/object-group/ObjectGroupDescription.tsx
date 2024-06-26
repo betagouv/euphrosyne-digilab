@@ -3,6 +3,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { css } from "@emotion/react";
 
 import { ContentProps } from "../../i18n";
+import { formatDatingLabel } from "../../utils";
 import { PageBadges, PageBadgesContent } from "../PageBadges";
 import { ErosLink } from "./ErosLink";
 import ObjectGroupMaterialTags from "./ObjectGroupMaterialTags";
@@ -10,6 +11,7 @@ import ObjectGroupMaterialTags from "./ObjectGroupMaterialTags";
 export interface ObjectGroupDescriptionContent {
   inventory: string;
   period: string;
+  era: string;
   geographicArea: string;
   materials: string;
   addObjectDataToCart: string;
@@ -23,7 +25,8 @@ type ObjectGroupDescriptionProps = Omit<
   "content"
 > & {
   collection?: string;
-  dating: string | null;
+  datingPeriodLabel?: string | null;
+  datingEraLabel?: string | null;
   discoveryPlace: string | null;
   materials?: string[];
   dataAvailable?: boolean;
@@ -33,7 +36,8 @@ type ObjectGroupDescriptionProps = Omit<
 
 export const ObjectGroupDescription = ({
   collection,
-  dating,
+  datingPeriodLabel,
+  datingEraLabel,
   discoveryPlace,
   materials,
   dataAvailable,
@@ -55,7 +59,12 @@ export const ObjectGroupDescription = ({
     },
     {
       label: content.period,
-      value: dating || "",
+      value: formatDatingLabel(datingPeriodLabel || ""),
+      icon: fr.cx("fr-icon-calendar-line"),
+    },
+    {
+      label: content.era,
+      value: formatDatingLabel(datingEraLabel || ""),
       icon: fr.cx("fr-icon-calendar-line"),
     },
     {
