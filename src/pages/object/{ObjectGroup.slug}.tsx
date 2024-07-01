@@ -3,7 +3,7 @@ import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { Select } from "@codegouvfr/react-dsfr/SelectNext";
 import { css } from "@emotion/react";
 import { HeadFC, PageProps, graphql } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 import React, { useContext, useEffect, useState } from "react";
 
 import { buildProjectPath } from "../../catalog/utils";
@@ -135,21 +135,40 @@ export default function ObjectTemplate({
                 content={content.objectGroupDescription}
               />
               <div className="fr-col-12 fr-col-lg-6">
-                <StaticImage
-                  src="../../images/objectgroup-placeholder.svg"
-                  alt={content.altImageWithObjectName.replace(
-                    "{}",
-                    objectGroup.name,
-                  )}
-                  placeholder="blurred"
-                  css={css`
-                    ${fr.breakpoints.down("lg")} {
-                      max-height: 200px;
-                      width: 100%;
-                      margin-bottom: ${fr.spacing("3w")};
+                {objectGroup.erosImage?.childImageSharp?.gatsbyImageData ? (
+                  <GatsbyImage
+                    image={
+                      objectGroup.erosImage.childImageSharp.gatsbyImageData
                     }
-                  `}
-                />
+                    alt={content.altImageWithObjectName.replace(
+                      "{}",
+                      objectGroup.name,
+                    )}
+                    css={css`
+                      ${fr.breakpoints.down("lg")} {
+                        max-height: 200px;
+                        width: 100%;
+                        margin-bottom: ${fr.spacing("3w")};
+                      }
+                    `}
+                  />
+                ) : (
+                  <StaticImage
+                    src="../../images/objectgroup-placeholder.svg"
+                    alt={content.altImageWithObjectName.replace(
+                      "{}",
+                      objectGroup.name,
+                    )}
+                    placeholder="blurred"
+                    css={css`
+                      ${fr.breakpoints.down("lg")} {
+                        max-height: 200px;
+                        width: 100%;
+                        margin-bottom: ${fr.spacing("3w")};
+                      }
+                    `}
+                  />
+                )}
               </div>
             </div>
           </BaseSection>
@@ -244,6 +263,11 @@ export const query = graphql`
               filters
             }
           }
+        }
+      }
+      erosImage {
+        childImageSharp {
+          gatsbyImageData(width: 600, layout: FIXED)
         }
       }
     }
