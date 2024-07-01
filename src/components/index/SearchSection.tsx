@@ -1,14 +1,15 @@
 import { fr } from "@codegouvfr/react-dsfr";
+import SearchBar from "@codegouvfr/react-dsfr/SearchBar";
 import { css } from "@emotion/react";
+import { navigate } from "gatsby";
 
-import { ContentProps } from "../../i18n";
+import { ContentProps, getCurrentLangKey, localizePath } from "../../i18n";
 
 export interface SearchSectionContent {
   title: {
     highlight: string;
     rest: string;
   };
-  featureSoon: string;
 }
 
 const highlightStyle = css`
@@ -19,32 +20,39 @@ const highlightStyle = css`
 
 export const SearchSection: React.FC<ContentProps<SearchSectionContent>> = ({
   content,
-}) => (
-  <div
-    css={css`
-      background-color: ${fr.colors.decisions.background.alt.grey.default};
-    `}
-    className="fr-pt-10w"
-  >
+}) => {
+  return (
     <div
       css={css`
-        background-color: ${fr.colors.decisions.background.default.grey
-          .default};
-        max-width: 996px;
-        margin: 0 auto;
-        text-align: center;
+        background-color: ${fr.colors.decisions.background.alt.grey.default};
       `}
-      className="fr-pb-10w fr-pt-5w"
+      className="fr-pt-10w"
     >
-      <div>
-        <h2>
-          <span css={highlightStyle}>{content.title.highlight}</span>{" "}
-          {content.title.rest}
-        </h2>
-      </div>
-      <div className="fr-mt-5w">
-        <h5 css={highlightStyle}>{content.featureSoon}</h5>
+      <div
+        css={css`
+          background-color: ${fr.colors.decisions.background.default.grey
+            .default};
+          max-width: 996px;
+          margin: 0 auto;
+          text-align: center;
+        `}
+        className="fr-pb-10w fr-pt-5w"
+      >
+        <div>
+          <h2>
+            <span css={highlightStyle}>{content.title.highlight}</span>{" "}
+            {content.title.rest}
+          </h2>
+        </div>
+        <div className="fr-mt-5w fr-px-3w">
+          <SearchBar
+            big={true}
+            onButtonClick={(text) =>
+              navigate(localizePath(`/catalog?q=${text}`, getCurrentLangKey()))
+            }
+          />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};

@@ -81,7 +81,6 @@ const indexPageContent: IndexPageContent = {
       highlight: "Parcourez",
       rest: "notre catalogue de données Euphrosyne",
     },
-    featureSoon: "Fonctionnalité à venir...",
   },
   howItWorks: {
     title: "Les services d'Euphrosyne",
