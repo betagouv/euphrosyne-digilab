@@ -45,6 +45,7 @@ interface IMethod {
 }
 
 interface IRun {
+  id: string;
   label: string;
   startDate: Date | null;
   particleType: string;

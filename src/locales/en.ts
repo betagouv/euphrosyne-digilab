@@ -1,3 +1,6 @@
+import { CartButtonContent } from "../cart/CartButton";
+import { CartSubmitFormContent } from "../cart/CartSubmitForm";
+import { CartTableContent } from "../cart/CartTable";
 import type { PageBadgesContent } from "../components/PageBadges";
 import type { ProjectCardContent } from "../components/ProjectCard";
 import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
@@ -5,6 +8,7 @@ import type { ProjectDataContent } from "../components/project/ProjectData";
 import type { LayoutContentProps } from "../layouts";
 import type { IndexPageContent } from "../pages";
 import { NotFoundPageContent } from "../pages/404";
+import { CartContent } from "../pages/cart";
 import type { CatalogContent } from "../pages/catalog";
 import type { ObjectTemplateContent } from "../pages/object/{ObjectGroup.slug}";
 import type { ProjectTemplateContent } from "../pages/project/{Project.slug}";
@@ -19,6 +23,8 @@ export const translations = {
   era: "Era",
   geographicArea: "Geographic area",
   materials: "Materials",
+
+  error: "Error",
 };
 export const erosLinkText = "Eros object page";
 
@@ -204,7 +210,6 @@ const projectPageContent: ProjectTemplateContent = {
   projectDescription: {
     pageBadges: pageBadges,
     noDescription: "No description for this project.",
-    addDataToCart: "Add all data to the cart",
   },
   projectObjects: {
     projectObjects: "Project objects",
@@ -219,6 +224,42 @@ const projectPageContent: ProjectTemplateContent = {
     geographicArea: translations.geographicArea,
     materials: translations.materials,
   },
+};
+
+const cartButton: CartButtonContent = {
+  title: "Cart",
+};
+
+const cartTable: CartTableContent = {
+  headerRunName: "Run name",
+  headerFromType: "From: type",
+  headerFromPage: "From: page",
+  headerDelete: "Delete",
+  viewFromPage: "View page",
+  noData: "Your selection is empty.",
+};
+
+const cartSubmitForm: CartSubmitFormContent = {
+  email: "Email address",
+  firstName: "First name",
+  lastName: "Last name",
+  description: "Description",
+  descriptionHint:
+    "Tell us why you need this data so we can better understand the needs of our users and improve this service.",
+  institution: "Institution",
+};
+
+const cart: CartContent = {
+  requestData: "Request data",
+  title: "Cart",
+  buttonSubmit: "Submit",
+  error: translations.error,
+  errorOnRequest:
+    "An error occurred while requesting data. Please try again later or contact a New AGLAE administrator.",
+  successTitle: "Your data request has been successfully submitted.",
+  successDescription:
+    "A New AGLAE team member will process your request. You will receive a confirmation email shortly.",
+  successLink: "Back to catalog",
 };
 
 export const notFoundPageContent: NotFoundPageContent = {
@@ -239,6 +280,10 @@ const t: Translations = {
   objectPageContent,
   projectPageContent,
   notFoundPageContent,
+  cart,
+  cartButton,
+  cartTable,
+  cartSubmitForm,
 };
 
 export default t;

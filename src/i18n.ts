@@ -73,8 +73,17 @@ const translatePrefixPath = (
   return `${localizedInitialPath}/${pathParts.slice(slugIndex).join("/")}`;
 };
 
+export const localizePathToCurrenLange = (path: string): string => {
+  const lang = getCurrentLangKey();
+  return localizePath(path, lang);
+};
+
 export const localizePath = (path: string, lang: Lang): string => {
-  return `/${lang}${translatePrefixPath(path, lang)}`.replaceAll("//", "/");
+  let translatedPath = translatePrefixPath(path, lang);
+  if (!translatedPath.startsWith(`/${lang}`)) {
+    return (translatedPath = `/${lang}` + translatedPath);
+  }
+  return translatedPath.replaceAll("//", "/");
 };
 
 export const changePathLocale = (

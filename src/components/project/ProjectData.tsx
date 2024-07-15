@@ -1,6 +1,8 @@
 import Button from "@codegouvfr/react-dsfr/Button";
-import * as React from "react";
+import type { WindowLocation } from "@reach/router";
+import { useContext } from "react";
 
+import { CartContext, type ICartContext } from "../../cart/context";
 import { ContentProps } from "../../i18n";
 import { Leader } from "../../types/project";
 import { Run } from "../../types/run";
@@ -15,6 +17,8 @@ interface ProjectDataProps
   extends Omit<React.InputHTMLAttributes<HTMLDivElement>, "content"> {
   runs: readonly Run[] | null;
   projectLeader: Leader;
+  location: WindowLocation;
+  pageType: "project" | "objectGroup";
 }
 
 export const ProjectData = ({
@@ -22,13 +26,28 @@ export const ProjectData = ({
   projectLeader,
   className,
   content,
+  location,
+  pageType,
   ...props
 }: ProjectDataProps & ContentProps<ProjectDataContent>) => {
+  const cart = useContext(CartContext);
+
   return (
     <div className={`${className}`}>
       <div className="fr-grid-row fr-grid-row--gutters">
         <div className="fr-col-12">
-          <Button disabled>{content.addToCart}</Button>
+          <Button
+            onClick={() =>
+              runs &&
+              cart.addItems(runs as ICartContext["items"], {
+                type: pageType,
+                href: location.pathname + location.search,
+              })
+            }
+            disabled={!runs || runs.length === 0}
+          >
+            {content.addToCart}
+          </Button>
         </div>
       </div>
       {runs && runs.length > 0 && (

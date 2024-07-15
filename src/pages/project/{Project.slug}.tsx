@@ -34,6 +34,7 @@ export interface ProjectTemplateContent {
 
 export default function ProjectTemplate({
   data,
+  location,
 }: PageProps<Queries.ProjectPageQuery>) {
   const { translations } = useContext(LangContext);
   const content = translations.projectPageContent;
@@ -85,6 +86,8 @@ export default function ProjectTemplate({
               runs={project.projectPageData.runs as Run[]}
               projectLeader={project.projectPageData.leader as Leader}
               content={content.projectDataContent}
+              location={location}
+              pageType="project"
             />
           </BaseSection>
           <ProjectObjects
@@ -120,6 +123,8 @@ export const query = graphql`
           institutionCountry
         }
         runs {
+          id
+          projectSlug
           label
           startDate
           particleType

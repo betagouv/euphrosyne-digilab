@@ -2,6 +2,7 @@ import { Header } from "@codegouvfr/react-dsfr/Header";
 import { Link } from "gatsby";
 import * as React from "react";
 
+import CartButton from "../cart/CartButton";
 import type { ContentProps, Lang } from "../i18n";
 import { changePathLocale, getCurrentLangKey, langs } from "../i18n";
 
@@ -85,7 +86,7 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
     <Header
       brandTop="Ministère de la Culture"
       homeLinkProps={{
-        to: `/`,
+        to: ``,
         title: content.homeLinkTitle,
       }}
       quickAccessItems={[
@@ -97,6 +98,7 @@ export const EuphrosyneHeader: React.FC<EuphrosyneHeaderProps> = ({
           },
           text: content.euphrosyneLinkTitle,
         },
+        <CartButton />,
         <LanguageSwitcher content={content.languageSwitcher} />,
       ]}
       navigation={[

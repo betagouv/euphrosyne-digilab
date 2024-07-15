@@ -6,6 +6,7 @@ import { HeadFC, PageProps, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import React, { useContext, useEffect, useState } from "react";
 
+import { CartContext, ICartItem } from "../../cart/context";
 import { buildProjectPath } from "../../catalog/utils";
 import { BaseHead } from "../../components/BaseHead";
 import { BaseSection } from "../../components/BaseSection";
@@ -47,17 +48,20 @@ interface Project {
 
 export default function ObjectTemplate({
   data,
+  location,
 }: PageProps<Queries.ObjectGroupPageQuery> &
   ContentProps<ObjectTemplateContent>) {
   const { translations } = useContext(LangContext);
   const content = translations.objectPageContent;
 
   const { currentProject } = useContext(PageContext);
+  const cart = useContext(CartContext);
   const { objectGroup } = data;
   const projects = objectGroup?.objectPageData?.projects || [];
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const selectedProjectRuns = objectGroup?.objectPageData?.runs.filter(
+  const runs = objectGroup?.objectPageData?.runs;
+  const selectedProjectRuns = runs?.filter(
     (run) => run?.projectSlug === selectedProject?.slug,
   );
   const onProjectSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -133,6 +137,14 @@ export default function ObjectTemplate({
                 label={objectGroup.name}
                 c2rmfId={objectGroup.c2rmfId}
                 content={content.objectGroupDescription}
+                addDataButtonDisabled={!runs || runs.length === 0}
+                onAddDataClick={() =>
+                  runs &&
+                  cart.addItems(runs as ICartItem[], {
+                    type: "objectGroup",
+                    href: location.pathname + location.search,
+                  })
+                }
               />
               <div className="fr-col-12 fr-col-lg-6">
                 <StaticImage
@@ -183,7 +195,9 @@ export default function ObjectTemplate({
                     runs={selectedProjectRuns as Run[]}
                     projectLeader={selectedProject.leader}
                     content={content.projectDataContent}
+                    location={location}
                     className="fr-mb-2w"
+                    pageType="objectGroup"
                   />
                 )}
               </React.Fragment>
@@ -231,6 +245,7 @@ export const query = graphql`
           }
         }
         runs {
+          id
           label
           startDate
           particleType
