@@ -16,7 +16,7 @@
     "prebuild": "only-include-used-icons && npm run build-plugins",
     "build": "gatsby build",
     "postbuild": "copy-dsfr-to-public",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve --port 8002",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
     "postinstall": "copy-dsfr-to-public",

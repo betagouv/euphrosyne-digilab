@@ -8,6 +8,8 @@ interface Method {
 }
 
 export interface Run {
+  id: string;
+  projectSlug: string;
   beamline: string | null;
   energyInKev: number | null;
   label: string;

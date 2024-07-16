@@ -59,11 +59,9 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
       }
 
       type ${NODE_TYPES.Project}ProjectPageDataRuns {
+        id: String!
         label: String!
         projectSlug: String!
-      }
-
-      type ${NODE_TYPES.Project}ObjectPageDataRuns {
         startDate: Date
         particleType: String
         energyInKev: String
@@ -116,11 +114,9 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
       }
 
       type ${NODE_TYPES.ObjectGroup}ObjectPageDataRuns {
+        id: String!
         label: String!
         projectSlug: String!
-      }
-
-      type ${NODE_TYPES.ObjectGroup}ObjectPageDataRuns {
         startDate: Date
         particleType: String
         energyInKev: String

@@ -1,4 +1,3 @@
-import { Button } from "@codegouvfr/react-dsfr/Button";
 import { css } from "@emotion/react";
 
 import { ContentProps } from "../../i18n";
@@ -10,7 +9,6 @@ import { PageBadges, PageBadgesContent } from "../PageBadges";
 export interface ProjectDescriptionContent {
   pageBadges: PageBadgesContent;
   noDescription: string;
-  addDataToCart: string;
 }
 
 type ProjectDescriptionProps = {
@@ -36,7 +34,6 @@ export const ProjectDescription = ({
         pageType="project"
         projectStatus={projectStatus}
         className="fr-mb-2w"
-        content={content.pageBadges}
       />
       <div className="fr-grid-row fr-grid-row--gutters">
         <div className="fr-col-12 fr-col-md-6">
@@ -44,9 +41,6 @@ export const ProjectDescription = ({
           <p className="fr-mb-2w">
             {projectDescription || <i>{content.noDescription}</i>}
           </p>
-          <Button className="fr-mb-2w" disabled>
-            {content.addDataToCart}
-          </Button>
         </div>
       </div>
     </BaseSection>

@@ -2,6 +2,7 @@ import { DsfrProvider } from "@codegouvfr/react-dsfr/next-appdir/DsfrProvider";
 import { PageProps } from "gatsby";
 import React, { useState } from "react";
 
+import { CartContext, ICart, createCart } from "../cart/context";
 import {
   EuphrosyneHeader,
   EuphrosyneHeaderContent,
@@ -39,6 +40,8 @@ export default function Layout({
 
   const content = translations.layoutContent;
 
+  const [items, setItems] = useState<ICart["items"]>();
+
   return (
     <DsfrProvider lang={langKey}>
       <LangContext.Provider value={{ translations }}>
@@ -48,14 +51,14 @@ export default function Layout({
             setCurrentProject,
           }}
         >
-          <React.Fragment>
+          <CartContext.Provider value={createCart(items, setItems)}>
             <EuphrosyneHeader
               currentPath={currentPath}
               content={content.header}
             />
             <main>{children}</main>
             <Footer />
-          </React.Fragment>
+          </CartContext.Provider>
         </PageContext.Provider>
       </LangContext.Provider>
     </DsfrProvider>

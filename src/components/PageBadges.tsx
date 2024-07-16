@@ -1,13 +1,15 @@
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { css } from "@emotion/react";
-import React from "react";
+import { useContext } from "react";
 
-import { ContentProps } from "../i18n";
+import { LangContext } from "../contexts/LangContext";
 import { ProjectStatus } from "../types/project";
 import {
   ProjectStatusBadge,
   ProjectStatusBadgeContent,
 } from "./ProjectStatusBadge";
+
+export type PageBadgeType = "project" | "objectGroup";
 
 export interface PageBadgesContent {
   project: string;
@@ -20,12 +22,12 @@ export const PageBadges = ({
   pageType,
   projectStatus,
   className,
-  content,
 }: {
-  pageType: "project" | "objectGroup";
+  pageType: PageBadgeType;
   projectStatus?: ProjectStatus;
   className?: string;
-} & ContentProps<PageBadgesContent>) => {
+}) => {
+  const content = useContext(LangContext).translations.pageBadges;
   return (
     <div
       css={css`

@@ -32,6 +32,8 @@ type ObjectGroupDescriptionProps = Omit<
   dataAvailable?: boolean;
   label: string;
   c2rmfId: string | null;
+  addDataButtonDisabled: boolean;
+  onAddDataClick: () => void;
 };
 
 export const ObjectGroupDescription = ({
@@ -44,6 +46,8 @@ export const ObjectGroupDescription = ({
   label,
   c2rmfId,
   content,
+  addDataButtonDisabled,
+  onAddDataClick,
   ...props
 }: ObjectGroupDescriptionProps &
   ContentProps<ObjectGroupDescriptionContent>) => {
@@ -86,7 +90,6 @@ export const ObjectGroupDescription = ({
         projectStatus={
           dataAvailable ? "Status.DATA_AVAILABLE" : "Status.FINISHED"
         }
-        content={content.pageBadges}
         className="fr-mb-2w"
       />
       <h1 className="fr-mb-6w">{label}</h1>
@@ -114,7 +117,11 @@ export const ObjectGroupDescription = ({
         ))}
       </div>
 
-      <Button className="fr-mb-2w" disabled>
+      <Button
+        className="fr-mb-2w"
+        disabled={addDataButtonDisabled}
+        onClick={onAddDataClick}
+      >
         {content.addObjectDataToCart}
       </Button>
       {c2rmfId && (

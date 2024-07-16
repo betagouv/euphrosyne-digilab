@@ -89,6 +89,7 @@ interface IObjectPageData {
 }
 
 interface IRun {
+  id: string;
   label: string;
   start_date?: string;
   particle_type: string;

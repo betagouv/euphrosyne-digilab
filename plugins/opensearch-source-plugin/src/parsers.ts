@@ -86,6 +86,7 @@ function parseObjectPageData(
   return {
     runs: data.runs?.map((run) => {
       return {
+        id: run.id,
         label: run.label,
         startDate: run.start_date ? new Date(run.start_date) : null,
         particleType: run.particle_type,
@@ -132,6 +133,7 @@ function parseProjectPageData(
     },
     runs: data.runs?.map((run) => {
       return {
+        id: run.id,
         label: run.label,
         startDate: run.start_date ? new Date(run.start_date) : null,
         particleType: run.particle_type,
