@@ -81,7 +81,7 @@ export const localizePathToCurrenLange = (path: string): string => {
 export const localizePath = (path: string, lang: Lang): string => {
   let translatedPath = translatePrefixPath(path, lang);
   if (!translatedPath.startsWith(`/${lang}`)) {
-    return (translatedPath = `/${lang}` + translatedPath);
+    return (translatedPath = `/${lang}` + translatedPath).replaceAll("//", "/");
   }
   return translatedPath.replaceAll("//", "/");
 };
