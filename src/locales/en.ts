@@ -190,7 +190,6 @@ const objectPageContent: ObjectTemplateContent = {
     era: translations.era,
     geographicArea: translations.geographicArea,
     materials: translations.materials,
-    addObjectDataToCart: "Add all object data to cart",
     erosLinkText,
 
     pageBadges,

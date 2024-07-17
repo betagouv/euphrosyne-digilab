@@ -6,7 +6,6 @@ import { HeadFC, PageProps, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import React, { useContext, useEffect, useState } from "react";
 
-import { CartContext, ICartItem } from "../../cart/context";
 import { buildProjectPath } from "../../catalog/utils";
 import { BaseHead } from "../../components/BaseHead";
 import { BaseSection } from "../../components/BaseSection";
@@ -55,7 +54,6 @@ export default function ObjectTemplate({
   const content = translations.objectPageContent;
 
   const { currentProject } = useContext(PageContext);
-  const cart = useContext(CartContext);
   const { objectGroup } = data;
   const projects = objectGroup?.objectPageData?.projects || [];
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -137,17 +135,6 @@ export default function ObjectTemplate({
                 label={objectGroup.name}
                 c2rmfId={objectGroup.c2rmfId}
                 content={content.objectGroupDescription}
-                addDataButtonDisabled={!runs || runs.length === 0}
-                onAddDataClick={() =>
-                  runs &&
-                  cart.addItems(
-                    runs.filter((run) => !run?.isDataEmbargoed) as ICartItem[],
-                    {
-                      type: "objectGroup",
-                      href: location.pathname + location.search,
-                    },
-                  )
-                }
               />
               <div className="fr-col-12 fr-col-lg-6">
                 <StaticImage

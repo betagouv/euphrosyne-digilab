@@ -194,7 +194,6 @@ const objectPageContent: ObjectTemplateContent = {
     era: translations.era,
     geographicArea: translations.geographicArea,
     materials: translations.materials,
-    addObjectDataToCart: "Ajouter toutes les données de l'objet au panier",
     erosLinkText,
 
     pageBadges,
