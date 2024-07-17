@@ -38,6 +38,7 @@ export function createCart(
   const cart: ICartContext = {
     items: items || [],
     addItems: (items: Run[], from: IFromInformation) => {
+      // Only add items that are not already in the cart
       const toInsert = items
         .filter((run) => !cart.items?.find((item) => item.id === run.id))
         .map((run) => ({ ...run, from }));

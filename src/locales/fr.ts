@@ -1,6 +1,7 @@
 import { CartButtonContent } from "../cart/CartButton";
 import { CartSubmitFormContent } from "../cart/CartSubmitForm";
 import { CartTableContent } from "../cart/CartTable";
+import { DataAddedAlertContent } from "../cart/DataAddedAlert";
 import type { PageBadgesContent } from "../components/PageBadges";
 import type { ProjectCardContent } from "../components/ProjectCard";
 import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
@@ -276,6 +277,10 @@ export const runCard: RunCardContent = {
   dataUnderEmbargo: "Ces données ne sont pas encore accesibles",
 };
 
+const dataAlert: DataAddedAlertContent = {
+  description: "Les données ont été ajoutées au panier.",
+};
+
 const t = {
   base: translations,
   cart,
@@ -293,6 +298,7 @@ const t = {
   projectPageContent,
   projectStatusBadge,
   runCard,
+  dataAlert,
 };
 
 export type Translations = typeof t;
