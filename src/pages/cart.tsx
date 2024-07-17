@@ -8,7 +8,11 @@ import { FormEvent, useContext, useRef, useState } from "react";
 import CartSubmitForm from "../cart/CartSubmitForm";
 import CartTable from "../cart/CartTable";
 import { IDataRequestForm } from "../cart/IDataRequestForm";
-import { requestData } from "../cart/client";
+import {
+  DetailValidationError,
+  ValidationError,
+  requestData,
+} from "../cart/client";
 import { CartContext } from "../cart/context";
 import { BaseHead } from "../components/BaseHead";
 import { I18nLink as Link } from "../components/I18nLink";
@@ -25,6 +29,7 @@ export interface CartContent {
   buttonSubmit: string;
   error: string;
   errorOnRequest: string;
+  errorOnRunTitle: string;
   successTitle: string;
   successDescription: string;
   successLink: string;
@@ -32,10 +37,19 @@ export interface CartContent {
 
 export interface CartProps extends PageProps {}
 
+function ErrorAlert({ title, body }: { title: string; body?: string }) {
+  return (
+    <div className="fr-alert fr-alert--error fr-my-1w">
+      <h3 className="fr-alert__title">{title}</h3>
+      {body && <p>{body}</p>}
+    </div>
+  );
+}
+
 export default function CartPage() {
   const translations = useContext(LangContext).translations.cart;
 
-  const [errors, setErrors] = useState<string[]>([]);
+  const [errors, setErrors] = useState<DetailValidationError>({});
   const [showSuccess, setShowSuccess] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -55,15 +69,21 @@ export default function CartPage() {
     event.preventDefault();
     if (!formRef.current?.reportValidity()) return;
     if (!form) return;
-    setErrors([]);
+    setErrors({});
     try {
       await requestData(
         form,
         items.map((item) => item.id),
       );
     } catch (e) {
-      console.error(e);
-      setErrors([...errors, translations.errorOnRequest]);
+      console.log(e, e instanceof ValidationError);
+      if (e instanceof ValidationError) {
+        setErrors(e.detail);
+        return;
+      } else {
+        console.error(e);
+        setErrors({ ...errors, global: [translations.errorOnRequest] });
+      }
       return;
     }
     setShowSuccess(true);
@@ -104,11 +124,11 @@ export default function CartPage() {
               },
             ]}
           >
-            {errors.map((error) => (
-              <div className="fr-alert fr-alert--error fr-my-1w">
-                <h3 className="fr-alert__title">{translations.error}</h3>
-                <p>{error}</p>
-              </div>
+            {errors.runs?.map((error) => (
+              <ErrorAlert title={translations.errorOnRunTitle} body={error} />
+            ))}
+            {errors.global?.map((error) => (
+              <ErrorAlert title={translations.error} body={error} />
             ))}
             {showSuccess && (
               <div className="fr-alert fr-alert--success fr-my-1w">
@@ -121,7 +141,11 @@ export default function CartPage() {
               </div>
             )}
 
-            <CartSubmitForm form={form} onFormChange={setForm} />
+            <CartSubmitForm
+              form={form}
+              onFormChange={setForm}
+              errors={errors}
+            />
           </modal.Component>
         </form>
       </div>

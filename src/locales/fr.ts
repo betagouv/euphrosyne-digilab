@@ -255,6 +255,7 @@ const cart: CartContent = {
   error: translations.error,
   errorOnRequest:
     "Une erreur s'est produite lors de la demande. Merci de réessayer plus tard ou de contacter un administrateur New AGLAE.",
+  errorOnRunTitle: "Erreur sur la sélection de run",
   successTitle: "La demande a bien été envoyée",
   successDescription:
     "Un membre de l'équipe New AGLAE va traiter votre demande. Vous recevrez un email de confirmation sous peu.",

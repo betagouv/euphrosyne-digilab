@@ -252,6 +252,7 @@ const cart: CartContent = {
   errorOnRequest:
     "An error occurred while requesting data. Please try again later or contact a New AGLAE administrator.",
   successTitle: "Your data request has been successfully submitted.",
+  errorOnRunTitle: "Error on run selection.",
   successDescription:
     "A New AGLAE team member will process your request. You will receive a confirmation email shortly.",
   successLink: "Back to catalog",

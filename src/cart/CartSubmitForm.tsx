@@ -3,6 +3,17 @@ import { useContext } from "react";
 
 import { LangContext } from "../contexts/LangContext";
 import { IDataRequestForm } from "./IDataRequestForm";
+import { DetailValidationError } from "./client";
+
+function getInputErrorProps(
+  errors: DetailValidationError,
+  key: keyof DetailValidationError,
+) {
+  return {
+    state: errors[key] ? "error" : (undefined as "error" | undefined),
+    stateRelatedMessage: errors[key]?.join("\n"),
+  };
+}
 
 export interface CartSubmitFormContent {
   email: string;
@@ -16,11 +27,13 @@ export interface CartSubmitFormContent {
 interface CartSubmitFormProps {
   form: IDataRequestForm;
   onFormChange: (form: IDataRequestForm) => void;
+  errors: DetailValidationError;
 }
 
 export default function CartSubmitForm({
   form,
   onFormChange,
+  errors,
 }: CartSubmitFormProps) {
   const translations = useContext(LangContext).translations.cartSubmitForm;
   return (
@@ -36,6 +49,7 @@ export default function CartSubmitForm({
           required: true,
         }}
         label={translations.email}
+        {...getInputErrorProps(errors, "user_email")}
       />
       <Input
         nativeInputProps={{
@@ -48,6 +62,7 @@ export default function CartSubmitForm({
           required: true,
         }}
         label={translations.firstName}
+        {...getInputErrorProps(errors, "user_first_name")}
       />
       <Input
         nativeInputProps={{
@@ -60,6 +75,7 @@ export default function CartSubmitForm({
           required: true,
         }}
         label={translations.lastName}
+        {...getInputErrorProps(errors, "user_last_name")}
       />
       <Input
         nativeInputProps={{
@@ -72,6 +88,7 @@ export default function CartSubmitForm({
           required: true,
         }}
         label={translations.institution}
+        {...getInputErrorProps(errors, "user_institution")}
       />
       <Input
         textArea
@@ -84,6 +101,7 @@ export default function CartSubmitForm({
         }}
         label={translations.description}
         hintText={translations.descriptionHint}
+        {...getInputErrorProps(errors, "description")}
       />
     </div>
   );
