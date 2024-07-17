@@ -1,9 +1,13 @@
+import { fr } from "@codegouvfr/react-dsfr";
 import { Card } from "@codegouvfr/react-dsfr/Card";
-import { css } from "@emotion/react";
+import { Global, css } from "@emotion/react";
+import { useContext } from "react";
+import React from "react";
 
+import { LangContext } from "../../contexts/LangContext";
 import { ContentProps } from "../../i18n";
 import { Leader } from "../../types/project";
-import { Run } from "../../types/run";
+import { type Run } from "../../types/run";
 import { ellipse } from "../../utils";
 
 export interface RunCardContent {
@@ -11,6 +15,7 @@ export interface RunCardContent {
   projectLeader: string;
   experimentalCondition: string;
   methods: string;
+  dataUnderEmbargo: string;
 }
 
 interface RunCardProps {
@@ -24,12 +29,14 @@ const RunCardContent = ({
   content,
 }: RunCardProps & ContentProps<RunCardContent>) => {
   const institutionName = projectLeader?.institutionName;
-  const startDate = new Date(run.startDate);
+  const startDate = run.startDate
+    ? new Date(run.startDate).toLocaleDateString()
+    : "-";
   return (
     <div>
       <div>
         <span className="fr-hint-text">{content.date}</span>
-        <p>{startDate.toLocaleDateString()}</p>
+        <p>{startDate}</p>
       </div>
       <div>
         <span className="fr-hint-text">{content.projectLeader}</span>
@@ -97,25 +104,40 @@ const RunCardContent = ({
     </div>
   );
 };
-export const RunCard = ({
-  run,
-  projectLeader,
-  content,
-}: RunCardProps & ContentProps<RunCardContent>) => {
+export default function RunCard({ run, projectLeader }: RunCardProps) {
+  const content = useContext(LangContext).translations.runCard;
+
+  const warningTextClassName = "warning-text";
+  const warningTextClass = css(`
+    .${warningTextClassName} {
+      color: ${fr.colors.decisions.text.default.warning.default} !important;
+    }`);
+
+  const classes = {
+    detail: run.isDataEmbargoed
+      ? `fr-icon-warning-fill ${warningTextClassName}`
+      : "",
+  };
+
   return (
-    <Card
-      background
-      border
-      desc={
-        <RunCardContent
-          run={run}
-          projectLeader={projectLeader}
-          content={content}
-        />
-      }
-      size="medium"
-      title={ellipse(run.label, 35)}
-      titleAs="h3"
-    />
+    <React.Fragment>
+      <Global styles={warningTextClass} />
+      <Card
+        background
+        border
+        detail={run.isDataEmbargoed ? content.dataUnderEmbargo : ""}
+        classes={classes}
+        desc={
+          <RunCardContent
+            run={run}
+            projectLeader={projectLeader}
+            content={content}
+          />
+        }
+        size="medium"
+        title={ellipse(run.label, 35)}
+        titleAs="h3"
+      />
+    </React.Fragment>
   );
-};
+}

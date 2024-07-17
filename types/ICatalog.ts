@@ -44,7 +44,7 @@ interface IMethod {
   detectors: IDetector[];
 }
 
-interface IRun {
+export interface IRun {
   id: string;
   label: string;
   startDate: Date | null;
@@ -53,6 +53,7 @@ interface IRun {
   beamline: string;
   methods: IMethod[];
   projectSlug: string;
+  isDataEmbargoed: boolean;
 }
 
 interface IProject {

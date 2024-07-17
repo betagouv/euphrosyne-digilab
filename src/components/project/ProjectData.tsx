@@ -6,11 +6,10 @@ import { CartContext, type ICartContext } from "../../cart/context";
 import { ContentProps } from "../../i18n";
 import { Leader } from "../../types/project";
 import { Run } from "../../types/run";
-import { RunCard, RunCardContent } from "../run/RunCard";
+import RunCard from "../run/RunCard";
 
 export interface ProjectDataContent {
   addToCart: string;
-  runCard: RunCardContent;
 }
 
 interface ProjectDataProps
@@ -32,19 +31,21 @@ export const ProjectData = ({
 }: ProjectDataProps & ContentProps<ProjectDataContent>) => {
   const cart = useContext(CartContext);
 
+  const notEmbargoedRuns = runs?.filter((run) => !run.isDataEmbargoed);
+
   return (
     <div className={`${className}`}>
       <div className="fr-grid-row fr-grid-row--gutters">
         <div className="fr-col-12">
           <Button
             onClick={() =>
-              runs &&
-              cart.addItems(runs as ICartContext["items"], {
+              notEmbargoedRuns &&
+              cart.addItems(notEmbargoedRuns as ICartContext["items"], {
                 type: pageType,
                 href: location.pathname + location.search,
               })
             }
-            disabled={!runs || runs.length === 0}
+            disabled={!notEmbargoedRuns || notEmbargoedRuns.length === 0}
           >
             {content.addToCart}
           </Button>
@@ -54,11 +55,7 @@ export const ProjectData = ({
         <div className={`fr-grid-row fr-grid-row--gutters`} {...props}>
           {runs.map((run) => (
             <div className="fr-col-12 fr-col-md-6 fr-col-lg-4" key={run.label}>
-              <RunCard
-                run={run}
-                projectLeader={projectLeader}
-                content={content.runCard}
-              />
+              <RunCard run={run} projectLeader={projectLeader} />
             </div>
           ))}
         </div>

@@ -16,4 +16,5 @@ export interface Run {
   particleType: "PROTON" | "ALPHA_PARTICLE" | "DEUTON" | null;
   startDate: string;
   methods: readonly (Method | null)[] | null;
+  isDataEmbargoed: boolean;
 }

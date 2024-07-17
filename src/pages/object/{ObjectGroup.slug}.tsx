@@ -140,10 +140,13 @@ export default function ObjectTemplate({
                 addDataButtonDisabled={!runs || runs.length === 0}
                 onAddDataClick={() =>
                   runs &&
-                  cart.addItems(runs as ICartItem[], {
-                    type: "objectGroup",
-                    href: location.pathname + location.search,
-                  })
+                  cart.addItems(
+                    runs.filter((run) => !run?.isDataEmbargoed) as ICartItem[],
+                    {
+                      type: "objectGroup",
+                      href: location.pathname + location.search,
+                    },
+                  )
                 }
               />
               <div className="fr-col-12 fr-col-lg-6">
@@ -248,6 +251,7 @@ export const query = graphql`
           id
           label
           startDate
+          isDataEmbargoed
           particleType
           energyInKev
           beamline

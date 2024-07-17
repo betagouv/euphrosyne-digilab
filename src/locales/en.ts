@@ -5,6 +5,7 @@ import type { PageBadgesContent } from "../components/PageBadges";
 import type { ProjectCardContent } from "../components/ProjectCard";
 import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
 import type { ProjectDataContent } from "../components/project/ProjectData";
+import { RunCardContent } from "../components/run/RunCard";
 import type { LayoutContentProps } from "../layouts";
 import type { IndexPageContent } from "../pages";
 import { NotFoundPageContent } from "../pages/404";
@@ -43,12 +44,6 @@ const layoutContent: LayoutContentProps = {
 
 export const projectDataContent: ProjectDataContent = {
   addToCart: "Add data to cart",
-  runCard: {
-    date: "Date",
-    projectLeader: "Project leader",
-    experimentalCondition: "Experimental conditions",
-    methods: "Methods",
-  },
 };
 
 const projectStatusBadge: ProjectStatusBadgeContent = {
@@ -268,22 +263,31 @@ export const notFoundPageContent: NotFoundPageContent = {
   goHome: "Back to home",
 };
 
+const runCard: RunCardContent = {
+  date: "Date",
+  projectLeader: "Project leader",
+  experimentalCondition: "Experimental conditions",
+  methods: "Methods",
+  dataUnderEmbargo: "Data not yet accessible",
+};
+
 const t: Translations = {
   base: translations,
-  erosLinkText,
-  projectStatusBadge,
-  pageBadges,
-  projectCard,
-  layoutContent,
-  indexPageContent,
-  catalogContent,
-  objectPageContent,
-  projectPageContent,
-  notFoundPageContent,
   cart,
   cartButton,
-  cartTable,
   cartSubmitForm,
+  cartTable,
+  catalogContent,
+  erosLinkText,
+  indexPageContent,
+  layoutContent,
+  notFoundPageContent,
+  objectPageContent,
+  pageBadges,
+  projectCard,
+  projectPageContent,
+  projectStatusBadge,
+  runCard,
 };
 
 export default t;
