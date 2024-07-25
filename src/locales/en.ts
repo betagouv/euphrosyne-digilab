@@ -21,6 +21,7 @@ export const translations = {
   objectGroup: "Object group",
   object: "Object",
   inventory: "Inventory number",
+  collection: "Collection",
   period: "Period",
   era: "Era",
   geographicArea: "Geographic area",
@@ -140,7 +141,7 @@ const catalogContent: CatalogContent = {
     itemType: "Item type",
     materials: translations.materials,
     inventory: translations.inventory,
-    collection: "Collection",
+    collection: translations.collection,
     datingFilters: {
       period: translations.period,
       era: translations.era,
@@ -185,6 +186,7 @@ const objectPageContent: ObjectTemplateContent = {
   viewProject: "View project",
 
   objectGroupDescription: {
+    collection: translations.collection,
     inventory: translations.inventory,
     period: translations.period,
     era: translations.era,

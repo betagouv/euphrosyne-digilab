@@ -10,8 +10,7 @@ import { buildProjectPath } from "../../catalog/utils";
 import { BaseHead } from "../../components/BaseHead";
 import { BaseSection } from "../../components/BaseSection";
 import { I18nLink as Link } from "../../components/I18nLink";
-import {
-  ObjectGroupDescription,
+import ObjectGroupDescription, {
   ObjectGroupDescriptionContent,
 } from "../../components/object-group/ObjectGroupDescription";
 import {
@@ -126,6 +125,7 @@ export default function ObjectTemplate({
                 css={css`
                   ${paddedUpToLg}
                 `}
+                inventory={objectGroup.inventoryNumber || ""}
                 collection={objectGroup.collection || ""}
                 datingEraLabel={objectGroup.datingEra?.label}
                 datingPeriodLabel={objectGroup.datingPeriod?.label}
