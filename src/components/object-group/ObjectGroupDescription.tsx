@@ -8,6 +8,7 @@ import { ErosLink } from "./ErosLink";
 import ObjectGroupMaterialTags from "./ObjectGroupMaterialTags";
 
 export interface ObjectGroupDescriptionContent {
+  collection: string;
   inventory: string;
   period: string;
   era: string;
@@ -22,6 +23,7 @@ type ObjectGroupDescriptionProps = Omit<
   React.InputHTMLAttributes<HTMLDivElement>,
   "content"
 > & {
+  inventory?: string;
   collection?: string;
   datingPeriodLabel?: string | null;
   datingEraLabel?: string | null;
@@ -32,7 +34,8 @@ type ObjectGroupDescriptionProps = Omit<
   c2rmfId: string | null;
 };
 
-export const ObjectGroupDescription = ({
+export default function ObjectGroupDescription({
+  inventory,
   collection,
   datingPeriodLabel,
   datingEraLabel,
@@ -43,17 +46,21 @@ export const ObjectGroupDescription = ({
   c2rmfId,
   content,
   ...props
-}: ObjectGroupDescriptionProps &
-  ContentProps<ObjectGroupDescriptionContent>) => {
+}: ObjectGroupDescriptionProps & ContentProps<ObjectGroupDescriptionContent>) {
   const descriptionItems: {
     label: string;
     value: string | React.ReactElement;
     icon: string;
   }[] = [
     {
-      label: content.inventory,
+      label: content.collection,
       value: collection || "",
       icon: fr.cx("fr-icon-clipboard-line"),
+    },
+    {
+      label: content.inventory,
+      value: inventory || "",
+      icon: fr.cx("fr-icon-image-line"),
     },
     {
       label: content.period,
@@ -117,4 +124,4 @@ export const ObjectGroupDescription = ({
       )}
     </div>
   );
-};
+}

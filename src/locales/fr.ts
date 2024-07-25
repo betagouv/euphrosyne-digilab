@@ -20,6 +20,7 @@ export const translations = {
   object: "Objet",
   objectGroup: "Groupe d'objets",
 
+  collection: "Collection",
   inventory: "Numéro d'inventaire",
   period: "Période",
   era: "Époque",
@@ -144,7 +145,7 @@ const catalogContent: CatalogContent = {
     itemType: "Type d 'item",
     materials: translations.materials,
     inventory: translations.inventory,
-    collection: "Collection",
+    collection: translations.collection,
     discoveryPlaceFilter: {
       discoveryPlace: "Lieu de découverte",
     },
@@ -189,6 +190,7 @@ const objectPageContent: ObjectTemplateContent = {
   viewProject: "Voir le projet",
 
   objectGroupDescription: {
+    collection: translations.collection,
     inventory: translations.inventory,
     period: translations.period,
     era: translations.era,
