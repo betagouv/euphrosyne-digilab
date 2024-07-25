@@ -130,6 +130,7 @@ export const query = graphql`
           particleType
           energyInKev
           beamline
+          isDataEmbargoed
           methods {
             name
             detectors {

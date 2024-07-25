@@ -2,15 +2,16 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import type { WindowLocation } from "@reach/router";
 import { useContext } from "react";
 
+import DataAddedAlert from "../../cart/DataAddedAlert";
 import { CartContext, type ICartContext } from "../../cart/context";
+import { useClosableAlert } from "../../hooks/useClosableAlert";
 import { ContentProps } from "../../i18n";
 import { Leader } from "../../types/project";
 import { Run } from "../../types/run";
-import { RunCard, RunCardContent } from "../run/RunCard";
+import RunCard from "../run/RunCard";
 
 export interface ProjectDataContent {
   addToCart: string;
-  runCard: RunCardContent;
 }
 
 interface ProjectDataProps
@@ -21,7 +22,7 @@ interface ProjectDataProps
   pageType: "project" | "objectGroup";
 }
 
-export const ProjectData = ({
+export function ProjectData({
   runs,
   projectLeader,
   className,
@@ -29,22 +30,31 @@ export const ProjectData = ({
   location,
   pageType,
   ...props
-}: ProjectDataProps & ContentProps<ProjectDataContent>) => {
+}: ProjectDataProps & ContentProps<ProjectDataContent>) {
   const cart = useContext(CartContext);
+
+  const notEmbargoedRuns = runs?.filter((run) => !run.isDataEmbargoed);
+
+  const [showDataAddedAlert, setshowDataAddedAlert] = useClosableAlert();
+
+  const onAddRunsToCart = () => {
+    if (notEmbargoedRuns && notEmbargoedRuns.length > 0) {
+      cart.addItems(notEmbargoedRuns as ICartContext["items"], {
+        type: pageType,
+        href: location.pathname + location.search,
+      });
+      setshowDataAddedAlert(true);
+    }
+  };
 
   return (
     <div className={`${className}`}>
+      {showDataAddedAlert && <DataAddedAlert />}
       <div className="fr-grid-row fr-grid-row--gutters">
         <div className="fr-col-12">
           <Button
-            onClick={() =>
-              runs &&
-              cart.addItems(runs as ICartContext["items"], {
-                type: pageType,
-                href: location.pathname + location.search,
-              })
-            }
-            disabled={!runs || runs.length === 0}
+            onClick={onAddRunsToCart}
+            disabled={!notEmbargoedRuns || notEmbargoedRuns.length === 0}
           >
             {content.addToCart}
           </Button>
@@ -54,15 +64,11 @@ export const ProjectData = ({
         <div className={`fr-grid-row fr-grid-row--gutters`} {...props}>
           {runs.map((run) => (
             <div className="fr-col-12 fr-col-md-6 fr-col-lg-4" key={run.label}>
-              <RunCard
-                run={run}
-                projectLeader={projectLeader}
-                content={content.runCard}
-              />
+              <RunCard run={run} projectLeader={projectLeader} />
             </div>
           ))}
         </div>
       )}
     </div>
   );
-};
+}

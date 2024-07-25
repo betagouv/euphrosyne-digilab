@@ -5,8 +5,12 @@ import type {
   IObjectPageData,
   IProjectItem,
   IProjectPageData,
+  IRun,
 } from "../../../types/ICatalog";
-import type { IOpenSearchDocument } from "../../../types/IOpenSearch";
+import type {
+  IRun as IDocumentRun,
+  IOpenSearchDocument,
+} from "../../../types/IOpenSearch";
 
 export function parseProjectDocument(data: IOpenSearchDocument): IProjectItem {
   return {
@@ -84,28 +88,7 @@ function parseObjectPageData(
   data: IOpenSearchDocument["object_page_data"],
 ): IObjectPageData {
   return {
-    runs: data.runs?.map((run) => {
-      return {
-        id: run.id,
-        label: run.label,
-        startDate: run.start_date ? new Date(run.start_date) : null,
-        particleType: run.particle_type,
-        energyInKev: run.energy_in_kev,
-        beamline: run.beamline,
-        projectSlug: run.project_slug,
-        methods: run.methods?.map((method) => {
-          return {
-            name: method.name,
-            detectors: method.detectors?.map((detector) => {
-              return {
-                name: detector.name,
-                filters: detector.filters,
-              };
-            }),
-          };
-        }),
-      };
-    }),
+    runs: data.runs?.map(parseRunData),
     projects: data.projects.map((project) => {
       return {
         name: project.name,
@@ -131,28 +114,7 @@ function parseProjectPageData(
       institutionName: data.leader.institution_name,
       institutionCountry: data.leader.institution_country,
     },
-    runs: data.runs?.map((run) => {
-      return {
-        id: run.id,
-        label: run.label,
-        startDate: run.start_date ? new Date(run.start_date) : null,
-        particleType: run.particle_type,
-        energyInKev: run.energy_in_kev,
-        beamline: run.beamline,
-        projectSlug: run.project_slug,
-        methods: run.methods?.map((method) => {
-          return {
-            name: method.name,
-            detectors: method.detectors?.map((detector) => {
-              return {
-                name: detector.name,
-                filters: detector.filters,
-              };
-            }),
-          };
-        }),
-      };
-    }),
+    runs: data.runs?.map(parseRunData),
     objectGroups: data.object_groups?.map((objectGroup) => {
       return {
         id: objectGroup.id,
@@ -168,6 +130,30 @@ function parseProjectPageData(
             label: object.label,
             collection: object.collection,
             inventory: object.inventory || null,
+          };
+        }),
+      };
+    }),
+  };
+}
+
+function parseRunData(run: IDocumentRun): IRun {
+  return {
+    id: run.id,
+    label: run.label,
+    startDate: run.start_date ? new Date(run.start_date) : null,
+    particleType: run.particle_type,
+    energyInKev: run.energy_in_kev,
+    beamline: run.beamline,
+    projectSlug: run.project_slug,
+    isDataEmbargoed: run.is_data_embargoed,
+    methods: run.methods?.map((method) => {
+      return {
+        name: method.name,
+        detectors: method.detectors?.map((detector) => {
+          return {
+            name: detector.name,
+            filters: detector.filters,
           };
         }),
       };

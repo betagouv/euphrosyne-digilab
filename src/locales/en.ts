@@ -1,10 +1,12 @@
 import { CartButtonContent } from "../cart/CartButton";
 import { CartSubmitFormContent } from "../cart/CartSubmitForm";
 import { CartTableContent } from "../cart/CartTable";
+import { DataAddedAlertContent } from "../cart/DataAddedAlert";
 import type { PageBadgesContent } from "../components/PageBadges";
 import type { ProjectCardContent } from "../components/ProjectCard";
 import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
 import type { ProjectDataContent } from "../components/project/ProjectData";
+import { RunCardContent } from "../components/run/RunCard";
 import type { LayoutContentProps } from "../layouts";
 import type { IndexPageContent } from "../pages";
 import { NotFoundPageContent } from "../pages/404";
@@ -43,12 +45,6 @@ const layoutContent: LayoutContentProps = {
 
 export const projectDataContent: ProjectDataContent = {
   addToCart: "Add data to cart",
-  runCard: {
-    date: "Date",
-    projectLeader: "Project leader",
-    experimentalCondition: "Experimental conditions",
-    methods: "Methods",
-  },
 };
 
 const projectStatusBadge: ProjectStatusBadgeContent = {
@@ -194,7 +190,6 @@ const objectPageContent: ObjectTemplateContent = {
     era: translations.era,
     geographicArea: translations.geographicArea,
     materials: translations.materials,
-    addObjectDataToCart: "Add all object data to cart",
     erosLinkText,
 
     pageBadges,
@@ -257,6 +252,7 @@ const cart: CartContent = {
   errorOnRequest:
     "An error occurred while requesting data. Please try again later or contact a New AGLAE administrator.",
   successTitle: "Your data request has been successfully submitted.",
+  errorOnRunTitle: "Error on run selection.",
   successDescription:
     "A New AGLAE team member will process your request. You will receive a confirmation email shortly.",
   successLink: "Back to catalog",
@@ -268,22 +264,36 @@ export const notFoundPageContent: NotFoundPageContent = {
   goHome: "Back to home",
 };
 
+const runCard: RunCardContent = {
+  date: "Date",
+  projectLeader: "Project leader",
+  experimentalCondition: "Experimental conditions",
+  methods: "Methods",
+  dataUnderEmbargo: "Data not yet accessible",
+};
+
+const dataAlert: DataAddedAlertContent = {
+  description: "Data has been added to your cart.",
+};
+
 const t: Translations = {
   base: translations,
-  erosLinkText,
-  projectStatusBadge,
-  pageBadges,
-  projectCard,
-  layoutContent,
-  indexPageContent,
-  catalogContent,
-  objectPageContent,
-  projectPageContent,
-  notFoundPageContent,
   cart,
   cartButton,
-  cartTable,
   cartSubmitForm,
+  cartTable,
+  catalogContent,
+  erosLinkText,
+  indexPageContent,
+  layoutContent,
+  notFoundPageContent,
+  objectPageContent,
+  pageBadges,
+  projectCard,
+  projectPageContent,
+  projectStatusBadge,
+  runCard,
+  dataAlert,
 };
 
 export default t;

@@ -1,5 +1,4 @@
 import { fr } from "@codegouvfr/react-dsfr";
-import Button from "@codegouvfr/react-dsfr/Button";
 import { css } from "@emotion/react";
 
 import { ContentProps } from "../../i18n";
@@ -14,7 +13,6 @@ export interface ObjectGroupDescriptionContent {
   era: string;
   geographicArea: string;
   materials: string;
-  addObjectDataToCart: string;
   erosLinkText: string;
 
   pageBadges: PageBadgesContent;
@@ -32,8 +30,6 @@ type ObjectGroupDescriptionProps = Omit<
   dataAvailable?: boolean;
   label: string;
   c2rmfId: string | null;
-  addDataButtonDisabled: boolean;
-  onAddDataClick: () => void;
 };
 
 export const ObjectGroupDescription = ({
@@ -46,8 +42,6 @@ export const ObjectGroupDescription = ({
   label,
   c2rmfId,
   content,
-  addDataButtonDisabled,
-  onAddDataClick,
   ...props
 }: ObjectGroupDescriptionProps &
   ContentProps<ObjectGroupDescriptionContent>) => {
@@ -116,14 +110,6 @@ export const ObjectGroupDescription = ({
           </div>
         ))}
       </div>
-
-      <Button
-        className="fr-mb-2w"
-        disabled={addDataButtonDisabled}
-        onClick={onAddDataClick}
-      >
-        {content.addObjectDataToCart}
-      </Button>
       {c2rmfId && (
         <p>
           <ErosLink c2rmfId={c2rmfId} text={content.erosLinkText} />

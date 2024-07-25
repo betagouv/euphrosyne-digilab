@@ -1,10 +1,12 @@
 import { CartButtonContent } from "../cart/CartButton";
 import { CartSubmitFormContent } from "../cart/CartSubmitForm";
 import { CartTableContent } from "../cart/CartTable";
+import { DataAddedAlertContent } from "../cart/DataAddedAlert";
 import type { PageBadgesContent } from "../components/PageBadges";
 import type { ProjectCardContent } from "../components/ProjectCard";
 import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
 import type { ProjectDataContent } from "../components/project/ProjectData";
+import { RunCardContent } from "../components/run/RunCard";
 import type { LayoutContentProps } from "../layouts";
 import type { IndexPageContent } from "../pages";
 import { NotFoundPageContent } from "../pages/404";
@@ -43,12 +45,6 @@ const layoutContent: LayoutContentProps = {
 
 export const projectDataContent: ProjectDataContent = {
   addToCart: "Ajouter les données au panier",
-  runCard: {
-    date: "Date",
-    projectLeader: "Chef de projet",
-    experimentalCondition: "Conditions expérimentales",
-    methods: "Méthodes",
-  },
 };
 
 const projectStatusBadge: ProjectStatusBadgeContent = {
@@ -198,7 +194,6 @@ const objectPageContent: ObjectTemplateContent = {
     era: translations.era,
     geographicArea: translations.geographicArea,
     materials: translations.materials,
-    addObjectDataToCart: "Ajouter toutes les données de l'objet au panier",
     erosLinkText,
 
     pageBadges,
@@ -260,6 +255,7 @@ const cart: CartContent = {
   error: translations.error,
   errorOnRequest:
     "Une erreur s'est produite lors de la demande. Merci de réessayer plus tard ou de contacter un administrateur New AGLAE.",
+  errorOnRunTitle: "Erreur sur la sélection de run",
   successTitle: "La demande a bien été envoyée",
   successDescription:
     "Un membre de l'équipe New AGLAE va traiter votre demande. Vous recevrez un email de confirmation sous peu.",
@@ -272,22 +268,36 @@ export const notFoundPageContent: NotFoundPageContent = {
   goHome: "Retour à l'accueil",
 };
 
+export const runCard: RunCardContent = {
+  date: "Date",
+  projectLeader: "Chef de projet",
+  experimentalCondition: "Conditions expérimentales",
+  methods: "Méthodes",
+  dataUnderEmbargo: "Ces données ne sont pas encore accesibles",
+};
+
+const dataAlert: DataAddedAlertContent = {
+  description: "Les données ont été ajoutées au panier.",
+};
+
 const t = {
   base: translations,
-  erosLinkText,
-  projectStatusBadge,
-  pageBadges,
-  projectCard,
-  layoutContent,
-  indexPageContent,
-  catalogContent,
-  objectPageContent,
-  projectPageContent,
-  notFoundPageContent,
   cart,
   cartButton,
-  cartTable,
   cartSubmitForm,
+  cartTable,
+  catalogContent,
+  erosLinkText,
+  indexPageContent,
+  layoutContent,
+  notFoundPageContent,
+  objectPageContent,
+  pageBadges,
+  projectCard,
+  projectPageContent,
+  projectStatusBadge,
+  runCard,
+  dataAlert,
 };
 
 export type Translations = typeof t;

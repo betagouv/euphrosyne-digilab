@@ -6,6 +6,29 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
   ({ actions }) => {
     const { createTypes } = actions;
 
+    const sharedTypes = `
+    type PageDataRunsMethodsFilters {
+      filters: [String!]
+    }
+  
+    type PageDataRunsMethods {
+      detectors: [PageDataRunsMethodsFilters!]
+      name: String!
+    }
+
+    type PageDataRuns{
+      id: String!
+      label: String!
+      projectSlug: String!
+      isDataEmbargoed: Boolean!
+      startDate: Date
+      particleType: String
+      energyInKev: String
+      beamline: String
+      methods: [PageDataRunsMethods!]
+    }
+    `;
+
     const projectTypes = `
       type ${NODE_TYPES.Project} implements Node {
         category: String!
@@ -24,7 +47,7 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
       type ${NODE_TYPES.Project}ProjectPageData {
         leader: ${NODE_TYPES.Project}ProjectPageDataLeader!
         objectGroups: [${NODE_TYPES.Project}ProjectPageDataObjectGroups]
-        runs: [${NODE_TYPES.Project}ProjectPageDataRuns]!
+        runs: [PageDataRuns!]!
       }
 
       type ${NODE_TYPES.Project}ProjectPageDataLeader {
@@ -57,26 +80,6 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         lat: Float!
         lon: Float!
       }
-
-      type ${NODE_TYPES.Project}ProjectPageDataRuns {
-        id: String!
-        label: String!
-        projectSlug: String!
-        startDate: Date
-        particleType: String
-        energyInKev: String
-        beamline: String
-        methods: [${NODE_TYPES.Project}ObjectPageDataRunsMethods!]
-      }
-
-      type ${NODE_TYPES.Project}ObjectPageDataRunsMethods {
-        detectors: [${NODE_TYPES.Project}ObjectPageDataRunsMethodsFilters!]
-        name: String!
-      }
-
-      type ${NODE_TYPES.Project}ObjectPageDataRunsMethodsFilters {
-        filters: [String!]
-      }
     `;
 
     const objectGroupTypes = `
@@ -96,8 +99,8 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
       }
 
       type ${NODE_TYPES.ObjectGroup}ObjectPageData {
-        projects: [${NODE_TYPES.ObjectGroup}ObjectPageDataProjects]!
-        runs: [${NODE_TYPES.ObjectGroup}ObjectPageDataRuns]!
+        projects: [${NODE_TYPES.ObjectGroup}ObjectPageDataProjects!]!
+        runs: [PageDataRuns!]!
       }
 
       type ${NODE_TYPES.ObjectGroup}ObjectPageDataProjects {
@@ -112,27 +115,6 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         institutionCountry: String
         institutionName: String
       }
-
-      type ${NODE_TYPES.ObjectGroup}ObjectPageDataRuns {
-        id: String!
-        label: String!
-        projectSlug: String!
-        startDate: Date
-        particleType: String
-        energyInKev: String
-        beamline: String
-        methods: [${NODE_TYPES.ObjectGroup}ObjectPageDataRunsMethods!]
-      }
-
-      type ${NODE_TYPES.ObjectGroup}ObjectPageDataRunsMethods {
-        detectors: [${NODE_TYPES.ObjectGroup}ObjectPageDataRunsMethodsFilters!]
-        name: String!
-      }
-
-      type ${NODE_TYPES.ObjectGroup}ObjectPageDataRunsMethodsFilters {
-        filters: [String!]
-      }
-
     `;
 
     const catalogItemTypes = `
@@ -148,6 +130,7 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
       }
     `;
 
+    createTypes(sharedTypes);
     createTypes(projectTypes);
     createTypes(objectGroupTypes);
     createTypes(catalogItemTypes);

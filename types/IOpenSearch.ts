@@ -88,7 +88,7 @@ interface IObjectPageData {
   }[];
 }
 
-interface IRun {
+export interface IRun {
   id: string;
   label: string;
   start_date?: string;
@@ -96,6 +96,7 @@ interface IRun {
   energy_in_kev: string;
   beamline: string;
   project_slug: string;
+  is_data_embargoed: boolean;
   methods: {
     name: string;
     detectors: {
