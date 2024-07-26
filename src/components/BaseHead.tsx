@@ -6,7 +6,7 @@ import { StartDsfr } from "../StartDsfr";
 export const BaseHead: HeadFC = () => (
   <>
     <StartDsfr />
-    <title>Catalogue des données de NewAglae</title>
+    <title>Catalogue des données de New AGLAE</title>
     <link rel="apple-touch-icon" href="/dsfr/favicon/apple-touch-icon.png" />
     <link rel="icon" href="/dsfr/favicon/favicon.svg" type="image/svg+xml" />
     <link

@@ -33,11 +33,11 @@ export const erosLinkText = "Eros object page";
 
 const layoutContent: LayoutContentProps = {
   header: {
-    homeLinkTitle: "Home - NewAglae Data Catalog",
+    homeLinkTitle: "Home - New AGLAE Data Catalog",
     euphrosyneLinkTitle: "Access Euphrosyne",
     homeLinkLabel: "Home",
     catalogLinkLabel: "Catalog",
-    serviceTitle: "NewAglae Data Catalog",
+    serviceTitle: "New AGLAE Data Catalog",
     languageSwitcher: {
       selectLangBtnTitle: "Change language",
     },
@@ -68,13 +68,13 @@ export const projectCard: ProjectCardContent = {
 
 const indexPageContent: IndexPageContent = {
   hero: {
-    title: "Data produced by NewAglae available online",
-    description: `Euphrosyne is the digital platform linked to NewAglae, 
+    title: "Data produced by New AGLAE available online",
+    description: `Euphrosyne is the digital platform linked to New AGLAE, 
     the Grand Louvre Accelerator for Elemental Analysis dedicated to heritage sciences.
     It allows the collection and dissemination of data
-    as well as, for NewAglae users, remote access to
+    as well as, for New AGLAE users, remote access to
     software for processing ion beam analysis acquired
-    on NewAglae. The NewAglae data catalog helps you
+    on New AGLAE. The New AGLAE data catalog helps you
     search for scientific data by keywords (materials, date,
     geographical area, etc.) to best meet your research needs.`,
   },
@@ -87,20 +87,20 @@ const indexPageContent: IndexPageContent = {
   howItWorks: {
     title: "Euphrosyne's services",
     catalogText:
-      "A catalog referencing the datasets produced by NewAglae since 04/01/2022.",
+      "A catalog referencing the datasets produced by New AGLAE since 04/01/2022.",
     euphrosyneText:
-      "A digital platform allowing NewAglae users to prepare their experiments.",
+      "A digital platform allowing New AGLAE users to prepare their experiments.",
     workplaceText:
-      "A virtual office for NewAglae users to process and retrieve their data remotely.",
+      "A virtual office for New AGLAE users to process and retrieve their data remotely.",
   },
   about: {
     title: "About",
-    newAglae: "NewAglae, Grand Louvre Accelerator for Elemental Analysis",
+    newAglae: "New AGLAE, Grand Louvre Accelerator for Elemental Analysis",
     description: `AGLAE, acronym for "Grand Louvre Accelerator for Elemental Analysis," is a unique large instrument, located within
     the Louvre Palace itself. Since its installation in 1988, AGLAE is the
     only particle accelerator in the world dedicated to heritage sciences, using advanced techniques to decipher the
     secrets buried in works of art. Winner of the Future Investment from the National Research Agency (ANR-10-EQPX-22),
-    AGLAE became NewAglae in 2017. Completely automated, the
+    AGLAE became New AGLAE in 2017. Completely automated, the
     beam line is now likely to operate
     24/7.`,
     moreInfo: "Learn more",
@@ -108,7 +108,7 @@ const indexPageContent: IndexPageContent = {
     img2Alt: "Object analyzed by New AGLAÉ.",
   },
   figure: {
-    title: "Key figures of NewAglae",
+    title: "Key figures of New AGLAE",
     analyzedProjectsLabel: "analysis projects carried out",
     analyzedObjectsLabel: "objects analyzed",
     hoursLabel: "hours",
