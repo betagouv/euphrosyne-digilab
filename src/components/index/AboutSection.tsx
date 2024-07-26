@@ -62,20 +62,30 @@ export const AboutSection: React.FC<ContentProps<AboutSectionContent>> = ({
               className="fr-col-12 fr-col-lg-6"
               css={css`
                 display: flex;
-                text-align: center;
                 background-color: ${fr.colors.decisions.background.actionLow
                   .blueFrance.default};
                 ${fr.breakpoints.down("lg")} {
                   display: none;
                 }
+                ${fr.breakpoints.down("xl")} {
+                  text-align: center;
+                }
               `}
             >
-              <div className="fr-col-lg-6">
+              <div
+                className="fr-col-lg-6"
+                css={css(`
+                  ${fr.breakpoints.down("xl")} {
+                    margin: 0 auto;
+                  }
+                `)}
+              >
                 <StaticImage
                   src="../../images/analyzed-object-zoomed-1.png"
                   alt={content.img1Alt}
                   placeholder="blurred"
                   className="fr-mr-1v"
+                  height={490}
                   css={css`
                     mix-blend-mode: luminosity;
                   `}
@@ -84,20 +94,26 @@ export const AboutSection: React.FC<ContentProps<AboutSectionContent>> = ({
                   © Christophe Hargoues. C2RMF. AGLAÉ. CNRS Photothèque. 2017
                 </p>
               </div>
-              <div className="fr-col-lg-6">
+              <div
+                className="fr-col-lg-6"
+                css={css`
+                  ${fr.breakpoints.down("xl")} {
+                    display: none;
+                  }
+                `}
+              >
                 <StaticImage
                   src="../../images/analyzed-object-zoomed-2.png"
                   alt={content.img2Alt}
                   placeholder="blurred"
                   className="fr-ml-1v"
+                  height={490}
                   css={css`
                     mix-blend-mode: luminosity;
-                    ${fr.breakpoints.down("xl")} {
-                      display: none;
-                    }
+                    transform: scaleX(-1);
                   `}
                 />
-                <p>&nbsp;</p>
+                <p className="fr-text--xs">© Vanessa Fournier. C2RMF.</p>
               </div>
             </FadeInDiv>
           )}
