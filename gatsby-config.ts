@@ -7,7 +7,7 @@ dotenv.config({
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `Catalogue des données de NewAglae`,
+    title: `Catalogue des données de New AGLAE`,
     siteUrl: process.env.SITE_URL,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.

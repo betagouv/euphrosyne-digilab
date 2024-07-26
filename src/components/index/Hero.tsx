@@ -22,7 +22,7 @@ export const Hero: React.FC<ContentProps<HeroContent>> = ({ content }) => (
         <div className="fr-col-12 fr-col-lg-6">
           <StaticImage
             src="../../images/hero-banner.jpg"
-            alt="Objet analysé par NewAglae"
+            alt="Objet analysé par New AGLAE"
             placeholder="blurred"
             css={css`
               ${fr.breakpoints.down("lg")} {

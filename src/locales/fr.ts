@@ -33,11 +33,11 @@ export const erosLinkText = "Fiche objet Eros";
 
 const layoutContent: LayoutContentProps = {
   header: {
-    homeLinkTitle: "Accueil - Catalogue des données de NewAglae",
+    homeLinkTitle: "Accueil - Catalogue des données de New AGLAE",
     euphrosyneLinkTitle: "Accéder à Euphrosyne",
     homeLinkLabel: "Accueil",
     catalogLinkLabel: "Catalogue",
-    serviceTitle: "Catalogue des données de NewAglae",
+    serviceTitle: "Catalogue des données de New AGLAE",
     languageSwitcher: {
       selectLangBtnTitle: "Changer de langue",
     },
@@ -68,13 +68,13 @@ export const projectCard: ProjectCardContent = {
 
 const indexPageContent: IndexPageContent = {
   hero: {
-    title: "Les données produites par NewAglae accessibles en ligne",
-    description: `Euphrosyne est la plateforme numérique liée à NewAglae, 
+    title: "Les données produites par New AGLAE accessibles en ligne",
+    description: `Euphrosyne est la plateforme numérique liée à New AGLAE, 
     l'Accélérateur Grand Louvre d'Analyse Elémentaire dédié aux sciences
     du patrimoine. Elle permet la collecte et la diffusion des données
-    ainsi que, pour les utilisateurs de NewAglae, l'accès à distance aux
+    ainsi que, pour les utilisateurs de New AGLAE, l'accès à distance aux
     logiciels de traitement des analyses par faisceau d'ions acquises
-    sur NewAglae. Le catalogue des données de NewAglae vous aide a
+    sur New AGLAE. Le catalogue des données de New AGLAE vous aide a
     chercher des données scientifiques par mots-clefs (matériaux, date,
     aire géographique, etc.) afin de répondre au mieux à vos besoins de
     recherche.`,
@@ -88,15 +88,15 @@ const indexPageContent: IndexPageContent = {
   howItWorks: {
     title: "Les services d'Euphrosyne",
     catalogText:
-      "Un catalogue référençant les jeux de données produits par NewAglae depuis le 01/04/2022.",
+      "Un catalogue référençant les jeux de données produits par New AGLAE depuis le 01/04/2022.",
     euphrosyneText:
-      "Une plateforme numérique permettant aux utilisateurs de NewAglae de préparer leurs expériences.",
+      "Une plateforme numérique permettant aux utilisateurs de New AGLAE de préparer leurs expériences.",
     workplaceText:
-      "Un bureau virtuel pour que les utilisateurs de NewAglae puissent traiter et récupérer leurs données à distance.",
+      "Un bureau virtuel pour que les utilisateurs de New AGLAE puissent traiter et récupérer leurs données à distance.",
   },
   about: {
     title: "À propos",
-    newAglae: "NewAglae, Accélérateur Grand Louvre d'analyse élémentaire",
+    newAglae: "New AGLAE, Accélérateur Grand Louvre d'analyse élémentaire",
     description: `AGLAE, acronyme pour "Accélérateur Grand Louvre d'Analyse
     Élémentaire," est un grand instrument unique, situé au sein même
     du Palais du Louvre. Depuis son installation en 1988, AGLAE est le
@@ -104,7 +104,7 @@ const indexPageContent: IndexPageContent = {
     patrimoine, utilisant des techniques avancées pour décrypter les
     secrets enfouis dans les œuvres d'art. Lauréat de l'Investissement
     d'Avenir de l'Agence Nationale de la Recherche (ANR-10-EQPX-22),
-    AGLAE est devenu NewAglae en 2017. Complètement automatisée, la
+    AGLAE est devenu New AGLAE en 2017. Complètement automatisée, la
     ligne de faisceau est dorénavant susceptible de fonctionner
     24h/24.`,
     moreInfo: "En savoir plus",
@@ -112,7 +112,7 @@ const indexPageContent: IndexPageContent = {
     img2Alt: "Objet analysé par New AGLAÉ.",
   },
   figure: {
-    title: "Les chiffres clefs de NewAglae",
+    title: "Les chiffres clefs de New AGLAE",
     analyzedProjectsLabel: "projets d'analyse menés",
     analyzedObjectsLabel: "objets analysés",
     hoursLabel: "heures",
