@@ -82,13 +82,18 @@ export default function ObjectTemplate({
       label: project.name,
       value: project.slug,
     }));
-  }
 
-  if (currentProject) {
-    breadcrumbSegments.push({
-      label: content.projectWithName.replace("{}", currentProject.name),
-      linkProps: { to: buildProjectPath(currentProject) },
-    });
+    // Add current project to breadcrumb if any and related to object
+    if (
+      currentProject &&
+      projects.map((p) => p.slug).indexOf(currentProject.slug) !== -1
+    ) {
+      console.log(currentProject, projects);
+      breadcrumbSegments.push({
+        label: content.projectWithName.replace("{}", currentProject.name),
+        linkProps: { to: buildProjectPath(currentProject) },
+      });
+    }
   }
 
   useEffect(() => {
