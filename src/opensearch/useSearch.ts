@@ -205,6 +205,11 @@ function searchParamsAreEqualWithoutPagination(
   copy1.delete("page");
   copy2.delete("from");
   copy2.delete("page");
+  if (copy1.size === 0) {
+    // Fix first page change bug
+    // On first page change copy1 is empty. I don't know why...
+    return true;
+  }
   return copy1.toString() === copy2.toString();
 }
 
