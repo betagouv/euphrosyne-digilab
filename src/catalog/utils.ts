@@ -7,7 +7,8 @@ export function buildObjectPath({
   label: string;
   id: string;
 }): string {
-  return `/object/${slugify(label, { lower: true })}-${id}`;
+  const slug = slugify(label, { lower: true }).replaceAll("'", "-");
+  return `/object/${slug}-${id}`;
 }
 
 export function buildProjectPath({ slug }: { slug: string }): string {
