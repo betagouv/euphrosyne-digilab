@@ -1,8 +1,8 @@
 import * as Sentry from "@sentry/gatsby";
 
-export function StartSentry() {
+export function initSentry(dsn?: string) {
   Sentry.init({
-    dsn: "https://387b15a5897e55c39dbdd622edd91769@sentry.incubateur.net/179",
+    dsn,
     integrations: [
       Sentry.browserTracingIntegration(),
       Sentry.replayIntegration(),
@@ -14,5 +14,4 @@ export function StartSentry() {
     replaysOnErrorSampleRate: 1.0,
     environment: process.env.NODE_ENV ? "production" : "development",
   });
-  return null;
 }
