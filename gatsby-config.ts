@@ -1,10 +1,6 @@
 import dotenv from "dotenv";
 import type { GatsbyConfig } from "gatsby";
 
-import { initSentry } from "./init-sentry";
-
-initSentry(process.env.SENTRY_DSN);
-
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 });
@@ -65,7 +61,12 @@ const config: GatsbyConfig = {
         },
       },
     },
-    "@sentry/gatsby",
+    {
+      resolve: "@sentry/gatsby",
+      options: {
+        dsn: process.env.GATSBY_SENTRY_DSN,
+      },
+    },
   ],
 };
 
