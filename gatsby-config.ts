@@ -59,6 +59,10 @@ const config: GatsbyConfig = {
         openSearch: {
           host: process.env.ELASTICSEARCH_CONNECTION_URL,
         },
+        eros: {
+          enabled: process.env.EROS_ENABLED === "true",
+          apiToken: process.env.EROS_API_TOKEN,
+        },
       },
     },
     {
