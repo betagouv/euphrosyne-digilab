@@ -96,6 +96,8 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         discoveryPlaceLabel: String
         collection: String
         inventoryNumber: String
+        datingEra: ${NODE_TYPES.ObjectGroup}Dating
+        datingPeriod: ${NODE_TYPES.ObjectGroup}Dating
       }
 
       type ${NODE_TYPES.ObjectGroup}ObjectPageData {
@@ -114,6 +116,12 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         lastName: String!
         institutionCountry: String
         institutionName: String
+      }
+
+      type ${NODE_TYPES.ObjectGroup}Dating {
+        label: String!
+        thesoHumaNumId: String
+        thesoHumaNumParentIds: [String!]
       }
     `;
 
