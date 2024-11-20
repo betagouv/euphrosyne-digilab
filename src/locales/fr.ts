@@ -275,7 +275,7 @@ export const runCard: RunCardContent = {
   projectLeader: "Chef de projet",
   experimentalCondition: "Conditions expérimentales",
   methods: "Méthodes",
-  dataUnderEmbargo: "Ces données ne sont pas encore accesibles",
+  dataUnderEmbargo: "Ces données ne sont pas encore accessibles",
 };
 
 const dataAlert: DataAddedAlertContent = {
