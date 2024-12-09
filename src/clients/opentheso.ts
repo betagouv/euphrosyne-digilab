@@ -1,4 +1,4 @@
-const BASE_URL = `https://opentheso.huma-num.fr/opentheso/openapi/v1`;
+const BASE_URL = `https://opentheso.huma-num.fr/openapi/v1`;
 
 interface OpenThesoSearchResult {
   id: string;
@@ -18,7 +18,9 @@ export async function searchTheso(
   const url = `${BASE_URL}/concept/${thesoId}/search/fullpath?q=${q}&lang=fr&exactMatch=false`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: { Accept: "application/json" },
+    });
     if (response.status === 404) {
       return [];
     }
