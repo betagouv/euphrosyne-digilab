@@ -1,5 +1,5 @@
 import { GatsbyNode } from "gatsby";
-import { createRemoteFileNode } from "gatsby-source-filesystem";
+import { FileSystemNode, createRemoteFileNode } from "gatsby-source-filesystem";
 
 import { NODE_TYPES } from "./constants";
 import { getImageURLForObject } from "./eros/image";
@@ -37,13 +37,20 @@ export const onCreateNode: GatsbyNode[`onCreateNode`] = async (
     );
     if (objectImageUrl) {
       reporter.verbose(`Fetching image URL for object ${c2rmfId}`);
-      const fileNode = await createRemoteFileNode({
-        url: objectImageUrl,
-        parentNodeId: node.id,
-        createNode,
-        createNodeId,
-        getCache,
-      });
+      let fileNode: FileSystemNode | null = null;
+      try {
+        fileNode = await createRemoteFileNode({
+          url: objectImageUrl,
+          parentNodeId: node.id,
+          createNode,
+          createNodeId,
+          getCache,
+        });
+      } catch (error) {
+        reporter.error(
+          `Failed to create localErosImage field for object ${slug} and image URL ${objectImageUrl}. Skipping.`,
+        );
+      }
       if (fileNode) {
         createNodeField({ node, name: "localErosImage", value: fileNode.id });
       }
