@@ -64,8 +64,9 @@ export async function getImageURLForObject(c2rmfId: string, apiToken: string) {
       console.warn(`No images found for object with id ${c2rmfId}`);
       return null;
     }
-    const imageId = objectDetails.images[0].filmnbr;
-    return `http://eros.c2rmf.fr/vignettes/${c2rmfId}/${imageId}.jpg`;
+    return objectDetails.images.map((image) => {
+      return `http://eros.c2rmf.fr/vignettes/${c2rmfId}/${image.filmnbr}.jpg`;
+    });
   }
   return null;
 }
