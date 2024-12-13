@@ -65,8 +65,24 @@ export async function getImageURLForObject(c2rmfId: string, apiToken: string) {
       return null;
     }
     return objectDetails.images.map((image) => {
-      return `http://eros.c2rmf.fr/vignettes/${c2rmfId}/${image.filmnbr}.jpg`;
+      return constructEroImageUrl(c2rmfId, image.filmnbr);
     });
   }
   return null;
+}
+
+function constructEroImageUrl(
+  c2rmfId: string,
+  imageId: string,
+  imageSize: number = 600,
+) {
+  let imageCategory: string;
+  if (c2rmfId.startsWith("C2RMF")) {
+    imageCategory = `pyr-${c2rmfId.substring(0, 6)}`;
+  } else if (c2rmfId.startsWith("F")) {
+    imageCategory = `pyr-${c2rmfId.substring(0, 2)}`;
+  } else {
+    imageCategory = `pyr-FZ`;
+  }
+  return `https://www.c2rmf.cnrs.fr/iiif/${imageCategory}/${c2rmfId}/${imageId}.tif/full/${imageSize},/0/default.jpg`;
 }
