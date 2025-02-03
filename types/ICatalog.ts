@@ -87,6 +87,7 @@ export interface IBaseItem {
   created: Date;
   materials: string[];
   dataAvailable: boolean;
+  thumbnail: string | null;
 }
 
 export interface IProjectItem extends IBaseItem {

@@ -74,6 +74,7 @@ export const query = graphql`
         comments
         slug
         pagePath
+        thumbnail
       }
     }
     euphrosyneAPI {

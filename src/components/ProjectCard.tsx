@@ -2,7 +2,6 @@ import { Card } from "@codegouvfr/react-dsfr/Card";
 import { css } from "@emotion/react";
 
 import { ContentProps } from "../i18n";
-import placeHolderImage from "../images/card-placeholder-16x9.png";
 import { ProjectStatus } from "../types/project";
 import { ellipse } from "../utils";
 import {
@@ -27,12 +26,17 @@ interface Project {
   slug: string;
   materials: readonly string[] | null;
   pagePath: string;
+  thumbnail: string | null;
 }
 
 export const ProjectCard = ({
   project,
   content,
 }: { project: Project } & ContentProps<ProjectCardContent>) => {
+  const thumbnail =
+    project.thumbnail ||
+    "https://www.systeme-de-design.gouv.fr/img/placeholder.16x9.png";
+
   return (
     <Card
       background
@@ -46,7 +50,7 @@ export const ProjectCard = ({
       desc={ellipse(project.comments, 100)}
       enlargeLink
       imageAlt={content.projectImage.replace("{}", project.name)}
-      imageUrl={placeHolderImage}
+      imageUrl={thumbnail}
       linkProps={{
         to: project.pagePath,
       }}

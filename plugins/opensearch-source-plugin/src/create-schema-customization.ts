@@ -42,6 +42,8 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         projectPageData: ${NODE_TYPES.Project}ProjectPageData!
         status: String!
         pagePath: String!
+        thumbnail: String
+        thumbnailImg: File @link(from: "fields.localThumbnail")
       }
 
       type ${NODE_TYPES.Project}ProjectPageData {
@@ -98,6 +100,8 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         inventoryNumber: String
         datingEra: ${NODE_TYPES.ObjectGroup}Dating
         datingPeriod: ${NODE_TYPES.ObjectGroup}Dating
+        thumbnail: String
+        thumbnailImg: File @link(from: "fields.localThumbnail")
       }
 
       type ${NODE_TYPES.ObjectGroup}ObjectPageData {

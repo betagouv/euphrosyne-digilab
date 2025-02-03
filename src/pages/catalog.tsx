@@ -224,9 +224,11 @@ export const query = graphql`
         created
         object {
           id
+          thumbnail
         }
         project {
           comments
+          thumbnail
         }
       }
     }
