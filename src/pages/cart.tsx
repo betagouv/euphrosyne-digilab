@@ -76,7 +76,6 @@ export default function CartPage() {
         items.map((item) => item.id),
       );
     } catch (e) {
-      console.log(e, e instanceof ValidationError);
       if (e instanceof ValidationError) {
         setErrors(e.detail);
         return;
