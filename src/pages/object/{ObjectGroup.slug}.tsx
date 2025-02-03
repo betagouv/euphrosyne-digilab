@@ -3,7 +3,12 @@ import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { Select } from "@codegouvfr/react-dsfr/SelectNext";
 import { css } from "@emotion/react";
 import { HeadFC, PageProps, graphql } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
+import {
+  GatsbyImage,
+  ImageDataLike,
+  StaticImage,
+  getImage,
+} from "gatsby-plugin-image";
 import React, { useContext, useEffect, useState } from "react";
 
 import { buildProjectPath } from "../../catalog/utils";
@@ -88,7 +93,6 @@ export default function ObjectTemplate({
       currentProject &&
       projects.map((p) => p.slug).indexOf(currentProject.slug) !== -1
     ) {
-      console.log(currentProject, projects);
       breadcrumbSegments.push({
         label: content.projectWithName.replace("{}", currentProject.name),
         linkProps: { to: buildProjectPath(currentProject) },
@@ -101,6 +105,13 @@ export default function ObjectTemplate({
       setSelectedProject(projects[0] as Project);
     }
   }, []);
+
+  const thumbnailImg =
+    data.objectGroup &&
+    data.objectGroup.thumbnailImg &&
+    data.objectGroup.thumbnailImg.childImageSharp
+      ? getImage(data.objectGroup.thumbnailImg as ImageDataLike)
+      : null;
 
   return (
     <div>
@@ -142,21 +153,25 @@ export default function ObjectTemplate({
                 content={content.objectGroupDescription}
               />
               <div className="fr-col-12 fr-col-lg-6">
-                <StaticImage
-                  src="../../images/objectgroup-placeholder.svg"
-                  alt={content.altImageWithObjectName.replace(
-                    "{}",
-                    objectGroup.name,
-                  )}
-                  placeholder="blurred"
-                  css={css`
-                    ${fr.breakpoints.down("lg")} {
-                      max-height: 200px;
-                      width: 100%;
-                      margin-bottom: ${fr.spacing("3w")};
-                    }
-                  `}
-                />
+                {thumbnailImg ? (
+                  <GatsbyImage image={thumbnailImg} alt="" />
+                ) : (
+                  <StaticImage
+                    src="../../images/objectgroup-placeholder.svg"
+                    alt={content.altImageWithObjectName.replace(
+                      "{}",
+                      objectGroup.name,
+                    )}
+                    placeholder="blurred"
+                    css={css`
+                      ${fr.breakpoints.down("lg")} {
+                        max-height: 200px;
+                        width: 100%;
+                        margin-bottom: ${fr.spacing("3w")};
+                      }
+                    `}
+                  />
+                )}
               </div>
             </div>
           </BaseSection>
@@ -217,6 +232,11 @@ export const query = graphql`
       discoveryPlaceLabel
       collection
       inventoryNumber
+      thumbnailImg {
+        childImageSharp {
+          gatsbyImageData(width: 600)
+        }
+      }
       datingPeriod {
         label
       }

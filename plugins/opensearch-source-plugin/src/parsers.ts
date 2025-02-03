@@ -24,6 +24,7 @@ export function parseProjectDocument(data: IOpenSearchDocument): IProjectItem {
     status: data.status,
     discoveryPlacePoints: data.discovery_place_points,
     dataAvailable: data.is_data_available,
+    thumbnail: data.thumbnail,
     projectPageData: parseProjectPageData(data.project_page_data),
 
     pagePath: `/project/${data.slug}/`,
@@ -81,6 +82,7 @@ function parseCommonData(data: IOpenSearchDocument): IBaseItem {
     created: new Date(data.created),
     materials: data.materials,
     dataAvailable: data.is_data_available,
+    thumbnail: data.thumbnail,
   };
 }
 

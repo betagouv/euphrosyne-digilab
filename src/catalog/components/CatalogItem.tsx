@@ -44,6 +44,11 @@ export function CatalogItem({ searchItem, css }: CatalogItemProps) {
   const linkTo = searchItem.pagePath || "#",
     title = searchItem.name || "";
 
+  const thumbnail =
+    searchItem.object?.thumbnail ||
+    searchItem.project?.thumbnail ||
+    "https://www.systeme-de-design.gouv.fr/img/placeholder.16x9.png";
+
   return (
     <Card
       background
@@ -58,6 +63,8 @@ export function CatalogItem({ searchItem, css }: CatalogItemProps) {
       end={<SearchItemBadge searchItem={searchItem} />}
       titleAs="h3"
       title={title}
+      imageUrl={thumbnail}
+      imageAlt="Image de l'objet"
       css={{ ...css, minHeight: "22rem" }}
     />
   );

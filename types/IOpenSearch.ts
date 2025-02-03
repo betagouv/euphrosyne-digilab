@@ -22,6 +22,7 @@ interface IBaseDocument {
   created: string;
   materials: string[];
   is_data_available: boolean;
+  thumbnail: string | null;
 }
 
 interface IBaseProjectDocument {
