@@ -74,7 +74,10 @@ export const query = graphql`
         comments
         slug
         pagePath
-        thumbnail
+        thumbnail {
+          copyright
+          url
+        }
       }
     }
     euphrosyneAPI {

@@ -224,11 +224,17 @@ export const query = graphql`
         created
         object {
           id
-          thumbnail
+          thumbnail {
+            url
+            copyright
+          }
         }
         project {
           comments
-          thumbnail
+          thumbnail {
+            url
+            copyright
+          }
         }
       }
     }

@@ -107,10 +107,8 @@ export default function ObjectTemplate({
   }, []);
 
   const thumbnailImg =
-    data.objectGroup &&
-    data.objectGroup.thumbnailImg &&
-    data.objectGroup.thumbnailImg.childImageSharp
-      ? getImage(data.objectGroup.thumbnailImg as ImageDataLike)
+    data.objectGroup && data.objectGroup.thumbnailImage
+      ? getImage(data.objectGroup.thumbnailImage as ImageDataLike)
       : null;
 
   return (
@@ -154,7 +152,15 @@ export default function ObjectTemplate({
               />
               <div className="fr-col-12 fr-col-lg-6">
                 {thumbnailImg ? (
-                  <GatsbyImage image={thumbnailImg} alt="" />
+                  <div>
+                    <GatsbyImage image={thumbnailImg} alt="" />
+                    <p
+                      className="fr-text--sm fr-mt-1w"
+                      css={{ textAlign: "right" }}
+                    >
+                      © {data.objectGroup?.thumbnail?.copyright}
+                    </p>
+                  </div>
                 ) : (
                   <StaticImage
                     src="../../images/objectgroup-placeholder.svg"
@@ -232,7 +238,11 @@ export const query = graphql`
       discoveryPlaceLabel
       collection
       inventoryNumber
-      thumbnailImg {
+      thumbnail {
+        copyright
+        url
+      }
+      thumbnailImage {
         childImageSharp {
           gatsbyImageData(width: 600)
         }

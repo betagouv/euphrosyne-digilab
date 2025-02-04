@@ -1,6 +1,7 @@
 import { CreateNodeArgs, GatsbyNode } from "gatsby";
 import { createRemoteFileNode } from "gatsby-source-filesystem";
 
+import { IThumbnail } from "../../../types/ICatalog";
 import { NODE_TYPES } from "./constants";
 
 export const onCreateNode: GatsbyNode[`onCreateNode`] = async (
@@ -15,7 +16,7 @@ export const onCreateNode: GatsbyNode[`onCreateNode`] = async (
     node.thumbnail
   ) {
     const fileNode = await createRemoteFileNode({
-      url: node.thumbnail as string, // string that points to the URL of the image
+      url: (node.thumbnail as IThumbnail).url as string, // string that points to the URL of the image
       parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
       createNode, // helper function in gatsby-node to generate the node
       createNodeId, // helper function in gatsby-node to generate the node id

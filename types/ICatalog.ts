@@ -9,6 +9,11 @@ interface IObject {
   inventory: string | null;
 }
 
+export interface IThumbnail {
+  url: string;
+  copyright: string;
+}
+
 export interface IDating {
   label: string;
   thesoHumaNumId?: string;
@@ -87,7 +92,7 @@ export interface IBaseItem {
   created: Date;
   materials: string[];
   dataAvailable: boolean;
-  thumbnail: string | null;
+  thumbnail: IThumbnail | null;
 }
 
 export interface IProjectItem extends IBaseItem {
