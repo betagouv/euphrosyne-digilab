@@ -14,6 +14,11 @@ interface ILeader {
   institution_country: string;
 }
 
+interface IThumbnail {
+  url: string;
+  copyright: string;
+}
+
 interface IBaseDocument {
   id: string;
   category: "object" | "project";
@@ -22,7 +27,7 @@ interface IBaseDocument {
   created: string;
   materials: string[];
   is_data_available: boolean;
-  thumbnail: string | null;
+  thumbnail: IThumbnail | null;
 }
 
 interface IBaseProjectDocument {

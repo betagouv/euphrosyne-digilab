@@ -26,7 +26,7 @@ interface Project {
   slug: string;
   materials: readonly string[] | null;
   pagePath: string;
-  thumbnail: string | null;
+  thumbnail: { url: string; copyright: string } | null;
 }
 
 export const ProjectCard = ({
@@ -34,7 +34,7 @@ export const ProjectCard = ({
   content,
 }: { project: Project } & ContentProps<ProjectCardContent>) => {
   const thumbnail =
-    project.thumbnail ||
+    project.thumbnail?.url ||
     "https://www.systeme-de-design.gouv.fr/img/placeholder.16x9.png";
 
   return (

@@ -45,8 +45,8 @@ export function CatalogItem({ searchItem, css }: CatalogItemProps) {
     title = searchItem.name || "";
 
   const thumbnail =
-    searchItem.object?.thumbnail ||
-    searchItem.project?.thumbnail ||
+    searchItem.object?.thumbnail?.url ||
+    searchItem.project?.thumbnail?.url ||
     "https://www.systeme-de-design.gouv.fr/img/placeholder.16x9.png";
 
   return (
