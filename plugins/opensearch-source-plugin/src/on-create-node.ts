@@ -10,14 +10,7 @@ export const onCreateNode: GatsbyNode[`onCreateNode`] = async (
   args: CreateNodeArgs<Record<string, unknown>>,
   options: IPluginOptionsInternal,
 ) => {
-  const {
-      node,
-      actions,
-      reporter,
-      createNodeId,
-      getCache,
-      createContentDigest,
-    } = args,
+  const { node, actions, reporter, createNodeId, getCache } = args,
     { createNodeField, createNode } = actions;
   // From https://www.gatsbyjs.com/docs/how-to/images-and-media/preprocessing-external-images/
 
@@ -77,20 +70,13 @@ export const onCreateNode: GatsbyNode[`onCreateNode`] = async (
         );
       }
       if (fileNode) {
-        const nodeId = createNodeId(`objectgroup-${slug}-localErosImage`);
         const { url, copyright } = fileNode.image;
-        createNode({
-          url,
-          copyright,
-          localImage: fileNode.node,
-          id: nodeId,
-          parent: node.id,
-          internal: {
-            type: NODE_TYPES.ErosImage,
-            contentDigest: createContentDigest(url),
-          },
+        reporter.verbose(`Created erosImage field for object ${slug}`);
+        createNodeField({
+          node,
+          name: "erosImage",
+          value: { localImage: fileNode.node.id, url, copyright },
         });
-        createNodeField({ node, name: "erosImage", value: nodeId });
       }
     }
   }

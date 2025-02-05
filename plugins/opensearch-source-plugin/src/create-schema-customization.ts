@@ -32,12 +32,6 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
       url: String!
       copyright: String!
     }
-
-    type ErosThumbnail {
-      url: String!
-      copyright: String!
-      image: File @link(from: "fields.localImage")
-    }
     `;
 
     const projectTypes = `
@@ -96,6 +90,16 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
     `;
 
     const objectGroupTypes = `
+      type ErosThumbnail {
+        url: String!
+        copyright: String!
+        image: File @link(from: "localImage")
+      }
+
+      type ${NODE_TYPES.ObjectGroup}Fields {
+        erosImage: ErosThumbnail
+      }
+
       type ${NODE_TYPES.ObjectGroup} implements Node {
         category: String!
         created: Date!
@@ -114,7 +118,7 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         datingPeriod: ${NODE_TYPES.ObjectGroup}Dating
         thumbnail: Thumbnail
         thumbnailImage: File @link(from: "fields.localThumbnail")
-
+        fields: ${NODE_TYPES.ObjectGroup}Fields
       }
 
       type ${NODE_TYPES.ObjectGroup}ObjectPageData {

@@ -107,12 +107,13 @@ export default function ObjectTemplate({
   }, []);
 
   const thumbnailSrc =
-    objectGroup?.thumbnailImage || objectGroup?.erosImage?.image;
+    objectGroup?.thumbnailImage || objectGroup?.fields?.erosImage?.image;
   const thumbnailImg = thumbnailSrc
     ? getImage(thumbnailSrc as ImageDataLike)
     : null;
   const thumbnailCopyright =
-    objectGroup?.thumbnail?.copyright || objectGroup?.erosImage?.copyright;
+    objectGroup?.thumbnail?.copyright ||
+    objectGroup?.fields?.erosImage?.copyright;
 
   return (
     <div>
@@ -292,11 +293,13 @@ export const query = graphql`
           }
         }
       }
-      erosImage {
-        copyright
-        image {
-          childImageSharp {
-            gatsbyImageData(width: 600)
+      fields {
+        erosImage {
+          copyright
+          image {
+            childImageSharp {
+              gatsbyImageData(width: 600)
+            }
           }
         }
       }
