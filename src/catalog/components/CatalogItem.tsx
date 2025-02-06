@@ -8,6 +8,7 @@ import { ellipse } from "../../utils";
 
 type CatalogItemProps = {
   searchItem: SearchItem;
+  relatedErosImageUrl?: string | null;
   css?: SerializedStyles;
 };
 
@@ -40,12 +41,17 @@ function CardStart({ searchItem }: { searchItem: SearchItem }) {
   );
 }
 
-export function CatalogItem({ searchItem, css }: CatalogItemProps) {
+export function CatalogItem({
+  searchItem,
+  css,
+  relatedErosImageUrl,
+}: CatalogItemProps) {
   const linkTo = searchItem.pagePath || "#",
     title = searchItem.name || "";
 
   const thumbnail =
     searchItem.object?.thumbnail?.url ||
+    relatedErosImageUrl ||
     searchItem.project?.thumbnail?.url ||
     "https://www.systeme-de-design.gouv.fr/img/placeholder.16x9.png";
 

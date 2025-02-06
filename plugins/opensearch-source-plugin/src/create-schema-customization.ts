@@ -90,6 +90,16 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
     `;
 
     const objectGroupTypes = `
+      type ErosThumbnail {
+        url: String!
+        copyright: String!
+        image: File @link(from: "localImage")
+      }
+
+      type ${NODE_TYPES.ObjectGroup}Fields {
+        erosImage: ErosThumbnail
+      }
+
       type ${NODE_TYPES.ObjectGroup} implements Node {
         category: String!
         created: Date!
@@ -103,11 +113,12 @@ export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] 
         discoveryPlaceLabel: String
         collection: String
         inventoryNumber: String
+        erosImage: ErosThumbnail
         datingEra: ${NODE_TYPES.ObjectGroup}Dating
         datingPeriod: ${NODE_TYPES.ObjectGroup}Dating
         thumbnail: Thumbnail
         thumbnailImage: File @link(from: "fields.localThumbnail")
-
+        fields: ${NODE_TYPES.ObjectGroup}Fields
       }
 
       type ${NODE_TYPES.ObjectGroup}ObjectPageData {

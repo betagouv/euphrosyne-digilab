@@ -46,18 +46,18 @@ export const sourceNodes: GatsbyNode[`sourceNodes`] = async (
         },
       },
     });
-    const documents = searchResponse.body.hits.hits;
-    documents.forEach((document: SearchHit) => {
+    const documents: SearchHit[] = searchResponse.body.hits.hits;
+    for (const document of documents) {
       let documentData: IProjectItem | IObjectGroupItem | null = null;
       if (document._source.category === "project") {
         documentData = parseProjectDocument(document._source);
-        nodeBuilder({
+        await nodeBuilder({
           gatsbyApi,
           input: { type: NODE_TYPES.Project, data: documentData },
         });
       } else if (document._source.category === "object") {
         documentData = parseObjectDocument(document._source);
-        nodeBuilder({
+        await nodeBuilder({
           gatsbyApi,
           input: { type: NODE_TYPES.ObjectGroup, data: documentData },
         });
@@ -75,7 +75,7 @@ export const sourceNodes: GatsbyNode[`sourceNodes`] = async (
           [documentData.category]: id,
           category: documentData.category,
         };
-        nodeBuilder({
+        await nodeBuilder({
           gatsbyApi,
           input: {
             type: NODE_TYPES.CatalogItem,
@@ -83,7 +83,7 @@ export const sourceNodes: GatsbyNode[`sourceNodes`] = async (
           },
         });
       }
-    });
+    }
   }
   sourcingTimer.end();
 };
@@ -109,5 +109,5 @@ export function nodeBuilder({ gatsbyApi, input }: INodeBuilderArgs) {
     },
   } satisfies NodeInput;
 
-  gatsbyApi.actions.createNode(node);
+  return gatsbyApi.actions.createNode(node);
 }

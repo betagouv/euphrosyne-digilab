@@ -21,6 +21,10 @@ interface IPluginOptionsKeys {
   openSearch: {
     host: string;
   };
+  eros: {
+    enabled: boolean;
+    apiToken: string;
+  };
 }
 
 /**

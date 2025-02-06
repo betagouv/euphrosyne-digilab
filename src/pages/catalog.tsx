@@ -47,8 +47,13 @@ export interface CatalogTemplateProps extends PageProps {
   searchItems: SearchItem[];
 }
 
+interface C2rmfImages {
+  [key: string]: string | undefined;
+}
+
 export default function CatalogPage({
   location,
+  data,
 }: PageProps<Queries.CatalogPageQuery> & ContentProps<CatalogContent>) {
   //const searchItems = allCatalogItem.nodes as SearchItem[];
   const { translations } = useContext(LangContext);
@@ -63,6 +68,23 @@ export default function CatalogPage({
   const pageLength = 10;
 
   const searchResult = useSearch(filters, selectedSort, location);
+
+  const erosImageUrls: C2rmfImages = {};
+  for (const node of data.c2rmfImages.nodes) {
+    erosImageUrls[node.c2rmfId as string] = node.fields?.erosImage?.image
+      ?.publicURL as string | undefined;
+  }
+
+  const getErosUrlForCatalogItem = (item: SearchItem) => {
+    if (
+      item.object &&
+      item.object.c2rmfId &&
+      item.object.c2rmfId in erosImageUrls
+    ) {
+      return erosImageUrls[item.object.c2rmfId];
+    }
+    return null;
+  };
 
   useEffect(() => {
     const from = filters.size * (currentPage - 1);
@@ -181,7 +203,12 @@ export default function CatalogPage({
                       className="fr-col-6 fr-col-xl-4"
                       key={`catalog-item-${searchItem.category}-${searchItem.slug}`}
                     >
-                      <CatalogItem searchItem={searchItem} />
+                      <CatalogItem
+                        searchItem={searchItem}
+                        relatedErosImageUrl={getErosUrlForCatalogItem(
+                          searchItem,
+                        )}
+                      />
                     </div>
                   ))}
                   {!searchResult.results.length && (
@@ -224,18 +251,29 @@ export const query = graphql`
         created
         object {
           id
+          c2rmfId
           thumbnail {
             url
-            copyright
           }
         }
         project {
           comments
           thumbnail {
             url
-            copyright
           }
         }
+      }
+    }
+    c2rmfImages: allObjectGroup(filter: { c2rmfId: { ne: null } }) {
+      nodes {
+        fields {
+          erosImage {
+            image {
+              publicURL
+            }
+          }
+        }
+        c2rmfId
       }
     }
   }
