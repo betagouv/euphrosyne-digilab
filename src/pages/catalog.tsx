@@ -70,7 +70,7 @@ export default function CatalogPage({
   const searchResult = useSearch(filters, selectedSort, location);
 
   const erosImageUrls: C2rmfImages = {};
-  for (const node of data.c2rmfImages.nodes) {
+  for (const node of data.c2rmfImages?.nodes || []) {
     erosImageUrls[node.c2rmfId as string] = node.fields?.erosImage?.image
       ?.publicURL as string | undefined;
   }
