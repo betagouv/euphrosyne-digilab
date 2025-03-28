@@ -5,3 +5,5 @@ export interface SearchResults {
   results: SearchItem[];
   total: number;
 }
+
+export type CatalogViewMode = "grid" | "list";

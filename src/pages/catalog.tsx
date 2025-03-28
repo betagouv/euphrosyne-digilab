@@ -6,7 +6,8 @@ import { useContext, useEffect, useState } from "react";
 import CatalogFilters, {
   CatalogFiltersContent,
 } from "../catalog/components/CatalogFilters";
-import { CatalogItem } from "../catalog/components/CatalogItem";
+import CatalogItem from "../catalog/components/CatalogItem/CatalogItem";
+import CatalogViewModeToggle from "../catalog/components/CatalogViewModeToggle";
 import FilterContainer, {
   FilterContainerContent,
 } from "../catalog/components/FilterContainer";
@@ -29,7 +30,7 @@ import useSearch, {
   Filters,
   buildFiltersFromLocation,
 } from "../opensearch/useSearch";
-import { SearchItem } from "../types/catalog";
+import { CatalogViewMode, SearchItem } from "../types/catalog";
 
 export interface CatalogContent {
   noData: string;
@@ -63,6 +64,8 @@ export default function CatalogPage({
   const [filters, setFilters] = useState<Filters>(
     buildFiltersFromLocation(location),
   );
+
+  const [viewMode, setViewMode] = useState<CatalogViewMode>("list");
 
   const currentPage = usePagination();
   const pageLength = 10;
@@ -193,6 +196,18 @@ export default function CatalogPage({
               </div>
               <div
                 css={css`
+                  display: flex;
+                  justify-content: flex-end;
+                  margin-bottom: ${fr.spacing("2w")};
+                `}
+              >
+                <CatalogViewModeToggle
+                  viewMode={viewMode}
+                  onViewModeChange={setViewMode}
+                />
+              </div>
+              <div
+                css={css`
                   max-width: 78rem;
                   min-height: 1500px;
                 `}
@@ -200,7 +215,11 @@ export default function CatalogPage({
                 <div className="fr-grid-row fr-grid-row--gutters fr-my-3w">
                   {searchResult.results.map((searchItem) => (
                     <div
-                      className="fr-col-6 fr-col-xl-4"
+                      className={
+                        viewMode === "grid"
+                          ? "fr-col-6 fr-col-xl-4"
+                          : "fr-col-12"
+                      }
                       key={`catalog-item-${searchItem.category}-${searchItem.slug}`}
                     >
                       <CatalogItem
@@ -208,6 +227,7 @@ export default function CatalogPage({
                         relatedErosImageUrl={getErosUrlForCatalogItem(
                           searchItem,
                         )}
+                        viewMode={viewMode}
                       />
                     </div>
                   ))}
