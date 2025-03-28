@@ -6,7 +6,7 @@ import {
   StartDsfrOnHydration,
 } from "@codegouvfr/react-dsfr/next-app-router";
 
-import { I18nLink as Link } from "./components/I18nLink";
+import { I18nLink as Link } from "../components/I18nLink";
 import { defaultColorScheme } from "./defaultColorScheme";
 
 declare module "@codegouvfr/react-dsfr/next-app-router" {

@@ -1,26 +1,23 @@
 import type { HeadFC } from "gatsby";
 import * as React from "react";
 
-import { StartDsfrOnHydration } from "../StartDsfr";
+import { StartDsfrOnHydration } from "../dsf-bootstrap";
+import {
+  DsfrHead,
+  getHtmlAttributes,
+} from "../dsf-bootstrap/server-only-index";
+import { getCurrentLangKey } from "../i18n";
 
-export const BaseHead: HeadFC = () => (
-  <>
-    <StartDsfrOnHydration />
-    <title>Catalogue des données de New AGLAE</title>
-    <link rel="apple-touch-icon" href="/dsfr/favicon/apple-touch-icon.png" />
-    <link rel="icon" href="/dsfr/favicon/favicon.svg" type="image/svg+xml" />
-    <link
-      rel="shortcut icon"
-      href="/dsfr/favicon/favicon.ico"
-      type="image/x-icon"
-    />
-    <link
-      rel="manifest"
-      href="/dsfr/favicon/manifest.webmanifest"
-      crossOrigin="use-credentials"
-    />
-
-    <link rel="stylesheet" href="/dsfr/utility/icons/icons.min.css" />
-    <link rel="stylesheet" href="/dsfr/dsfr.min.css" />
-  </>
-);
+export const BaseHead: HeadFC = () => {
+  const currentLang = getCurrentLangKey();
+  return (
+    <>
+      <head {...getHtmlAttributes({ lang: currentLang })} />
+      <StartDsfrOnHydration />
+      <DsfrHead
+        preloadFonts={["Marianne-Regular", "Marianne-Medium", "Marianne-Bold"]}
+      />
+      <title>Catalogue des données de New AGLAE</title>
+    </>
+  );
+};

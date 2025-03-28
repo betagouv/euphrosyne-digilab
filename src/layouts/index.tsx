@@ -1,7 +1,6 @@
 import { PageProps } from "gatsby";
 import React, { useState } from "react";
 
-import { DsfrProvider } from "../StartDsfr";
 import { CartContext, ICart, createCart } from "../cart/context";
 import {
   EuphrosyneHeader,
@@ -10,6 +9,7 @@ import {
 import { Footer } from "../components/Footer";
 import { LangContext } from "../contexts/LangContext";
 import { PageContext } from "../contexts/PageContext";
+import { DsfrProvider } from "../dsf-bootstrap";
 import useTranslations from "../hooks/useTranslations";
 import { Lang } from "../i18n";
 import { PageContext as IPageContext } from "../types/context";
