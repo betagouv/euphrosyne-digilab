@@ -2,6 +2,7 @@ import { CartButtonContent } from "../cart/CartButton";
 import { CartSubmitFormContent } from "../cart/CartSubmitForm";
 import { CartTableContent } from "../cart/CartTable";
 import { DataAddedAlertContent } from "../cart/DataAddedAlert";
+import { CatalogViewModeToggleContent } from "../catalog/components/CatalogViewModeToggle";
 import type { PageBadgesContent } from "../components/PageBadges";
 import type { ProjectCardContent } from "../components/ProjectCard";
 import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
@@ -176,6 +177,11 @@ const catalogContent: CatalogContent = {
   },
 };
 
+const catalogViewModeToggleContent: CatalogViewModeToggleContent = {
+  grid: "Grid",
+  list: "List",
+};
+
 const objectPageContent: ObjectTemplateContent = {
   catalog: "Catalog",
   projectWithName: "Project {}",
@@ -296,6 +302,7 @@ const t: Translations = {
   projectStatusBadge,
   runCard,
   dataAlert,
+  catalogViewModeToggleContent,
 };
 
 export default t;
