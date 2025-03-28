@@ -1,7 +1,7 @@
-import { DsfrProvider } from "@codegouvfr/react-dsfr/next-appdir/DsfrProvider";
 import { PageProps } from "gatsby";
 import React, { useState } from "react";
 
+import { DsfrProvider } from "../StartDsfr";
 import { CartContext, ICart, createCart } from "../cart/context";
 import {
   EuphrosyneHeader,

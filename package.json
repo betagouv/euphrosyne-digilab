@@ -13,14 +13,12 @@
   "scripts": {
     "develop": "gatsby develop --port 8002 --verbose",
     "start": "gatsby develop --port 8002",
-    "prebuild": "only-include-used-icons && npm run build-plugins",
+    "predev": "react-dsfr update-icons",
+    "prebuild": "react-dsfr update-icons",
     "build": "gatsby build",
-    "postbuild": "copy-dsfr-to-public",
     "serve": "gatsby serve --port 8002",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
-    "postinstall": "copy-dsfr-to-public",
-    "prestart": "only-include-used-icons",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
     "build-plugins": "cd plugins/opensearch-source-plugin && npm run build"
@@ -31,7 +29,7 @@
     ]
   },
   "dependencies": {
-    "@codegouvfr/react-dsfr": "^1.22.1",
+    "@codegouvfr/react-dsfr": "^1.20.4",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@opensearch-project/opensearch": "^2.8.0",
