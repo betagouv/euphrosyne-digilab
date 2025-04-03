@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { Link } from "gatsby";
 
+import { I18nLink as Link } from "../../../components/I18nLink";
 import { ellipse } from "../../../utils";
 import CardStart from "./CardStart";
 import SearchItemBadge from "./SearchItemBadge";
