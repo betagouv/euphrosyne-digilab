@@ -48,7 +48,7 @@ export interface CatalogTemplateProps extends PageProps {
   searchItems: SearchItem[];
 }
 
-interface C2rmfImages {
+interface IIDImageMapping {
   [key: string]: string | undefined;
 }
 
@@ -72,10 +72,19 @@ export default function CatalogPage({
 
   const searchResult = useSearch(filters, selectedSort, location);
 
-  const erosImageUrls: C2rmfImages = {};
+  const erosImageUrls: IIDImageMapping = {};
   for (const node of data.c2rmfImages?.nodes || []) {
     erosImageUrls[node.c2rmfId as string] = node.fields?.erosImage?.image
       ?.publicURL as string | undefined;
+  }
+
+  const placeholderImageUrls: IIDImageMapping = {};
+  for (const node of data.allCatalogItem.nodes as SearchItem[]) {
+    const item = node.object || node.project;
+    if (item?.placeholderImage?.publicURL) {
+      placeholderImageUrls[item.slug] = item?.placeholderImage
+        ?.publicURL as string;
+    }
   }
 
   const getErosUrlForCatalogItem = (item: SearchItem) => {
@@ -227,6 +236,9 @@ export default function CatalogPage({
                         relatedErosImageUrl={getErosUrlForCatalogItem(
                           searchItem,
                         )}
+                        placeholderImageUrl={
+                          placeholderImageUrls[searchItem.slug]
+                        }
                         viewMode={viewMode}
                       />
                     </div>
@@ -271,15 +283,23 @@ export const query = graphql`
         created
         object {
           id
+          slug
           c2rmfId
           thumbnail {
             url
           }
+          placeholderImage {
+            publicURL
+          }
         }
         project {
+          slug
           comments
           thumbnail {
             url
+          }
+          placeholderImage {
+            publicURL
           }
         }
       }
