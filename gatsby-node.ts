@@ -1,11 +1,14 @@
 import type { GatsbyNode } from "gatsby";
+import { FileSystemNode } from "gatsby-source-filesystem";
 import {
   writeGraphQLConfig,
   writeGraphQLFragments,
   writeGraphQLSchema,
 } from "gatsby/dist/utils/graphql-typegen/file-writes";
 
+import { NODE_TYPES } from "./plugins/opensearch-source-plugin/src/constants";
 import { defaultLangKey, langs, localizePath } from "./src/i18n";
+import { deterministicItemSelector } from "./src/placeholder";
 
 export const onCreatePage: GatsbyNode["onCreatePage"] = ({ page, actions }) => {
   if (
@@ -67,3 +70,49 @@ export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({
     });
   }
 };
+
+export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
+  node,
+  actions,
+  getNodesByType,
+}) => {
+  const { createNodeField } = actions;
+  if (
+    ([NODE_TYPES.ObjectGroup, NODE_TYPES.Project] as string[]).includes(
+      node.internal.type,
+    )
+  ) {
+    const placeholderFiles = (
+      getNodesByType("File") as FileSystemNode[]
+    ).filter((file) => file.relativePath.startsWith("placeholders"));
+
+    const randomPlaceholder = deterministicItemSelector(
+      node.slug as string,
+      placeholderFiles,
+    );
+
+    createNodeField({
+      node,
+      name: "placeholderImage",
+      value: randomPlaceholder.id,
+    });
+  }
+};
+
+export const createSchemaCustomization: GatsbyNode[`createSchemaCustomization`] =
+  ({ actions }) => {
+    const { createTypes } = actions;
+
+    const additionalTypes = `
+      type ${NODE_TYPES.Project} implements Node {
+        placeholderImage: File @link(from: "fields.placeholderImage")
+      }
+
+      type ${NODE_TYPES.ObjectGroup} implements Node {
+        placeholderImage: File @link(from: "fields.placeholderImage")
+      }
+
+    `;
+
+    createTypes(additionalTypes);
+  };

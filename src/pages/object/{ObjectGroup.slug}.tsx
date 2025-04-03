@@ -106,11 +106,18 @@ export default function ObjectTemplate({
     }
   }, []);
 
+  // Find the thumbnail image
+  // Check if the object group has a thumbnail image, an Eros image, or a placeholder image
+  // and use the first one that is available
   const thumbnailSrc =
-    objectGroup?.thumbnailImage || objectGroup?.fields?.erosImage?.image;
-  const thumbnailImg = thumbnailSrc
+    objectGroup?.thumbnailImage ||
+    objectGroup?.fields?.erosImage?.image ||
+    objectGroup?.placeholderImage;
+
+  const thumbnailImg = thumbnailSrc?.childImageSharp?.gatsbyImageData
     ? getImage(thumbnailSrc as ImageDataLike)
     : null;
+
   const thumbnailCopyright =
     objectGroup?.thumbnail?.copyright ||
     objectGroup?.fields?.erosImage?.copyright;
@@ -156,7 +163,7 @@ export default function ObjectTemplate({
               />
               <div className="fr-col-12 fr-col-lg-6">
                 {thumbnailImg ? (
-                  <div>
+                  <div css={{ maxWidth: "600px", margin: "0 auto" }}>
                     <GatsbyImage image={thumbnailImg} alt="" />
                     {thumbnailCopyright && (
                       <p
@@ -249,6 +256,11 @@ export const query = graphql`
         url
       }
       thumbnailImage {
+        childImageSharp {
+          gatsbyImageData(width: 600)
+        }
+      }
+      placeholderImage {
         childImageSharp {
           gatsbyImageData(width: 600)
         }
