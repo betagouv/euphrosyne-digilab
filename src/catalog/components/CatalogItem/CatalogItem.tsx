@@ -7,6 +7,7 @@ import ListItem from "./ListItem";
 type CatalogItemProps = {
   searchItem: SearchItem;
   relatedErosImageUrl?: string | null;
+  placeholderImageUrl?: string | null;
   css?: SerializedStyles;
   viewMode?: CatalogViewMode;
 };
@@ -14,16 +15,19 @@ type CatalogItemProps = {
 export default function CatalogItem({
   searchItem,
   relatedErosImageUrl,
+  placeholderImageUrl,
   viewMode = "list",
   ...props
 }: CatalogItemProps) {
   const linkTo = searchItem.pagePath || "#",
     title = searchItem.name || "";
 
+  const item = searchItem.object || searchItem.project;
+
   const thumbnail =
-    searchItem.object?.thumbnail?.url ||
+    item?.thumbnail?.url ||
     relatedErosImageUrl ||
-    searchItem.project?.thumbnail?.url ||
+    placeholderImageUrl ||
     "https://www.systeme-de-design.gouv.fr/img/placeholder.16x9.png";
 
   return viewMode === "grid" ? (

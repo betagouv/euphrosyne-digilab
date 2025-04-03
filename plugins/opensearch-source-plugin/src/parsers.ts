@@ -26,6 +26,7 @@ export function parseProjectDocument(data: IOpenSearchDocument): IProjectItem {
     dataAvailable: data.is_data_available,
     thumbnail: data.thumbnail,
     projectPageData: parseProjectPageData(data.project_page_data),
+    placeholderImage: null,
 
     pagePath: `/project/${data.slug}/`,
   };
@@ -69,6 +70,7 @@ export function parseObjectDocument(
     }),
     collections: data.collections,
     inventoryNumbers: data.inventory_numbers,
+    placeholderImage: null,
 
     pagePath: `/object/${data.slug}/`,
   };
@@ -83,6 +85,7 @@ function parseCommonData(data: IOpenSearchDocument): IBaseItem {
     materials: data.materials,
     dataAvailable: data.is_data_available,
     thumbnail: data.thumbnail,
+    placeholderImage: null,
   };
 }
 

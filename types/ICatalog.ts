@@ -93,6 +93,7 @@ export interface IBaseItem {
   materials: string[];
   dataAvailable: boolean;
   thumbnail: IThumbnail | null;
+  placeholderImage: never | null;
 }
 
 export interface IProjectItem extends IBaseItem {
