@@ -78,6 +78,9 @@ export const query = graphql`
           copyright
           url
         }
+        placeholderImage {
+          publicURL
+        }
       }
     }
     euphrosyneAPI {
