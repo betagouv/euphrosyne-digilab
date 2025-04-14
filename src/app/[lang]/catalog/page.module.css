@@ -1,0 +1,34 @@
+.catalogContainer {
+  width: 100%;
+}
+
+/* less than md */
+@media (max-width: 47.9969em) {
+  .root {
+    background-color: var(--background-alt-grey);
+  }
+  .catalogContainer {
+    background-color: var(--background-default-grey);
+    margin: 1.5rem;
+  }
+}
+
+/* more than md */
+@media (min-width: 48em) {
+  .searchBarSm {
+    display: none;
+  }
+  .catalogContainer {
+    display: flex;
+  }
+  .searchResultsContainer {
+    width: 70%;
+  }
+}
+
+/* more than lg */
+@media (min-width: 62em) {
+  .searchResultsContainer {
+    margin: 0 auto !important;
+  }
+}
