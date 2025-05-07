@@ -1,8 +1,10 @@
 import { ContentProps } from "@/i18n";
-import useSharedStyles from "@/styles";
+import sharedStyles from "@/styles/shared.module.css";
+
 import { ProjectStatus } from "../../types/project";
 import { BaseSection } from "../BaseSection";
 import { PageBadges, PageBadgesContent } from "../PageBadges";
+
 
 export interface ProjectDescriptionContent {
   pageBadges: PageBadgesContent;
@@ -21,9 +23,8 @@ export const ProjectDescription = ({
   projectStatus,
   content,
 }: ProjectDescriptionProps & ContentProps<ProjectDescriptionContent>) => {
-  const sharedClasses = useSharedStyles().classes;
   return (
-    <BaseSection className={`fr-mb-5w ${sharedClasses.paddedUpToLg}`}>
+    <BaseSection className={`fr-mb-5w ${sharedStyles.paddedUpToLg}`}>
       <PageBadges
         pageType="project"
         projectStatus={projectStatus}

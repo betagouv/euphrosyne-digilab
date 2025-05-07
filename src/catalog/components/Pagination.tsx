@@ -1,9 +1,7 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import React, { useContext } from "react";
-import { useRouter } from "next/navigation";
 
 import { ContentProps } from "../../i18n";
-import { getUrlForPage } from "../hooks/usePagination";
 import { CatalogContext } from "../CatalogContext";
 
 export interface PaginationContent {
@@ -26,22 +24,17 @@ export function Pagination({
   content,
   ...props
 }: PaginationProps & ContentProps<PaginationContent>) {
-  const router = useRouter();
   const { setFilters, filters } = useContext(CatalogContext);
-  
+
   const handlePageChange = (page: number) => {
     // Early return if trying to navigate outside valid range
     if (page < 1 || page > pageCount) return;
-    
-    // Update URL
-    const url = getUrlForPage(page);
-    router.push(url.pathname + url.search);
-    
+
     // Update filters directly
     const from = filters.size * (page - 1);
     setFilters({ ...filters, from });
   };
-  
+
   const visiblePages = Array.from(
     new Set(
       [
@@ -55,7 +48,7 @@ export function Pagination({
       ].filter((page) => page > 0 && page <= pageCount)
     )
   );
-  
+
   return (
     <nav
       role="navigation"

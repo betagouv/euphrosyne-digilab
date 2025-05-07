@@ -1,11 +1,12 @@
 "use client";
 
 import Badge from "@codegouvfr/react-dsfr/Badge";
-import { useStyles } from "tss-react";
 import { useContext } from "react";
+import { useStyles } from "tss-react";
 
 import { LangContext } from "../contexts/LangContext";
 import { ProjectStatus } from "../types/project";
+
 import {
   ProjectStatusBadge,
   ProjectStatusBadgeContent,

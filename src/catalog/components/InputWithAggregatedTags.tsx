@@ -45,6 +45,7 @@ export default function InputWithAggregatedTags({
 
   useEffect(() => {
     debouncedFetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue]);
 
   return (

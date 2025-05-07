@@ -1,6 +1,7 @@
-import fr from "../../dictionaries/fr";
-import en from "../../dictionaries/en";
 import { Lang } from "@/i18n";
+
+import en from "../../locales/en";
+import fr from "../../locales/fr";
 
 const dictionaries = {
   fr,

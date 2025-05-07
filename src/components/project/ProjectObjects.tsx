@@ -1,27 +1,19 @@
-import Button from "@codegouvfr/react-dsfr/Button";
-import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import * as React from "react";
 
-import { buildObjectPath } from "@/catalog/utils";
 import { ContentProps } from "@/i18n";
+
 import { ObjectGroup } from "../../types/project";
-import { formatDatingLabel } from "../../utils";
 import { BaseSection } from "../BaseSection";
-import { I18nLink as Link } from "../I18nLink";
-import { ErosLink } from "../object-group/ErosLink";
+import { ExpandableList } from "../ExpandableList";
+
+import ProjectObject, { ProjectObjectContent } from "./ProjectObject";
 
 export interface ProjectObjectsContent {
   projectObjects: string;
   noObjects: string;
-  seeObjectDetails: string;
   seeMore: string;
   seeLess: string;
-  erosLinkText: string;
-  inventory: string;
-  period: string;
-  era: string;
-  materials: string;
-  geographicArea: string;
+  projectObject: ProjectObjectContent;
 }
 
 interface ProjectObjectsProps
@@ -35,11 +27,8 @@ export const ProjectObjects = ({
   ...props
 }: ProjectObjectsProps & ContentProps<ProjectObjectsContent>) => {
   const excerptLength = 3;
-  const [showAll, setShowAll] = React.useState(false);
 
-  const visibleObjectGroups = showAll
-    ? objectGroups
-    : objectGroups.slice(0, excerptLength);
+  const alwaysVisibleObjectGroups = objectGroups.slice(0, excerptLength);
 
   return (
     <BaseSection {...props}>
@@ -55,65 +44,32 @@ export const ProjectObjects = ({
       ) : (
         <>
           <div className="fr-grid-row fr-grid-row--gutters">
-            {visibleObjectGroups.map((objectGroup) => (
-              <div
+            {alwaysVisibleObjectGroups.map((objectGroup) => (
+              <ProjectObject
+                content={content.projectObject}
+                key={`project-object-${objectGroup.id}`}
+                objectGroup={objectGroup}
                 className="fr-col-6 fr-col-lg-4"
-                key={`object-group-item-${objectGroup.id}`}
-              >
-                <h3>{objectGroup.label}</h3>
-                <p>
-                  {objectGroup.c2rmfId ? (
-                    <ErosLink
-                      c2rmfId={objectGroup.c2rmfId}
-                      text={content.erosLinkText}
-                    />
-                  ) : (
-                    "\x00"
-                  )}
-                </p>
-                <p>
-                  <strong>{content.era}: </strong>
-                  {formatDatingLabel(objectGroup.datingEraLabel || "")}
-                </p>
-                <p>
-                  <strong>{content.period}: </strong>
-                  {formatDatingLabel(objectGroup.datingPeriodLabel || "")}
-                </p>
-                <p>
-                  <strong>{content.geographicArea}: </strong>
-                  {objectGroup.discoveryPlaceLabel}
-                </p>
-                <p>
-                  <strong>{content.materials}: </strong>
-                  {(objectGroup.materials || []).map((material) => (
-                    <Tag
-                      key={`object-group-item-${objectGroup.id}-material-${material}`}
-                    >
-                      {material}
-                    </Tag>
-                  ))}
-                </p>
-                <p>
-                  <Link to={buildObjectPath(objectGroup)}>
-                    {content.seeObjectDetails}
-                  </Link>
-                </p>
-              </div>
+              />
             ))}
-          </div>
-          <div style={{ textAlign: "center" }}>
             {objectGroups.length > excerptLength && (
-              <Button
-                onClick={() => setShowAll(!showAll)}
-                priority="tertiary no outline"
+              <ExpandableList
+                excerptLength={excerptLength}
+                expandText={content.seeMore.replace(
+                  "{}",
+                  (objectGroups.length - excerptLength).toString()
+                )}
+                collapseText={content.seeLess}
               >
-                {!showAll
-                  ? content.seeMore.replace(
-                      "{}",
-                      (objectGroups.length - excerptLength).toString()
-                    )
-                  : content.seeLess}
-              </Button>
+                {objectGroups.slice(excerptLength).map((objectGroup) => (
+                  <ProjectObject
+                    content={content.projectObject}
+                    key={`project-object-${objectGroup.id}`}
+                    objectGroup={objectGroup}
+                    className="fr-col-6 fr-col-lg-4"
+                  />
+                ))}
+              </ExpandableList>
             )}
           </div>
         </>

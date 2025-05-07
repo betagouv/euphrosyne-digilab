@@ -1,5 +1,7 @@
 import slugify from "slugify";
 
+import { IItemCategory } from "@/types/ICatalog";
+
 export function buildObjectPath({
   label,
   id,
@@ -9,10 +11,16 @@ export function buildObjectPath({
 }): string {
   return `/object/${slugify(label, { lower: true }).replaceAll(
     "'",
-    "-",
+    "-"
   )}-${id}`;
 }
 
-export function buildProjectPath({ slug }: { slug: string }): string {
-  return `/project/${slug}`;
+export function buildCatalogItemPath({
+  slug,
+  category,
+}: {
+  slug: string;
+  category: IItemCategory;
+}): string {
+  return `/${category}/${slug}`;
 }

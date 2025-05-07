@@ -1,7 +1,8 @@
 import { createContext } from "react";
 
-import { LangContext as ILangContext } from "../types/context";
 import { getTranslations } from "@/app/[lang]/dictionaries";
+
+import { LangContext as ILangContext } from "../types/context";
 
 const defaultTranslations = getTranslations("fr");
 

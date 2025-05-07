@@ -1,0 +1,6 @@
+/* more than md */
+@media (max-width: 47.99em) {
+  .root {
+    background-color: var(--background-alt-grey);
+  }
+}

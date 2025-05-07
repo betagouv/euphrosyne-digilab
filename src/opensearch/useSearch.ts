@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { parseObjectDocument, parseProjectDocument } from "./parsers";
-import { IObjectGroupItem, IProjectItem } from "@/types/ICatalog";
 import { SortValue } from "@/types/catalog";
+import { IObjectGroupItem, IProjectItem } from "@/types/ICatalog";
+
 import { SearchProps, searchCatalog } from "../clients/search";
 import { SearchItem, SearchResults } from "../types/catalog";
+
+import { parseObjectDocument, parseProjectDocument } from "./parsers";
 
 export interface Filters {
   [key: string]: string | boolean | number | undefined | string[] | BoundingBox;
@@ -20,7 +22,7 @@ export interface Filters {
   datingEraIds?: string[];
   createdFromYear?: number;
   createdToYear?: number;
-  isDataAvailable?: boolean;
+  isDataEmbargoed?: boolean;
   bBox?: BoundingBox;
 }
 
@@ -36,12 +38,25 @@ export interface BoundingBox {
   bottomLeft?: GeoPoint;
 }
 
+export const EMPTY_FILTERS: Filters = {
+  objectGroupsSelected: true,
+  projectsSelected: true,
+  q: "",
+  size: 10,
+  from: 0,
+  materials: [],
+};
+
 export default function useSearch(
   filters: Filters,
   sort: SortValue = "default"
 ) {
   const [filteredSearchItems, setFilteredSearchItems] = useState<SearchResults>(
     { results: [], total: 0 }
+  );
+
+  const [previousFrom, setPreviosFrom] = useState(
+    filters.from / filters.size + 1
   );
 
   useEffect(() => {
@@ -54,7 +69,7 @@ export default function useSearch(
       datingPeriodIds,
       collection,
       inventory,
-      isDataAvailable,
+      isDataEmbargoed,
     } = filters;
     let category: "object" | "project" | undefined;
     const locationFilter: SearchProps["location"] = {};
@@ -84,9 +99,15 @@ export default function useSearch(
       createdTo = `${filters.createdToYear}-12-31T23:59:59.999Z`;
     }
 
-    doSearch({
+    let updatedFrom = 0;
+    if (from !== previousFrom) {
+      updatedFrom = filters.from;
+      setPreviosFrom(updatedFrom);
+    }
+
+    const requestFilters: SearchProps = {
       q,
-      from,
+      from: updatedFrom,
       size,
       category,
       collection,
@@ -100,9 +121,14 @@ export default function useSearch(
       },
       created_from: createdFrom,
       created_to: createdTo,
-      is_data_available: isDataAvailable,
       sort: sort === "default" ? undefined : sort,
-    })
+    };
+
+    if (isDataEmbargoed === false) {
+      requestFilters.is_data_embargoed = false;
+    }
+
+    doSearch(requestFilters)
       .then((searchItems) => {
         setFilteredSearchItems(searchItems);
       })
@@ -110,7 +136,7 @@ export default function useSearch(
         console.error(error);
         return;
       });
-  }, [filters, sort]);
+  }, [filters, previousFrom, sort]);
 
   return filteredSearchItems;
 }
@@ -133,22 +159,34 @@ async function doSearch(filters: SearchProps): Promise<SearchResults> {
     if (!item) return;
     const { name, pagePath, materials, category, slug, created } = item;
     searchItems.push({
+      ...project,
+      ...object,
       name,
       pagePath,
       materials,
       category,
       slug,
-      created: created.toISOString(),
-      project: project,
-      object: object,
-    });
+      created: created,
+    } as SearchItem);
   });
   return { results: searchItems, total: response.hits.total.value };
 }
 
 export function buildFiltersSearchParams(
-  queryParams: URLSearchParams
+  queryParams: URLSearchParams | null
 ): Filters {
+  if (!queryParams) {
+    // Return default filters if searchParams is null
+    return {
+      objectGroupsSelected: true,
+      projectsSelected: true,
+      q: "",
+      size: 10,
+      from: 0,
+      materials: [],
+    };
+  }
+
   // Get the value of a query parameter
   const q = queryParams.get("q") || "";
   const objectGroupsSelected =
@@ -170,7 +208,7 @@ export function buildFiltersSearchParams(
       parseInt(queryParams.get("createdFromYear") || "") || undefined,
     createdToYear:
       parseInt(queryParams.get("createdToYear") || "") || undefined,
-    isDataAvailable: !!queryParams.get("isDataAvailable") || undefined,
+    isDataEmbargoed: !!queryParams.get("isDataEmbargoed") || undefined,
   };
   return filters;
 }

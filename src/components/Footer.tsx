@@ -5,39 +5,41 @@ import {
 } from "@codegouvfr/react-dsfr/Footer";
 import React from "react";
 
-const contentDescription = () => (
-  <React.Fragment>
-    Euphrosyne, ouvrir les données de{" "}
-    <a href="https://c2rmf.fr/aglae-0" target="_blank">
-      New AGLAE
-    </a>
-    .
-  </React.Fragment>
-);
+import { getTranslations } from "@/app/[lang]/dictionaries";
+import type { WithCurrentLang } from "@/i18n";
 
-export const Footer = () => {
+export function Footer({ currentLang }: WithCurrentLang) {
+  const translations = getTranslations(currentLang);
+  const content = translations.footerContent;
+
+  const contentDescription = (
+    <>
+      {content.description.split("{link}")[0]}
+      <a
+        href={"https://c2rmf.fr/aglae-0"}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        New AGLAE
+      </a>
+      {content.description.split("{link}")[1]}
+    </>
+  );
+
   const bottomItems: FooterProps.BottomItem[] = [
-    {
-      linkProps: {
-        href: "/legal/donnees-personnelles",
-      },
-      text: "Données personnelles et Cookies",
-    },
-    {
-      linkProps: {
-        href: "/legal/cgu",
-      },
-      text: "Conditions générales d'utilisation",
-    },
+    ...content.bottomItems.map((item: { href: string; text: string }) => ({
+      linkProps: { href: item.href },
+      text: item.text,
+    })),
+    headerFooterDisplayItem,
   ];
+
   return (
     <DsfrFooter
       accessibility="non compliant"
-      contentDescription={contentDescription()}
-      termsLinkProps={{
-        href: "/legal/mentions-legales",
-      }}
-      bottomItems={[...bottomItems, headerFooterDisplayItem]}
+      contentDescription={contentDescription}
+      termsLinkProps={content.termsLink}
+      bottomItems={bottomItems}
     />
   );
-};
+}

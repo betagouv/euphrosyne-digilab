@@ -9,7 +9,7 @@ export interface IPageContext {
   } | null;
   setCurrentProject: React.Dispatch<
     SetStateAction<IPageContext["currentProject"]>
-  > | null;
+  >;
 }
 
 export interface LangContext {

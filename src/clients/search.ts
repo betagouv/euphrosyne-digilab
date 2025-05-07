@@ -1,12 +1,13 @@
-import { SearchHit } from "@elastic/elasticsearch/lib/api/types";
-import type { IOpenSearchDocument } from "../types/IOpenSearch";
+import { IItemCategory } from "@/types/ICatalog";
+
+import type { SearchHit } from "../types/IOpenSearch";
 
 export interface SearchProps {
   q?: string;
   materials?: string[];
   dating_period_ids?: string[];
   dating_era_ids?: string[];
-  category?: "project" | "object";
+  category?: IItemCategory;
   c2rmfId?: string;
   created_from?: string;
   created_to?: string;
@@ -18,7 +19,7 @@ export interface SearchProps {
     top_right?: { lat: number; lon: number };
     bottom_left?: { lat: number; lon: number };
   };
-  is_data_available?: boolean;
+  is_data_embargoed?: boolean;
   from?: number;
   size?: number;
   sort?: "asc" | "desc";
@@ -36,14 +37,50 @@ interface AggregationOpenSearchResponse<Key extends string, KeyType> {
 
 interface SearchResponse {
   hits: {
-    hits: SearchHit<IOpenSearchDocument>[];
+    hits: SearchHit[];
     total: { value: number };
   };
+}
+
+export async function listAllProjects() {
+  return (await listAllItems()).hits.hits.filter(
+    (item) => item._source.category === "project"
+  ) as SearchHit[];
+}
+
+export async function listAllObjects() {
+  return (await listAllItems()).hits.hits.filter(
+    (item) => item._source.category === "object"
+  ) as SearchHit[];
+}
+
+async function listAllItems(): Promise<SearchResponse> {
+  if (!process.env.NEXT_PUBLIC_EUPHROSYNE_HOST) {
+    throw new Error("NEXT_PUBLIC_EUPHROSYNE_HOST env variable is not defined");
+  }
+  let response: Response;
+  try {
+    response = await fetch(
+      `${process.env.NEXT_PUBLIC_EUPHROSYNE_HOST}/api/lab/catalog/list-all`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (error) {
+    throw new Error("Failed to fetch search results.\nError:\n" + error);
+  }
+  return (await response.json()) as SearchResponse;
 }
 
 export async function searchCatalog(
   filters: SearchProps
 ): Promise<SearchResponse> {
+  if (!process.env.NEXT_PUBLIC_EUPHROSYNE_HOST) {
+    throw new Error("NEXT_PUBLIC_EUPHROSYNE_HOST env variable is not defined");
+  }
   let response: Response;
   try {
     response = await fetch(
@@ -67,6 +104,9 @@ export async function fetchAggregatedTags(
   query?: string,
   exclude?: string[]
 ) {
+  if (!process.env.NEXT_PUBLIC_EUPHROSYNE_HOST) {
+    throw new Error("NEXT_PUBLIC_EUPHROSYNE_HOST env variable is not defined");
+  }
   let url = `${process.env.NEXT_PUBLIC_EUPHROSYNE_HOST}/api/lab/catalog/aggregate`;
   url += `?field=${field}`;
   if (query) {
@@ -98,6 +138,9 @@ export async function fetchAggregatedTags(
 }
 
 export async function fetchCreatedAggs() {
+  if (!process.env.NEXT_PUBLIC_EUPHROSYNE_HOST) {
+    throw new Error("NEXT_PUBLIC_EUPHROSYNE_HOST env variable is not defined");
+  }
   const url = `${process.env.NEXT_PUBLIC_EUPHROSYNE_HOST}/api/lab/catalog/aggregate-created`;
   let response;
   try {

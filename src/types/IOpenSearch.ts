@@ -26,7 +26,7 @@ interface IBaseDocument {
   slug: string;
   created: string;
   materials: string[];
-  is_data_available: boolean;
+  isDataEmbargoed: boolean;
   thumbnail: IThumbnail | null;
 }
 
@@ -97,9 +97,9 @@ interface IObjectPageData {
 export interface IRun {
   id: string;
   label: string;
-  start_date?: string;
+  start_date?: Date;
   particle_type: string;
-  energy_in_kev: string;
+  energy_in_kev: number;
   beamline: string;
   project_slug: string;
   is_data_embargoed: boolean;

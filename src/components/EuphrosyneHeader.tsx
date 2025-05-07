@@ -1,20 +1,15 @@
 "use client";
 
 import { Header } from "@codegouvfr/react-dsfr/Header";
-import * as React from "react";
-
-import CartButton from "../cart/CartButton";
-import type { ContentProps, Lang } from "../i18n";
-import {
-  changePathLocale,
-  getCurrentLangKey,
-  langs,
-  localizePath,
-} from "../i18n";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useContext } from "react";
-import { LangContext } from "@/contexts/LangContext";
+import { Suspense } from "react";
+
+import { getTranslations } from "@/app/[lang]/dictionaries";
+
+import CartButton from "../cart/CartButton";
+import type { ContentProps, Lang, WithCurrentLang } from "../i18n";
+import { changePathLocale, langs, localizePath } from "../i18n";
 
 interface LanguageSwitcherContent {
   selectLangBtnTitle: string;
@@ -44,18 +39,16 @@ const buildLanguageSwitchLink = (
   pathname: string,
   searchParams: URLSearchParams
 ) => {
-  //if (typeof window === "undefined") return `/${lang}`;
   return (
     changePathLocale(pathname, lang, currentLang) + searchParams.toString()
   );
 };
 
-const LanguageSwitcher: React.FC<ContentProps<LanguageSwitcherContent>> = ({
-  content,
-}) => {
+const LanguageSwitcher: React.FC<
+  ContentProps<LanguageSwitcherContent> & WithCurrentLang
+> = ({ content, currentLang }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentLang = getCurrentLangKey();
 
   return (
     <nav role="navigation" className="fr-translate fr-nav">
@@ -77,12 +70,16 @@ const LanguageSwitcher: React.FC<ContentProps<LanguageSwitcherContent>> = ({
                   className="fr-translate__language fr-nav__link"
                   hrefLang={lang}
                   lang={lang}
-                  href={buildLanguageSwitchLink(
-                    lang,
-                    currentLang,
-                    pathname,
-                    searchParams
-                  )}
+                  href={
+                    pathname && searchParams
+                      ? buildLanguageSwitchLink(
+                          lang,
+                          currentLang,
+                          pathname,
+                          searchParams
+                        )
+                      : "#"
+                  }
                   aria-current={lang === currentLang ? "true" : undefined}
                 >
                   {lang.toUpperCase()} - {langNames[lang]}
@@ -96,10 +93,9 @@ const LanguageSwitcher: React.FC<ContentProps<LanguageSwitcherContent>> = ({
   );
 };
 
-export default function EuphrosyneHeader() {
+export default function EuphrosyneHeader({ currentLang }: WithCurrentLang) {
   const currentPath = usePathname();
-  const content = useContext(LangContext).translations.layoutContent.header;
-  const currentLang = getCurrentLangKey();
+  const content = getTranslations(currentLang).headerContent;
 
   return (
     <Header
@@ -118,10 +114,12 @@ export default function EuphrosyneHeader() {
           text: content.euphrosyneLinkTitle,
         },
         <CartButton key="cart-btn" />,
-        <LanguageSwitcher
-          content={content.languageSwitcher}
-          key="language-switcher"
-        />,
+        <Suspense key="language-switcher">
+          <LanguageSwitcher
+            content={content.languageSwitcher}
+            currentLang={currentLang}
+          />
+        </Suspense>,
       ]}
       navigation={[
         {
@@ -130,14 +128,16 @@ export default function EuphrosyneHeader() {
             target: "_self",
           },
           text: content.homeLinkLabel,
-          isActive: currentPath + "/" === localizePath("/", currentLang),
+          isActive:
+            (currentPath + "/").replace("//", "/") ===
+            localizePath("/", currentLang),
         },
         {
           linkProps: {
             href: localizePath("/catalog", currentLang),
           },
           text: content.catalogLinkLabel,
-          isActive: currentPath + "/" === localizePath("/catalog", currentLang),
+          isActive: currentPath === localizePath("/catalog", currentLang),
         },
       ]}
       serviceTitle={content.serviceTitle}

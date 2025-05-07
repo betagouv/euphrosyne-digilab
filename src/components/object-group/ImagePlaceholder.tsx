@@ -1,47 +1,26 @@
-import { fr } from "@codegouvfr/react-dsfr";
-
-import { ContentProps } from "@/i18n";
-import { tss } from "tss-react";
 import Image from "next/image";
 
 interface ImagePlaceholderProps {
   image?: string;
   objectGroupLabel: string;
-}
-
-interface ImagePlaceholderContent {
-  altImageWithObjectName: string;
+  alt?: string;
 }
 
 export default function ImagePlaceholder({
   image,
-  content,
-  objectGroupLabel,
-}: ImagePlaceholderProps & ContentProps<ImagePlaceholderContent>) {
-  const { classes } = tss.create(() => ({
-    image: {
-      [fr.breakpoints.down("lg")]: {
-        maxHeight: "200px",
-        width: "100%",
-        marginBottom: fr.spacing("3w"),
-      },
-    },
-  }))();
-  const props: { placeholder: "blur"; className: string } = {
-    placeholder: "blur",
-    className: classes.image,
+  alt = "",
+}: ImagePlaceholderProps) {
+  const className = `fr-mb-3w fr-mt-mb-0`;
+  const props = {
+    className,
   };
   return image ? (
-    <Image
-      src={image}
-      alt={content.altImageWithObjectName.replace("{}", objectGroupLabel)}
-      {...props}
-    />
+    <Image src={image} alt={alt} fill {...props} />
   ) : (
     <Image
       src="../../images/objectgroup-placeholder.svg"
-      alt={content.altImageWithObjectName.replace("{}", objectGroupLabel)}
-      className={classes.image}
+      alt={alt}
+      className={className}
     />
   );
 }

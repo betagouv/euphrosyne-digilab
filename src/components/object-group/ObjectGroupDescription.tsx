@@ -1,8 +1,10 @@
 import { fr } from "@codegouvfr/react-dsfr";
 
 import { ContentProps } from "@/i18n";
+
 import { formatDatingLabel } from "../../utils";
 import { PageBadges, PageBadgesContent } from "../PageBadges";
+
 import { ErosLink } from "./ErosLink";
 import ObjectGroupMaterialTags from "./ObjectGroupMaterialTags";
 

@@ -1,10 +1,10 @@
+import { FiltersProps } from "@/types/catalog";
+
 import { OpenThesoSearchItem } from "../../clients/opentheso";
-import { Filters } from "../../opensearch/useSearch";
+
 import OpenthesoSelect from "./OpenthesoSelect";
 
 interface PeriodFilterProps {
-  filters: Filters;
-  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
   thesoId: string;
   inputLabel: string;
   datingField: "period" | "era";
@@ -18,7 +18,9 @@ export default function BaseDatingFilter({
   inputLabel,
   datingField,
   ...props
-}: PeriodFilterProps & Omit<React.HTMLAttributes<HTMLDivElement>, "content">) {
+}: PeriodFilterProps &
+  FiltersProps &
+  Omit<React.HTMLAttributes<HTMLDivElement>, "content">) {
   const onSuggestionClick = (suggestion: OpenThesoSearchItem | undefined) => {
     const filterFieldName =
       datingField === "period" ? "datingPeriodIds" : "datingEraIds";

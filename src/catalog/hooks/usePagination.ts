@@ -1,31 +1,15 @@
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Filters } from "@/opensearch/useSearch";
 
 const isBrowser = typeof window !== "undefined";
 
-export default function usePagination(page?: number) {
-  const searchParams = useSearchParams();
-  const pageFromUrl = searchParams ? searchParams.get("page") : null;
-  
-  // Use URL page parameter or fallback to provided page or 1
-  const [currentPage, setCurrentPage] = useState<number>(
-    page || (pageFromUrl ? parseInt(pageFromUrl) : 1)
-  );
+function getPageFromFilters(filters: Filters): number {
+  return filters.from / filters.size + 1;
+}
 
-  // Update page when URL changes
-  useEffect(() => {
-    if (pageFromUrl) {
-      const newPage = parseInt(pageFromUrl);
-      if (newPage !== currentPage) {
-        setCurrentPage(newPage);
-      }
-    } else if (currentPage !== 1) {
-      // If no page in URL, set to page 1
-      setCurrentPage(1);
-    }
-  }, [pageFromUrl, searchParams]);
-
-  return currentPage;
+export default function usePagination(filters: Filters) {
+  // Simply return the calculated page number from filters
+  // The page reset logic is handled in the Pagination component
+  return getPageFromFilters(filters);
 }
 
 export function getCurrentPageFromURL(): number | null {

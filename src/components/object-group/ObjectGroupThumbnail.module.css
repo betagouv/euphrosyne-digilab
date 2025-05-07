@@ -1,0 +1,18 @@
+.imageContainer {
+    width: 100%;
+    margin: 0 auto; 
+    position: relative;
+    height: 300px;
+}
+
+.imageContainer img {
+    object-fit: cover;
+}
+
+@media (min-width: 61.99em) {
+    .imageContainer {
+        max-width: 600px;
+        height: 100%;
+
+    }
+}

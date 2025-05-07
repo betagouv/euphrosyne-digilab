@@ -1,7 +1,10 @@
 import { ContentProps } from "@/i18n";
+import sharedStyles from "@/styles/shared.module.css";
+
 import { BaseSection } from "../BaseSection";
-import AboutSectionImages from "./AboutSectionImages";
+
 import styles from "./AboutSection.module.css";
+import AboutSectionImages from "./AboutSectionImages";
 
 export interface AboutSectionContent {
   title: string;
@@ -26,7 +29,7 @@ export default function AboutSection({
             <div>
               <h3>{content.newAglae}</h3>
             </div>
-            <p className={styles.paddedUpToLg}>{content.description}</p>
+            <p className={sharedStyles.paddedUpToLg}>{content.description}</p>
             <a href="https://c2rmf.fr/aglae">{content.moreInfo}</a>
           </div>
 

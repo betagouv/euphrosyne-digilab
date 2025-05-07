@@ -3,9 +3,9 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import Input from "@codegouvfr/react-dsfr/Input";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useStyles } from "tss-react";
 
 import { useDebounce } from "../hooks/useDebounce";
-import { useStyles } from "tss-react";
 
 export interface Suggestion<T> {
   label: string;
@@ -51,7 +51,7 @@ export default function AutocompleteInput<T>({
 
   useEffect(() => {
     debouncedFetch();
-  }, [inputValue]);
+  }, [inputValue, debouncedFetch]);
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {

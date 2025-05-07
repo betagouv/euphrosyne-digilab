@@ -1,20 +1,17 @@
+import { FiltersProps } from "@/types/catalog";
+
 import { searchGeonames } from "../../clients/geonames";
 import { Suggestion } from "../../components/AutocompleteInput";
 import { AutocompleteWithDismissibleTag } from "../../components/AutocompleteWithDismissibleTag";
 import { ContentProps } from "../../i18n";
-import { BoundingBox, Filters } from "../../opensearch/useSearch";
-
-interface DiscoveryPlaceFilterProps {
-  filters: Filters;
-  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
-}
+import { BoundingBox } from "../../opensearch/useSearch";
 
 export interface DiscoveryPlaceFilterContent {
   discoveryPlace: string;
 }
 
 const fetchLocationSuggestions = async (
-  query: string,
+  query: string
 ): Promise<Suggestion<BoundingBox>[]> => {
   if (query.length === 0) return [];
   const suggestions: Suggestion<BoundingBox>[] = [];
@@ -44,7 +41,7 @@ export function DiscoveryPlaceFilter({
   filters,
   content,
   ...props
-}: DiscoveryPlaceFilterProps &
+}: FiltersProps &
   Omit<React.HTMLAttributes<HTMLDivElement>, "content"> &
   ContentProps<DiscoveryPlaceFilterContent>) {
   const onLocationSuggestionClick = (suggestion: Suggestion<BoundingBox>) => {

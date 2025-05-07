@@ -1,3 +1,4 @@
+import { buildCatalogItemPath } from "@/catalog/utils";
 import type {
   IBaseItem,
   IDating,
@@ -11,9 +12,12 @@ import type {
   IRun as IDocumentRun,
   IOpenSearchDocument,
 } from "@/types/IOpenSearch";
+import { ParticleType } from "@/types/run";
 
 export function parseProjectDocument(data: IOpenSearchDocument): IProjectItem {
   return {
+    object: undefined,
+
     id: data.id,
     category: "project",
     name: data.name,
@@ -23,12 +27,12 @@ export function parseProjectDocument(data: IOpenSearchDocument): IProjectItem {
     comments: data.comments,
     status: data.status,
     discoveryPlacePoints: data.discovery_place_points,
-    dataAvailable: data.is_data_available,
+    dataAvailable: data.isDataEmbargoed,
     thumbnail: data.thumbnail,
     projectPageData: parseProjectPageData(data.project_page_data),
     placeholderImage: null,
 
-    pagePath: `/project/${data.slug}/`,
+    pagePath: buildCatalogItemPath(data),
   };
 }
 
@@ -51,6 +55,8 @@ export function parseObjectDocument(
     };
   }
   return {
+    project: undefined,
+
     category: "object",
     ...parseCommonData(data),
     objectPageData: parseObjectPageData(data.object_page_data),
@@ -72,7 +78,7 @@ export function parseObjectDocument(
     inventoryNumbers: data.inventory_numbers,
     placeholderImage: null,
 
-    pagePath: `/object/${data.slug}/`,
+    pagePath: buildCatalogItemPath(data),
   };
 }
 
@@ -83,7 +89,7 @@ function parseCommonData(data: IOpenSearchDocument): IBaseItem {
     slug: data.slug,
     created: new Date(data.created),
     materials: data.materials,
-    dataAvailable: data.is_data_available,
+    dataAvailable: data.isDataEmbargoed,
     thumbnail: data.thumbnail,
     placeholderImage: null,
   };
@@ -147,7 +153,7 @@ function parseRunData(run: IDocumentRun): IRun {
     id: run.id,
     label: run.label,
     startDate: run.start_date ? new Date(run.start_date) : null,
-    particleType: run.particle_type,
+    particleType: run.particle_type as ParticleType | null,
     energyInKev: run.energy_in_kev,
     beamline: run.beamline,
     projectSlug: run.project_slug,

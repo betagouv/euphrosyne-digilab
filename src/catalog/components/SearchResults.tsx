@@ -1,11 +1,15 @@
 "use client";
 
 import { useContext } from "react";
-import { CatalogContext } from "../CatalogContext";
+
 import { LangContext } from "@/contexts/LangContext";
+import { Lang } from "@/i18n";
+import { IIDImageMapping, SearchItem } from "@/types/catalog";
+
+import { CatalogContext } from "../CatalogContext";
+
 import CatalogItem from "./CatalogItem/CatalogItem";
 import { Pagination } from "./Pagination";
-import { IIDImageMapping, SearchItem } from "@/types/catalog";
 
 const PAGE_LENGTH = 10;
 
@@ -14,19 +18,21 @@ const getErosUrlForCatalogItem = (
   item: SearchItem
 ) => {
   if (
-    item.object &&
-    item.object.c2rmfId &&
-    item.object.c2rmfId in erosImageUrls
+    item.category === "object" &&
+    item.c2rmfId &&
+    item.c2rmfId in erosImageUrls
   ) {
-    return erosImageUrls[item.object.c2rmfId];
+    return erosImageUrls[item.c2rmfId];
   }
   return null;
 };
 
 export default function SearchResults({
   erosImageUrls,
+  lang,
 }: {
   erosImageUrls: IIDImageMapping;
+  lang: Lang;
 }) {
   const { translations } = useContext(LangContext);
   const content = translations.catalogContent;
@@ -50,6 +56,7 @@ export default function SearchResults({
                 searchItem
               )}
               viewMode={viewMode}
+              lang={lang}
             />
           </div>
         ))}

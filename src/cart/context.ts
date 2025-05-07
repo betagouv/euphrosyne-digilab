@@ -2,6 +2,7 @@ import { createContext } from "react";
 
 import { PageBadgeType } from "../components/PageBadges";
 import type { Run } from "../types/run";
+
 import { addItemsToCart, emptyCart, getCart } from "./localStorage";
 
 interface IFromInformation {

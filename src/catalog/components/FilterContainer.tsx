@@ -2,11 +2,9 @@
 
 import { fr } from "@codegouvfr/react-dsfr";
 import { useCallback, useEffect, useState } from "react";
-//import { animated, useSpring } from "react-spring";
-import useMeasure from "react-use-measure";
+import { tss } from "tss-react";
 
 import { ContentProps } from "../../i18n";
-import { tss } from "tss-react";
 
 export interface FilterContainerContent {
   filterResults: string;
@@ -39,18 +37,7 @@ function MobileFilterContainer({
   children,
   content,
 }: { children?: React.ReactNode } & ContentProps<FilterContainerContent>) {
-  const [ref, { height: viewHeight }] = useMeasure();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  /*
-  const style = useSpring({
-    from: { height: 0, opacity: 0, y: 0 },
-    to: {
-      height: isFilterOpen ? viewHeight : 0,
-      opacity: isFilterOpen ? 1 : 0,
-      y: isFilterOpen ? 0 : -10,
-    },
-  });
-  */
 
   const { classes, cx } = tss.create({
     root: {
@@ -91,8 +78,7 @@ function MobileFilterContainer({
           />
         </button>
         <div>
-          {/* <animated.div style={style}>*/}
-          <div ref={ref}>{children}</div>
+          <div>{children}</div>
         </div>
       </div>
     </div>
@@ -152,7 +138,7 @@ export default function FilterContainer({
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
-  }, []);
+  }, [getComponentIndex]);
 
   return containers[selectedComponentIndex][1];
 }

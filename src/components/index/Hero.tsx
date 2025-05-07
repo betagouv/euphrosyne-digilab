@@ -2,13 +2,14 @@
 
 import { fr } from "@codegouvfr/react-dsfr";
 import Image from "next/image";
+import { tss } from "tss-react";
 
 import { ContentProps } from "@/i18n";
 import useSharedStyles from "@/styles";
-import { BaseSection } from "../BaseSection";
-import { tss } from "tss-react";
 
 import heroImg from "../../../public/images/hero-banner.jpg";
+import { BaseSection } from "../BaseSection";
+
 
 export interface HeroContent {
   title: string;

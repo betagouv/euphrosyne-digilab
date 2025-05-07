@@ -1,3 +1,29 @@
+import { Run } from "./run";
+
+export type IItemCategory = "project" | "object";
+
+interface IDetector {
+  name: string;
+  filters: string[];
+}
+
+interface IMethod {
+  name: string;
+  detectors: IDetector[];
+}
+
+export interface IRun {
+  id: string;
+  label: string;
+  startDate: Date | null;
+  particleType: "PROTON" | "ALPHA_PARTICLE" | "DEUTON" | null;
+  energyInKev: number;
+  beamline: string;
+  methods: IMethod[];
+  projectSlug: string;
+  isDataEmbargoed: boolean;
+}
+
 interface ILocation {
   lat: number;
   lon: number;
@@ -39,29 +65,7 @@ export interface ILeader {
   institutionCountry: string;
 }
 
-interface IDetector {
-  name: string;
-  filters: string[];
-}
-
-interface IMethod {
-  name: string;
-  detectors: IDetector[];
-}
-
-export interface IRun {
-  id: string;
-  label: string;
-  startDate: Date | null;
-  particleType: string;
-  energyInKev: string;
-  beamline: string;
-  methods: IMethod[];
-  projectSlug: string;
-  isDataEmbargoed: boolean;
-}
-
-interface IProject {
+export interface IProject {
   name: string;
   slug: string;
   leader: ILeader;
@@ -69,12 +73,12 @@ interface IProject {
 
 export interface IProjectPageData {
   leader: ILeader;
-  runs: IRun[];
+  runs: Run[];
   objectGroups: IObjectGroup[];
 }
 
 export interface IObjectPageData {
-  runs: IRun[];
+  runs: Run[];
   projects: IProject[];
 }
 
@@ -105,6 +109,8 @@ export interface IProjectItem extends IBaseItem {
   pagePath: string;
 
   projectPageData: IProjectPageData;
+
+  object: undefined;
 }
 
 export interface IObjectGroupItem extends IBaseItem {
@@ -123,4 +129,6 @@ export interface IObjectGroupItem extends IBaseItem {
   pagePath: string;
 
   objectPageData: IObjectPageData;
+
+  project: undefined;
 }

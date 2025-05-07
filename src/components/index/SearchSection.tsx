@@ -2,9 +2,10 @@
 
 import { fr } from "@codegouvfr/react-dsfr";
 import SearchBar from "@codegouvfr/react-dsfr/SearchBar";
-import { ContentProps, getCurrentLangKey, localizePath } from "@/i18n";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { tss } from "tss-react";
+
+import { ContentProps, getPathnameLangKey, localizePath } from "@/i18n";
 
 export interface SearchSectionContent {
   title: {
@@ -34,6 +35,8 @@ export const SearchSection: React.FC<ContentProps<SearchSectionContent>> = ({
   });
   const { classes } = useStyles();
   const router = useRouter();
+  const pathname = usePathname(),
+    currentLang = getPathnameLangKey(pathname);
 
   return (
     <div className={`${classes.root} fr-pt-10w`}>
@@ -48,9 +51,7 @@ export const SearchSection: React.FC<ContentProps<SearchSectionContent>> = ({
           <SearchBar
             big={true}
             onButtonClick={(text) =>
-              router.push(
-                localizePath(`/catalog?q=${text}`, getCurrentLangKey())
-              )
+              router.push(localizePath(`/catalog?q=${text}`, currentLang))
             }
           />
         </div>

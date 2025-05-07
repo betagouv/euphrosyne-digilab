@@ -1,14 +1,15 @@
 "use client";
 
+import { createContext, SetStateAction } from "react";
+
 import { Filters } from "@/opensearch/useSearch";
 import { CatalogViewMode, SearchResults, SortValue } from "@/types/catalog";
-import { createContext, SetStateAction } from "react";
 
 export interface ICatalogContext {
   selectedSort: SortValue;
   setSelectedSort: React.Dispatch<SetStateAction<SortValue>>;
   filters: Filters;
-  setFilters: React.Dispatch<SetStateAction<Filters>>;
+  setFilters: (filters: Filters) => void;
   viewMode: CatalogViewMode;
   setViewMode: React.Dispatch<SetStateAction<CatalogViewMode>>;
   searchResult: SearchResults;

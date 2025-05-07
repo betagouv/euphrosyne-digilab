@@ -3,8 +3,9 @@
 import Select from "@codegouvfr/react-dsfr/SelectNext";
 import { ChangeEvent, useContext } from "react";
 
-import { SortValue } from "@/types/catalog";
 import { LangContext } from "@/contexts/LangContext";
+import { SortValue } from "@/types/catalog";
+
 import { CatalogContext } from "../CatalogContext";
 
 export interface SortSelectContent {

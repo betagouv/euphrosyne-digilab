@@ -1,3 +1,13 @@
+import type { ObjectTemplateContent } from "@/app/[lang]/[itemType]/[slug]/ObjectPage";
+import { ProjectTemplateContent } from "@/app/[lang]/[itemType]/[slug]/page";
+import { ICartContent } from "@/app/[lang]/cart/page";
+import { CatalogContent } from "@/app/[lang]/catalog/page";
+import { NotFoundPageContent } from "@/app/[lang]/not-found";
+import type { IndexPageContent } from "@/app/[lang]/page";
+import { EuphrosyneHeaderContent } from "@/components/EuphrosyneHeader";
+import { IProjectSelectContent } from "@/components/object-group/ProjectSelect";
+import { AddToCartContent } from "@/components/project/AddToCartSection";
+
 import { CartButtonContent } from "../cart/CartButton";
 import { CartSubmitFormContent } from "../cart/CartSubmitForm";
 import { CartTableContent } from "../cart/CartTable";
@@ -6,15 +16,15 @@ import { CatalogViewModeToggleContent } from "../catalog/components/CatalogViewM
 import type { PageBadgesContent } from "../components/PageBadges";
 import type { ProjectCardContent } from "../components/ProjectCard";
 import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
-import type { ProjectDataContent } from "../components/project/ProjectData";
 import { RunCardContent } from "../components/run/RunCard";
-import type { LayoutContentProps } from "../layouts";
-import type { IndexPageContent } from "../pages";
-import { NotFoundPageContent } from "../pages/404";
-import { CartContent } from "../pages/cart";
-import type { CatalogContent } from "../pages/catalog";
-import type { ObjectTemplateContent } from "../pages/object/{ObjectGroup.slug}";
-import type { ProjectTemplateContent } from "../pages/project/{Project.slug}";
+
+// used for building the app (for example to translate paths)
+const _system = {
+  project: "projet",
+  object: "objet",
+};
+
+const siteTitle = "Catalogue des données de New AGLAE";
 
 export const translations = {
   project: "Projet",
@@ -29,23 +39,23 @@ export const translations = {
   materials: "Matériaux",
 
   error: "Erreur",
+
+  siteTitle,
 };
 export const erosLinkText = "Fiche objet Eros";
 
-const layoutContent: LayoutContentProps = {
-  header: {
-    homeLinkTitle: "Accueil - Catalogue des données de New AGLAE",
-    euphrosyneLinkTitle: "Accéder à Euphrosyne",
-    homeLinkLabel: "Accueil",
-    catalogLinkLabel: "Catalogue",
-    serviceTitle: "Catalogue des données de New AGLAE",
-    languageSwitcher: {
-      selectLangBtnTitle: "Changer de langue",
-    },
+const headerContent: EuphrosyneHeaderContent = {
+  homeLinkTitle: `Accueil - ${siteTitle}`,
+  euphrosyneLinkTitle: "Accéder à Euphrosyne",
+  homeLinkLabel: "Accueil",
+  catalogLinkLabel: "Catalogue",
+  serviceTitle: siteTitle,
+  languageSwitcher: {
+    selectLangBtnTitle: "Changer de langue",
   },
 };
 
-export const projectDataContent: ProjectDataContent = {
+export const addToCartContent: AddToCartContent = {
   addToCart: "Ajouter les données au panier",
 };
 
@@ -83,7 +93,7 @@ const indexPageContent: IndexPageContent = {
   search: {
     title: {
       highlight: "Parcourez",
-      rest: "notre catalogue de données Euphrosyne",
+      rest: "notre catalogue de données New AGLAE",
     },
   },
   howItWorks: {
@@ -121,7 +131,7 @@ const indexPageContent: IndexPageContent = {
     inYear: "En {}",
   },
   projectList: {
-    title: "Les dernières recherches Euphrosyne",
+    title: "Les dernières recherches New AGLAE",
     projectCard,
   },
 };
@@ -132,7 +142,7 @@ const catalogContent: CatalogContent = {
   numResultPlural: "{} résultats",
 
   searchBar: {
-    title: "Parcourez le catalogue de données Euphrosyne",
+    title: "Parcourez le catalogue de données New AGLAE",
   },
 
   filterContainer: {
@@ -189,12 +199,10 @@ const catalogViewModeToggleContent: CatalogViewModeToggleContent = {
 const objectPageContent: ObjectTemplateContent = {
   catalog: "Catalogue",
   projectWithName: "Projet {}",
-  altImageWithObjectName: "Image de l'objet {}",
-  noProject: "Aucun projet",
+  objectGroupThumbnailContent: {
+    altImageWithObjectName: "Image de l'objet {}",
+  },
   objectData: "Données de l'objet",
-  project: "Projet",
-  viewProject: "Voir le projet",
-
   objectGroupDescription: {
     collection: translations.collection,
     inventory: translations.inventory,
@@ -206,30 +214,38 @@ const objectPageContent: ObjectTemplateContent = {
 
     pageBadges,
   },
-  projectDataContent,
+};
+
+export const runCard: RunCardContent = {
+  date: "Date",
+  projectLeader: "Chef de projet",
+  experimentalCondition: "Conditions expérimentales",
+  methods: "Méthodes",
+  dataUnderEmbargo: "Ces données ne sont pas encore accessibles",
 };
 
 const projectPageContent: ProjectTemplateContent = {
   catalog: "Catalogue",
   projectData: "Données du projet",
 
-  projectDataContent,
   projectDescription: {
     pageBadges: pageBadges,
     noDescription: "Pas de description pour ce projet.",
   },
+  runCard,
   projectObjects: {
     projectObjects: "Objets du projet",
     noObjects: "Ce projet n'a pas d'objet enregistré.",
-    seeObjectDetails: "Voir le détail de l'objet",
     seeMore: "Voir plus d'objets liés ({} restants) +",
     seeLess: "Voir moins -",
-    erosLinkText,
-    inventory: translations.inventory,
-    period: translations.period,
-    era: translations.era,
-    geographicArea: translations.geographicArea,
-    materials: translations.materials,
+    projectObject: {
+      erosLinkText,
+      period: translations.period,
+      era: translations.era,
+      geographicArea: translations.geographicArea,
+      materials: translations.materials,
+      seeObjectDetails: "Voir le détail de l'objet",
+    },
   },
 };
 
@@ -256,7 +272,7 @@ const cartSubmitForm: CartSubmitFormContent = {
   institution: "Institution",
 };
 
-const cart: CartContent = {
+const cart: ICartContent = {
   requestData: "Demande de données",
   title: "Panier",
   buttonSubmit: "Envoyer",
@@ -276,19 +292,37 @@ export const notFoundPageContent: NotFoundPageContent = {
   goHome: "Retour à l'accueil",
 };
 
-export const runCard: RunCardContent = {
-  date: "Date",
-  projectLeader: "Chef de projet",
-  experimentalCondition: "Conditions expérimentales",
-  methods: "Méthodes",
-  dataUnderEmbargo: "Ces données ne sont pas encore accessibles",
-};
-
 const dataAlert: DataAddedAlertContent = {
   description: "Les données ont été ajoutées au panier.",
 };
 
+const projectSelect: IProjectSelectContent = {
+  noProject: "Aucun projet",
+  viewProject: "Voir le projet",
+  projectDataContent: runCard,
+  projects: translations.project,
+  project: translations.project,
+};
+
+export const footerContent = {
+  description: "Euphrosyne, ouvrir les données de {link}.",
+  bottomItems: [
+    {
+      href: "/legal/donnees-personnelles",
+      text: "Données personnelles et Cookies",
+    },
+    {
+      href: "/legal/cgu",
+      text: "Conditions générales d'utilisation",
+    },
+  ],
+  termsLink: {
+    href: "/legal/mentions-legales",
+  },
+};
+
 const t = {
+  _system,
   base: translations,
   cart,
   cartButton,
@@ -297,7 +331,7 @@ const t = {
   catalogContent,
   erosLinkText,
   indexPageContent,
-  layoutContent,
+  headerContent,
   notFoundPageContent,
   objectPageContent,
   pageBadges,
@@ -307,6 +341,9 @@ const t = {
   runCard,
   dataAlert,
   catalogViewModeToggleContent,
+  addToCartContent,
+  projectSelect,
+  footerContent,
 };
 
 export type Translations = typeof t;

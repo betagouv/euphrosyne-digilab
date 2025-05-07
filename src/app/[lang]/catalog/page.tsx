@@ -9,15 +9,18 @@ import { PaginationContent } from "@/catalog/components/Pagination";
 import SearchBarSection, {
   SearchBarContent,
 } from "@/catalog/components/SearchBarSection";
-import SortSelect, { SortSelectContent } from "@/catalog/components/SortSelect";
-import { IPageParam } from "../types";
-import { getTranslations } from "../dictionaries";
 import SearchResults from "@/catalog/components/SearchResults";
+import SearchResultsCount from "@/catalog/components/SearchResultsCount";
+import SortSelect, { SortSelectContent } from "@/catalog/components/SortSelect";
+import { CatalogProviders } from "@/catalog/providers";
+import { StartDsfrOnHydration } from "@/dsfr-bootstrap";
+
+import { getTranslations } from "../dictionaries";
+import { IPageParam } from "../types";
 
 import styles from "./page.module.css";
-import SearchResultsCount from "@/catalog/components/SearchResultsCount";
-import { StartDsfrOnHydration } from "@/dsfr-bootstrap";
-import { CatalogProviders } from "@/catalog/providers";
+
+export { generateStaticParams } from "../static-params";
 
 export interface CatalogContent {
   noData: string;
@@ -113,7 +116,7 @@ export default async function CatalogPage({
                     minHeight: "1500px",
                   }}
                 >
-                  <SearchResults erosImageUrls={erosImageUrls} />
+                  <SearchResults erosImageUrls={erosImageUrls} lang={lang} />
                 </div>
               </div>
             </div>
@@ -123,53 +126,3 @@ export default async function CatalogPage({
     </div>
   );
 }
-
-/*
-export const query = graphql`
-  query CatalogPage {
-    allCatalogItem {
-      nodes {
-        name
-        pagePath
-        materials
-        category
-        slug
-        created
-        object {
-          id
-          slug
-          c2rmfId
-          thumbnail {
-            url
-          }
-          placeholderImage {
-            publicURL
-          }
-        }
-        project {
-          slug
-          comments
-          thumbnail {
-            url
-          }
-          placeholderImage {
-            publicURL
-          }
-        }
-      }
-    }
-    c2rmfImages: allObjectGroup(filter: { c2rmfId: { ne: null } }) {
-      nodes {
-        fields {
-          erosImage {
-            image {
-              publicURL
-            }
-          }
-        }
-        c2rmfId
-      }
-    }
-  }
-`;
-*/

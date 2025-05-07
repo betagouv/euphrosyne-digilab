@@ -1,13 +1,11 @@
-"use client";
+import React from "react";
 
-import { fr } from "@codegouvfr/react-dsfr";
-import React, { useRef } from "react";
-
-import useHasBeenInViewport from "../../hooks/useHasBeenInViewport";
+import { fetchStats } from "@/clients/stats";
 import { ContentProps } from "@/i18n";
-import AnimatedNumber from "../AnimatedNumber";
+
 import { BaseSection } from "../BaseSection";
-import { useStyles } from "tss-react";
+
+import styles from "./FigureSection.module.css";
 
 export interface FigureSectionContent {
   title: string;
@@ -18,62 +16,25 @@ export interface FigureSectionContent {
   inYear: string;
 }
 
-interface Stats {
-  totalProjects: number | null;
-  totalObjectGroups: number | null;
-  totalHours: number | null;
-}
-
-interface StatsContainer {
-  [key: string]: Stats | null;
-  all: Stats | null;
-  year: Stats | null;
-}
-
-interface FigureSectionProps {
-  stats: StatsContainer | null;
-}
-
-export const FigureSection: React.FC<
-  FigureSectionProps & ContentProps<FigureSectionContent>
-> = ({ stats, content }) => {
-  const { css } = useStyles();
-  const elementRef = useRef<HTMLDivElement>(null);
-  const isInViewport = useHasBeenInViewport(elementRef);
+export default async function FigureSection({
+  content,
+}: ContentProps<FigureSectionContent>) {
+  const stats = await fetchStats();
 
   return (
-    <div className="fr-pt-10w" ref={elementRef}>
-      <BaseSection
-        className={`fr-pb-0 fr-pt-5w ${css`
-          background-color: ${fr.colors.decisions.background.alt.blueFrance
-            .default};
-          max-width: 996px;
-          margin: 0 auto;
-          text-align: center;
-        `}`}
-      >
+    <div className="fr-pt-10w">
+      <BaseSection className={`fr-pb-0 fr-pt-5w ${styles.container}`}>
         <h3>{content.title}</h3>
         {["all", "year"].map((key) => {
           const animatedNumberProps: [string, number][] = [
-            [
-              content.analyzedProjectsLabel,
-              stats ? stats[key]?.totalProjects || 0 : 0,
-            ],
-            [
-              content.analyzedObjectsLabel,
-              stats ? stats[key]?.totalObjectGroups || 0 : 0,
-            ],
-            [content.hoursLabel, stats ? stats[key]?.totalHours || 0 : 0],
+            [content.analyzedProjectsLabel, stats[key]!.totalProjects],
+            [content.analyzedObjectsLabel, stats[key]!.totalObjectGroups],
+            [content.hoursLabel, stats[key]!.totalHours],
           ];
 
           return (
             <React.Fragment key={`figure-${key}`}>
-              <h4
-                className={css`
-                  margin-right: auto;
-                  margin-left: auto;
-                `}
-              >
+              <h4 className={styles.h4}>
                 {key === "all"
                   ? content.sinceYear.replace("{}", "2022")
                   : content.inYear.replace(
@@ -87,7 +48,7 @@ export const FigureSection: React.FC<
                     className="fr-col-12 fr-col-lg-4 fr-px-7w fr-py-4w"
                     key={`figure-${key}-${label}`}
                   >
-                    <h4>{isInViewport && <AnimatedNumber n={number} />}</h4>
+                    <h4>{number}</h4>
                     <p>{label}</p>
                   </div>
                 ))}
@@ -98,4 +59,4 @@ export const FigureSection: React.FC<
       </BaseSection>
     </div>
   );
-};
+}

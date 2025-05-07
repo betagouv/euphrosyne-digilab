@@ -1,7 +1,7 @@
 import Card from "@codegouvfr/react-dsfr/Card";
-import { SerializedStyles } from "@emotion/react";
 
 import { ellipse } from "../../../utils";
+
 import CardStart from "./CardStart";
 import SearchItemBadge from "./SearchItemBadge";
 import { CatalogItemProps } from "./types";
@@ -12,12 +12,15 @@ export default function CardItem({
   linkTo,
   thumbnail,
   ...props
-}: CatalogItemProps & { css?: SerializedStyles }) {
+}: CatalogItemProps) {
   return (
     <Card
       background
       border
-      desc={ellipse(searchItem.project?.comments || "", 200)}
+      desc={ellipse(
+        searchItem.category === "project" ? searchItem.comments : "",
+        200
+      )}
       enlargeLink
       linkProps={{
         href: linkTo,
@@ -29,7 +32,8 @@ export default function CardItem({
       title={title}
       imageUrl={thumbnail}
       imageAlt="Image de l'objet"
-      css={{ ...props.css, minHeight: "22rem" }}
+      style={{ minHeight: "22rem" }}
+      {...props}
     />
   );
 }

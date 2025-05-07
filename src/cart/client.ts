@@ -23,7 +23,7 @@ export class ValidationError extends Error {
 }
 
 export async function requestData(form: IDataRequestForm, runIds: string[]) {
-  const url = `${process.env.GATSBY_EUPHROSYNE_HOST}/api/data-request/`;
+  const url = `${process.env.NEXT_PUBLIC_EUPHROSYNE_HOST}/api/data-request/`;
   const response = await fetch(url, {
     method: "POST",
     headers: {

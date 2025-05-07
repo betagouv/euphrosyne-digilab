@@ -1,16 +1,12 @@
 import { ToggleSwitch } from "@codegouvfr/react-dsfr/ToggleSwitch";
 
+import { FiltersProps } from "@/types/catalog";
+
 import { ContentProps } from "../../i18n";
-import { Filters } from "../../opensearch/useSearch";
 
 export interface DataAvailableSwitchContent {
   label: string;
   status: string;
-}
-
-interface DataAvailableSwitchProps {
-  filters: Filters;
-  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
 }
 
 export default function DataAvailableSwitch({
@@ -18,10 +14,10 @@ export default function DataAvailableSwitch({
   filters,
   setFilters,
   ...props
-}: DataAvailableSwitchProps &
+}: FiltersProps &
   ContentProps<DataAvailableSwitchContent> &
   Omit<React.HTMLAttributes<HTMLDivElement>, "content">) {
-  const { isDataAvailable } = filters;
+  const { isDataEmbargoed } = filters;
   return (
     <div {...props}>
       <label className="fr-label" htmlFor="data-available-switch">
@@ -30,9 +26,9 @@ export default function DataAvailableSwitch({
       <ToggleSwitch
         inputTitle={content.label}
         label={content.label}
-        checked={isDataAvailable}
+        checked={isDataEmbargoed === false}
         onChange={(checked) =>
-          setFilters({ ...filters, isDataAvailable: checked })
+          setFilters({ ...filters, isDataEmbargoed: !checked })
         }
         showCheckedHint={false}
         id="data-available-switch"

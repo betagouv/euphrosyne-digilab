@@ -1,11 +1,13 @@
+import { fr } from "@codegouvfr/react-dsfr";
+import Image from "next/image";
+import { tss } from "tss-react";
+
 import { I18nLink as Link } from "../../../components/I18nLink";
 import { ellipse } from "../../../utils";
+
 import CardStart from "./CardStart";
 import SearchItemBadge from "./SearchItemBadge";
 import { CatalogItemProps } from "./types";
-import Image from "next/image";
-import { tss } from "tss-react";
-import { fr } from "@codegouvfr/react-dsfr";
 
 export default function ListItem({
   searchItem,
@@ -65,7 +67,13 @@ export default function ListItem({
             </Link>
           </h3>
           <div className="fr-text--sm fr-my-1w">
-            <span>{ellipse(searchItem.project?.comments || "", 500)}</span>
+            <span>
+              {ellipse(
+                (searchItem.category === "project" && searchItem.comments) ||
+                  "",
+                500
+              )}
+            </span>
           </div>
           <CardStart searchItem={searchItem} />
         </div>

@@ -1,13 +1,18 @@
 import { Card } from "@codegouvfr/react-dsfr/Card";
 
-import { ContentProps } from "../i18n";
+import { buildCatalogItemPath } from "@/catalog/utils";
+import { getDeterministicPlaceholderImage } from "@/placeholder";
+import { IProjectItem } from "@/types/ICatalog";
+
+import { ContentProps, localizePath, WithCurrentLang } from "../i18n";
 import { ProjectStatus } from "../types/project";
 import { ellipse } from "../utils";
+
+import ObjectGroupMaterialTags from "./object-group/ObjectGroupMaterialTags";
 import {
   ProjectStatusBadge,
   ProjectStatusBadgeContent,
 } from "./ProjectStatusBadge";
-import ObjectGroupMaterialTags from "./object-group/ObjectGroupMaterialTags";
 
 export interface ProjectCardContent {
   project: string;
@@ -18,25 +23,20 @@ export interface ProjectCardContent {
   projectStatusBadge: ProjectStatusBadgeContent;
 }
 
-interface Project {
-  status: string;
-  comments: string | null;
-  name: string;
-  slug: string;
-  materials: readonly string[] | null;
-  pagePath: string;
-  thumbnail: { url: string; copyright: string } | null;
-  placeholderImage: { publicURL: string } | null;
-}
-
 export const ProjectCard = ({
   project,
   content,
-}: { project: Project } & ContentProps<ProjectCardContent>) => {
+  currentLang,
+}: {
+  project: IProjectItem;
+} & WithCurrentLang &
+  ContentProps<ProjectCardContent>) => {
   const thumbnail =
     project.thumbnail?.url ||
-    project.placeholderImage?.publicURL ||
+    getDeterministicPlaceholderImage(project.slug) ||
     "/images/default-placeholder-16x9.png";
+
+  const link = localizePath(buildCatalogItemPath(project), currentLang);
 
   return (
     <Card
@@ -52,9 +52,9 @@ export const ProjectCard = ({
       enlargeLink
       imageAlt={content.projectImage.replace("{}", project.name)}
       imageUrl={thumbnail}
-      //linkProps={{
-      //  href: project.pagePath,
-      //}}
+      linkProps={{
+        href: link,
+      }}
       size="medium"
       start={
         <ObjectGroupMaterialTags

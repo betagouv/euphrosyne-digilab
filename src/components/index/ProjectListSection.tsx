@@ -1,8 +1,8 @@
-import { ContentProps } from "@/i18n";
-import type { Project } from "../../types/project";
+import { ContentProps, WithCurrentLang } from "@/i18n";
+import { IProjectItem } from "@/types/ICatalog";
+
 import { BaseSection } from "../BaseSection";
 import { ProjectCard, ProjectCardContent } from "../ProjectCard";
-import { IOpenSearchDocument } from "@/types/IOpenSearch";
 
 export interface ProjectListSectionContent {
   title: string;
@@ -11,10 +11,12 @@ export interface ProjectListSectionContent {
 
 export const ProjectListSection = ({
   projects,
+  currentLang,
   content,
 }: {
-  projects: IOpenSearchDocument[];
-} & ContentProps<ProjectListSectionContent>) => {
+  projects: IProjectItem[];
+} & WithCurrentLang &
+  ContentProps<ProjectListSectionContent>) => {
   return (
     <BaseSection>
       <div>
@@ -23,10 +25,14 @@ export const ProjectListSection = ({
       <div className="fr-grid-row fr-grid-row--gutters">
         {projects.map((project) => (
           <div
-            className="fr-col-12 fr-col-md-6 fr-col-lg-4 fr-p-7w"
+            className="fr-col-12 fr-col-md-6 fr-col-lg-4 fr-p-4w"
             key={project.name}
           >
-            <ProjectCard project={project} content={content.projectCard} />
+            <ProjectCard
+              project={project}
+              content={content.projectCard}
+              currentLang={currentLang}
+            />
           </div>
         ))}
       </div>

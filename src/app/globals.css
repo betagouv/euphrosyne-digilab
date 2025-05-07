@@ -5,3 +5,7 @@
 .warning-text {
   color: var(--text-default-warning) !important
 }
+
+.fr-card__detail.fr-icon-warning-fill {
+  color: var(--text-default-warning);
+}

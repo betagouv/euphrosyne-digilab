@@ -1,5 +1,3 @@
-import { css } from "@emotion/react";
-
 import ObjectGroupMaterialTags from "../../../components/object-group/ObjectGroupMaterialTags";
 import { SearchItem } from "../../../types/catalog";
 
@@ -15,9 +13,9 @@ export default function CardStart({ searchItem }: { searchItem: SearchItem }) {
         />
       ) : (
         <div
-          css={css`
-            height: 2.5em;
-          `}
+          style={{
+            height: "2.5em",
+          }}
         ></div>
       )}
     </div>

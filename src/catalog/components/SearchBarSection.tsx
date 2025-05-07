@@ -4,8 +4,6 @@ import SearchBar from "@codegouvfr/react-dsfr/SearchBar";
 import { useContext, useEffect, useRef } from "react";
 
 import { ContentProps } from "../../i18n";
-import { tss } from "tss-react";
-import { fr } from "@codegouvfr/react-dsfr";
 import { CatalogContext } from "../CatalogContext";
 
 export interface SearchBarContent {
@@ -31,7 +29,7 @@ export default function SearchBarSection({
     if (searchValue !== inputRef.current?.value) {
       inputRef.current!.value = searchValue;
     }
-  }, []);
+  }, [searchValue]);
 
   return (
     <div {...props} className={`${props.className}`}>

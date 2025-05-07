@@ -1,3 +1,5 @@
+"use client";
+
 import { FrIconClassName, fr } from "@codegouvfr/react-dsfr";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { Table } from "@codegouvfr/react-dsfr/Table";
@@ -6,6 +8,7 @@ import { useContext } from "react";
 import { I18nLink as Link } from "../components/I18nLink";
 import { PageBadges } from "../components/PageBadges";
 import { LangContext } from "../contexts/LangContext";
+
 import { CartContext } from "./context";
 
 export interface CartTableContent {
@@ -23,13 +26,16 @@ export default function CartTable() {
 
   const data = items.map((item) => [
     item.label,
-    <PageBadges pageType={item.from.type} />,
-    <Link to={item.from.href}>{translations.viewFromPage}</Link>,
+    <PageBadges pageType={item.from.type} key={`${item.id}-page-badges`} />,
+    <Link href={item.from.href} key={`${item.id}-link`}>
+      {translations.viewFromPage}
+    </Link>,
     <Button
       iconId={fr.cx("fr-icon-close-line") as FrIconClassName}
       onClick={() => removeItem(item)}
       title={translations.headerDelete}
       priority="tertiary no outline"
+      key={`${item.id}-delete`}
     />,
   ]);
 

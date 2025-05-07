@@ -1,6 +1,10 @@
+import { Metadata } from "next";
 import React from "react";
 
+import EuphrosyneHeader from "@/components/EuphrosyneHeader";
+import { Footer } from "@/components/Footer";
 import { Lang } from "@/i18n";
+
 import {
   getHtmlAttributes,
   DsfrHead,
@@ -8,10 +12,24 @@ import {
 import { Providers } from "../providers";
 
 import "../globals.css";
-import EuphrosyneHeader from "@/components/EuphrosyneHeader";
+import { getTranslations } from "./dictionaries";
 
 interface IRootLayoutParams {
   lang: Lang;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<IRootLayoutParams>;
+}): Promise<Metadata> {
+  // read route params
+  const { lang } = await params;
+  const translations = getTranslations(lang);
+
+  return {
+    title: translations.base.siteTitle,
+  };
 }
 
 export default async function RootLayout({
@@ -29,8 +47,9 @@ export default async function RootLayout({
       </head>
       <body>
         <Providers lang={lang}>
-          <EuphrosyneHeader />
+          <EuphrosyneHeader currentLang={lang} />
           {children}
+          <Footer currentLang={lang} />
         </Providers>
       </body>
     </html>

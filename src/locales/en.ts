@@ -1,3 +1,13 @@
+import { ObjectTemplateContent } from "@/app/[lang]/[itemType]/[slug]/ObjectPage";
+import { ProjectTemplateContent } from "@/app/[lang]/[itemType]/[slug]/page";
+import { ICartContent } from "@/app/[lang]/cart/page";
+import { CatalogContent } from "@/app/[lang]/catalog/page";
+import { NotFoundPageContent } from "@/app/[lang]/not-found";
+import type { IndexPageContent } from "@/app/[lang]/page";
+import { EuphrosyneHeaderContent } from "@/components/EuphrosyneHeader";
+import { IProjectSelectContent } from "@/components/object-group/ProjectSelect";
+import { AddToCartContent } from "@/components/project/AddToCartSection";
+
 import { CartButtonContent } from "../cart/CartButton";
 import { CartSubmitFormContent } from "../cart/CartSubmitForm";
 import { CartTableContent } from "../cart/CartTable";
@@ -6,16 +16,16 @@ import { CatalogViewModeToggleContent } from "../catalog/components/CatalogViewM
 import type { PageBadgesContent } from "../components/PageBadges";
 import type { ProjectCardContent } from "../components/ProjectCard";
 import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
-import type { ProjectDataContent } from "../components/project/ProjectData";
 import { RunCardContent } from "../components/run/RunCard";
-import type { LayoutContentProps } from "../layouts";
-import type { IndexPageContent } from "../pages";
-import { NotFoundPageContent } from "../pages/404";
-import { CartContent } from "../pages/cart";
-import type { CatalogContent } from "../pages/catalog";
-import type { ObjectTemplateContent } from "../pages/object/{ObjectGroup.slug}";
-import type { ProjectTemplateContent } from "../pages/project/{Project.slug}";
+
 import type { Translations } from "./fr";
+
+const _system = {
+  project: "project",
+  object: "object",
+};
+
+const siteTitle = "New AGLAE Data Catalog";
 
 export const translations = {
   project: "Project",
@@ -29,23 +39,23 @@ export const translations = {
   materials: "Materials",
 
   error: "Error",
+
+  siteTitle,
 };
 export const erosLinkText = "Eros object page";
 
-const layoutContent: LayoutContentProps = {
-  header: {
-    homeLinkTitle: "Home - New AGLAE Data Catalog",
-    euphrosyneLinkTitle: "Access Euphrosyne",
-    homeLinkLabel: "Home",
-    catalogLinkLabel: "Catalog",
-    serviceTitle: "New AGLAE Data Catalog",
-    languageSwitcher: {
-      selectLangBtnTitle: "Change language",
-    },
+const headerContent: EuphrosyneHeaderContent = {
+  homeLinkTitle: `Home - ${siteTitle}`,
+  euphrosyneLinkTitle: "Access Euphrosyne",
+  homeLinkLabel: "Home",
+  catalogLinkLabel: "Catalog",
+  serviceTitle: siteTitle,
+  languageSwitcher: {
+    selectLangBtnTitle: "Change language",
   },
 };
 
-export const projectDataContent: ProjectDataContent = {
+export const addToCartContent: AddToCartContent = {
   addToCart: "Add data to cart",
 };
 
@@ -82,7 +92,7 @@ const indexPageContent: IndexPageContent = {
   search: {
     title: {
       highlight: "Browse",
-      rest: "our Euphrosyne data catalog",
+      rest: "our New AGLAE data catalog",
     },
   },
   howItWorks: {
@@ -117,7 +127,7 @@ const indexPageContent: IndexPageContent = {
     inYear: "In {}",
   },
   projectList: {
-    title: "Latest Euphrosyne research projects",
+    title: "Latest New AGLAE research projects",
     projectCard,
   },
 };
@@ -128,7 +138,7 @@ const catalogContent: CatalogContent = {
   numResultPlural: "{} results",
 
   searchBar: {
-    title: "Browse the Euphrosyne data catalog",
+    title: "Browse the New AGLAE data catalog",
   },
 
   filterContainer: {
@@ -185,11 +195,10 @@ const catalogViewModeToggleContent: CatalogViewModeToggleContent = {
 const objectPageContent: ObjectTemplateContent = {
   catalog: "Catalog",
   projectWithName: "Project {}",
-  altImageWithObjectName: "Image of the object {}",
-  noProject: "No project",
+  objectGroupThumbnailContent: {
+    altImageWithObjectName: "Image of the object {}",
+  },
   objectData: "Object data",
-  project: "Project",
-  viewProject: "View project",
 
   objectGroupDescription: {
     collection: translations.collection,
@@ -202,14 +211,22 @@ const objectPageContent: ObjectTemplateContent = {
 
     pageBadges,
   },
-  projectDataContent,
+};
+
+const runCard: RunCardContent = {
+  date: "Date",
+  projectLeader: "Project leader",
+  experimentalCondition: "Experimental conditions",
+  methods: "Methods",
+  dataUnderEmbargo: "Data not yet accessible",
 };
 
 const projectPageContent: ProjectTemplateContent = {
   catalog: "Catalog",
   projectData: "Project data",
 
-  projectDataContent,
+  runCard,
+
   projectDescription: {
     pageBadges: pageBadges,
     noDescription: "No description for this project.",
@@ -217,15 +234,16 @@ const projectPageContent: ProjectTemplateContent = {
   projectObjects: {
     projectObjects: "Project objects",
     noObjects: "This project has no registered object.",
-    seeObjectDetails: "See object details",
     seeMore: "See more related objects ({} remaining) +",
     seeLess: "See less -",
-    erosLinkText,
-    inventory: translations.inventory,
-    period: translations.period,
-    era: translations.era,
-    geographicArea: translations.geographicArea,
-    materials: translations.materials,
+    projectObject: {
+      erosLinkText,
+      seeObjectDetails: "See object details",
+      period: translations.period,
+      era: translations.era,
+      geographicArea: translations.geographicArea,
+      materials: translations.materials,
+    },
   },
 };
 
@@ -252,7 +270,7 @@ const cartSubmitForm: CartSubmitFormContent = {
   institution: "Institution",
 };
 
-const cart: CartContent = {
+const cart: ICartContent = {
   requestData: "Request data",
   title: "Cart",
   buttonSubmit: "Submit",
@@ -272,19 +290,37 @@ export const notFoundPageContent: NotFoundPageContent = {
   goHome: "Back to home",
 };
 
-const runCard: RunCardContent = {
-  date: "Date",
-  projectLeader: "Project leader",
-  experimentalCondition: "Experimental conditions",
-  methods: "Methods",
-  dataUnderEmbargo: "Data not yet accessible",
-};
-
 const dataAlert: DataAddedAlertContent = {
   description: "Data has been added to your cart.",
 };
 
+const projectSelect: IProjectSelectContent = {
+  noProject: "No project",
+  viewProject: "View project",
+  projectDataContent: runCard,
+  projects: translations.project,
+  project: translations.project,
+};
+
+const footerContent = {
+  description: "Euphrosyne, open the data from {link}.",
+  bottomItems: [
+    {
+      href: "/legal/donnees-personnelles",
+      text: "Personal data and Cookies",
+    },
+    {
+      href: "/legal/cgu",
+      text: "Terms of Use",
+    },
+  ],
+  termsLink: {
+    href: "/legal/mentions-legales",
+  },
+};
+
 const t: Translations = {
+  _system,
   base: translations,
   cart,
   cartButton,
@@ -293,7 +329,7 @@ const t: Translations = {
   catalogContent,
   erosLinkText,
   indexPageContent,
-  layoutContent,
+  headerContent,
   notFoundPageContent,
   objectPageContent,
   pageBadges,
@@ -303,6 +339,9 @@ const t: Translations = {
   runCard,
   dataAlert,
   catalogViewModeToggleContent,
+  addToCartContent,
+  projectSelect,
+  footerContent,
 };
 
 export default t;

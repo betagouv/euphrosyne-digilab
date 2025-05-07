@@ -14,7 +14,7 @@ export function useClosableAlert() {
       setHideAlertTimeout(timeout);
       return () => clearTimeout(hideAlertTimeout);
     }
-  }, [showDataAddedAlert]);
+  }, [hideAlertTimeout, showDataAddedAlert]);
 
   return [showDataAddedAlert, setshowDataAddedAlert] as const;
 }

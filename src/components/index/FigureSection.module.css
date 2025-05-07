@@ -1,0 +1,11 @@
+.container {
+  background-color: var(--background-alt-blue-france);
+  max-width: 996px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.h4 {
+    margin-right: auto;
+    margin-left: auto;
+}

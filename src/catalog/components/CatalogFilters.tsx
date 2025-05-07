@@ -1,8 +1,11 @@
 "use client";
 import { Checkbox } from "@codegouvfr/react-dsfr/Checkbox";
 import Input from "@codegouvfr/react-dsfr/Input";
+import { useContext } from "react";
 
 import { ContentProps } from "../../i18n";
+import { CatalogContext } from "../CatalogContext";
+
 import CreatedRange, { CreatedRangeContent } from "./CreatedRange";
 import DataAvailableSwitch, {
   DataAvailableSwitchContent,
@@ -14,8 +17,6 @@ import {
 import EraFilter, { EraFilterContent } from "./EraFilter";
 import InputWithAggregatedTags from "./InputWithAggregatedTags";
 import PeriodFilter, { PeriodFilterContent } from "./PeriodFilter";
-import { useContext } from "react";
-import { CatalogContext } from "../CatalogContext";
 
 export interface CatalogFiltersContent {
   project: string;

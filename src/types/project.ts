@@ -1,4 +1,4 @@
-import { ILeader, IObjectGroup, IProjectItem } from "../../types/ICatalog";
+import { ILeader, IObjectGroup, IProjectItem } from "./ICatalog";
 
 export type ProjectStatus = "Status.FINISHED" | "Status.DATA_AVAILABLE";
 

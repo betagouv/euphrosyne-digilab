@@ -1,24 +1,20 @@
 import { Range } from "@codegouvfr/react-dsfr/Range";
 import { useEffect, useState } from "react";
 
+import { FiltersProps } from "@/types/catalog";
+
 import { fetchCreatedAggs } from "../../clients/search";
 import { ContentProps } from "../../i18n";
-import { Filters } from "../../opensearch/useSearch";
 
 export interface CreatedRangeContent {
   label: string;
-}
-
-interface CreatedRangeProps {
-  filters: Filters;
-  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
 }
 
 export default function CreatedRange({
   content,
   filters,
   setFilters,
-}: CreatedRangeProps & ContentProps<CreatedRangeContent>) {
+}: FiltersProps & ContentProps<CreatedRangeContent>) {
   const minYear = 1970;
   const maxYear = new Date().getFullYear();
   const [ranges, setRanges] = useState<number[]>([minYear, maxYear]);
@@ -26,7 +22,7 @@ export default function CreatedRange({
   useEffect(() => {
     fetchCreatedAggs().then((response) => {
       const results = response.map((dateResult) =>
-        new Date(dateResult.key).getFullYear(),
+        new Date(dateResult.key).getFullYear()
       );
       setRanges(results);
     });

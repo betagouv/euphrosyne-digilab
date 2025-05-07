@@ -7,9 +7,9 @@ export type Lang = "fr" | "en";
 export const langs: Lang[] = ["fr", "en"];
 export const defaultLangKey: Lang = "fr";
 
-export const getCurrentLangKey = (): Lang => {
-  if (typeof window === "undefined") return defaultLangKey;
-  const lang = location.pathname.split("/")[1];
+export const getPathnameLangKey = (pathname: string | null): Lang => {
+  if (!pathname) return defaultLangKey;
+  const lang = pathname.split("/")[1];
   if ((langs as string[]).includes(lang)) {
     return lang as Lang;
   }
@@ -45,7 +45,7 @@ const translationsLangMapping: TranslationsLangMapping = {
 const translatePrefixPath = (
   path: string,
   lang: Lang,
-  currentLang?: Lang,
+  currentLang?: Lang
 ): string => {
   if (currentLang && lang === currentLang) return path;
   const translations: BaseTranslations = translationsLangMapping[lang],
@@ -73,11 +73,6 @@ const translatePrefixPath = (
   return `${localizedInitialPath}/${pathParts.slice(slugIndex).join("/")}`;
 };
 
-export const localizePathToCurrenLange = (path: string): string => {
-  const lang = getCurrentLangKey();
-  return localizePath(path, lang);
-};
-
 export const localizePath = (path: string, lang: Lang): string => {
   let translatedPath = translatePrefixPath(path, lang);
   if (!translatedPath.startsWith(`/${lang}`)) {
@@ -89,10 +84,14 @@ export const localizePath = (path: string, lang: Lang): string => {
 export const changePathLocale = (
   path: string,
   newLang: Lang,
-  oldLang: Lang,
+  oldLang: Lang
 ): string => {
   return translatePrefixPath(path, newLang, oldLang).replace(
-    `${oldLang}/`,
-    `${newLang}/`,
+    `/${oldLang}`,
+    `/${newLang}`
   );
 };
+
+export interface WithCurrentLang {
+  currentLang: Lang;
+}

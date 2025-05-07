@@ -1,11 +1,12 @@
 import Image from "next/image";
 
 import { ContentProps } from "@/i18n";
+
+import calendarSVG from "../../../public/images/illustrations/calendar.svg";
+import humanCoopSVG from "../../../public/images/illustrations/human-cooperation.svg";
+import searchSVG from "../../../public/images/illustrations/search.svg";
 import { BaseSection } from "../BaseSection";
 
-import searchSVG from "../../../public/images/illustrations/search.svg";
-import humanCoopSVG from "../../../public/images/illustrations/human-cooperation.svg";
-import calendarSVG from "../../../public/images/illustrations/calendar.svg";
 
 export interface HowItWorksSectionContent {
   title: string;

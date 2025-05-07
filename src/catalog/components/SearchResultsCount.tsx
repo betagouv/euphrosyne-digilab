@@ -1,7 +1,9 @@
 "use client";
 
-import { LangContext } from "@/contexts/LangContext";
 import { useContext } from "react";
+
+import { LangContext } from "@/contexts/LangContext";
+
 import { CatalogContext } from "../CatalogContext";
 
 export default function SearchResultsCount() {

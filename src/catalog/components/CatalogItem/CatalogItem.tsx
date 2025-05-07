@@ -1,28 +1,33 @@
 import { SerializedStyles } from "@emotion/react";
 
+import { defaultLangKey, Lang, localizePath } from "@/i18n";
+import { getDeterministicPlaceholderImage } from "@/placeholder";
+
 import { CatalogViewMode, SearchItem } from "../../../types/catalog";
+
 import CardItem from "./CardItem";
 import ListItem from "./ListItem";
-import { getCurrentLangKey, localizePath } from "@/i18n";
-import { getDeterministicPlaceholderImage } from "@/placeholder";
 
 type CatalogItemProps = {
   searchItem: SearchItem;
   relatedErosImageUrl?: string | null;
   css?: SerializedStyles;
   viewMode?: CatalogViewMode;
+  lang?: Lang;
 };
 
 export default function CatalogItem({
   searchItem,
   relatedErosImageUrl,
   viewMode = "list",
+  lang,
   ...props
 }: CatalogItemProps) {
-  const linkTo = localizePath(searchItem.pagePath, getCurrentLangKey()) || "#",
+  const linkTo =
+      localizePath(searchItem.pagePath, lang || defaultLangKey) || "#",
     title = searchItem.name || "";
 
-  const item = searchItem.object || searchItem.project;
+  const item = searchItem;
 
   const placeholderImageUrl = getDeterministicPlaceholderImage(searchItem.slug);
 
