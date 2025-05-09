@@ -6,7 +6,7 @@ import {
 import React from "react";
 
 import { getTranslations } from "@/app/[lang]/dictionaries";
-import type { WithCurrentLang } from "@/i18n";
+import { localizePath, type WithCurrentLang } from "@/i18n";
 
 export function Footer({ currentLang }: WithCurrentLang) {
   const translations = getTranslations(currentLang);
@@ -40,6 +40,11 @@ export function Footer({ currentLang }: WithCurrentLang) {
       contentDescription={contentDescription}
       termsLinkProps={content.termsLink}
       bottomItems={bottomItems}
+      brandTop="Ministère de la Culture"
+      homeLinkProps={{
+        href: localizePath("/", currentLang),
+        title: content.homeLinkTitle,
+      }}
     />
   );
 }

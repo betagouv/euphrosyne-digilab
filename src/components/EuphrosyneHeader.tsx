@@ -101,7 +101,7 @@ export default function EuphrosyneHeader({ currentLang }: WithCurrentLang) {
     <Header
       brandTop="Ministère de la Culture"
       homeLinkProps={{
-        href: ``,
+        href: localizePath("/", currentLang),
         title: content.homeLinkTitle,
       }}
       quickAccessItems={[

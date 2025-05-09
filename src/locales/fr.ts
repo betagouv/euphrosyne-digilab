@@ -306,6 +306,7 @@ const projectSelect: IProjectSelectContent = {
 
 export const footerContent = {
   description: "Euphrosyne, ouvrir les données de {link}.",
+  homeLinkTitle: `Accueil - ${siteTitle}`,
   bottomItems: [
     {
       href: "/legal/donnees-personnelles",

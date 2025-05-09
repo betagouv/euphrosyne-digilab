@@ -304,6 +304,7 @@ const projectSelect: IProjectSelectContent = {
 
 const footerContent = {
   description: "Euphrosyne, open the data from {link}.",
+  homeLinkTitle: `Home - ${siteTitle}`,
   bottomItems: [
     {
       href: "/legal/donnees-personnelles",
