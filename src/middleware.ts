@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { defaultLangKey, langs } from "./i18n";
+
 export function middleware(req: NextRequest) {
   if (!process.env.BASIC_AUTH_CREDENTIALS) {
     throw new Error("BASIC_AUTH_CREDENTIALS environment variable is not set");
@@ -16,7 +18,7 @@ export function middleware(req: NextRequest) {
       process.env.BASIC_AUTH_CREDENTIALS.split(":");
 
     if (username === basicAuthUsername && password === basicAuthPassword) {
-      return NextResponse.next();
+      return checkI18nRedirection(req);
     }
   }
 
@@ -27,8 +29,23 @@ export function middleware(req: NextRequest) {
     },
   });
 }
+
 export const config = {
   matcher: [
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };
+
+function checkI18nRedirection(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const pathnameHasLocale = langs.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+
+  if (pathnameHasLocale) return NextResponse.next();
+
+  const locale = defaultLangKey;
+  request.nextUrl.pathname = `/${locale}${pathname}`;
+
+  return NextResponse.redirect(request.nextUrl);
+}
