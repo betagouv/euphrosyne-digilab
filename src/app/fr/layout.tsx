@@ -6,7 +6,7 @@ import Layout from "../Layout";
 import "../globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const translations = getTranslations("en");
+  const translations = getTranslations("fr");
 
   return {
     title: translations.base.siteTitle,
