@@ -58,5 +58,7 @@ export async function fetchStats(): Promise<StatsContainer> {
     statsResponse.year?.total_projects || stats.year["totalProjects"];
   stats.year["totalObjectGroups"] =
     statsResponse.year?.total_object_groups || stats.year["totalObjectGroups"];
+  stats.year["totalHours"] =
+    statsResponse.year?.total_hours || stats.year["totalHours"];
   return stats;
 }
