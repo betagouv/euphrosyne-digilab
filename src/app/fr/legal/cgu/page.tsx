@@ -34,7 +34,7 @@ export default function CGUPage() {
           les clips audio, les téléchargements numériques et les compilations de
           données, est la propriété de L&apos;Atelier Numérique ou de ses
           fournisseurs de contenu et est protégé par les lois françaises et
-          internationales sur le droit d&apos;auteur. le droit d&apos;auteur.
+          internationales sur le droit d&apos;auteur.
         </p>
 
         <h3>Limitation de responsabilité</h3>
