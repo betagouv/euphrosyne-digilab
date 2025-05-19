@@ -5,11 +5,10 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { Table } from "@codegouvfr/react-dsfr/Table";
 import { useContext } from "react";
 
+import { CartContext } from "./context";
 import { I18nLink as Link } from "../components/I18nLink";
 import { PageBadges } from "../components/PageBadges";
 import { LangContext } from "../contexts/LangContext";
-
-import { CartContext } from "./context";
 
 export interface CartTableContent {
   headerRunName: string;

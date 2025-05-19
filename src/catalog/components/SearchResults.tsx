@@ -7,7 +7,6 @@ import { Lang } from "@/i18n";
 import { IIDImageMapping, SearchItem } from "@/types/catalog";
 
 import { CatalogContext } from "../CatalogContext";
-
 import CatalogItem from "./CatalogItem/CatalogItem";
 import { Pagination } from "./Pagination";
 
@@ -15,7 +14,7 @@ const PAGE_LENGTH = 10;
 
 const getErosUrlForCatalogItem = (
   erosImageUrls: IIDImageMapping,
-  item: SearchItem
+  item: SearchItem,
 ) => {
   if (
     item.category === "object" &&
@@ -53,7 +52,7 @@ export default function SearchResults({
               searchItem={searchItem}
               relatedErosImageUrl={getErosUrlForCatalogItem(
                 erosImageUrls,
-                searchItem
+                searchItem,
               )}
               viewMode={viewMode}
               lang={lang}

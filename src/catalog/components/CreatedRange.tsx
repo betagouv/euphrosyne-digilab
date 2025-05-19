@@ -22,7 +22,7 @@ export default function CreatedRange({
   useEffect(() => {
     fetchCreatedAggs().then((response) => {
       const results = response.map((dateResult) =>
-        new Date(dateResult.key).getFullYear()
+        new Date(dateResult.key).getFullYear(),
       );
       setRanges(results);
     });

@@ -4,7 +4,6 @@ import { fetchStats } from "@/clients/stats";
 import { ContentProps } from "@/i18n";
 
 import { BaseSection } from "../BaseSection";
-
 import styles from "./FigureSection.module.css";
 
 export interface FigureSectionContent {
@@ -39,7 +38,7 @@ export default async function FigureSection({
                   ? content.sinceYear.replace("{}", "2022")
                   : content.inYear.replace(
                       "{}",
-                      new Date().getFullYear().toString()
+                      new Date().getFullYear().toString(),
                     )}
               </h4>
               <div className="fr-grid-row fr-grid-row--gutters">

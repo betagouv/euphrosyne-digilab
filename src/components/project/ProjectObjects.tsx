@@ -5,7 +5,6 @@ import { ContentProps } from "@/i18n";
 import { ObjectGroup } from "../../types/project";
 import { BaseSection } from "../BaseSection";
 import { ExpandableList } from "../ExpandableList";
-
 import ProjectObject, { ProjectObjectContent } from "./ProjectObject";
 
 export interface ProjectObjectsContent {
@@ -57,7 +56,7 @@ export const ProjectObjects = ({
                 excerptLength={excerptLength}
                 expandText={content.seeMore.replace(
                   "{}",
-                  (objectGroups.length - excerptLength).toString()
+                  (objectGroups.length - excerptLength).toString(),
                 )}
                 collapseText={content.seeLess}
               >

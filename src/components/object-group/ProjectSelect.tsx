@@ -30,7 +30,7 @@ export default function ProjectSelect({ objectGroup }: IProjectSelectProps) {
 
   const projects = React.useMemo(
     () => objectGroup?.objectPageData?.projects || [],
-    [objectGroup]
+    [objectGroup],
   );
 
   const [selectedProject, setSelectedProject] = useState<IProject | null>(null);
@@ -45,11 +45,11 @@ export default function ProjectSelect({ objectGroup }: IProjectSelectProps) {
 
   const runs = objectGroup?.objectPageData?.runs;
   const selectedProjectRuns = runs?.filter(
-    (run) => run?.projectSlug === selectedProject?.slug
+    (run) => run?.projectSlug === selectedProject?.slug,
   );
   const onProjectSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const project = projects?.find(
-      (project) => project?.slug === event.target.value
+      (project) => project?.slug === event.target.value,
     );
     if (project) {
       setSelectedProject(project);

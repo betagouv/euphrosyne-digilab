@@ -4,13 +4,12 @@ import Badge from "@codegouvfr/react-dsfr/Badge";
 import { useContext } from "react";
 import { useStyles } from "tss-react";
 
-import { LangContext } from "../contexts/LangContext";
-import { ProjectStatus } from "../types/project";
-
 import {
   ProjectStatusBadge,
   ProjectStatusBadgeContent,
 } from "./ProjectStatusBadge";
+import { LangContext } from "../contexts/LangContext";
+import { ProjectStatus } from "../types/project";
 
 export type PageBadgeType = "project" | "objectGroup";
 

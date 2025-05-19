@@ -8,8 +8,9 @@ import { Suspense } from "react";
 import { getTranslations } from "@/app/[lang]/dictionaries";
 
 import CartButton from "../cart/CartButton";
-import type { ContentProps, Lang, WithCurrentLang } from "../i18n";
 import { changePathLocale, langs, localizePath } from "../i18n";
+
+import type { ContentProps, Lang, WithCurrentLang } from "../i18n";
 
 interface LanguageSwitcherContent {
   selectLangBtnTitle: string;
@@ -37,7 +38,7 @@ const buildLanguageSwitchLink = (
   lang: Lang,
   currentLang: Lang,
   pathname: string,
-  searchParams: URLSearchParams
+  searchParams: URLSearchParams,
 ) => {
   return (
     changePathLocale(pathname, lang, currentLang) + searchParams.toString()
@@ -76,7 +77,7 @@ const LanguageSwitcher: React.FC<
                           lang,
                           currentLang,
                           pathname,
-                          searchParams
+                          searchParams,
                         )
                       : "#"
                   }

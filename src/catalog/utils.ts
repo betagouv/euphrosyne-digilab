@@ -11,7 +11,7 @@ export function buildObjectPath({
 }): string {
   return `/object/${slugify(label, { lower: true }).replaceAll(
     "'",
-    "-"
+    "-",
   )}-${id}`;
 }
 

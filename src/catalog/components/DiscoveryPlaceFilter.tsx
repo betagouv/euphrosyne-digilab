@@ -11,7 +11,7 @@ export interface DiscoveryPlaceFilterContent {
 }
 
 const fetchLocationSuggestions = async (
-  query: string
+  query: string,
 ): Promise<Suggestion<BoundingBox>[]> => {
   if (query.length === 0) return [];
   const suggestions: Suggestion<BoundingBox>[] = [];

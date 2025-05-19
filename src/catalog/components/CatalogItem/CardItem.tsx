@@ -1,10 +1,9 @@
 import Card from "@codegouvfr/react-dsfr/Card";
 
-import { ellipse } from "../../../utils";
-
 import CardStart from "./CardStart";
 import SearchItemBadge from "./SearchItemBadge";
 import { CatalogItemProps } from "./types";
+import { ellipse } from "../../../utils";
 
 export default function CardItem({
   searchItem,
@@ -19,7 +18,7 @@ export default function CardItem({
       border
       desc={ellipse(
         searchItem.category === "project" ? searchItem.comments : "",
-        200
+        200,
       )}
       enlargeLink
       linkProps={{

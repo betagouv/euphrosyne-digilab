@@ -1,10 +1,9 @@
 import Input from "@codegouvfr/react-dsfr/Input";
 import { useContext } from "react";
 
-import { LangContext } from "../contexts/LangContext";
-
 import { DetailValidationError } from "./client";
 import { IDataRequestForm } from "./IDataRequestForm";
+import { LangContext } from "../contexts/LangContext";
 
 function getInputErrorProps(
   errors: DetailValidationError,

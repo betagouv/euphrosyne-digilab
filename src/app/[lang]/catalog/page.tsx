@@ -17,7 +17,6 @@ import { StartDsfrOnHydration } from "@/dsfr-bootstrap";
 
 import { getTranslations } from "../dictionaries";
 import { IPageParam } from "../types";
-
 import styles from "./page.module.css";
 
 export { generateStaticParams } from "../static-params";

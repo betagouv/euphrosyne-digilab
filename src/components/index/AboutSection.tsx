@@ -2,7 +2,6 @@ import { ContentProps } from "@/i18n";
 import sharedStyles from "@/styles/shared.module.css";
 
 import { BaseSection } from "../BaseSection";
-
 import styles from "./AboutSection.module.css";
 import AboutSectionImages from "./AboutSectionImages";
 

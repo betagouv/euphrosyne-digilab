@@ -1,10 +1,9 @@
 import { ContentProps } from "@/i18n";
 
+import AddToCartSection from "./AddToCartSection";
 import { Leader } from "../../types/project";
 import { Run } from "../../types/run";
 import RunCard, { RunCardContent } from "../run/RunCard";
-
-import AddToCartSection from "./AddToCartSection";
 
 interface ProjectDataProps
   extends Omit<React.InputHTMLAttributes<HTMLDivElement>, "content"> {

@@ -6,7 +6,7 @@ import {
 import React from "react";
 
 import { getTranslations } from "@/app/[lang]/dictionaries";
-import { localizePath, type WithCurrentLang } from "@/i18n";
+import { type WithCurrentLang, localizePath } from "@/i18n";
 
 export function Footer({ currentLang }: WithCurrentLang) {
   const translations = getTranslations(currentLang);

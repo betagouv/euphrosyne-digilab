@@ -1,8 +1,7 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
 import { FlatCompat } from "@eslint/eslintrc";
 import importPlugin from "eslint-plugin-import";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,15 +21,25 @@ const eslintConfig = [
         "error",
         {
           groups: [
-            "builtin",
-            "external",
+            ["builtin", "external"],
             "internal",
-            "parent",
-            "sibling",
+            ["parent", "sibling"],
             "index",
+            "object",
+            "type",
+          ],
+          pathGroups: [
+            {
+              pattern: "@/**",
+              group: "internal",
+              position: "before",
+            },
           ],
           "newlines-between": "always",
-          alphabetize: { order: "asc", caseInsensitive: true },
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
         },
       ],
     },

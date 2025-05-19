@@ -45,8 +45,8 @@ export function Pagination({
         currentPage + 2,
         pageCount - 1,
         pageCount,
-      ].filter((page) => page > 0 && page <= pageCount)
-    )
+      ].filter((page) => page > 0 && page <= pageCount),
+    ),
   );
 
   return (

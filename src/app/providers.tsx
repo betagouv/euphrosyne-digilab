@@ -3,16 +3,14 @@
 import { useState } from "react";
 import { NextAppDirEmotionCacheProvider } from "tss-react/next/appDir";
 
-import { CartContext, createCart, ICart } from "@/cart/context";
+import { CartContext, ICart, createCart } from "@/cart/context";
 import { LangContext } from "@/contexts/LangContext";
 import { PageContext } from "@/contexts/PageContext";
 import { Lang } from "@/i18n";
 
 import { DsfrProvider } from "../dsfr-bootstrap";
 import { IPageContext } from "../types/context";
-
 import { getTranslations } from "./[lang]/dictionaries";
-
 
 export function Providers({
   children,

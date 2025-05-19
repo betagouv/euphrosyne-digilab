@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import { SortValue } from "@/types/catalog";
 import { IObjectGroupItem, IProjectItem } from "@/types/ICatalog";
 
+import { parseObjectDocument, parseProjectDocument } from "./parsers";
 import { SearchProps, searchCatalog } from "../clients/search";
 import { SearchItem, SearchResults } from "../types/catalog";
-
-import { parseObjectDocument, parseProjectDocument } from "./parsers";
 
 export interface Filters {
   [key: string]: string | boolean | number | undefined | string[] | BoundingBox;
@@ -49,14 +48,14 @@ export const EMPTY_FILTERS: Filters = {
 
 export default function useSearch(
   filters: Filters,
-  sort: SortValue = "default"
+  sort: SortValue = "default",
 ) {
   const [filteredSearchItems, setFilteredSearchItems] = useState<SearchResults>(
-    { results: [], total: 0 }
+    { results: [], total: 0 },
   );
 
   const [previousFrom, setPreviosFrom] = useState(
-    filters.from / filters.size + 1
+    filters.from / filters.size + 1,
   );
 
   useEffect(() => {
@@ -173,7 +172,7 @@ async function doSearch(filters: SearchProps): Promise<SearchResults> {
 }
 
 export function buildFiltersSearchParams(
-  queryParams: URLSearchParams | null
+  queryParams: URLSearchParams | null,
 ): Filters {
   if (!queryParams) {
     // Return default filters if searchParams is null

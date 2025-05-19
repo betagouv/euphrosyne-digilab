@@ -21,10 +21,9 @@ import {
 import { parseProjectDocument } from "@/opensearch/parsers";
 import { IProjectItem } from "@/types/ICatalog";
 
-import { StartDsfrOnHydration } from "../../dsfr-bootstrap";
-
 import { getTranslations } from "./dictionaries";
 import { IPageParam } from "./types";
+import { StartDsfrOnHydration } from "../../dsfr-bootstrap";
 
 export { generateStaticParams } from "./static-params";
 

@@ -6,12 +6,11 @@ import { Footer } from "@/components/Footer";
 import { Lang } from "@/i18n";
 
 import {
-  getHtmlAttributes,
   DsfrHead,
+  getHtmlAttributes,
 } from "../../dsfr-bootstrap/server-only-index";
-import { Providers } from "../providers";
-
 import "../globals.css";
+import { Providers } from "../providers";
 import { getTranslations } from "./dictionaries";
 
 interface IRootLayoutParams {

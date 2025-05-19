@@ -1,6 +1,7 @@
 import { translations as enTranslations } from "./locales/en";
-import type { BaseTranslations } from "./locales/fr";
 import { translations as frTranslations } from "./locales/fr";
+
+import type { BaseTranslations } from "./locales/fr";
 
 export type Lang = "fr" | "en";
 
@@ -45,7 +46,7 @@ const translationsLangMapping: TranslationsLangMapping = {
 const translatePrefixPath = (
   path: string,
   lang: Lang,
-  currentLang?: Lang
+  currentLang?: Lang,
 ): string => {
   if (currentLang && lang === currentLang) return path;
   const translations: BaseTranslations = translationsLangMapping[lang],
@@ -84,11 +85,11 @@ export const localizePath = (path: string, lang: Lang): string => {
 export const changePathLocale = (
   path: string,
   newLang: Lang,
-  oldLang: Lang
+  oldLang: Lang,
 ): string => {
   return translatePrefixPath(path, newLang, oldLang).replace(
     `/${oldLang}`,
-    `/${newLang}`
+    `/${newLang}`,
   );
 };
 

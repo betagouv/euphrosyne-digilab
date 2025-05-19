@@ -8,7 +8,6 @@ import { tss } from "tss-react";
 
 import { LangContext } from "../contexts/LangContext";
 import { getPathnameLangKey, localizePath } from "../i18n";
-
 import { CartContext } from "./context";
 
 export interface CartButtonContent {

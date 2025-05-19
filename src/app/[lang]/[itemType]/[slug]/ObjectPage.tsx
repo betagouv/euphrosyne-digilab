@@ -15,11 +15,10 @@ import { getDeterministicPlaceholderImage } from "@/placeholder";
 import sharedStyles from "@/styles/shared.module.css";
 import { IOpenSearchDocument } from "@/types/IOpenSearch";
 
-import { getTranslations } from "../../dictionaries";
-import { IPageParam } from "../../types";
-
 import styles from "./ObjectPage.module.css";
 import pageStyles from "./page.module.css";
+import { getTranslations } from "../../dictionaries";
+import { IPageParam } from "../../types";
 
 interface IObjectPageParams extends IPageParam {
   item: IOpenSearchDocument;
@@ -46,7 +45,7 @@ export default async function ObjectPage({ item, lang }: IObjectPageParams) {
     content = translations.objectPageContent;
 
   const placeholderImageUrl = getDeterministicPlaceholderImage(
-    objectGroup.slug
+    objectGroup.slug,
   );
 
   const thumbnail =

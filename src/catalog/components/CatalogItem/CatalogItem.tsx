@@ -1,12 +1,11 @@
 import { SerializedStyles } from "@emotion/react";
 
-import { defaultLangKey, Lang, localizePath } from "@/i18n";
+import { Lang, defaultLangKey, localizePath } from "@/i18n";
 import { getDeterministicPlaceholderImage } from "@/placeholder";
-
-import { CatalogViewMode, SearchItem } from "../../../types/catalog";
 
 import CardItem from "./CardItem";
 import ListItem from "./ListItem";
+import { CatalogViewMode, SearchItem } from "../../../types/catalog";
 
 type CatalogItemProps = {
   searchItem: SearchItem;

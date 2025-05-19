@@ -5,7 +5,6 @@ import { ProjectStatus } from "../../types/project";
 import { BaseSection } from "../BaseSection";
 import { PageBadges, PageBadgesContent } from "../PageBadges";
 
-
 export interface ProjectDescriptionContent {
   pageBadges: PageBadgesContent;
   noDescription: string;

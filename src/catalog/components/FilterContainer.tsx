@@ -60,7 +60,7 @@ function MobileFilterContainer({
         <button
           className={cx(
             classes.toggleButton,
-            fr.cx("fr-btn", "fr-btn--tertiary-no-outline")
+            fr.cx("fr-btn", "fr-btn--tertiary-no-outline"),
           )}
           onClick={() => setIsFilterOpen(!isFilterOpen)}
         >
@@ -72,7 +72,7 @@ function MobileFilterContainer({
           <i
             className={fr.cx(
               `fr-icon-arrow-${isFilterOpen ? "up" : "down"}-s-line`,
-              "fr-ml-3w"
+              "fr-ml-3w",
             )}
             aria-hidden={true}
           />

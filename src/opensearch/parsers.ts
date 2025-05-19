@@ -37,7 +37,7 @@ export function parseProjectDocument(data: IOpenSearchDocument): IProjectItem {
 }
 
 export function parseObjectDocument(
-  data: IOpenSearchDocument
+  data: IOpenSearchDocument,
 ): IObjectGroupItem {
   let datingEra: IDating | undefined, datingPeriod: IDating | undefined;
   if (data.dating_era_label) {
@@ -96,7 +96,7 @@ function parseCommonData(data: IOpenSearchDocument): IBaseItem {
 }
 
 function parseObjectPageData(
-  data: IOpenSearchDocument["object_page_data"]
+  data: IOpenSearchDocument["object_page_data"],
 ): IObjectPageData {
   return {
     runs: data.runs?.map(parseRunData),
@@ -116,7 +116,7 @@ function parseObjectPageData(
 }
 
 function parseProjectPageData(
-  data: IOpenSearchDocument["project_page_data"]
+  data: IOpenSearchDocument["project_page_data"],
 ): IProjectPageData {
   return {
     leader: {

@@ -1,8 +1,7 @@
 import { FiltersProps } from "@/types/catalog";
 
-import { OpenThesoSearchItem } from "../../clients/opentheso";
-
 import OpenthesoSelect from "./OpenthesoSelect";
+import { OpenThesoSearchItem } from "../../clients/opentheso";
 
 interface PeriodFilterProps {
   thesoId: string;

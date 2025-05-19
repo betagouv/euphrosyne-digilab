@@ -19,7 +19,7 @@ export function I18nLink(props: React.ComponentProps<typeof Link>) {
     lang = getPathnameLangKey(pathname),
     definitivePath = localizePath(
       href as string,
-      (langs as string[]).includes(lang) ? lang : defaultLangKey
+      (langs as string[]).includes(lang) ? lang : defaultLangKey,
     );
 
   const { children, ...rest } = props;

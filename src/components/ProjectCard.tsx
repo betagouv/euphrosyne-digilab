@@ -4,10 +4,9 @@ import { buildCatalogItemPath } from "@/catalog/utils";
 import { getDeterministicPlaceholderImage } from "@/placeholder";
 import { IProjectItem } from "@/types/ICatalog";
 
-import { ContentProps, localizePath, WithCurrentLang } from "../i18n";
+import { ContentProps, WithCurrentLang, localizePath } from "../i18n";
 import { ProjectStatus } from "../types/project";
 import { ellipse } from "../utils";
-
 import ObjectGroupMaterialTags from "./object-group/ObjectGroupMaterialTags";
 import {
   ProjectStatusBadge,

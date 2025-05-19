@@ -113,13 +113,13 @@ const RunCardContent = ({
                           </span>
                           <br />
                         </span>
-                      )
+                      ),
                   )}
                   {!method.detectors ||
                     (method.detectors?.length === 0 && <span>-</span>)}
                 </span>
               </span>
-            )
+            ),
         )}
       </span>
     </>

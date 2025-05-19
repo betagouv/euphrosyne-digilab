@@ -1,11 +1,11 @@
 "use client";
+
 import { Checkbox } from "@codegouvfr/react-dsfr/Checkbox";
 import Input from "@codegouvfr/react-dsfr/Input";
 import { useContext } from "react";
 
 import { ContentProps } from "../../i18n";
 import { CatalogContext } from "../CatalogContext";
-
 import CreatedRange, { CreatedRangeContent } from "./CreatedRange";
 import DataAvailableSwitch, {
   DataAvailableSwitchContent,
@@ -39,7 +39,7 @@ export default function CatalogFilters({
 
   const itemTypeOptions: [
     string,
-    "objectGroupsSelected" | "projectsSelected"
+    "objectGroupsSelected" | "projectsSelected",
   ][] = [
     [content.project, "projectsSelected"],
     [content.objectGroup, "objectGroupsSelected"],

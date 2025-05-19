@@ -10,7 +10,6 @@ import useSharedStyles from "@/styles";
 import heroImg from "../../../public/images/hero-banner.jpg";
 import { BaseSection } from "../BaseSection";
 
-
 export interface HeroContent {
   title: string;
   description: string;

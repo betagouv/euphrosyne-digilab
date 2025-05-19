@@ -13,10 +13,11 @@ import { CartSubmitFormContent } from "../cart/CartSubmitForm";
 import { CartTableContent } from "../cart/CartTable";
 import { DataAddedAlertContent } from "../cart/DataAddedAlert";
 import { CatalogViewModeToggleContent } from "../catalog/components/CatalogViewModeToggle";
+import { RunCardContent } from "../components/run/RunCard";
+
 import type { PageBadgesContent } from "../components/PageBadges";
 import type { ProjectCardContent } from "../components/ProjectCard";
 import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
-import { RunCardContent } from "../components/run/RunCard";
 
 // used for building the app (for example to translate paths)
 const _system = {

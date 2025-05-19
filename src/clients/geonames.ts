@@ -23,7 +23,7 @@ export async function searchGeonames(q: string, limit?: number) {
     const response = await fetch(
       `https://secure.geonames.org/searchJSON?q=${q}&maxRows=${
         limit || 10
-      }&username=${USERNAME}&inclBbox=true`
+      }&username=${USERNAME}&inclBbox=true`,
     );
     const geonames = ((await response.json()) as GeonamesResponse).geonames;
     geonames.forEach((geoname) => {

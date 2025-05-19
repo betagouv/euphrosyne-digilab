@@ -18,10 +18,9 @@ import { IObjectGroup } from "@/types/ICatalog";
 import { IOpenSearchDocument } from "@/types/IOpenSearch";
 import { Leader, ProjectStatus } from "@/types/project";
 
+import styles from "./page.module.css";
 import { getTranslations } from "../../dictionaries";
 import { IPageParam } from "../../types";
-
-import styles from "./page.module.css";
 
 interface IProjectPageParams extends IPageParam {
   item: IOpenSearchDocument;

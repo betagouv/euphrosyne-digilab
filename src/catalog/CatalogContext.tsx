@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, SetStateAction } from "react";
+import { SetStateAction, createContext } from "react";
 
 import { Filters } from "@/opensearch/useSearch";
 import { CatalogViewMode, SearchResults, SortValue } from "@/types/catalog";

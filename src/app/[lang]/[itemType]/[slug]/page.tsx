@@ -8,11 +8,10 @@ import { StartDsfrOnHydration } from "@/dsfr-bootstrap";
 import { langs } from "@/i18n";
 import { SearchHit } from "@/types/IOpenSearch";
 
-import { getTranslations } from "../../dictionaries";
-import { IPageParam } from "../../types";
-
 import ObjectPage from "./ObjectPage";
 import ProjectPage from "./ProjectPage";
+import { getTranslations } from "../../dictionaries";
+import { IPageParam } from "../../types";
 
 interface IProjectPageParams extends IPageParam {
   slug: string;
@@ -35,7 +34,7 @@ export const generateStaticParams = async () => {
       lang,
       slug: item._source.slug,
       itemType: getTranslations(lang)._system[item._source.category],
-    }))
+    })),
   );
 };
 

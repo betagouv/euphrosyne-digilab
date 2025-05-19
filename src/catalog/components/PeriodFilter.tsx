@@ -1,9 +1,8 @@
 import { FiltersProps } from "@/types/catalog";
 
+import BaseDatingFilter from "./BaseDatingFilter";
 import { ContentProps } from "../../i18n";
 import { formatDatingLabel } from "../../utils";
-
-import BaseDatingFilter from "./BaseDatingFilter";
 
 const THESO_ID = "th287";
 

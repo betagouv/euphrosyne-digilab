@@ -1,4 +1,5 @@
 "use client";
+
 import { usePathname } from "next/navigation";
 
 import { I18nLink as Link } from "@/components/I18nLink";

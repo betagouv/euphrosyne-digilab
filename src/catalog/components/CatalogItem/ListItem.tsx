@@ -2,12 +2,11 @@ import { fr } from "@codegouvfr/react-dsfr";
 import Image from "next/image";
 import { tss } from "tss-react";
 
-import { I18nLink as Link } from "../../../components/I18nLink";
-import { ellipse } from "../../../utils";
-
 import CardStart from "./CardStart";
 import SearchItemBadge from "./SearchItemBadge";
 import { CatalogItemProps } from "./types";
+import { I18nLink as Link } from "../../../components/I18nLink";
+import { ellipse } from "../../../utils";
 
 export default function ListItem({
   searchItem,
@@ -40,7 +39,7 @@ export default function ListItem({
     <div
       className={cx(
         classes.root,
-        fr.cx("fr-my-1v", "fr-p-1w", "fr-enlarge-link")
+        fr.cx("fr-my-1v", "fr-p-1w", "fr-enlarge-link"),
       )}
     >
       <div className="fr-grid-row fr-grid-row--gutters fr-grid-row--top">
@@ -71,7 +70,7 @@ export default function ListItem({
               {ellipse(
                 (searchItem.category === "project" && searchItem.comments) ||
                   "",
-                500
+                500,
               )}
             </span>
           </div>

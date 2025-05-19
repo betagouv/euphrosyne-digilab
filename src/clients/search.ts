@@ -44,13 +44,13 @@ interface SearchResponse {
 
 export async function listAllProjects() {
   return (await listAllItems()).hits.hits.filter(
-    (item) => item._source.category === "project"
+    (item) => item._source.category === "project",
   ) as SearchHit[];
 }
 
 export async function listAllObjects() {
   return (await listAllItems()).hits.hits.filter(
-    (item) => item._source.category === "object"
+    (item) => item._source.category === "object",
   ) as SearchHit[];
 }
 
@@ -67,7 +67,7 @@ async function listAllItems(): Promise<SearchResponse> {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
   } catch (error) {
     throw new Error("Failed to fetch search results.\nError:\n" + error);
@@ -76,7 +76,7 @@ async function listAllItems(): Promise<SearchResponse> {
 }
 
 export async function searchCatalog(
-  filters: SearchProps
+  filters: SearchProps,
 ): Promise<SearchResponse> {
   if (!process.env.NEXT_PUBLIC_EUPHROSYNE_HOST) {
     throw new Error("NEXT_PUBLIC_EUPHROSYNE_HOST env variable is not defined");
@@ -91,7 +91,7 @@ export async function searchCatalog(
           "Content-Type": "application/json",
         },
         body: JSON.stringify(filters),
-      }
+      },
     );
   } catch (error) {
     throw new Error("Failed to fetch search results.\nError:\n" + error);
@@ -102,7 +102,7 @@ export async function searchCatalog(
 export async function fetchAggregatedTags(
   field: AggregatedField,
   query?: string,
-  exclude?: string[]
+  exclude?: string[],
 ) {
   if (!process.env.NEXT_PUBLIC_EUPHROSYNE_HOST) {
     throw new Error("NEXT_PUBLIC_EUPHROSYNE_HOST env variable is not defined");
@@ -163,6 +163,6 @@ export async function fetchCreatedAggs() {
       key,
       count: doc_count,
       keyAsString: key_as_string || key.toString(),
-    })
+    }),
   );
 }

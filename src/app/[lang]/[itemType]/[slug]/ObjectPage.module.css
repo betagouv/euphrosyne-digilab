@@ -1,6 +1,6 @@
 /* Down lg */
 @media (max-width: 61.9969em) {
-    .mainSectionContainer {
-      flex-direction: column-reverse;
-    }
+  .mainSectionContainer {
+    flex-direction: column-reverse;
   }
+}

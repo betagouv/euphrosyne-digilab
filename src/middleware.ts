@@ -39,7 +39,7 @@ export const config = {
 function checkI18nRedirection(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const pathnameHasLocale = langs.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
   if (pathnameHasLocale) return NextResponse.next();

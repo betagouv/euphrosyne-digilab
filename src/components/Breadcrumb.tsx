@@ -1,6 +1,6 @@
 import DsfrBreadcrumb from "@codegouvfr/react-dsfr/Breadcrumb";
 
-import { localizePath, WithCurrentLang } from "@/i18n";
+import { WithCurrentLang, localizePath } from "@/i18n";
 
 export interface BreadcrumbSegment {
   label: string;

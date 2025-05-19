@@ -13,12 +13,12 @@ import { CartSubmitFormContent } from "../cart/CartSubmitForm";
 import { CartTableContent } from "../cart/CartTable";
 import { DataAddedAlertContent } from "../cart/DataAddedAlert";
 import { CatalogViewModeToggleContent } from "../catalog/components/CatalogViewModeToggle";
-import type { PageBadgesContent } from "../components/PageBadges";
-import type { ProjectCardContent } from "../components/ProjectCard";
-import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
 import { RunCardContent } from "../components/run/RunCard";
 
 import type { Translations } from "./fr";
+import type { PageBadgesContent } from "../components/PageBadges";
+import type { ProjectCardContent } from "../components/ProjectCard";
+import type { ProjectStatusBadgeContent } from "../components/ProjectStatusBadge";
 
 const _system = {
   project: "project",

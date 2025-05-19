@@ -35,7 +35,7 @@ export function ExpandableList({
               ? collapseText
               : expandText.replace(
                   "{}",
-                  (Children.count(children) - excerptLength).toString()
+                  (Children.count(children) - excerptLength).toString(),
                 )}
           </Button>
         </div>

@@ -7,7 +7,6 @@ import humanCoopSVG from "../../../public/images/illustrations/human-cooperation
 import searchSVG from "../../../public/images/illustrations/search.svg";
 import { BaseSection } from "../BaseSection";
 
-
 export interface HowItWorksSectionContent {
   title: string;
   catalogText: string;

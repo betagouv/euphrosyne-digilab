@@ -8,7 +8,7 @@ import React, { useCallback, useContext, useRef, useState } from "react";
 import { LangContext } from "@/contexts/LangContext";
 
 import CartSubmitForm from "./CartSubmitForm";
-import { DetailValidationError, requestData, ValidationError } from "./client";
+import { DetailValidationError, ValidationError, requestData } from "./client";
 import { CartContext } from "./context";
 import ErrorAlert from "./ErrorAlert";
 import { IDataRequestForm } from "./IDataRequestForm";
@@ -48,7 +48,7 @@ export default function CartDataRequest() {
       try {
         await requestData(
           form,
-          items.map((item) => item.id)
+          items.map((item) => item.id),
         );
       } catch (e) {
         if (e instanceof ValidationError) {
@@ -63,7 +63,7 @@ export default function CartDataRequest() {
       setShowSuccess(true);
       emptyCart();
     },
-    [form, emptyCart, items, errors, content.errorOnRequest]
+    [form, emptyCart, items, errors, content.errorOnRequest],
   );
 
   return (

@@ -46,7 +46,7 @@ export default function AutocompleteInput<T>({
         setSuggestionsVisible(true);
         setSuggestions(s);
       }),
-    300
+    300,
   );
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function AutocompleteInput<T>({
         setSuggestionsVisible(false);
       }
     },
-    [suggestionsVisible]
+    [suggestionsVisible],
   );
 
   useEffect(() => {

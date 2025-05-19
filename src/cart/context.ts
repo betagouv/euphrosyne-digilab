@@ -1,9 +1,9 @@
 import { createContext } from "react";
 
-import { PageBadgeType } from "../components/PageBadges";
-import type { Run } from "../types/run";
-
 import { addItemsToCart, emptyCart, getCart } from "./localStorage";
+import { PageBadgeType } from "../components/PageBadges";
+
+import type { Run } from "../types/run";
 
 interface IFromInformation {
   type: PageBadgeType;
