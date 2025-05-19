@@ -10,7 +10,8 @@
     "predev": "react-dsfr update-icons",
     "prebuild": "react-dsfr update-icons",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.22.3",
