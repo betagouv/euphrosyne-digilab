@@ -1,26 +1,14 @@
 import { Metadata } from "next";
 import React from "react";
 
-import EuphrosyneHeader from "@/components/EuphrosyneHeader";
-import { Footer } from "@/components/Footer";
-import { Lang } from "@/i18n";
-
-import {
-  DsfrHead,
-  getHtmlAttributes,
-} from "../../dsfr-bootstrap/server-only-index";
+import Layout, { ILayoutParams } from "../Layout";
 import "../globals.css";
-import { Providers } from "../providers";
 import { getTranslations } from "./dictionaries";
-
-interface IRootLayoutParams {
-  lang: Lang;
-}
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<IRootLayoutParams>;
+  params: Promise<ILayoutParams>;
 }): Promise<Metadata> {
   // read route params
   const { lang } = await params;
@@ -36,21 +24,8 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<IRootLayoutParams>;
+  params: Promise<ILayoutParams>;
 }) {
-  const { lang } = await params;
-  return (
-    <html {...getHtmlAttributes({ lang })}>
-      <head>
-        <DsfrHead />
-      </head>
-      <body>
-        <Providers lang={lang}>
-          <EuphrosyneHeader currentLang={lang} />
-          {children}
-          <Footer currentLang={lang} />
-        </Providers>
-      </body>
-    </html>
-  );
+  const awaitedParams = await params;
+  return <Layout params={awaitedParams}>{children}</Layout>;
 }
