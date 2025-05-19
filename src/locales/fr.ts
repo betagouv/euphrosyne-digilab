@@ -310,16 +310,16 @@ export const footerContent = {
   homeLinkTitle: `Accueil - ${siteTitle}`,
   bottomItems: [
     {
-      href: "/legal/donnees-personnelles",
+      href: "/fr/legal/donnees-personnelles",
       text: "Données personnelles et Cookies",
     },
     {
-      href: "/legal/cgu",
+      href: "/fr/legal/cgu",
       text: "Conditions générales d'utilisation",
     },
   ],
   termsLink: {
-    href: "/legal/mentions-legales",
+    href: "/fr/legal/mentions-legales",
   },
 };
 

@@ -307,16 +307,16 @@ const footerContent = {
   homeLinkTitle: `Home - ${siteTitle}`,
   bottomItems: [
     {
-      href: "/legal/donnees-personnelles",
+      href: "/en/legal/personal-data",
       text: "Personal data and Cookies",
     },
     {
-      href: "/legal/cgu",
+      href: "/en/legal/gcu",
       text: "Terms of Use",
     },
   ],
   termsLink: {
-    href: "/legal/mentions-legales",
+    href: "/en/legal/legal-notice",
   },
 };
 
