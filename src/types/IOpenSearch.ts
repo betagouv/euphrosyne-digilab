@@ -26,7 +26,7 @@ interface IBaseDocument {
   slug: string;
   created: string;
   materials: string[];
-  isDataEmbargoed: boolean;
+  is_data_embargoed: boolean;
   thumbnail: IThumbnail | null;
 }
 

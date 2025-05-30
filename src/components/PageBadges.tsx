@@ -9,7 +9,6 @@ import {
   ProjectStatusBadgeContent,
 } from "./ProjectStatusBadge";
 import { LangContext } from "../contexts/LangContext";
-import { ProjectStatus } from "../types/project";
 
 export type PageBadgeType = "project" | "objectGroup";
 
@@ -22,11 +21,11 @@ export interface PageBadgesContent {
 
 export const PageBadges = ({
   pageType,
-  projectStatus,
+  dataAvailable,
   className,
 }: {
   pageType: PageBadgeType;
-  projectStatus?: ProjectStatus;
+  dataAvailable?: boolean;
   className?: string;
 }) => {
   const { css } = useStyles();
@@ -39,9 +38,9 @@ export const PageBadges = ({
       {pageType === "objectGroup" && (
         <Badge severity="new">{content.objectGroup}</Badge>
       )}
-      {projectStatus && (
+      {dataAvailable != null && (
         <ProjectStatusBadge
-          status={projectStatus}
+          dataAvailable={dataAvailable}
           content={content.projectStatusBadge}
           className="fr-ml-1w"
         />

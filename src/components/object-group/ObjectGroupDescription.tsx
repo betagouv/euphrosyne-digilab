@@ -88,9 +88,7 @@ export default function ObjectGroupDescription({
     <div {...props}>
       <PageBadges
         pageType="objectGroup"
-        projectStatus={
-          dataAvailable ? "Status.DATA_AVAILABLE" : "Status.FINISHED"
-        }
+        dataAvailable={dataAvailable}
         className="fr-mb-2w"
       />
       <h1 className="fr-mb-6w">{label}</h1>

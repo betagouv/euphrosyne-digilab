@@ -2,7 +2,6 @@ import { AlertProps } from "@codegouvfr/react-dsfr/Alert";
 import { Badge, BadgeProps } from "@codegouvfr/react-dsfr/Badge";
 
 import { ContentProps } from "../i18n";
-import { ProjectStatus } from "../types/project";
 
 export interface ProjectStatusBadgeContent {
   upcoming: string;
@@ -10,27 +9,24 @@ export interface ProjectStatusBadgeContent {
 }
 
 function projectStatusToLabelAndSeverity(
-  status: ProjectStatus,
+  dataAvailable: boolean,
   content: ProjectStatusBadgeContent,
 ): [string, AlertProps.Severity | "new"] {
-  switch (status) {
-    case "Status.FINISHED":
-      return [content.upcoming, "info"];
-    case "Status.DATA_AVAILABLE":
-      return [content.dataAvailable, "success"];
-    default:
-      return [status, "info"];
-  }
+  if (dataAvailable) return [content.dataAvailable, "success"];
+  return [content.upcoming, "info"];
 }
 
 export const ProjectStatusBadge = ({
-  status,
+  dataAvailable,
   content,
   ...props
 }: Omit<BadgeProps, "children"> & {
-  status: ProjectStatus;
+  dataAvailable: boolean;
 } & ContentProps<ProjectStatusBadgeContent>) => {
-  const [label, severity] = projectStatusToLabelAndSeverity(status, content);
+  const [label, severity] = projectStatusToLabelAndSeverity(
+    dataAvailable,
+    content,
+  );
   return (
     <Badge severity={severity} noIcon={true} {...props}>
       {label}
