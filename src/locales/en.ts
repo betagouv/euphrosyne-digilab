@@ -7,6 +7,7 @@ import type { IndexPageContent } from "@/app/[lang]/page";
 import { EuphrosyneHeaderContent } from "@/components/EuphrosyneHeader";
 import { IProjectSelectContent } from "@/components/object-group/ProjectSelect";
 import { AddToCartContent } from "@/components/project/AddToCartSection";
+import { RunDataCopyrightContent } from "@/components/run/RunDataCopyright";
 
 import { CartButtonContent } from "../cart/CartButton";
 import { CartSubmitFormContent } from "../cart/CartSubmitForm";
@@ -213,12 +214,18 @@ const objectPageContent: ObjectTemplateContent = {
   },
 };
 
+export const dataCopyright: RunDataCopyrightContent = {
+  by: "by",
+  licensedUnder: "is licensed under",
+};
+
 const runCard: RunCardContent = {
   date: "Date",
   projectLeader: "Project leader",
   experimentalCondition: "Experimental conditions",
   methods: "Methods",
   dataUnderEmbargo: "Data not yet accessible",
+  dataCopyright,
 };
 
 const projectPageContent: ProjectTemplateContent = {
@@ -282,6 +289,7 @@ const cart: ICartContent = {
   successDescription:
     "A New AGLAE team member will process your request. You will receive a confirmation email shortly.",
   successLink: "Back to catalog",
+  dataLicensedUnder: "All data licensed under",
 };
 
 export const notFoundPageContent: NotFoundPageContent = {

@@ -1,0 +1,3 @@
+.run-card .fr-card__end {
+  flex-direction: column-reverse;
+}
