@@ -16,7 +16,7 @@ import { parseProjectDocument } from "@/opensearch/parsers";
 import sharedStyles from "@/styles/shared.module.css";
 import { IObjectGroup } from "@/types/ICatalog";
 import { IOpenSearchDocument } from "@/types/IOpenSearch";
-import { Leader, ProjectStatus } from "@/types/project";
+import { Leader } from "@/types/project";
 
 import styles from "./page.module.css";
 import { getTranslations } from "../../dictionaries";
@@ -56,7 +56,7 @@ export default async function ProjectPage({ item, lang }: IProjectPageParams) {
           </div>
           <ProjectDescription
             projectName={project.name}
-            projectStatus={project.status as ProjectStatus}
+            dataAvailable={project.dataAvailable}
             projectDescription={project.comments}
             content={content.projectDescription}
           />

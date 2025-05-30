@@ -5,7 +5,6 @@ import { getDeterministicPlaceholderImage } from "@/placeholder";
 import { IProjectItem } from "@/types/ICatalog";
 
 import { ContentProps, WithCurrentLang, localizePath } from "../i18n";
-import { ProjectStatus } from "../types/project";
 import { ellipse } from "../utils";
 import ObjectGroupMaterialTags from "./object-group/ObjectGroupMaterialTags";
 import {
@@ -42,7 +41,7 @@ export const ProjectCard = ({
       background
       badge={
         <ProjectStatusBadge
-          status={project.status as ProjectStatus}
+          dataAvailable={project.dataAvailable}
           content={content.projectStatusBadge}
         />
       }
