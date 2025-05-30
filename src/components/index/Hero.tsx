@@ -36,13 +36,28 @@ export const Hero: React.FC<ContentProps<HeroContent>> = ({ content }) => {
       <BaseSection>
         <div className="fr-grid-row fr-grid-row--gutters">
           <div className={`fr-col-12 fr-col-lg-6 ${classes.imageContainer}`}>
-            <Image
-              src={heroImg}
-              alt="Objet analysé par New AGLAE"
-              placeholder="blur"
-              fill
-              style={{ objectFit: "cover" }}
-            />
+            <div style={{ position: "relative", height: "100%" }}>
+              <Image
+                src={heroImg}
+                alt="Objet analysé par New AGLAE"
+                placeholder="blur"
+                fill
+                style={{ objectFit: "cover" }}
+              />
+              <p
+                className="fr-text--xs"
+                style={{
+                  position: "absolute",
+                  bottom: fr.spacing("1v"),
+                  left: fr.spacing("1v"),
+                  zIndex: 2,
+                  color: "#ffffffd6",
+                  margin: 0,
+                }}
+              >
+                © Vanessa Fournier. C2RMF.
+              </p>
+            </div>
           </div>
           <div
             className={`fr-col-12 fr-col-lg-6 ${sharedClasses.paddedUpToLg}`}
