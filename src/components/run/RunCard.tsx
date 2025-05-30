@@ -3,9 +3,12 @@ import React from "react";
 
 import { ContentProps } from "@/i18n";
 
+import RunDataCopyright, { RunDataCopyrightContent } from "./RunDataCopyright";
 import { Leader } from "../../types/project";
 import { type Run } from "../../types/run";
 import { ellipse } from "../../utils";
+
+import "./run-card.css";
 
 export interface RunCardContent {
   date: string;
@@ -13,6 +16,7 @@ export interface RunCardContent {
   experimentalCondition: string;
   methods: string;
   dataUnderEmbargo: string;
+  dataCopyright: RunDataCopyrightContent;
 }
 
 interface RunCardProps {
@@ -42,9 +46,24 @@ export default function RunCard({
           content={content}
         />
       }
+      end={
+        <div className="fr-text--xs fr-mb-0">
+          <RunDataCopyright
+            label={run.label}
+            leader={
+              projectLeader
+                ? `${projectLeader.firstName} ${projectLeader.lastName}`
+                : null
+            }
+            createdAt={run.startDate}
+            content={content.dataCopyright}
+          />
+        </div>
+      }
       size="medium"
       title={ellipse(run.label, 35)}
       titleAs="h3"
+      className="run-card"
     />
   );
 }

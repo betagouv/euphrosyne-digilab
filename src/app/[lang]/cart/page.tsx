@@ -1,5 +1,7 @@
 import CartDataRequest from "@/cart/CartDataRequest";
 import CartTable from "@/cart/CartTable";
+import CCByLink from "@/components/CCByLink";
+import CCByLogos from "@/components/CCByLogos";
 import { StartDsfrOnHydration } from "@/dsfr-bootstrap";
 
 import { getTranslations } from "../dictionaries";
@@ -18,6 +20,7 @@ export interface ICartContent {
   successTitle: string;
   successDescription: string;
   successLink: string;
+  dataLicensedUnder: string;
 }
 
 export default async function CartPage({
@@ -35,11 +38,18 @@ export default async function CartPage({
     <div className={`fr-container fr-my-3w ${styles.root}`}>
       <StartDsfrOnHydration />
       <h1>{content.title}</h1>
-      <div className="fr-grid-row fr-grid-row--gutters">
+      <div className="fr-grid-row">
         <CartTable />
       </div>
-      <div className="fr-grid-row fr-grid-row--gutters">
+
+      <div className="fr-grid-row">
         <CartDataRequest />
+      </div>
+      <div className="fr-grid-row fr-mt-1w">
+        <small>
+          {content.dataLicensedUnder} <CCByLink lang={lang} />
+          <CCByLogos />
+        </small>
       </div>
     </div>
   );

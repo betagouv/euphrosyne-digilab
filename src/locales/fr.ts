@@ -7,6 +7,7 @@ import type { IndexPageContent } from "@/app/[lang]/page";
 import { EuphrosyneHeaderContent } from "@/components/EuphrosyneHeader";
 import { IProjectSelectContent } from "@/components/object-group/ProjectSelect";
 import { AddToCartContent } from "@/components/project/AddToCartSection";
+import { RunDataCopyrightContent } from "@/components/run/RunDataCopyright";
 
 import { CartButtonContent } from "../cart/CartButton";
 import { CartSubmitFormContent } from "../cart/CartSubmitForm";
@@ -217,12 +218,18 @@ const objectPageContent: ObjectTemplateContent = {
   },
 };
 
+export const dataCopyright: RunDataCopyrightContent = {
+  by: "par",
+  licensedUnder: "est sous licence",
+};
+
 export const runCard: RunCardContent = {
   date: "Date",
   projectLeader: "Chef de projet",
   experimentalCondition: "Conditions expérimentales",
   methods: "Méthodes",
   dataUnderEmbargo: "Ces données ne sont pas encore accessibles",
+  dataCopyright,
 };
 
 const projectPageContent: ProjectTemplateContent = {
@@ -285,6 +292,7 @@ const cart: ICartContent = {
   successDescription:
     "Un membre de l'équipe New AGLAE va traiter votre demande. Vous recevrez un email de confirmation sous peu.",
   successLink: "Retour au catalogue",
+  dataLicensedUnder: "Les données des runs sont sous licence",
 };
 
 export const notFoundPageContent: NotFoundPageContent = {
