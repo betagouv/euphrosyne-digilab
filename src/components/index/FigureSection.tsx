@@ -35,7 +35,7 @@ export default async function FigureSection({
             <React.Fragment key={`figure-${key}`}>
               <h4 className={styles.h4}>
                 {key === "all"
-                  ? content.sinceYear.replace("{}", "2022")
+                  ? content.sinceYear.replace("{}", "2023")
                   : content.inYear.replace(
                       "{}",
                       new Date().getFullYear().toString(),
