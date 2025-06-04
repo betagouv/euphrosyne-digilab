@@ -135,7 +135,8 @@ export default function useSearch(
         console.error(error);
         return;
       });
-  }, [filters, previousFrom, sort]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters, sort]);
 
   return filteredSearchItems;
 }

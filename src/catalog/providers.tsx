@@ -18,15 +18,21 @@ export function CatalogProviders({ children }: { children: React.ReactNode }) {
     // Check if the filters have changed and if the "from" filter is not changed
     // If the "from" filter is not changed, keep it as is
     // Otherwise, set it to 0
-    const hasNonFromFiltersChanged = Object.keys(filters).some((key) => {
+
+    // Construct a set of all keys from both current and new filters
+    // because some keys might be in one but not the other
+    // example : "isDataEmbargoed" is not present in the initial EMPTY_FILTERS
+    const keys = new Set([...Object.keys(filters), ...Object.keys(newFilters)]);
+
+    const hasNonFromFiltersChanged = [...keys].some((key) => {
       if (key === "from") return false;
       return (
-        JSON.stringify(filters[key]) !==
+        JSON.stringify(newFilters[key]) !==
         JSON.stringify(prevFiltersRef.current[key])
       );
     });
 
-    const from = hasNonFromFiltersChanged ? 0 : filters.from;
+    const from = hasNonFromFiltersChanged ? 0 : newFilters.from;
 
     _setFilters({ ...newFilters, from });
   };
