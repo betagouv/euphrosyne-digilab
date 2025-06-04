@@ -50,11 +50,7 @@ export default function RunCard({
         <div className="fr-text--xs fr-mb-0">
           <RunDataCopyright
             label={run.label}
-            leader={
-              projectLeader
-                ? `${projectLeader.firstName} ${projectLeader.lastName}`
-                : null
-            }
+            projectLeader={projectLeader}
             createdAt={run.startDate}
             content={content.dataCopyright}
           />
