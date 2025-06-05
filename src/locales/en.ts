@@ -319,7 +319,7 @@ const footerContent = {
       text: "Personal data and Cookies",
     },
     {
-      href: "/en/legal/gcu",
+      href: "https://euphrosyne.beta.gouv.fr/cgu/",
       text: "Terms of Use",
     },
   ],

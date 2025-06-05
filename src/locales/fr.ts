@@ -322,7 +322,7 @@ export const footerContent = {
       text: "Données personnelles et Cookies",
     },
     {
-      href: "/fr/legal/cgu",
+      href: "https://euphrosyne.beta.gouv.fr/cgu/",
       text: "Conditions générales d'utilisation",
     },
   ],
