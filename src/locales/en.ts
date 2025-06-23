@@ -221,6 +221,7 @@ export const dataCopyright: RunDataCopyrightContent = {
 
 const runCard: RunCardContent = {
   date: "Date",
+  dateLocale: "en",
   projectLeader: "Project leader",
   experimentalCondition: "Experimental conditions",
   methods: "Methods",
