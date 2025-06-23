@@ -37,7 +37,7 @@ export interface IndexPageContent {
 }
 
 async function getLastProjects(): Promise<IProjectItem[]> {
-  const res = await searchCatalog({ size: 5, category: "project" });
+  const res = await searchCatalog({ size: 6, category: "project" });
   return res.hits.hits.map((hit) => parseProjectDocument(hit._source));
 }
 
