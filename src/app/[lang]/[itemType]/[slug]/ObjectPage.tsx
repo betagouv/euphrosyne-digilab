@@ -11,7 +11,6 @@ import ObjectGroupThumbnail, {
 import ProjectSelect from "@/components/object-group/ProjectSelect";
 import { StartDsfrOnHydration } from "@/dsfr-bootstrap";
 import { parseObjectDocument } from "@/opensearch/parsers";
-import { getDeterministicPlaceholderImage } from "@/placeholder";
 import sharedStyles from "@/styles/shared.module.css";
 import { IOpenSearchDocument } from "@/types/IOpenSearch";
 
@@ -44,14 +43,7 @@ export default async function ObjectPage({ item, lang }: IObjectPageParams) {
   const translations = getTranslations(lang),
     content = translations.objectPageContent;
 
-  const placeholderImageUrl = getDeterministicPlaceholderImage(
-    objectGroup.slug,
-  );
-
-  const thumbnail =
-    objectGroup.thumbnail?.url ||
-    placeholderImageUrl ||
-    "/images/default-placeholder-16x9.png";
+  const thumbnail = objectGroup.thumbnail?.url;
 
   const thumbnailCopyright = objectGroup?.thumbnail?.copyright;
   //objectGroup?.fields?.erosImage?.copyright;
@@ -84,12 +76,14 @@ export default async function ObjectPage({ item, lang }: IObjectPageParams) {
                 content={content.objectGroupDescription}
               />
               <div className="fr-col-12 fr-col-lg-6">
-                <ObjectGroupThumbnail
-                  src={thumbnail}
-                  copyright={thumbnailCopyright}
-                  content={content.objectGroupThumbnailContent}
-                  objectGroupLabel={objectGroup.name}
-                />
+                {thumbnail && (
+                  <ObjectGroupThumbnail
+                    src={thumbnail}
+                    copyright={thumbnailCopyright}
+                    content={content.objectGroupThumbnailContent}
+                    objectGroupLabel={objectGroup.name}
+                  />
+                )}
               </div>
             </div>
           </BaseSection>
