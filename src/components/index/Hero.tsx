@@ -9,7 +9,6 @@ import useSharedStyles from "@/styles";
 
 import heroImg from "../../../public/images/hero-banner.jpg";
 import { BaseSection } from "../BaseSection";
-import RomboidContainer from "../RomboidContainer";
 
 export interface HeroContent {
   title: string;
@@ -26,12 +25,6 @@ export const Hero: React.FC<ContentProps<HeroContent>> = ({ content }) => {
       [fr.breakpoints.down("lg")]: {
         height: "200px",
       },
-    },
-    copyrightContainer: {
-      position: "absolute",
-      bottom: fr.spacing("1v"),
-      left: fr.spacing("2v"),
-      zIndex: 2,
     },
   });
 
@@ -51,12 +44,8 @@ export const Hero: React.FC<ContentProps<HeroContent>> = ({ content }) => {
                 fill
                 style={{ objectFit: "cover" }}
               />
-              <RomboidContainer className={classes.copyrightContainer}>
-                <p className="fr-text--xs fr-m-0">
-                  © C2RMF - Vanessa Fournier
-                </p>
-              </RomboidContainer>
             </div>
+            <p className="fr-text--xs fr-m-0">© C2RMF - Vanessa Fournier</p>
           </div>
           <div
             className={`fr-col-12 fr-col-lg-6 ${sharedClasses.paddedUpToLg}`}

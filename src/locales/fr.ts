@@ -62,7 +62,7 @@ export const addToCartContent: AddToCartContent = {
 };
 
 const projectStatusBadge: ProjectStatusBadgeContent = {
-  upcoming: "À venir",
+  upcoming: "Données à venir",
   dataAvailable: "Données disponibles",
 };
 
@@ -101,7 +101,7 @@ const indexPageContent: IndexPageContent = {
   howItWorks: {
     title: "Les services d'Euphrosyne",
     catalogText:
-      "Un catalogue référençant les jeux de données produits par New AGLAE depuis le 01/04/2022.",
+      "Un catalogue référençant les jeux de données produits par New AGLAE depuis le 01/04/2023.",
     euphrosyneText:
       "Une plateforme numérique permettant aux utilisateurs de New AGLAE de préparer leurs expériences.",
     workplaceText:
@@ -133,7 +133,7 @@ const indexPageContent: IndexPageContent = {
     inYear: "En {}",
   },
   projectList: {
-    title: "Les dernières recherches New AGLAE",
+    title: "Les dernières recherches à New AGLAE",
     projectCard,
   },
 };
@@ -225,6 +225,7 @@ export const dataCopyright: RunDataCopyrightContent = {
 
 export const runCard: RunCardContent = {
   date: "Date",
+  dateLocale: "fr",
   projectLeader: "Chef de projet",
   experimentalCondition: "Conditions expérimentales",
   methods: "Méthodes",

@@ -1,7 +1,7 @@
 import { Card } from "@codegouvfr/react-dsfr/Card";
 import React from "react";
 
-import { ContentProps } from "@/i18n";
+import { ContentProps, Lang } from "@/i18n";
 
 import RunDataCopyright, { RunDataCopyrightContent } from "./RunDataCopyright";
 import { Leader } from "../../types/project";
@@ -17,6 +17,7 @@ export interface RunCardContent {
   methods: string;
   dataUnderEmbargo: string;
   dataCopyright: RunDataCopyrightContent;
+  dateLocale: Lang;
 }
 
 interface RunCardProps {
@@ -75,7 +76,7 @@ const RunCardContent = ({
 }: RunCardProps & ContentProps<RunCardContent>) => {
   const institutionName = projectLeader?.institutionName;
   const startDate = run.startDate
-    ? new Date(run.startDate).toLocaleDateString()
+    ? new Date(run.startDate).toLocaleDateString(content.dateLocale)
     : "-";
   return (
     <>

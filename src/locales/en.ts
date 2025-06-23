@@ -61,7 +61,7 @@ export const addToCartContent: AddToCartContent = {
 };
 
 const projectStatusBadge: ProjectStatusBadgeContent = {
-  upcoming: "Upcoming",
+  upcoming: "Upcoming data",
   dataAvailable: "Data available",
 };
 
@@ -99,7 +99,7 @@ const indexPageContent: IndexPageContent = {
   howItWorks: {
     title: "Euphrosyne's services",
     catalogText:
-      "A catalog referencing the datasets produced by New AGLAE since 04/01/2022.",
+      "A catalog referencing the datasets produced by New AGLAE since 04/01/2023.",
     euphrosyneText:
       "A digital platform allowing New AGLAE users to prepare their experiments.",
     workplaceText:
@@ -128,7 +128,7 @@ const indexPageContent: IndexPageContent = {
     inYear: "In {}",
   },
   projectList: {
-    title: "Latest New AGLAE research projects",
+    title: "Latest research projects at New AGLAE",
     projectCard,
   },
 };
@@ -221,6 +221,7 @@ export const dataCopyright: RunDataCopyrightContent = {
 
 const runCard: RunCardContent = {
   date: "Date",
+  dateLocale: "en",
   projectLeader: "Project leader",
   experimentalCondition: "Experimental conditions",
   methods: "Methods",

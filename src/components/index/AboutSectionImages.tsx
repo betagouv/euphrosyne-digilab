@@ -8,7 +8,6 @@ import { ContentProps } from "@/i18n";
 
 import imageZoomed1 from "../../../public/images/analyzed-object-zoomed-1.png";
 import imageZoomed2 from "../../../public/images/analyzed-object-zoomed-2.png";
-import RomboidContainer from "../RomboidContainer";
 
 export interface AboutSectionContent {
   title: string;
@@ -47,13 +46,6 @@ export default function AboutSectionImages({
       mixBlendMode: "luminosity",
       transform: "scaleX(-1)",
     },
-    copyrightContainer: {
-      position: "absolute",
-      bottom: fr.spacing("3v"),
-      left: fr.spacing("3v"),
-      maxWidth: "calc(100% - 2rem)",
-      zIndex: 2,
-    },
   });
   const { classes } = useStyles();
 
@@ -68,11 +60,9 @@ export default function AboutSectionImages({
           className={`fr-mr-1v
                   ${classes.image}`}
         />
-        <RomboidContainer className={classes.copyrightContainer}>
-          <p className="fr-text--xs fr-m-0">
-            © C2RMF. Christophe Hargoues. AGLAÉ. CNRS Photothèque. 2017
-          </p>
-        </RomboidContainer>
+        <p className="fr-text--xs fr-m-0">
+          © C2RMF. Christophe Hargoues. AGLAÉ. CNRS Photothèque. 2017
+        </p>
       </div>
       <div className={`fr-col-xl-6 fr-col-12 ${classes.imageContainer}`}>
         <Image
@@ -82,9 +72,7 @@ export default function AboutSectionImages({
           height={490}
           className={`fr-ml-1v ${classes.secondImage}`}
         />
-        <RomboidContainer className={classes.copyrightContainer}>
-          <p className="fr-text--xs fr-m-0">© C2RMF. Vanessa Fournier.</p>
-        </RomboidContainer>
+        <p className="fr-text--xs fr-m-0">© C2RMF. Vanessa Fournier.</p>
       </div>
     </div>
   );
