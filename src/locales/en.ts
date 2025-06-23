@@ -61,7 +61,7 @@ export const addToCartContent: AddToCartContent = {
 };
 
 const projectStatusBadge: ProjectStatusBadgeContent = {
-  upcoming: "Upcoming",
+  upcoming: "Upcoming data",
   dataAvailable: "Data available",
 };
 
