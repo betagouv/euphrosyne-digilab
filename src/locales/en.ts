@@ -128,7 +128,7 @@ const indexPageContent: IndexPageContent = {
     inYear: "In {}",
   },
   projectList: {
-    title: "Latest New AGLAE research projects",
+    title: "Latest research projects at New AGLAE",
     projectCard,
   },
 };
