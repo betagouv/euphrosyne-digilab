@@ -101,7 +101,7 @@ const indexPageContent: IndexPageContent = {
   howItWorks: {
     title: "Les services d'Euphrosyne",
     catalogText:
-      "Un catalogue référençant les jeux de données produits par New AGLAE depuis le 01/04/2022.",
+      "Un catalogue référençant les jeux de données produits par New AGLAE depuis le 01/04/2023.",
     euphrosyneText:
       "Une plateforme numérique permettant aux utilisateurs de New AGLAE de préparer leurs expériences.",
     workplaceText:

@@ -99,7 +99,7 @@ const indexPageContent: IndexPageContent = {
   howItWorks: {
     title: "Euphrosyne's services",
     catalogText:
-      "A catalog referencing the datasets produced by New AGLAE since 04/01/2022.",
+      "A catalog referencing the datasets produced by New AGLAE since 04/01/2023.",
     euphrosyneText:
       "A digital platform allowing New AGLAE users to prepare their experiments.",
     workplaceText:
