@@ -1,20 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useClosableAlert() {
   const [showDataAddedAlert, setshowDataAddedAlert] = useState(false);
-  const [hideAlertTimeout, setHideAlertTimeout] =
-    useState<ReturnType<typeof setTimeout>>();
+  const hideAlertTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
-    if (hideAlertTimeout) {
-      clearTimeout(hideAlertTimeout);
-    }
     if (showDataAddedAlert) {
-      const timeout = setTimeout(() => setshowDataAddedAlert(false), 6000);
-      setHideAlertTimeout(timeout);
-      return () => clearTimeout(hideAlertTimeout);
+      // Clear any previous timeout
+      if (hideAlertTimeout.current) {
+        clearTimeout(hideAlertTimeout.current);
+      }
+      hideAlertTimeout.current = setTimeout(
+        () => setshowDataAddedAlert(false),
+        6000,
+      );
+      return () => {
+        if (hideAlertTimeout.current) {
+          clearTimeout(hideAlertTimeout.current);
+        }
+      };
     }
-  }, [hideAlertTimeout, showDataAddedAlert]);
+  }, [showDataAddedAlert]);
 
   return [showDataAddedAlert, setshowDataAddedAlert] as const;
 }

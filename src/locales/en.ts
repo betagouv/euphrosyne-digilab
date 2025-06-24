@@ -61,7 +61,7 @@ export const addToCartContent: AddToCartContent = {
 };
 
 const projectStatusBadge: ProjectStatusBadgeContent = {
-  upcoming: "Upcoming",
+  upcoming: "Upcoming data",
   dataAvailable: "Data available",
 };
 
@@ -128,7 +128,7 @@ const indexPageContent: IndexPageContent = {
     inYear: "In {}",
   },
   projectList: {
-    title: "Latest New AGLAE research projects",
+    title: "Latest research projects at New AGLAE",
     projectCard,
   },
 };
@@ -222,6 +222,7 @@ export const dataCopyright: RunDataCopyrightContent = {
 
 const runCard: RunCardContent = {
   date: "Date",
+  dateLocale: "en",
   projectLeader: "Project leader",
   experimentalCondition: "Experimental conditions",
   methods: "Methods",
@@ -320,7 +321,7 @@ const footerContent = {
       text: "Personal data and Cookies",
     },
     {
-      href: "/en/legal/gcu",
+      href: "https://euphrosyne.beta.gouv.fr/cgu/",
       text: "Terms of Use",
     },
   ],

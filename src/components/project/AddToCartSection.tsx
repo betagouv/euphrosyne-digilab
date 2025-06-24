@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@codegouvfr/react-dsfr/Button";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 
 import { CartContext, ICartContext } from "@/cart/context";
 import DataAddedAlert from "@/cart/DataAddedAlert";
@@ -23,7 +23,7 @@ export default function AddToCartSection({ runs }: { runs: Run[] }) {
 
   const [showDataAddedAlert, setshowDataAddedAlert] = useClosableAlert();
 
-  const onAddRunsToCart = () => {
+  const onAddRunsToCart = useCallback(() => {
     if (notEmbargoedRuns && notEmbargoedRuns.length > 0) {
       cart.addItems(notEmbargoedRuns as ICartContext["items"], {
         type: "project",
@@ -31,7 +31,7 @@ export default function AddToCartSection({ runs }: { runs: Run[] }) {
       });
       setshowDataAddedAlert(true);
     }
-  };
+  }, [notEmbargoedRuns, cart, setshowDataAddedAlert]);
 
   return (
     <div>

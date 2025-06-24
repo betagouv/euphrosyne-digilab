@@ -62,7 +62,7 @@ export const addToCartContent: AddToCartContent = {
 };
 
 const projectStatusBadge: ProjectStatusBadgeContent = {
-  upcoming: "À venir",
+  upcoming: "Données à venir",
   dataAvailable: "Données disponibles",
 };
 
@@ -133,7 +133,7 @@ const indexPageContent: IndexPageContent = {
     inYear: "En {}",
   },
   projectList: {
-    title: "Les dernières recherches New AGLAE",
+    title: "Les dernières recherches à New AGLAE",
     projectCard,
   },
 };
@@ -227,6 +227,7 @@ export const dataCopyright: RunDataCopyrightContent = {
 export const runCard: RunCardContent = {
   date: "Date",
   projectLeader: "Responsable de projet",
+  dateLocale: "fr",
   experimentalCondition: "Conditions expérimentales",
   methods: "Méthodes",
   dataUnderEmbargo: "Ces données ne sont pas encore accessibles",
@@ -323,7 +324,7 @@ export const footerContent = {
       text: "Données personnelles et Cookies",
     },
     {
-      href: "/fr/legal/cgu",
+      href: "https://euphrosyne.beta.gouv.fr/cgu/",
       text: "Conditions générales d'utilisation",
     },
   ],

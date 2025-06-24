@@ -34,6 +34,7 @@ export default function AboutSectionImages({
       },
     },
     imageContainer: {
+      position: "relative",
       [fr.breakpoints.down("xl")]: {
         display: "none",
       },
@@ -59,11 +60,11 @@ export default function AboutSectionImages({
           className={`fr-mr-1v
                   ${classes.image}`}
         />
-        <p className="fr-text--xs">
-          © Christophe Hargoues. C2RMF. AGLAÉ. CNRS Photothèque. 2017
+        <p className="fr-text--xs fr-m-0">
+          © C2RMF. Christophe Hargoues. AGLAÉ. CNRS Photothèque. 2017
         </p>
       </div>
-      <div className={`fr-col-xl-6 fr-col-12 ${classes.imageContainer}}`}>
+      <div className={`fr-col-xl-6 fr-col-12 ${classes.imageContainer}`}>
         <Image
           src={imageZoomed2}
           alt={content.img2Alt}
@@ -71,7 +72,7 @@ export default function AboutSectionImages({
           height={490}
           className={`fr-ml-1v ${classes.secondImage}`}
         />
-        <p className="fr-text--xs">© Vanessa Fournier. C2RMF.</p>
+        <p className="fr-text--xs fr-m-0">© C2RMF. Vanessa Fournier.</p>
       </div>
     </div>
   );
