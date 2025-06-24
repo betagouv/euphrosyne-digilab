@@ -215,7 +215,8 @@ const objectPageContent: ObjectTemplateContent = {
 };
 
 export const dataCopyright: RunDataCopyrightContent = {
-  by: "by",
+  by: "by {firstName} {lastName}",
+  atInstitution: "from {institutionName}",
   licensedUnder: "is licensed under",
 };
 

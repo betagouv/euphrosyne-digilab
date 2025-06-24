@@ -219,14 +219,15 @@ const objectPageContent: ObjectTemplateContent = {
 };
 
 export const dataCopyright: RunDataCopyrightContent = {
-  by: "par",
+  by: "par {firstName} {lastName}",
+  atInstitution: "à {institutionName}",
   licensedUnder: "est sous licence",
 };
 
 export const runCard: RunCardContent = {
   date: "Date",
+  projectLeader: "Responsable de projet",
   dateLocale: "fr",
-  projectLeader: "Chef de projet",
   experimentalCondition: "Conditions expérimentales",
   methods: "Méthodes",
   dataUnderEmbargo: "Ces données ne sont pas encore accessibles",
