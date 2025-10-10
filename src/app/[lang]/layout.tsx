@@ -1,22 +1,23 @@
 import { Metadata } from "next";
 import React from "react";
 
-import Layout, { ILayoutParams } from "../Layout";
+import { Lang, getPathnameLangKey } from "@/i18n";
+
+import Layout from "../Layout";
 import "../globals.css";
 import { getTranslations } from "./dictionaries";
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<ILayoutParams>;
+  params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   // read route params
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = getPathnameLangKey(`/${langParam}`) as Lang;
   const translations = getTranslations(lang);
 
-  return {
-    title: translations.base.siteTitle,
-  };
+  return { title: translations.base.siteTitle };
 }
 
 export default async function RootLayout({
@@ -24,8 +25,9 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<ILayoutParams>;
+  params: Promise<{ lang: string }>;
 }) {
-  const awaitedParams = await params;
-  return <Layout params={awaitedParams}>{children}</Layout>;
+  const { lang: langParam } = await params;
+  const lang = getPathnameLangKey(`/${langParam}`) as Lang;
+  return <Layout params={{ lang }}>{children}</Layout>;
 }
