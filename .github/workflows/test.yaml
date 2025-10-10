@@ -28,7 +28,7 @@ jobs:
         run: npm run build
         env:
           SITE_URL: http://localhost:8000
-          NEXT_PUBLIC_EUPHROSYNE_HOST: https://euphrosyne.incubateur.net
+          NEXT_PUBLIC_EUPHROSYNE_HOST: https://euphrosyne-staging.osc-fr1.scalingo.io
           TYPEGEN_ON_BUILD: true
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
