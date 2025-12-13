@@ -6,3 +6,6 @@ updates:
       interval: "weekly"
       time: "07:00"
       timezone: "Europe/Paris"
+    cooldown:
+      default-days: 7
+      include: "*"
