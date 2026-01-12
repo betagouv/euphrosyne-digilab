@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "react-dsfr update-icons && next dev",
+    "build": "react-dsfr update-icons && next build",
     "start": "next start",
     "lint": "next lint",
     "predev": "react-dsfr update-icons",
