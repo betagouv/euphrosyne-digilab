@@ -8,4 +8,3 @@ updates:
       timezone: "Europe/Paris"
     cooldown:
       default-days: 7
-      include: "*"
