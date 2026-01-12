@@ -9,6 +9,8 @@ jobs:
   run-linters:
     name: Run linters
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     concurrency:
       group: test-${{ github.ref }}
       cancel-in-progress: true
