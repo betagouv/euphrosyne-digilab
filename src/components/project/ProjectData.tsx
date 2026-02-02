@@ -5,8 +5,10 @@ import { Leader } from "../../types/project";
 import { Run } from "../../types/run";
 import RunCard, { RunCardContent } from "../run/RunCard";
 
-interface ProjectDataProps
-  extends Omit<React.InputHTMLAttributes<HTMLDivElement>, "content"> {
+interface ProjectDataProps extends Omit<
+  React.InputHTMLAttributes<HTMLDivElement>,
+  "content"
+> {
   runs: Run[];
   projectLeader: Leader;
 }

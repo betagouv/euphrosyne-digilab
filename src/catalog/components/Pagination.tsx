@@ -11,8 +11,10 @@ export interface PaginationContent {
   lastPage: string;
 }
 
-interface PaginationProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, "content"> {
+interface PaginationProps extends Omit<
+  React.HTMLAttributes<HTMLElement>,
+  "content"
+> {
   currentPage: number;
   pageCount: number;
 }
