@@ -15,8 +15,10 @@ export interface ProjectObjectsContent {
   projectObject: ProjectObjectContent;
 }
 
-interface ProjectObjectsProps
-  extends Omit<React.InputHTMLAttributes<HTMLDivElement>, "content"> {
+interface ProjectObjectsProps extends Omit<
+  React.InputHTMLAttributes<HTMLDivElement>,
+  "content"
+> {
   objectGroups: ObjectGroup[];
 }
 

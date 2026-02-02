@@ -3,9 +3,7 @@ export interface SearchHit {
 }
 
 export interface IOpenSearchDocument
-  extends IBaseDocument,
-    IBaseProjectDocument,
-    IBaseObjectDocument {}
+  extends IBaseDocument, IBaseProjectDocument, IBaseObjectDocument {}
 
 interface ILeader {
   user_first_name: string;
