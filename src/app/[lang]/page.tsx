@@ -41,14 +41,18 @@ async function getLastProjects(): Promise<IProjectItem[]> {
   return res.hits.hits.map((hit) => parseProjectDocument(hit._source));
 }
 
-const lastProjects = await getLastProjects();
-
 export default async function Page({
   params,
 }: {
   params: Promise<IPageParam>;
 }) {
   const { lang } = await params;
+  let lastProjects: IProjectItem[] = [];
+  try {
+    lastProjects = await getLastProjects();
+  } catch (error) {
+    console.error("Failed to load latest projects.", error);
+  }
   const translations = getTranslations(lang);
   const content = translations.indexPageContent;
   const { hero, search } = content;

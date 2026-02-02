@@ -28,14 +28,19 @@ export interface ProjectTemplateContent {
 }
 
 export const generateStaticParams = async () => {
-  const items = await listAllProjects();
-  return items.flatMap((item) =>
-    langs.map((lang) => ({
-      lang,
-      slug: item._source.slug,
-      itemType: getTranslations(lang)._system[item._source.category],
-    })),
-  );
+  try {
+    const items = await listAllProjects();
+    return items.flatMap((item) =>
+      langs.map((lang) => ({
+        lang,
+        slug: item._source.slug,
+        itemType: getTranslations(lang)._system[item._source.category],
+      })),
+    );
+  } catch (error) {
+    console.error("Failed to generate project routes.", error);
+    return [];
+  }
 };
 
 async function getItem({ itemType, slug, lang }: IProjectPageParams) {
