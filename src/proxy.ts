@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { defaultLangKey, langs } from "./i18n";
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   if (!process.env.BASIC_AUTH_CREDENTIALS) {
     throw new Error("BASIC_AUTH_CREDENTIALS environment variable is not set");
   }

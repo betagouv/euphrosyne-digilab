@@ -41,7 +41,7 @@ jobs:
         run: npm run lint
 
       - name: Run prettier check
-        run: npx prettier --check .
+        run: npm run format:check
 
       - name: Run tsc
         run: npm run typecheck
