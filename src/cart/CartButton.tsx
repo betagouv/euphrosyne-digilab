@@ -3,7 +3,7 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { usePathname, useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { tss } from "tss-react";
 
 import { LangContext } from "../contexts/LangContext";
@@ -20,11 +20,7 @@ export default function CartButton() {
   const pathname = usePathname(),
     currentLang = getPathnameLangKey(pathname);
 
-  const [numItems, setNumItems] = useState<number>(0);
-
-  useEffect(() => {
-    setNumItems(cart.items.length);
-  }, [cart.items]);
+  const numItems = cart.items.length;
 
   const { classes, cx } = tss.create({
     button: {

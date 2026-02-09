@@ -1,12 +1,12 @@
 "use client";
 
 import Select from "@codegouvfr/react-dsfr/SelectNext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import React from "react";
 
 import { buildCatalogItemPath } from "@/catalog/utils";
 import { LangContext } from "@/contexts/LangContext";
-import { IObjectGroupItem, IProject } from "@/types/ICatalog";
+import { IObjectGroupItem } from "@/types/ICatalog";
 
 import { I18nLink as Link } from "../I18nLink";
 import { ProjectData } from "../project/ProjectData";
@@ -33,7 +33,7 @@ export default function ProjectSelect({ objectGroup }: IProjectSelectProps) {
     [objectGroup],
   );
 
-  const [selectedProject, setSelectedProject] = useState<IProject | null>(null);
+  const [selectedProjectSlug, setSelectedProjectSlug] = useState<string>("");
 
   let selectOptions = [{ label: content.noProject, value: "" }];
   if (projects && projects.length > 0) {
@@ -44,23 +44,23 @@ export default function ProjectSelect({ objectGroup }: IProjectSelectProps) {
   }
 
   const runs = objectGroup?.objectPageData?.runs;
+  const selectedProject = React.useMemo(() => {
+    if (!projects.length) {
+      return null;
+    }
+
+    const matchingProject = projects.find(
+      (project) => project?.slug === selectedProjectSlug,
+    );
+
+    return matchingProject ?? projects[0];
+  }, [projects, selectedProjectSlug]);
   const selectedProjectRuns = runs?.filter(
     (run) => run?.projectSlug === selectedProject?.slug,
   );
   const onProjectSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const project = projects?.find(
-      (project) => project?.slug === event.target.value,
-    );
-    if (project) {
-      setSelectedProject(project);
-    }
+    setSelectedProjectSlug(event.target.value);
   };
-
-  useEffect(() => {
-    if (projects && projects.length) {
-      setSelectedProject(projects[0]);
-    }
-  }, [projects]);
 
   return (
     <div>
