@@ -17,7 +17,7 @@
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.25.3",
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@opensearch-project/opensearch": "^3.5.1",
     "@sentry/nextjs": "^10.27.0",
     "next": "^16.1.6",
