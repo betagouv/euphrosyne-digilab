@@ -37,7 +37,7 @@
     "eslint-plugin-import": "^2.31.0",
     "prettier": "^3.8.0",
     "sas": "^3.0.4",
-    "sass": "^1.97.2",
+    "sass": "^1.97.3",
     "typescript": "^5"
   }
 }
