@@ -35,7 +35,7 @@
     "eslint": "^9.25.1",
     "eslint-config-next": "^16.2.1",
     "eslint-plugin-import": "^2.31.0",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.2",
     "sas": "^3.0.4",
     "sass": "^1.98.0",
     "typescript": "^5"
