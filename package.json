@@ -18,7 +18,7 @@
     "@codegouvfr/react-dsfr": "^1.32.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@opensearch-project/opensearch": "^3.5.1",
+    "@opensearch-project/opensearch": "^3.6.0",
     "@sentry/nextjs": "^10.49.0",
     "next": "^16.2.4",
     "react": "^19.2.4",
