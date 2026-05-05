@@ -38,6 +38,6 @@
     "prettier": "^3.8.2",
     "sas": "^3.0.4",
     "sass": "^1.98.0",
-    "typescript": "^5"
+    "typescript": "^6"
   }
 }
