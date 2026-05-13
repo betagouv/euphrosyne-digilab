@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import {
+  parseBasicAuthCredentials,
+  parseBasicAuthHeader,
+} from "./auth/basicAuth";
 import { defaultLangKey, langs } from "./i18n";
 
 export function proxy(req: NextRequest) {
@@ -8,26 +12,21 @@ export function proxy(req: NextRequest) {
   }
 
   const authHeader = req.headers.get("authorization");
+  const credentials = parseBasicAuthHeader(authHeader);
+  const expectedCredentials = parseBasicAuthCredentials(
+    process.env.BASIC_AUTH_CREDENTIALS,
+  );
 
-  if (authHeader) {
-    const base64Credentials = authHeader.split(" ")[1];
-    const credentials = atob(base64Credentials);
-    const [username, password] = credentials.split(":");
-
-    const [basicAuthUsername, basicAuthPassword] =
-      process.env.BASIC_AUTH_CREDENTIALS.split(":");
-
-    if (username === basicAuthUsername && password === basicAuthPassword) {
-      return checkI18nRedirection(req);
-    }
+  if (
+    credentials &&
+    expectedCredentials &&
+    credentials.username === expectedCredentials.username &&
+    credentials.password === expectedCredentials.password
+  ) {
+    return checkI18nRedirection(req);
   }
 
-  return new NextResponse("Authentication required", {
-    status: 401,
-    headers: {
-      "WWW-Authenticate": 'Basic realm="Protected Area"',
-    },
-  });
+  return unauthorized();
 }
 
 export const config = {
@@ -35,6 +34,15 @@ export const config = {
     "/((?!api|_next/static|_next/image|images|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };
+
+function unauthorized() {
+  return new NextResponse("Authentication required", {
+    status: 401,
+    headers: {
+      "WWW-Authenticate": 'Basic realm="Protected Area"',
+    },
+  });
+}
 
 function checkI18nRedirection(request: NextRequest) {
   const { pathname } = request.nextUrl;
