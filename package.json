@@ -19,7 +19,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@opensearch-project/opensearch": "^3.9.0",
-    "@sentry/nextjs": "^10.71.0",
+    "@sentry/nextjs": "^10.75.2",
     "next": "^16.3.8",
     "react": "^19.2.8",
     "react-dom": "^19.3.0",
