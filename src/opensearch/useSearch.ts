@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { SortValue } from "@/types/catalog";
 import { IObjectGroupItem, IProjectItem } from "@/types/ICatalog";
@@ -54,9 +54,8 @@ export default function useSearch(
     { results: [], total: 0 },
   );
 
-  const [previousFrom, setPreviosFrom] = useState(
-    filters.from / filters.size + 1,
-  );
+  // Offset used by the last search; null until the first search runs.
+  const previousFrom = useRef<number | null>(null);
 
   useEffect(() => {
     const {
@@ -99,9 +98,9 @@ export default function useSearch(
     }
 
     let updatedFrom = 0;
-    if (from !== previousFrom) {
+    if (from !== previousFrom.current) {
       updatedFrom = filters.from;
-      setPreviosFrom(updatedFrom);
+      previousFrom.current = updatedFrom;
     }
 
     const requestFilters: SearchProps = {
@@ -135,7 +134,6 @@ export default function useSearch(
         console.error(error);
         return;
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, sort]);
 
   return filteredSearchItems;
