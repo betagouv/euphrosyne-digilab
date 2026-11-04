@@ -1,10 +1,17 @@
 "use client";
 
 import { fr } from "@codegouvfr/react-dsfr";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState, useSyncExternalStore } from "react";
 import { tss } from "tss-react";
 
 import { ContentProps } from "../../i18n";
+
+function subscribeToWindowResize(onResize: () => void) {
+  window.addEventListener("resize", onResize);
+  return () => {
+    window.removeEventListener("resize", onResize);
+  };
+}
 
 export interface FilterContainerContent {
   filterResults: string;
@@ -123,22 +130,13 @@ export default function FilterContainer({
     return index > -1 ? index : 0;
   }, [sortedContainers]);
 
-  const [selectedComponentIndex, setSelectedComponentIndex] =
-    useState<number>(1);
-
-  useEffect(() => {
-    setSelectedComponentIndex(getComponentIndex());
-  }, [getComponentIndex]);
-
-  useEffect(() => {
-    function handleWindowResize() {
-      setSelectedComponentIndex(getComponentIndex());
-    }
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, [getComponentIndex]);
+  // Server render and hydration use the desktop container (index 1), then the
+  // client snapshot follows the window width.
+  const selectedComponentIndex = useSyncExternalStore(
+    subscribeToWindowResize,
+    getComponentIndex,
+    () => 1,
+  );
 
   return containers[selectedComponentIndex][1];
 }
