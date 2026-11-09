@@ -6,7 +6,7 @@ interface Form {
   user_last_name: string;
   user_institution: string;
   description: string;
-  runs: string[];
+  runs: number[];
 }
 
 export type DetailValidationError = {
@@ -31,7 +31,8 @@ export async function requestData(form: IDataRequestForm, runIds: string[]) {
     },
     body: JSON.stringify({
       ...formatForm(form),
-      runs: runIds,
+      // The API expects integer run ids.
+      runs: runIds.map(Number),
     }),
   });
 
