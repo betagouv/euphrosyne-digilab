@@ -21,7 +21,7 @@
     "@opensearch-project/opensearch": "^3.9.0",
     "@sentry/nextjs": "^10.75.2",
     "next": "^16.4.3",
-    "react": "^19.2.8",
+    "react": "^19.3.1",
     "react-dom": "^19.3.0",
     "react-use-measure": "^2.1.7",
     "slugify": "^1.6.9",
